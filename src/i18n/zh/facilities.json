@@ -1,0 +1,23 @@
+{
+  "pageTitle": "温泉与设施",
+  "pageSubtitle": "在岳温泉的自然怀抱中，享受丰富的设施体验",
+  "filter": {
+    "all": "全部",
+    "onsen": "温泉",
+    "petService": "宠物服务",
+    "dining": "餐饮",
+    "leisure": "休闲",
+    "eco": "零碳景观"
+  },
+  "status": {
+    "open": "营业中",
+    "openingSoon": "即将开放",
+    "maintenance": "维护中"
+  },
+  "card": {
+    "learnMore": "了解更多"
+  },
+  "eco": {
+    "description": "可持续度假体验，感受零碳景观之美"
+  }
+}

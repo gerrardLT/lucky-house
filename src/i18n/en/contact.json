@@ -1,0 +1,35 @@
+{
+  "pageTitle": "Contact Us",
+  "pageSubtitle": "Have questions? We're here to help",
+  "info": {
+    "title": "Contact Information",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Service Hours"
+  },
+  "form": {
+    "title": "Inquiry Form",
+    "subject": "Subject",
+    "subjects": {
+      "accommodation": "Accommodation",
+      "pet": "Pet Stay",
+      "activity": "Events",
+      "general": "General Inquiry"
+    },
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone (Optional)",
+    "message": "Your Message",
+    "submit": "Send Message"
+  },
+  "social": {
+    "title": "Social Media"
+  },
+  "transport": {
+    "title": "Getting Here",
+    "viewMore": "View Explore Page"
+  },
+  "success": "Your message has been sent successfully. We will reply shortly.",
+  "error": "Failed to send. Please try again later or contact us directly."
+}

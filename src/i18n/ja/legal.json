@@ -1,0 +1,36 @@
+{
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新日",
+    "sections": {
+      "collection": "個人情報の収集",
+      "usage": "利用目的",
+      "storage": "データの保管",
+      "thirdParty": "第三者サービス",
+      "rights": "お客様の権利",
+      "contact": "お問い合わせ先"
+    }
+  },
+  "terms": {
+    "title": "ご宿泊約款",
+    "lastUpdated": "最終更新日",
+    "sections": {
+      "checkIn": "チェックイン・チェックアウト",
+      "cancellation": "キャンセル規定",
+      "refund": "返金について",
+      "liability": "免責事項",
+      "damage": "破損賠償"
+    }
+  },
+  "petRules": {
+    "title": "ペット同伴規約",
+    "lastUpdated": "最終更新日",
+    "sections": {
+      "allowed": "同伴可能なペット",
+      "requirements": "ご利用条件",
+      "facilities": "ペット施設のご利用",
+      "behavior": "マナーについて",
+      "liability": "責任と賠償"
+    }
+  }
+}

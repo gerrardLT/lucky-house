@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  /* 基础色调 — 纯黑极深 */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+
+  /* 强调色 — 保持暖金 */
+  --accent-primary: #d97706;
+  --accent-primary-hover: #f59e0b;
+  --accent-primary-active: #b45309;
+  --accent-secondary: #047857;
+
+  /* 表面色 — 纯净黑层次 */
+  --surface-primary: #0a0a0a;
+  --surface-secondary: #141414;
+  --surface-elevated: #000000;
+
+  /* 边框 — 极微妙白色透明 */
+  --border-default: rgba(255,255,255,0.1);
+  --border-subtle: rgba(255,255,255,0.05);
+
+  /* 文字层级 — 纯白层次 */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-muted: rgba(255,255,255,0.4);
+
+  /* 交互态 */
+  --focus-ring: #f59e0b;
+  --disabled-opacity: 0.45;
+
+  /* 字体 — 保持不变 */
+  --font-serif: var(--font-playfair), var(--font-noto-serif-sc), var(--font-noto-serif-jp), Georgia, 'Noto Serif CJK SC', 'Noto Serif CJK JP', serif;
+  --font-sans: var(--font-jost), system-ui, -apple-system, 'Segoe UI', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-primary-hover);
+  --color-surface: var(--surface-secondary);
+  --color-border: var(--border-default);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+}
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+}
+
+h4, h5, h6, form, button {
+  font-family: var(--font-sans);
+}
+
+/* Typography refinements */
+p {
+  line-height: 1.75;
+}
+
+.prose-luxury p:first-of-type::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: #f59e0b;
+}
+
+/* Ligatures and font features */
+body {
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+
+/* Refined paragraph spacing */
+p + p {
+  margin-top: 1.25em;
+}
+
+/* Hide native number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Custom scrollbar — luxury dark theme */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

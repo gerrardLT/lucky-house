@@ -1,0 +1,22 @@
+{
+  "pageTitle": "ギャラリー",
+  "pageSubtitle": "私たちの空間と雰囲気をご覧ください",
+  "filter": {
+    "all": "すべて",
+    "room": "客室",
+    "onsen": "温泉",
+    "pet": "ペット",
+    "dogRun": "ドッグラン",
+    "bbqCafe": "BBQ & カフェ",
+    "activity": "イベント",
+    "nearby": "周辺",
+    "eco": "ゼロカーボン景観"
+  },
+  "lightbox": {
+    "close": "閉じる",
+    "prev": "前へ",
+    "next": "次へ",
+    "of": "/"
+  },
+  "rendering": "イメージ図"
+}

@@ -1,0 +1,272 @@
+[
+  {
+    "id": "faq-pet-allowed",
+    "category": "pet",
+    "question": {
+      "zh": "哪些宠物可以入住？有体型限制吗？",
+      "ja": "どんなペットが宿泊できますか？サイズ制限はありますか？",
+      "en": "What pets are allowed? Are there size restrictions?"
+    },
+    "answer": {
+      "zh": "目前接受犬类和猫类入住。犬类体重上限根据房型不同而异（宠物友好房 25kg、套房 30kg、别墅 40kg）。具体宠物类型和品种限制请在预约时确认。",
+      "ja": "現在、犬と猫のご宿泊を受け付けております。犬の体重制限はお部屋タイプにより異なります（ペットフレンドリールーム25kg、スイート30kg、ヴィラ40kg）。具体的なペットの種類や犬種制限はご予約時にご確認ください。",
+      "en": "We currently accept dogs and cats. Weight limits for dogs vary by room type (Pet-Friendly Room: 25kg, Suite: 30kg, Villa: 40kg). Please confirm specific pet types and breed restrictions when booking."
+    },
+    "sortOrder": 1
+  },
+  {
+    "id": "faq-pet-vaccine",
+    "category": "pet",
+    "question": {
+      "zh": "携宠入住需要哪些疫苗证明？",
+      "ja": "ペット宿泊にはどのような予防接種証明が必要ですか？",
+      "en": "What vaccination certificates are required for pets?"
+    },
+    "answer": {
+      "zh": "所有犬类需提供有效期内的狂犬病疫苗接种证明和混合疫苗（五联或以上）接种证明。猫类需提供猫三联疫苗接种证明。证明需在入住前30天内有效。具体要求待运营确认后发布。",
+      "ja": "すべての犬は有効期限内の狂犬病予防接種証明書と混合ワクチン（5種以上）接種証明書が必要です。猫は3種混合ワクチン接種証明書が必要です。証明書はチェックイン前30日以内に有効である必要があります。詳細は運営確認後に公開いたします。",
+      "en": "All dogs require valid rabies vaccination certificates and combined vaccine (5-in-1 or above) certificates. Cats require 3-in-1 vaccine certificates. Certificates must be valid within 30 days before check-in. Specific requirements to be confirmed by operations."
+    },
+    "sortOrder": 2
+  },
+  {
+    "id": "faq-pet-rules-general",
+    "category": "pet",
+    "question": {
+      "zh": "宠物入住有哪些基本规则？",
+      "ja": "ペット宿泊の基本ルールは何ですか？",
+      "en": "What are the basic rules for pet stays?"
+    },
+    "answer": {
+      "zh": "基本规则包括：公共区域需牵引绳、客房内需使用宠物围栏、宠物不可上床、噪音控制（晚10点后保持安静）、排泄物及时清理。损坏物品需按规定赔偿。详细规则待公布。",
+      "ja": "基本ルール：共用エリアではリード着用必須、客室内ではペットゲート使用、ペットのベッド利用不可、騒音管理（22時以降は静かに）、排泄物の速やかな処理。破損物は規定に基づき弁償いただきます。詳細ルールは後日公開予定です。",
+      "en": "Basic rules include: leash required in public areas, pet gate use in rooms, pets not allowed on beds, noise control (quiet after 10 PM), prompt waste cleanup. Damage compensation per facility policy. Detailed rules to be announced."
+    },
+    "sortOrder": 3
+  },
+  {
+    "id": "faq-room-price",
+    "category": "room-price",
+    "question": {
+      "zh": "房间价格是多少？如何预订？",
+      "ja": "お部屋の料金はいくらですか？予約方法は？",
+      "en": "What are the room rates? How can I book?"
+    },
+    "answer": {
+      "zh": "目前各房型价格正在最终确认中，即将公布。您可以通过预约表单提交咨询，我们的工作人员会在48小时内与您联系确认价格和可用日期。",
+      "ja": "現在、各お部屋タイプの料金を最終確認中です。まもなく公開予定です。ご予約フォームからお問い合わせいただければ、48時間以内にスタッフが料金と空室状況をご連絡いたします。",
+      "en": "Room rates are currently being finalized and will be announced soon. You can submit an inquiry through our booking form, and our team will contact you within 48 hours with pricing and availability."
+    },
+    "sortOrder": 4
+  },
+  {
+    "id": "faq-room-pet-vs-standard",
+    "category": "room-price",
+    "question": {
+      "zh": "普通房和宠物友好房有什么区别？",
+      "ja": "通常のお部屋とペットフレンドリールームの違いは何ですか？",
+      "en": "What's the difference between standard rooms and pet-friendly rooms?"
+    },
+    "answer": {
+      "zh": "宠物友好房专为携宠客人设计，配备防滑地板、宠物围栏、宠物床、食碗等设施，部分房型可直通Dog Run区域。普通房不可携宠入住。营地别墅适合多人家庭，空间更大并配有私人庭院。",
+      "ja": "ペットフレンドリールームはペット連れのお客様のために設計されており、滑りにくい床、ペットゲート、ペットベッド、食器などを完備。一部のお部屋はドッグランに直結しています。通常のお部屋はペット不可です。キャンプヴィラはご家族向けで広く、プライベートガーデン付きです。",
+      "en": "Pet-friendly rooms are designed for guests with pets, featuring slip-resistant floors, pet gates, pet beds, and food bowls. Some rooms have direct Dog Run access. Standard rooms do not allow pets. Campsite villas are larger with private gardens, ideal for families."
+    },
+    "sortOrder": 5
+  },
+  {
+    "id": "faq-room-villa",
+    "category": "room-price",
+    "question": {
+      "zh": "营地小别墅什么时候开放？",
+      "ja": "キャンプヴィラはいつオープンしますか？",
+      "en": "When will the campsite villas open?"
+    },
+    "answer": {
+      "zh": "营地小别墅目前处于建设阶段，预计即将开放。请提交预约咨询或订阅我们的邮件通知，开放后第一时间获得消息。",
+      "ja": "キャンプヴィラは現在建設中で、まもなくオープン予定です。ご予約お問い合わせの送信またはメール通知のご登録で、オープン時にいち早くお知らせいたします。",
+      "en": "Campsite villas are currently under construction and expected to open soon. Submit a booking inquiry or subscribe to our email notifications to be the first to know when they're available."
+    },
+    "sortOrder": 6
+  },
+  {
+    "id": "faq-onsen-private",
+    "category": "onsen",
+    "question": {
+      "zh": "私汤温泉需要预约吗？可以带宠物吗？",
+      "ja": "貸切風呂は予約が必要ですか？ペットは一緒に入れますか？",
+      "en": "Do I need to reserve the private onsen? Can I bring my pet?"
+    },
+    "answer": {
+      "zh": "私汤采用预约制，每组45分钟。人类温泉区域不可携带宠物。我们设有专门的宠物温泉服务，可另行预约。",
+      "ja": "貸切風呂は予約制で、1回45分です。人間用温泉エリアにはペットの同伴はできません。別途ペット温泉サービスをご予約いただけます。",
+      "en": "The private onsen requires reservation, 45 minutes per session. Pets are not allowed in human onsen areas. We offer a separate pet onsen service that can be booked separately."
+    },
+    "sortOrder": 7
+  },
+  {
+    "id": "faq-onsen-public",
+    "category": "onsen",
+    "question": {
+      "zh": "公共温泉的使用时间和规则是什么？",
+      "ja": "大浴場の利用時間とルールを教えてください。",
+      "en": "What are the public onsen hours and rules?"
+    },
+    "answer": {
+      "zh": "公共温泉（大浴場）开放时间为早6:00至晚23:00，男女分浴。入浴前需先淋浴冲洗身体，不可穿戴泳衣或浴巾入池。具有纹身的客人请使用私汤。",
+      "ja": "大浴場の営業時間は朝6:00〜夜23:00、男女別です。入浴前に身体を洗い流してからお入りください。水着やタオルを巻いての入浴はご遠慮ください。タトゥーのあるお客様は貸切風呂をご利用ください。",
+      "en": "The public onsen is open from 6:00 AM to 11:00 PM, with separate male and female baths. Please shower before entering. Swimwear and towels are not allowed in the bath. Guests with tattoos are kindly asked to use the private onsen."
+    },
+    "sortOrder": 8
+  },
+  {
+    "id": "faq-onsen-pet",
+    "category": "onsen",
+    "question": {
+      "zh": "宠物温泉如何使用？需要额外付费吗？",
+      "ja": "ペット温泉はどのように利用しますか？追加料金はかかりますか？",
+      "en": "How does the pet onsen work? Is there an extra fee?"
+    },
+    "answer": {
+      "zh": "宠物温泉为专属预约制服务，由工作人员协助入浴。使用温和低温天然泉水，适合大多数犬类。具体费用和服务详情即将公布。",
+      "ja": "ペット温泉は予約制のサービスで、スタッフがお手伝いいたします。穏やかな低温の天然泉水を使用し、ほとんどの犬種に適しています。料金やサービス詳細は近日公開予定です。",
+      "en": "The pet onsen is a reservation-based service with staff assistance. It uses gentle, low-temperature natural spring water suitable for most dog breeds. Specific fees and service details will be announced soon."
+    },
+    "sortOrder": 9
+  },
+  {
+    "id": "faq-facility-dogrun",
+    "category": "facility",
+    "question": {
+      "zh": "Dog Run 区域有哪些设施？使用规则是什么？",
+      "ja": "ドッグランにはどのような設備がありますか？利用ルールは？",
+      "en": "What facilities are in the Dog Run? What are the usage rules?"
+    },
+    "answer": {
+      "zh": "室外Dog Run面积超500平方米，分设大型犬区和中小型犬区，配备饮水站和遮阳休息区。使用规则：需佩戴牵引绳进入后方可解开、排泄物即时清理、攻击性犬只需佩戴口罩。室内Dog Run即将开放。",
+      "ja": "屋外ドッグランは500㎡以上で、大型犬エリアと中小型犬エリアに分かれ、水飲み場と日除け付き休憩所を完備。利用ルール：リード着用で入場後に解放可、排泄物は即時清掃、攻撃性のある犬は口輪着用必須。屋内ドッグランはまもなくオープン予定です。",
+      "en": "The outdoor Dog Run is over 500 sqm, separated into large and small/medium dog zones, with water stations and shaded rest areas. Rules: enter on leash then release, clean up waste immediately, aggressive dogs must be muzzled. Indoor Dog Run opening soon."
+    },
+    "sortOrder": 10
+  },
+  {
+    "id": "faq-facility-bbq",
+    "category": "facility",
+    "question": {
+      "zh": "BBQ 区域如何预约？可以自带食材吗？",
+      "ja": "BBQエリアの予約方法は？食材の持ち込みは可能ですか？",
+      "en": "How do I reserve the BBQ area? Can I bring my own food?"
+    },
+    "answer": {
+      "zh": "BBQ区域需提前预约，可在预约表单中选择BBQ套餐。您也可以自带食材，我们提供炭火烤炉和基础调料。宠物可在专属围栏区域陪伴用餐。",
+      "ja": "BBQエリアは事前予約が必要です。予約フォームでBBQセットをお選びいただけます。食材のお持ち込みも可能で、炭火グリルと基本調味料をご用意しています。ペットは専用フェンスエリアでお食事にお付き合いいただけます。",
+      "en": "The BBQ area requires advance reservation through the booking form where you can select BBQ packages. You may bring your own food — we provide charcoal grills and basic seasonings. Pets welcome in the dedicated fenced dining area."
+    },
+    "sortOrder": 11
+  },
+  {
+    "id": "faq-transport-access",
+    "category": "transport",
+    "question": {
+      "zh": "如何到达酒店？有接送服务吗？",
+      "ja": "ホテルへのアクセス方法は？送迎サービスはありますか？",
+      "en": "How do I get to the hotel? Is there a shuttle service?"
+    },
+    "answer": {
+      "zh": "从JR二本松站出发，驾车约20分钟。也可乘坐当地巴士至岳温泉站下车。关于接送服务的安排，请在预约时备注咨询，我们会根据实际情况提供协助。",
+      "ja": "JR二本松駅からお車で約20分。地元バスで岳温泉停留所まで行くことも可能です。送迎サービスについてはご予約時にお問い合わせください。状況に応じてご対応いたします。",
+      "en": "About 20 minutes by car from JR Nihonmatsu Station. You can also take a local bus to the Dake Onsen stop. For shuttle service arrangements, please inquire when booking and we'll assist based on availability."
+    },
+    "sortOrder": 12
+  },
+  {
+    "id": "faq-transport-parking",
+    "category": "transport",
+    "question": {
+      "zh": "有停车场吗？停车是否免费？",
+      "ja": "駐車場はありますか？駐車料金はかかりますか？",
+      "en": "Is there parking? Is it free?"
+    },
+    "answer": {
+      "zh": "酒店提供免费停车场，可容纳住客车辆。别墅区域配有独立车位。如需大型车辆停放，请提前联系我们确认。",
+      "ja": "ホテルには無料駐車場がございます。ヴィラエリアには専用駐車スペースがあります。大型車両をご利用の場合は、事前にお問い合わせください。",
+      "en": "Free parking is available for guests. Villa areas have dedicated parking spots. For large vehicles, please contact us in advance to confirm arrangements."
+    },
+    "sortOrder": 13
+  },
+  {
+    "id": "faq-activity-registration",
+    "category": "activity",
+    "question": {
+      "zh": "如何报名参加活动？活动是否收费？",
+      "ja": "アクティビティの申し込み方法は？参加費はかかりますか？",
+      "en": "How do I register for activities? Are they free?"
+    },
+    "answer": {
+      "zh": "大部分活动通过官网活动页面进行兴趣登记或报名。部分活动免费（如月度宠物交流会），部分活动需付费参加，具体费用即将公布。订阅邮件通知可第一时间获取活动信息。",
+      "ja": "ほとんどのアクティビティは公式サイトのアクティビティページから興味登録またはお申し込みいただけます。一部無料（月例ペット交流会など）、一部有料です。料金は近日公開予定です。メール通知をご登録いただくと最新情報をお届けします。",
+      "en": "Most activities can be registered through the activities page on our website. Some are free (like the monthly pet meetup), while others have fees that will be announced soon. Subscribe to email notifications for the latest updates."
+    },
+    "sortOrder": 14
+  },
+  {
+    "id": "faq-activity-pet-meetup",
+    "category": "activity",
+    "question": {
+      "zh": "宠物交流会对宠物有什么要求？",
+      "ja": "ペット交流会に参加するペットの条件は？",
+      "en": "Are there requirements for pets at the meetup?"
+    },
+    "answer": {
+      "zh": "参加交流会的宠物需完成基本疫苗接种、无攻击性行为记录、处于健康状态。主人需全程在场监护。不适合社交的犬只建议使用室内Dog Run单独活动。",
+      "ja": "交流会に参加するペットは基本的な予防接種を完了し、攻撃的行動の履歴がなく、健康であることが条件です。飼い主様は常に付き添いが必要です。社交が苦手なわんちゃんは屋内ドッグランの個別利用をお勧めします。",
+      "en": "Pets attending the meetup must have completed basic vaccinations, have no history of aggressive behavior, and be in good health. Owners must be present at all times. Dogs that prefer solo time can use the indoor Dog Run instead."
+    },
+    "sortOrder": 15
+  },
+  {
+    "id": "faq-cancel-policy",
+    "category": "cancel",
+    "question": {
+      "zh": "取消预约的政策是什么？可以退款吗？",
+      "ja": "予約キャンセルのポリシーは？返金はされますか？",
+      "en": "What is the cancellation policy? Can I get a refund?"
+    },
+    "answer": {
+      "zh": "具体的取消与退款政策正在制定中，将在正式开业前公布。目前预约咨询阶段不涉及付款，您可以随时修改或取消咨询。",
+      "ja": "具体的なキャンセル・返金ポリシーは策定中で、正式オープン前に公開予定です。現在の予約お問い合わせ段階ではお支払いは発生しませんので、いつでも変更・取消が可能です。",
+      "en": "The specific cancellation and refund policy is being finalized and will be published before official opening. During the current inquiry phase, no payment is required, so you can modify or cancel your inquiry at any time."
+    },
+    "sortOrder": 16
+  },
+  {
+    "id": "faq-cancel-modify",
+    "category": "cancel",
+    "question": {
+      "zh": "提交预约后可以修改信息吗？",
+      "ja": "予約送信後に情報を変更できますか？",
+      "en": "Can I modify my booking after submission?"
+    },
+    "answer": {
+      "zh": "可以。在运营人员联系您确认之前，您可通过客服邮箱或电话修改预约信息。确认后的修改需按照届时公布的变更政策处理。",
+      "ja": "はい。スタッフが確認のご連絡をする前であれば、カスタマーサービスのメールまたはお電話で予約情報の変更が可能です。確認後の変更は公開予定の変更ポリシーに従います。",
+      "en": "Yes. Before our staff contacts you for confirmation, you can modify your booking details via customer service email or phone. Changes after confirmation will follow the modification policy to be published."
+    },
+    "sortOrder": 17
+  },
+  {
+    "id": "faq-pet-emergency",
+    "category": "pet",
+    "question": {
+      "zh": "宠物在住宿期间生病了怎么办？",
+      "ja": "滞在中にペットが体調を崩した場合はどうすればいいですか？",
+      "en": "What if my pet gets sick during the stay?"
+    },
+    "answer": {
+      "zh": "我们可协助联系附近的宠物医院。建议您提前了解最近的动物医院位置，并携带宠物的健康记录。紧急情况请立即联系前台。需运营确认后发布合作医院清单。",
+      "ja": "近隣のペット病院へのご連絡をお手伝いいたします。最寄りの動物病院の場所を事前にご確認いただき、ペットの健康記録をお持ちいただくことをお勧めします。緊急時はフロントに直接ご連絡ください。提携病院リストは運営確認後に公開予定です。",
+      "en": "We can assist in contacting nearby pet hospitals. We recommend knowing the nearest veterinary clinic location and bringing your pet's health records. For emergencies, contact the front desk immediately. Partner clinic list to be published after operations confirmation."
+    },
+    "sortOrder": 18
+  }
+]

@@ -1,0 +1,223 @@
+[
+  {
+    "slug": "spring-nature-walk",
+    "name": {
+      "zh": "春日樱花散步道",
+      "ja": "春の桜ウォーキング",
+      "en": "Spring Cherry Blossom Walk"
+    },
+    "description": {
+      "zh": "沿岳温泉周边的樱花小径，与爱宠一起漫步在粉色花海中。专业向导带领，途中设有宠物休息站和拍照打卡点。",
+      "ja": "岳温泉周辺の桜並木を愛犬と一緒にお散歩。専門ガイドがご案内し、途中にはペット休憩所やフォトスポットをご用意しています。",
+      "en": "Stroll through cherry blossom paths around Dake Onsen with your pet. Led by a professional guide with pet rest stops and photo spots along the way."
+    },
+    "date": "2025-04-12",
+    "category": "nature",
+    "targetAudience": {
+      "zh": ["携宠家庭", "情侣", "自然爱好者"],
+      "ja": ["ペット連れファミリー", "カップル", "自然好き"],
+      "en": ["Pet families", "Couples", "Nature lovers"]
+    },
+    "status": "upcoming",
+    "image": {
+      "id": "activity-spring-walk",
+      "src": "/images/activities/activity-pet-sports-01.png",
+      "alt": {
+        "zh": "春日樱花散步道",
+        "ja": "春の桜ウォーキング",
+        "en": "Spring cherry blossom walk"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 1,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "coming_soon",
+    "capacity": 20,
+    "sortOrder": 1
+  },
+  {
+    "slug": "summer-bbq-party",
+    "name": {
+      "zh": "夏日BBQ宠物派对",
+      "ja": "サマーBBQペットパーティー",
+      "en": "Summer BBQ Pet Party"
+    },
+    "description": {
+      "zh": "夏季限定的户外BBQ社交活动，为携宠家庭打造的欢乐聚会。提供烤肉套餐、宠物专属小食，还有水池嬉戏和集体游戏环节。",
+      "ja": "夏季限定の屋外BBQソーシャルイベント。ペット連れご家族のための楽しいパーティーです。BBQセット、ペット用おやつ、水遊びやグループゲームもお楽しみいただけます。",
+      "en": "A summer-exclusive outdoor BBQ social event for pet families. Featuring BBQ packages, pet treats, splash pools, and group games for everyone."
+    },
+    "date": "2025-07-19",
+    "category": "social",
+    "targetAudience": {
+      "zh": ["携宠家庭", "亲子", "社交达人"],
+      "ja": ["ペット連れファミリー", "お子様連れ", "交流好き"],
+      "en": ["Pet families", "Families with kids", "Social enthusiasts"]
+    },
+    "status": "upcoming",
+    "image": {
+      "id": "activity-summer-bbq",
+      "src": "/images/activities/activity-pet-photography-01.png",
+      "alt": {
+        "zh": "夏日BBQ宠物派对",
+        "ja": "サマーBBQペットパーティー",
+        "en": "Summer BBQ pet party"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 2,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "inquiry",
+    "capacity": 30,
+    "sortOrder": 2
+  },
+  {
+    "slug": "autumn-stargazing",
+    "name": {
+      "zh": "秋夜星空观赏会",
+      "ja": "秋の星空観賞会",
+      "en": "Autumn Stargazing Night"
+    },
+    "description": {
+      "zh": "在福岛纯净的秋夜天空下，铺上毯子与爱宠一起仰望银河。配备天文望远镜和热饮供应，工作人员讲解星座故事。",
+      "ja": "福島の澄み切った秋の夜空の下、ブランケットを敷いて愛犬と一緒に天の川を眺めましょう。天体望遠鏡とホットドリンクをご用意し、スタッフが星座のお話をいたします。",
+      "en": "Lie under Fukushima's pristine autumn sky with your pet, gazing at the Milky Way. Telescopes and hot drinks provided, with staff sharing constellation stories."
+    },
+    "category": "nature",
+    "targetAudience": {
+      "zh": ["携宠家庭", "情侣", "天文爱好者"],
+      "ja": ["ペット連れファミリー", "カップル", "天文好き"],
+      "en": ["Pet families", "Couples", "Astronomy enthusiasts"]
+    },
+    "status": "upcoming",
+    "image": {
+      "id": "activity-stargazing",
+      "src": "/images/activities/activity-pet-sports-01.png",
+      "alt": {
+        "zh": "秋夜星空观赏",
+        "ja": "秋の星空観賞",
+        "en": "Autumn stargazing"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 3,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "coming_soon",
+    "sortOrder": 3
+  },
+  {
+    "slug": "pet-meetup-monthly",
+    "name": {
+      "zh": "月度宠物交流会",
+      "ja": "月例ペット交流会",
+      "en": "Monthly Pet Meetup"
+    },
+    "description": {
+      "zh": "每月定期举办的宠物社交活动，在Dog Run区域让毛孩子们自由交友。同时为宠物主人提供养护分享和社群交流的平台。",
+      "ja": "毎月定期開催のペットソーシャルイベント。ドッグランエリアでわんちゃん同士が自由に交流できます。飼い主様にはケア情報の共有やコミュニティ交流の場をご提供します。",
+      "en": "A regular monthly pet social event in the Dog Run area where furry friends can mingle freely. Pet parents can share care tips and connect with the community."
+    },
+    "category": "social",
+    "targetAudience": {
+      "zh": ["携宠家庭", "宠物社交", "本地宠物主"],
+      "ja": ["ペット連れファミリー", "ペット交流", "地元の飼い主"],
+      "en": ["Pet families", "Pet socializing", "Local pet owners"]
+    },
+    "status": "open",
+    "image": {
+      "id": "activity-pet-meetup",
+      "src": "/images/activities/activity-pet-photography-01.png",
+      "alt": {
+        "zh": "月度宠物交流会",
+        "ja": "月例ペット交流会",
+        "en": "Monthly pet meetup"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 4,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "coming_soon",
+    "sortOrder": 4
+  },
+  {
+    "slug": "winter-onsen-wellness",
+    "name": {
+      "zh": "冬日温泉养生体验",
+      "ja": "冬の温泉ウェルネス体験",
+      "en": "Winter Onsen Wellness Experience"
+    },
+    "description": {
+      "zh": "冬季限定的温泉养生套餐体验，包含岳温泉的硫磺泉入浴、暖身料理和简单的身体放松指导。寒冬中的温暖治愈时光。",
+      "ja": "冬季限定の温泉ウェルネスパッケージ。岳温泉の硫黄泉入浴、温まるお料理、簡単なリラクゼーションガイダンスを含みます。寒い冬の癒しのひとときを。",
+      "en": "A winter-exclusive onsen wellness package featuring Dake Onsen sulfur spring bathing, warming cuisine, and guided relaxation. A healing retreat in the cold season."
+    },
+    "category": "wellness",
+    "targetAudience": {
+      "zh": ["温泉爱好者", "情侣", "养生客"],
+      "ja": ["温泉好き", "カップル", "ウェルネス志向"],
+      "en": ["Onsen lovers", "Couples", "Wellness seekers"]
+    },
+    "status": "upcoming",
+    "image": {
+      "id": "activity-winter-wellness",
+      "src": "/images/activities/activity-pet-sports-01.png",
+      "alt": {
+        "zh": "冬日温泉养生体验",
+        "ja": "冬の温泉ウェルネス体験",
+        "en": "Winter onsen wellness"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 5,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "coming_soon",
+    "sortOrder": 5
+  },
+  {
+    "slug": "photography-workshop",
+    "name": {
+      "zh": "宠物摄影工作坊",
+      "ja": "ペットフォトワークショップ",
+      "en": "Pet Photography Workshop"
+    },
+    "description": {
+      "zh": "由专业宠物摄影师指导，在营地自然场景中为爱宠拍摄专业写真。学习宠物摄影技巧，每组家庭可获得精修照片。",
+      "ja": "プロのペットフォトグラファーが指導する、キャンプ場の自然の中でのペット撮影会。ペット撮影のコツを学び、各ご家族にレタッチ済み写真をお渡しします。",
+      "en": "Guided by a professional pet photographer, capture stunning portraits of your companion in the campsite's natural settings. Learn pet photography tips and receive edited photos."
+    },
+    "category": "workshop",
+    "targetAudience": {
+      "zh": ["携宠家庭", "摄影爱好者", "社交达人"],
+      "ja": ["ペット連れファミリー", "写真好き", "交流好き"],
+      "en": ["Pet families", "Photography enthusiasts", "Social butterflies"]
+    },
+    "status": "upcoming",
+    "image": {
+      "id": "activity-photo-workshop",
+      "src": "/images/activities/activity-pet-photography-01.png",
+      "alt": {
+        "zh": "宠物摄影工作坊",
+        "ja": "ペットフォトワークショップ",
+        "en": "Pet photography workshop"
+      },
+      "category": "activity",
+      "isRendering": true,
+      "sortOrder": 6,
+      "width": 1200,
+      "height": 800
+    },
+    "priceStatus": "inquiry",
+    "capacity": 10,
+    "sortOrder": 6
+  }
+]

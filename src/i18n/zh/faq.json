@@ -1,0 +1,19 @@
+{
+  "pageTitle": "常见问题",
+  "pageSubtitle": "快速解答您的疑问",
+  "search": {
+    "placeholder": "搜索问题...",
+    "noResults": "未找到相关问题",
+    "contactUs": "联系我们获取帮助"
+  },
+  "categories": {
+    "all": "全部",
+    "pet": "宠物入住",
+    "roomPrice": "房型与价格",
+    "onsen": "温泉",
+    "facility": "设施",
+    "transport": "交通",
+    "activity": "活动",
+    "cancel": "取消政策"
+  }
+}

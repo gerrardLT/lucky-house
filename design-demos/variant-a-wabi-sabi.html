@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Variant A · 侘寂暗场温泉旅馆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0b09;
+    --bg-warm: #100f0c;
+    --gold: #c9a86c;
+    --gold-dim: #8a7548;
+    --ivory: #e8e2d4;
+    --text: rgba(232,226,212,0.88);
+    --text-dim: rgba(232,226,212,0.45);
+    --divider: rgba(201,168,108,0.15);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    overflow-x: hidden;
+  }
+  .serif { font-family: 'Noto Serif JP', serif; }
+
+  /* === HERO === */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 12vh 8vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/hero/hero-01-family-pet-walkway.png') center/cover no-repeat;
+    filter: brightness(0.35) saturate(0.8);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, var(--bg) 15%, transparent 50%);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 620px; }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 420px;
+    line-height: 1.9;
+  }
+  .hero-cta {
+    margin-top: 3rem;
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--bg); }
+
+  /* === INK WASH DIVIDER === */
+  .ink-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, var(--gold-dim) 30%, var(--gold) 50%, var(--gold-dim) 70%, transparent 100%);
+    opacity: 0.4;
+    margin: 0 10vw;
+  }
+
+  /* === PAW SIGNATURE === */
+  .paw-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    gap: 1.5rem;
+  }
+  .paw-mark .line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .paw-mark .line:last-child {
+    background: linear-gradient(to left, transparent, var(--gold-dim));
+  }
+  .paw-mark svg { width: 22px; height: 22px; fill: var(--gold-dim); }
+
+  /* === VALUE SECTION === */
+  .values { padding: 10rem 8vw; }
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6rem;
+    margin-bottom: 10rem;
+  }
+  .value-item:last-child { margin-bottom: 0; }
+  .value-number {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 96px;
+    line-height: 0.85;
+    color: var(--gold);
+    opacity: 0.28;
+    flex-shrink: 0;
+    letter-spacing: -0.03em;
+  }
+  .value-body { max-width: 480px; }
+  .value-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+  }
+  .value-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--ivory);
+    margin-bottom: 1.2rem;
+  }
+  .value-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 2;
+    margin-bottom: 2rem;
+  }
+  .value-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    filter: brightness(0.8) saturate(0.9);
+    margin-top: 2rem;
+  }
+  .value-link {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+  .value-link:hover { color: var(--ivory); border-color: var(--ivory); }
+
+  /* === ROOMS === */
+  .rooms { padding: 10rem 8vw; background: var(--bg-warm); }
+  .rooms-header {
+    max-width: 400px;
+    margin-bottom: 6rem;
+  }
+  .rooms-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--ivory);
+    line-height: 1.2;
+  }
+  .rooms-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    line-height: 1.9;
+  }
+  .room-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-bottom: 8rem;
+  }
+  .room-card:nth-child(even) { direction: rtl; }
+  .room-card:nth-child(even) > * { direction: ltr; }
+  .room-img-wrap { position: relative; overflow: hidden; }
+  .room-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.85);
+    display: block;
+  }
+  .room-img-caption {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(232,226,212,0.6);
+  }
+  .room-body {}
+  .room-category {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.8rem;
+  }
+  .room-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+  }
+  .room-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+  .room-specs {
+    display: flex;
+    gap: 2rem;
+    font-size: 11px;
+    color: var(--gold-dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--divider);
+    padding-top: 1.5rem;
+  }
+
+  /* === BOTTOM CTA === */
+  .bottom-cta {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .bottom-cta-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/hero/hero-02-shiba-onsen-veranda.png') center/cover no-repeat;
+    filter: brightness(0.25) saturate(0.7);
+  }
+  .bottom-cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--bg) 0%, transparent 20%, transparent 80%, var(--bg) 100%);
+  }
+  .bottom-cta-content { position: relative; z-index: 2; max-width: 560px; padding: 0 2rem; }
+  .social-proof {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 3rem;
+  }
+  .cta-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.25;
+    color: var(--ivory);
+    margin-bottom: 2rem;
+  }
+  .cta-sub {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 2;
+    margin-bottom: 3.5rem;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 16px 52px;
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .cta-btn:hover { background: var(--ivory); }
+  .trust-badges {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: rgba(232,226,212,0.35);
+  }
+
+  /* === FOOTER === */
+  .footer {
+    padding: 4rem 8vw;
+    border-top: 1px solid var(--divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">岳温泉 · 零碳宠物营地</div>
+    <h1 class="hero-title">带上毛孩子，<br>一起泡温泉</h1>
+    <p class="hero-subtitle">福岛岳温泉 · 人与宠物共享的千年天然硫磺泉疗愈体验</p>
+    <a href="#" class="hero-cta">立即预约</a>
+  </div>
+</section>
+
+<!-- PAW DIVIDER -->
+<div class="paw-mark">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24"><ellipse cx="7.5" cy="7" rx="2" ry="2.5"/><ellipse cx="16.5" cy="7" rx="2" ry="2.5"/><ellipse cx="5" cy="12" rx="1.8" ry="2.2"/><ellipse cx="19" cy="12" rx="1.8" ry="2.2"/><path d="M12 21s-5-3.5-5-7.5c0-2.5 1.5-4.5 3.5-4.5 1 0 1.5.4 1.5.4s.5-.4 1.5-.4c2 0 3.5 2 3.5 4.5 0 4-5 7.5-5 7.5z"/></svg>
+  <div class="line"></div>
+</div>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="value-item">
+    <div class="value-number serif">01</div>
+    <div class="value-body">
+      <div class="value-label">Onsen</div>
+      <h2 class="value-title">宠物友好温泉</h2>
+      <p class="value-desc">人与宠物各有专属温泉体验，共享岳温泉千年天然硫磺泉的疗愈力量。</p>
+      <img class="value-img" src="/images/facilities/facility-pet-onsen-01.png" alt="宠物温泉">
+      <a href="#" class="value-link">了解更多</a>
+    </div>
+  </div>
+
+  <div class="ink-divider"></div>
+
+  <div class="value-item" style="margin-top:10rem">
+    <div class="value-number serif">02</div>
+    <div class="value-body">
+      <div class="value-label">Nature</div>
+      <h2 class="value-title">零碳自然营地</h2>
+      <p class="value-desc">融入安达太良山脚自然景观的可持续度假空间，让每一次旅行都对地球温柔。</p>
+      <img class="value-img" src="/images/hero/hero-03-eco-campsite-aerial.png" alt="自然营地">
+      <a href="#" class="value-link">了解更多</a>
+    </div>
+  </div>
+
+  <div class="ink-divider"></div>
+
+  <div class="value-item" style="margin-top:10rem">
+    <div class="value-number serif">03</div>
+    <div class="value-body">
+      <div class="value-label">Community</div>
+      <h2 class="value-title">周末社群活动</h2>
+      <p class="value-desc">BBQ 派对、宠物交流会、星空观赏……为携宠家庭打造有温度的社群连接。</p>
+      <img class="value-img" src="/images/facilities/facility-bbq-terrace-01.png" alt="BBQ 聚会">
+      <a href="#" class="value-link">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAW DIVIDER -->
+<div class="paw-mark">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24"><ellipse cx="7.5" cy="7" rx="2" ry="2.5"/><ellipse cx="16.5" cy="7" rx="2" ry="2.5"/><ellipse cx="5" cy="12" rx="1.8" ry="2.2"/><ellipse cx="19" cy="12" rx="1.8" ry="2.2"/><path d="M12 21s-5-3.5-5-7.5c0-2.5 1.5-4.5 3.5-4.5 1 0 1.5.4 1.5.4s.5-.4 1.5-.4c2 0 3.5 2 3.5 4.5 0 4-5 7.5-5 7.5z"/></svg>
+  <div class="line"></div>
+</div>
+
+<!-- ROOMS -->
+<section class="rooms">
+  <div class="rooms-header">
+    <div class="value-label" style="margin-bottom:1rem">Featured Rooms</div>
+    <h2 class="rooms-title">精选房型</h2>
+    <p class="rooms-sub">为您和毛孩子精心准备的舒适空间</p>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img-wrap">
+      <img class="room-img" src="/images/rooms/room-pet-friendly-interior-01.png" alt="宠物友好双床房">
+      <div class="room-img-caption">Pet-Friendly Twin</div>
+    </div>
+    <div class="room-body">
+      <div class="room-category">宠物友好</div>
+      <h3 class="room-name">宠物友好双床房</h3>
+      <p class="room-desc">专为携宠家庭设计，配备宠物床、食碗、围栏。防滑耐磨地板，让毛孩子自在活动。</p>
+      <div class="room-specs">
+        <span>35㎡</span>
+        <span>最多 2 人</span>
+        <span>单人床 × 2</span>
+      </div>
+      <a href="#" class="value-link">查看详情</a>
+    </div>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img-wrap">
+      <img class="room-img" src="/images/rooms/room-pet-friendly-interior-01.png" alt="宠物友好套房">
+      <div class="room-img-caption">Pet-Friendly Suite</div>
+    </div>
+    <div class="room-body">
+      <div class="room-category">宠物友好</div>
+      <h3 class="room-name">宠物友好套房</h3>
+      <p class="room-desc">宽敞套房，独立客厅与卧室，配备专属宠物活动区和私汤露台。</p>
+      <div class="room-specs">
+        <span>52㎡</span>
+        <span>最多 4 人</span>
+        <span>大床 + 沙发床</span>
+      </div>
+      <a href="#" class="value-link">查看详情</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-bg"></div>
+  <div class="bottom-cta-overlay"></div>
+  <div class="bottom-cta-content">
+    <div class="social-proof">已有 128 位宠物家庭关注</div>
+    <h2 class="cta-title">开启您的携宠<br>温泉之旅</h2>
+    <p class="cta-sub">加入首批携宠入住名单，享受专属优惠</p>
+    <a href="#" class="cta-btn">立即预约</a>
+    <div class="trust-badges">
+      <span>· 免费取消</span>
+      <span>· 48 小时确认</span>
+      <span>· 携宠入住</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>© 2025 Lucky House</span>
+  <span>岳温泉零碳宠物营地 & 温泉酒店</span>
+</footer>
+
+</body>
+</html>

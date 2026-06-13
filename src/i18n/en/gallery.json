@@ -1,0 +1,22 @@
+{
+  "pageTitle": "Gallery",
+  "pageSubtitle": "Explore our spaces and atmosphere",
+  "filter": {
+    "all": "All",
+    "room": "Rooms",
+    "onsen": "Onsen",
+    "pet": "Pets",
+    "dogRun": "Dog Run",
+    "bbqCafe": "BBQ & Café",
+    "activity": "Events",
+    "nearby": "Surroundings",
+    "eco": "Zero-Carbon Landscape"
+  },
+  "lightbox": {
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next",
+    "of": "of"
+  },
+  "rendering": "Concept Image"
+}

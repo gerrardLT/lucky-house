@@ -1,0 +1,72 @@
+{
+  "pageTitle": "预约咨询",
+  "pageSubtitle": "填写以下表单，提交预约申请。我们将在 24 小时内与您联系确认。",
+  "steps": {
+    "dates": "日期与人数",
+    "room": "房型偏好",
+    "pet": "宠物信息",
+    "contact": "联系方式",
+    "confirm": "规则确认"
+  },
+  "step1": {
+    "checkIn": "入住日期",
+    "checkOut": "退房日期",
+    "adults": "成人数",
+    "children": "儿童数",
+    "rooms": "房间数",
+    "hasPet": "是否携宠",
+    "petCount": "宠物数量"
+  },
+  "step2": {
+    "roomPreference": "房型偏好",
+    "standard": "普通房",
+    "petFriendly": "宠物友好房",
+    "villa": "营地小别墅",
+    "noPreference": "无偏好",
+    "acceptAlternative": "是否接受替代房型"
+  },
+  "step3": {
+    "petType": "宠物类型",
+    "dog": "狗",
+    "cat": "猫",
+    "other": "其他",
+    "breed": "品种",
+    "count": "数量",
+    "weight": "体重 (kg)",
+    "age": "年龄",
+    "vaccineStatus": "疫苗证明状态",
+    "rabiesStatus": "狂犬证明状态",
+    "ready": "已准备",
+    "canProvide": "可补交",
+    "unsure": "不确定",
+    "needOnsen": "是否需要宠物温泉",
+    "needGrooming": "是否需要梳理服务",
+    "specialNotes": "特殊说明"
+  },
+  "step4": {
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话",
+    "country": "国家/地区",
+    "preferredChannel": "首选联系渠道"
+  },
+  "step5": {
+    "privacyPolicy": "我已阅读并同意隐私政策",
+    "petRules": "我已阅读并同意宠物入住规则",
+    "cancelPolicy": "我已阅读并同意取消政策",
+    "marketingSubscribe": "我希望接收营销邮件和优惠信息"
+  },
+  "submit": "提交预约",
+  "success": {
+    "title": "预约提交成功",
+    "subtitle": "感谢您的预约申请，我们将在 24 小时内与您联系确认。",
+    "confirmationId": "确认编号",
+    "contactSupport": "如有疑问，请联系客服"
+  },
+  "errors": {
+    "submitFailed": "提交失败，请重试或联系客服",
+    "dateInvalid": "入住日期不能早于今天",
+    "checkoutBeforeCheckin": "退房日期必须晚于入住日期",
+    "required": "此字段为必填项"
+  }
+}

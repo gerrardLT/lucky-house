@@ -1,0 +1,46 @@
+{
+  "pageTitle": "宠物友好",
+  "pageSubtitle": "宠物也是家人——在这里，每一位毛孩子都被温柔以待",
+  "services": {
+    "title": "宠物服务",
+    "onsen": "宠物温泉",
+    "grooming": "吹干梳理",
+    "cleaning": "清洁服务",
+    "boarding": "宠物寄养",
+    "indoorRun": "室内 Dog Run",
+    "outdoorRun": "室外 Dog Run",
+    "open": "已开放",
+    "comingSoon": "即将开放"
+  },
+  "process": {
+    "title": "入住流程",
+    "step1": "在线预约",
+    "step2": "提交宠物信息",
+    "step3": "到店确认",
+    "step4": "办理入住",
+    "step5": "使用设施"
+  },
+  "rules": {
+    "title": "宠物入住规则",
+    "petCount": "宠物数量",
+    "size": "体型限制",
+    "vaccine": "疫苗要求",
+    "leash": "牵引要求",
+    "noise": "噪音管理",
+    "cleaning": "清洁责任",
+    "damage": "损坏赔偿",
+    "tbd": "待公布"
+  },
+  "lifestyle": {
+    "title": "宠物生活方式",
+    "walking": "散步",
+    "exercise": "运动",
+    "bbq": "BBQ 陪伴",
+    "cafe": "咖啡休闲",
+    "social": "社交活动"
+  },
+  "cta": {
+    "viewRooms": "查看宠物友好房",
+    "bookWithPet": "携宠预约"
+  }
+}

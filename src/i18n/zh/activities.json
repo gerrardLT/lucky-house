@@ -1,0 +1,23 @@
+{
+  "pageTitle": "活动社群",
+  "pageSubtitle": "和志同道合的携宠家庭一起，探索温泉营地的精彩活动",
+  "filter": {
+    "all": "全部活动",
+    "month": "按月份",
+    "category": "按类别"
+  },
+  "card": {
+    "date": "活动日期",
+    "target": "适合对象",
+    "capacity": "名额",
+    "tbd": "时间待定",
+    "register": "立即报名",
+    "interest": "订阅提醒",
+    "full": "名额已满"
+  },
+  "interestTags": {
+    "title": "兴趣标签登记",
+    "subtitle": "选择您感兴趣的活动类型，我们会在相关活动上线时通知您",
+    "submit": "保存偏好"
+  }
+}

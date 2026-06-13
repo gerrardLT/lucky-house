@@ -1,0 +1,28 @@
+{
+  "pageTitle": "周辺観光",
+  "pageSubtitle": "岳温泉を拠点に、福島二本松エリアの豊かな体験を探索",
+  "map": {
+    "title": "アクセス・交通",
+    "driving": "お車でのアクセス",
+    "publicTransport": "公共交通機関",
+    "loadError": "地図の読み込みに失敗しました。外部マップリンクをご利用ください"
+  },
+  "spots": {
+    "title": "周辺スポット",
+    "distance": "距離"
+  },
+  "itineraries": {
+    "title": "おすすめプラン",
+    "oneDay": "日帰り",
+    "twoDay": "1泊2日",
+    "family": "ファミリー＆ペット",
+    "duration": "所要時間"
+  },
+  "seasonal": {
+    "title": "四季のおすすめ",
+    "spring": "春",
+    "summer": "夏",
+    "autumn": "秋",
+    "winter": "冬"
+  }
+}

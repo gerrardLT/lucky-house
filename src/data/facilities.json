@@ -1,0 +1,290 @@
+[
+  {
+    "slug": "private-onsen",
+    "category": "onsen",
+    "name": {
+      "zh": "私汤（貸切風呂）",
+      "ja": "貸切風呂",
+      "en": "Private Onsen (Kashikiri)"
+    },
+    "description": {
+      "zh": "完全私密的天然硫磺温泉，可供家庭或情侣独享。温泉水源自岳温泉深层地热，富含对肌肤有益的矿物质。提供45分钟一组的预约制服务。",
+      "ja": "ご家族やカップルで貸切いただける天然硫黄泉。岳温泉の深部地熱から湧き出る、お肌に優しいミネラル豊富な湯をお楽しみいただけます。45分単位のご予約制です。",
+      "en": "A completely private natural sulfur hot spring for families or couples. Sourced from Dake Onsen's deep geothermal reservoir, rich in skin-nourishing minerals. Available in 45-minute reserved sessions."
+    },
+    "status": "open",
+    "icon": "onsen-private",
+    "image": {
+      "id": "facility-private-onsen",
+      "src": "/images/facilities/facility-onsen-outdoor-01.png",
+      "alt": {
+        "zh": "私汤温泉",
+        "ja": "貸切風呂",
+        "en": "Private onsen"
+      },
+      "category": "onsen",
+      "isRendering": true,
+      "sortOrder": 1,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-onsen-private",
+    "linkedBooking": true,
+    "sortOrder": 1
+  },
+  {
+    "slug": "shared-onsen",
+    "category": "onsen",
+    "name": {
+      "zh": "公共温泉（大浴場）",
+      "ja": "大浴場",
+      "en": "Shared Onsen (Public Bath)"
+    },
+    "description": {
+      "zh": "开阔的室内外大浴场，分设男女专区。露天风吕可眺望安达太良山连绵山脉，夜间享受满天星空下的温泉时光。",
+      "ja": "広々とした男女別の大浴場。露天風呂からは安達太良山の連山を一望でき、夜は満天の星空の下で温泉をお楽しみいただけます。",
+      "en": "Expansive indoor and outdoor baths with separate male and female zones. The open-air rotenburo offers views of the Adatara mountain range — starlit soaks by night."
+    },
+    "status": "open",
+    "icon": "onsen-shared",
+    "image": {
+      "id": "facility-shared-onsen",
+      "src": "/images/facilities/facility-onsen-outdoor-01.png",
+      "alt": {
+        "zh": "公共温泉大浴场",
+        "ja": "大浴場",
+        "en": "Shared onsen public bath"
+      },
+      "category": "onsen",
+      "isRendering": true,
+      "sortOrder": 2,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-onsen-public",
+    "linkedBooking": false,
+    "sortOrder": 2
+  },
+  {
+    "slug": "pet-onsen",
+    "category": "pet-service",
+    "name": {
+      "zh": "宠物温泉",
+      "ja": "ペット温泉",
+      "en": "Pet Onsen"
+    },
+    "description": {
+      "zh": "专为毛孩子打造的温泉浴池，使用温和的低温天然泉水。专业工作人员协助入浴，让爱宠也能享受温泉疗愈。提供不同体型宠物专用浴池。",
+      "ja": "わんちゃん専用の温泉浴槽。低温の天然温泉水を使用し、スタッフがお手伝いいたします。体格に合わせた専用浴槽をご用意しております。",
+      "en": "A dedicated hot spring bath for your furry companions, using gentle low-temperature natural spring water. Professional staff assist with bathing, with pools sized for different breeds."
+    },
+    "status": "opening_soon",
+    "icon": "pet-bath",
+    "image": {
+      "id": "facility-pet-onsen",
+      "src": "/images/facilities/facility-pet-onsen-01.png",
+      "alt": {
+        "zh": "宠物温泉浴池",
+        "ja": "ペット温泉浴槽",
+        "en": "Pet onsen bath"
+      },
+      "category": "pet",
+      "isRendering": true,
+      "sortOrder": 3,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-pet-onsen",
+    "linkedBooking": true,
+    "sortOrder": 3
+  },
+  {
+    "slug": "dog-run-outdoor",
+    "category": "pet-service",
+    "name": {
+      "zh": "室外 Dog Run",
+      "ja": "屋外ドッグラン",
+      "en": "Outdoor Dog Run"
+    },
+    "description": {
+      "zh": "超过 500 平方米的专业围栏草坪跑场，分设大型犬区与中小型犬区。天然草坪定期养护，配备饮水站和遮阳休息区。",
+      "ja": "500㎡以上のフェンス付き天然芝ドッグラン。大型犬エリアと中小型犬エリアを分離。定期メンテナンス済みの芝生に、水飲み場と日除け付き休憩スペースを完備。",
+      "en": "Over 500 sqm of professionally fenced natural grass running area, separated into large and small/medium dog zones. Regularly maintained with water stations and shaded rest areas."
+    },
+    "status": "open",
+    "icon": "dog-run",
+    "image": {
+      "id": "facility-dog-run-outdoor",
+      "src": "/images/facilities/facility-dog-run-01.png",
+      "alt": {
+        "zh": "室外Dog Run草坪跑场",
+        "ja": "屋外ドッグラン芝生",
+        "en": "Outdoor Dog Run grass area"
+      },
+      "category": "dog-run",
+      "isRendering": true,
+      "sortOrder": 4,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-dog-run",
+    "linkedBooking": false,
+    "sortOrder": 4
+  },
+  {
+    "slug": "dog-run-indoor",
+    "category": "pet-service",
+    "name": {
+      "zh": "室内 Dog Run",
+      "ja": "屋内ドッグラン",
+      "en": "Indoor Dog Run"
+    },
+    "description": {
+      "zh": "全天候室内活动空间，雨天或严寒季节也能让爱犬尽情奔跑。配备防滑地垫和基础障碍训练设施。",
+      "ja": "全天候型の屋内ドッグラン。雨の日や寒い季節でもわんちゃんが思いっきり走り回れます。滑りにくいマットと基本的なアジリティ設備を備えています。",
+      "en": "An all-weather indoor activity space so your dog can run freely even on rainy days or during cold seasons. Equipped with non-slip mats and basic agility equipment."
+    },
+    "status": "opening_soon",
+    "icon": "dog-run-indoor",
+    "linkedFAQ": "faq-dog-run",
+    "linkedBooking": false,
+    "sortOrder": 5
+  },
+  {
+    "slug": "grooming-station",
+    "category": "pet-service",
+    "name": {
+      "zh": "宠物梳理 & 吹干站",
+      "ja": "グルーミング＆ドライステーション",
+      "en": "Grooming & Drying Station"
+    },
+    "description": {
+      "zh": "配备专业吹水机、美容台和基础梳理工具的自助服务站。温泉入浴后可直接为爱宠吹干整理，保持清洁舒适。",
+      "ja": "プロ仕様のブロワー、トリミングテーブル、基本グルーミングツールを備えたセルフサービスステーション。温泉後すぐにわんちゃんを乾かして清潔に保てます。",
+      "en": "A self-service station with professional blow dryers, grooming table, and basic grooming tools. Dry and groom your pet right after their onsen bath."
+    },
+    "status": "opening_soon",
+    "icon": "grooming",
+    "linkedFAQ": "faq-grooming",
+    "linkedBooking": false,
+    "sortOrder": 6
+  },
+  {
+    "slug": "bbq-terrace",
+    "category": "dining",
+    "name": {
+      "zh": "BBQ 露台",
+      "ja": "BBQテラス",
+      "en": "BBQ Terrace"
+    },
+    "description": {
+      "zh": "户外BBQ区域可容纳多组家庭同时使用，提供炭火烤炉和基础食材套餐（需提前预约）。宠物可在专属围栏区域陪伴用餐。",
+      "ja": "屋外BBQエリアは複数のご家族が同時にご利用可能。炭火グリルと基本食材セット（要予約）をご用意。ペットは専用フェンスエリアでお食事にお付き合いいただけます。",
+      "en": "Outdoor BBQ area accommodating multiple families simultaneously. Charcoal grills and basic food packages available (reservation required). Pets welcome in the dedicated fenced dining zone."
+    },
+    "status": "open",
+    "icon": "bbq",
+    "image": {
+      "id": "facility-bbq",
+      "src": "/images/facilities/facility-bbq-terrace-01.png",
+      "alt": {
+        "zh": "BBQ露台区域",
+        "ja": "BBQテラスエリア",
+        "en": "BBQ terrace area"
+      },
+      "category": "bbq-cafe",
+      "isRendering": true,
+      "sortOrder": 7,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-bbq",
+    "linkedBooking": true,
+    "sortOrder": 7
+  },
+  {
+    "slug": "campsite-cafe",
+    "category": "dining",
+    "name": {
+      "zh": "营地咖啡厅",
+      "ja": "キャンプカフェ",
+      "en": "Campsite Café"
+    },
+    "description": {
+      "zh": "温馨的林间咖啡空间，提供本地烘焙咖啡、轻食和季节甜品。设有宠物友好露台座位区，可携宠同坐享受悠闲午后。",
+      "ja": "森の中の温かいカフェスペース。地元焙煎コーヒー、軽食、季節のスイーツをご提供。ペット同伴可能なテラス席で、ゆったりとした午後をお過ごしいただけます。",
+      "en": "A cozy forest café serving locally roasted coffee, light meals, and seasonal desserts. Pet-friendly terrace seating for relaxed afternoons with your companion."
+    },
+    "status": "open",
+    "icon": "cafe",
+    "image": {
+      "id": "facility-cafe",
+      "src": "/images/facilities/facility-bbq-terrace-01.png",
+      "alt": {
+        "zh": "营地咖啡厅",
+        "ja": "キャンプカフェ",
+        "en": "Campsite café"
+      },
+      "category": "bbq-cafe",
+      "isRendering": true,
+      "sortOrder": 8,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-dining",
+    "linkedBooking": false,
+    "sortOrder": 8
+  },
+  {
+    "slug": "leisure-lounge",
+    "category": "leisure",
+    "name": {
+      "zh": "休闲大厅 & 阅读角",
+      "ja": "ラウンジ＆読書コーナー",
+      "en": "Leisure Lounge & Reading Corner"
+    },
+    "description": {
+      "zh": "公共休闲空间配备舒适沙发、自然主题图书角和儿童游戏区。大面积落地窗引入自然光，是雨天休憩的理想去处。",
+      "ja": "ゆったりとしたソファ、自然をテーマにした読書コーナー、キッズプレイエリアを備えた共用ラウンジ。大きな窓から自然光が差し込み、雨の日のくつろぎスペースに最適です。",
+      "en": "A communal space with comfortable sofas, nature-themed reading corner, and kids' play area. Floor-to-ceiling windows let in natural light — the perfect rainy-day retreat."
+    },
+    "status": "open",
+    "icon": "lounge",
+    "linkedFAQ": "faq-leisure",
+    "linkedBooking": false,
+    "sortOrder": 9
+  },
+  {
+    "slug": "eco-solar-landscape",
+    "category": "eco",
+    "name": {
+      "zh": "零碳景观花园步道",
+      "ja": "ゼロカーボン景観ガーデン散策路",
+      "en": "Zero-Carbon Landscape Garden Walk"
+    },
+    "description": {
+      "zh": "漫步林间花园步道，感受可持续自然体验。四季花卉与原生植被交织的景观中，享受宁静的散步时光。是拍照打卡和亲子自然教育的独特体验点。",
+      "ja": "林間のガーデン散策路を歩きながら、サステナブルな自然体験をお楽しみください。四季の花々と自生植物が織りなす景観の中で、穏やかなひとときを。フォトスポットや親子での自然教育にも最適です。",
+      "en": "Stroll along garden paths through the forest and enjoy a sustainable nature experience. Seasonal flowers interwoven with native vegetation create a tranquil landscape — a unique spot for photos and family eco-education."
+    },
+    "status": "maintenance",
+    "icon": "eco-leaf",
+    "image": {
+      "id": "facility-eco-solar",
+      "src": "/images/facilities/facility-solar-tree-01.png",
+      "alt": {
+        "zh": "零碳景观花园步道",
+        "ja": "ゼロカーボン景観ガーデン散策路",
+        "en": "Zero-carbon landscape garden walk"
+      },
+      "category": "eco",
+      "isRendering": true,
+      "sortOrder": 10,
+      "width": 1200,
+      "height": 800
+    },
+    "linkedFAQ": "faq-eco",
+    "linkedBooking": false,
+    "sortOrder": 10
+  }
+]

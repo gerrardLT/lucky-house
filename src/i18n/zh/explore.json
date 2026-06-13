@@ -1,0 +1,28 @@
+{
+  "pageTitle": "周边探索",
+  "pageSubtitle": "从岳温泉出发，探索福岛二本松地区的丰富体验",
+  "map": {
+    "title": "位置与交通",
+    "driving": "自驾路线",
+    "publicTransport": "公共交通",
+    "loadError": "地图加载失败，请点击链接查看外部地图"
+  },
+  "spots": {
+    "title": "周边玩法",
+    "distance": "距离"
+  },
+  "itineraries": {
+    "title": "推荐行程",
+    "oneDay": "一日游",
+    "twoDay": "两天一夜",
+    "family": "亲子携宠",
+    "duration": "行程时长"
+  },
+  "seasonal": {
+    "title": "四季推荐",
+    "spring": "春季",
+    "summer": "夏季",
+    "autumn": "秋季",
+    "winter": "冬季"
+  }
+}

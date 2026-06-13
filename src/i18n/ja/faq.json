@@ -1,0 +1,19 @@
+{
+  "pageTitle": "よくある質問",
+  "pageSubtitle": "よくある質問にお答えします",
+  "search": {
+    "placeholder": "質問を検索...",
+    "noResults": "該当する質問が見つかりませんでした",
+    "contactUs": "お問い合わせはこちら"
+  },
+  "categories": {
+    "all": "すべて",
+    "pet": "ペット同伴",
+    "roomPrice": "客室・料金",
+    "onsen": "温泉",
+    "facility": "施設",
+    "transport": "交通アクセス",
+    "activity": "イベント",
+    "cancel": "キャンセル規定"
+  }
+}

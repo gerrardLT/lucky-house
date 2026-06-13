@@ -1,0 +1,22 @@
+{
+  "pageTitle": "画廊",
+  "pageSubtitle": "探索我们的空间与氛围",
+  "filter": {
+    "all": "全部",
+    "room": "房间",
+    "onsen": "温泉",
+    "pet": "宠物",
+    "dogRun": "Dog Run",
+    "bbqCafe": "BBQ & Cafe",
+    "activity": "活动",
+    "nearby": "周边",
+    "eco": "零碳景观"
+  },
+  "lightbox": {
+    "close": "关闭",
+    "prev": "上一张",
+    "next": "下一张",
+    "of": "/"
+  },
+  "rendering": "示意图"
+}

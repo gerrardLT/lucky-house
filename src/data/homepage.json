@@ -1,0 +1,393 @@
+{
+  "hero": {
+    "image": {
+      "id": "hero-main",
+      "src": "/images/hero/hero-01-family-pet-walkway.png",
+      "alt": {
+        "zh": "福岛岳温泉宠物营地全景",
+        "ja": "福島岳温泉ペットキャンプ場全景",
+        "en": "Fukushima Dake Onsen pet campsite panoramic view"
+      },
+      "category": "all",
+      "isRendering": true,
+      "sortOrder": 1,
+      "width": 1920,
+      "height": 1080
+    },
+    "title": {
+      "zh": "带上毛孩子，一起泡温泉",
+      "ja": "愛犬と一緒に、温泉の旅へ",
+      "en": "Hot Springs & Happy Tails"
+    },
+    "subtitle": {
+      "zh": "福岛岳温泉 · 零碳宠物营地 & 温泉酒店 — 人与宠物共享的自然度假体验",
+      "ja": "福島岳温泉・ゼロカーボンペットキャンプ＆温泉ホテル — 人とペットが共に楽しむ自然バケーション",
+      "en": "Fukushima Dake Onsen · Zero-Carbon Pet Campsite & Onsen Hotel — A nature retreat for you and your furry family"
+    }
+  },
+  "bookingWidgetVisible": true,
+  "valueCards": [
+    {
+      "icon": "paw-heart",
+      "title": {
+        "zh": "宠物友好温泉",
+        "ja": "ペットフレンドリー温泉",
+        "en": "Pet-Friendly Onsen"
+      },
+      "description": {
+        "zh": "人与宠物各有专属温泉体验，共享岳温泉千年天然硫磺泉的疗愈力量",
+        "ja": "人もペットもそれぞれの温泉体験。岳温泉の千年の天然硫黄泉の癒しをお届け",
+        "en": "Separate onsen experiences for humans and pets, sharing the healing power of Dake Onsen's millennium-old sulfur springs"
+      },
+      "link": "/pet-friendly"
+    },
+    {
+      "icon": "leaf-sun",
+      "title": {
+        "zh": "零碳自然营地",
+        "ja": "ゼロカーボン自然キャンプ",
+        "en": "Zero-Carbon Nature Camp"
+      },
+      "description": {
+        "zh": "融入安达太良山脚自然景观的可持续度假空间，让每一次旅行都对地球温柔",
+        "ja": "安達太良山麓の自然に溶け込むサステナブルな休暇空間。地球に優しい旅を",
+        "en": "A sustainable retreat nestled in the natural landscape at the foot of Mount Adatara — travel gently on the earth"
+      },
+      "link": "/facilities"
+    },
+    {
+      "icon": "users-group",
+      "title": {
+        "zh": "周末社群活动",
+        "ja": "週末コミュニティイベント",
+        "en": "Weekend Community Events"
+      },
+      "description": {
+        "zh": "BBQ派对、宠物交流会、星空观赏…为携宠家庭打造有温度的社群连接",
+        "ja": "BBQパーティー、ペット交流会、星空観賞…ペット連れ家族のための温かいコミュニティ",
+        "en": "BBQ parties, pet meetups, stargazing nights… Building warm community connections for pet families"
+      },
+      "link": "/activities"
+    }
+  ],
+  "featuredRooms": [
+    {
+      "slug": "pet-friendly-twin",
+      "category": "pet-friendly",
+      "name": {
+        "zh": "宠物友好双床房",
+        "ja": "ペットフレンドリーツインルーム",
+        "en": "Pet-Friendly Twin Room"
+      },
+      "description": {
+        "zh": "专为携宠家庭设计的温馨客房，配备宠物床、食碗、围栏等用品。地板采用防滑耐磨材质，让毛孩子自在活动。",
+        "ja": "ペット連れのご家族のために設計されたお部屋です。ペットベッド、食器、ゲートなどをご用意。滑りにくい床材を使用し、わんちゃんも快適に。",
+        "en": "A cozy room designed for families with pets. Equipped with pet bed, food bowls, and safety gate. Slip-resistant flooring for your furry friend's comfort."
+      },
+      "area": 35,
+      "maxGuests": 2,
+      "maxChildren": 2,
+      "bedType": {
+        "zh": "单人床 × 2",
+        "ja": "シングルベッド × 2",
+        "en": "Single Bed × 2"
+      },
+      "isPetFriendly": true,
+      "maxPets": 2,
+      "maxPetWeight": 25,
+      "priceStatus": "inquiry",
+      "amenities": ["wifi", "air-conditioning", "pet-bed", "pet-bowls", "dog-run-access"],
+      "images": [
+        {
+          "id": "featured-pet-twin",
+          "src": "/images/rooms/room-pet-friendly-interior-01.png",
+          "alt": {
+            "zh": "宠物友好双床房",
+            "ja": "ペットフレンドリーツインルーム",
+            "en": "Pet-Friendly Twin Room"
+          },
+          "category": "room",
+          "isRendering": true,
+          "sortOrder": 1,
+          "width": 1200,
+          "height": 800
+        }
+      ],
+      "tags": {
+        "zh": ["携宠家庭"],
+        "ja": ["ペット連れファミリー"],
+        "en": ["Pet families"]
+      },
+      "status": "active",
+      "sortOrder": 1
+    },
+    {
+      "slug": "pet-friendly-suite",
+      "category": "pet-friendly",
+      "name": {
+        "zh": "宠物友好套房",
+        "ja": "ペットフレンドリースイート",
+        "en": "Pet-Friendly Suite"
+      },
+      "description": {
+        "zh": "宽敞的套房空间，独立客厅与卧室分隔设计，配备专属宠物活动区和私汤露台。",
+        "ja": "広々としたスイートルームで、独立したリビングと寝室をご用意。専用ペットスペースとプライベート露天風呂テラス付き。",
+        "en": "A spacious suite with separate living and bedroom areas, featuring a dedicated pet zone and private open-air onsen terrace."
+      },
+      "area": 52,
+      "maxGuests": 4,
+      "maxChildren": 2,
+      "bedType": {
+        "zh": "大床 × 1 + 沙发床 × 1",
+        "ja": "ダブルベッド × 1 + ソファベッド × 1",
+        "en": "Double Bed × 1 + Sofa Bed × 1"
+      },
+      "isPetFriendly": true,
+      "maxPets": 3,
+      "maxPetWeight": 30,
+      "priceStatus": "inquiry",
+      "amenities": ["wifi", "air-conditioning", "private-onsen", "pet-bed", "pet-bowls", "dog-run-access", "separate-living"],
+      "images": [
+        {
+          "id": "featured-pet-suite",
+          "src": "/images/rooms/room-pet-friendly-interior-01.png",
+          "alt": {
+            "zh": "宠物友好套房",
+            "ja": "ペットフレンドリースイート",
+            "en": "Pet-Friendly Suite"
+          },
+          "category": "room",
+          "isRendering": true,
+          "sortOrder": 1,
+          "width": 1200,
+          "height": 800
+        }
+      ],
+      "tags": {
+        "zh": ["携宠家庭", "豪华度假"],
+        "ja": ["ペット連れファミリー", "贅沢バケーション"],
+        "en": ["Pet families", "Luxury getaway"]
+      },
+      "status": "active",
+      "sortOrder": 2
+    },
+    {
+      "slug": "campsite-villa-a",
+      "category": "villa",
+      "name": {
+        "zh": "营地小别墅 A（林间型）",
+        "ja": "キャンプヴィラ A（森林タイプ）",
+        "en": "Campsite Villa A (Forest Type)"
+      },
+      "description": {
+        "zh": "隐匿于林间的独栋小别墅，开放式露台与自然融为一体。配备私人BBQ区和宠物围栏庭院。",
+        "ja": "森の中に佇む独立型ヴィラ。オープンテラスが自然と一体化し、プライベートBBQスペースとペット用フェンス付きお庭を完備。",
+        "en": "A secluded standalone villa nestled in the forest. Open terrace merges with nature, featuring a private BBQ area and fenced pet garden."
+      },
+      "area": 65,
+      "maxGuests": 6,
+      "maxChildren": 3,
+      "bedType": {
+        "zh": "大床 × 1 + 上下铺 × 1",
+        "ja": "ダブルベッド × 1 + 二段ベッド × 1",
+        "en": "Double Bed × 1 + Bunk Bed × 1"
+      },
+      "isPetFriendly": true,
+      "maxPets": 3,
+      "maxPetWeight": 40,
+      "priceStatus": "coming_soon",
+      "amenities": ["wifi", "air-conditioning", "private-bbq", "pet-bed", "fenced-garden", "kitchen"],
+      "images": [
+        {
+          "id": "featured-villa-a",
+          "src": "/images/rooms/room-villa-exterior-01.png",
+          "alt": {
+            "zh": "营地小别墅A",
+            "ja": "キャンプヴィラA",
+            "en": "Campsite Villa A"
+          },
+          "category": "room",
+          "isRendering": true,
+          "sortOrder": 1,
+          "width": 1200,
+          "height": 800
+        }
+      ],
+      "tags": {
+        "zh": ["携宠家庭", "自然露营"],
+        "ja": ["ペット連れファミリー", "ネイチャーキャンプ"],
+        "en": ["Pet families", "Nature camping"]
+      },
+      "status": "coming_soon",
+      "sortOrder": 3
+    }
+  ],
+  "featuredGallery": [
+    {
+      "id": "featured-gallery-1",
+      "src": "/images/rooms/room-pet-friendly-interior-01.png",
+      "alt": {
+        "zh": "宠物友好套房内部",
+        "ja": "ペットフレンドリースイート室内",
+        "en": "Pet-friendly suite interior"
+      },
+      "category": "room",
+      "isRendering": true,
+      "linkedPage": "/stay/pet-friendly-suite",
+      "sortOrder": 1,
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "featured-gallery-2",
+      "src": "/images/facilities/facility-onsen-outdoor-01.png",
+      "alt": {
+        "zh": "私汤温泉傍晚",
+        "ja": "貸切風呂の夕暮れ",
+        "en": "Private onsen evening"
+      },
+      "category": "onsen",
+      "isRendering": true,
+      "linkedPage": "/facilities",
+      "sortOrder": 2,
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "featured-gallery-3",
+      "src": "/images/facilities/facility-dog-run-01.png",
+      "alt": {
+        "zh": "Dog Run嬉戏",
+        "ja": "ドッグランで遊ぶ犬たち",
+        "en": "Dogs playing in Dog Run"
+      },
+      "category": "dog-run",
+      "isRendering": true,
+      "linkedPage": "/pet-friendly",
+      "sortOrder": 3,
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "featured-gallery-4",
+      "src": "/images/facilities/facility-bbq-terrace-01.png",
+      "alt": {
+        "zh": "家庭BBQ聚会",
+        "ja": "ファミリーBBQ",
+        "en": "Family BBQ gathering"
+      },
+      "category": "bbq-cafe",
+      "isRendering": true,
+      "linkedPage": "/facilities",
+      "sortOrder": 4,
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "id": "featured-gallery-5",
+      "src": "/images/explore/explore-nature-trail-01.png",
+      "alt": {
+        "zh": "安达太良山秋色",
+        "ja": "安達太良山の紅葉",
+        "en": "Mount Adatara autumn"
+      },
+      "category": "nearby",
+      "isRendering": false,
+      "linkedPage": "/explore",
+      "sortOrder": 5,
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "id": "featured-gallery-6",
+      "src": "/images/facilities/facility-solar-tree-01.png",
+      "alt": {
+        "zh": "零碳光伏花园",
+        "ja": "ゼロカーボンソーラーガーデン",
+        "en": "Zero-carbon solar garden"
+      },
+      "category": "eco",
+      "isRendering": true,
+      "sortOrder": 6,
+      "width": 1200,
+      "height": 800
+    }
+  ],
+  "topFAQs": [
+    {
+      "id": "faq-pet-allowed",
+      "category": "pet",
+      "question": {
+        "zh": "哪些宠物可以入住？有体型限制吗？",
+        "ja": "どんなペットが宿泊できますか？サイズ制限はありますか？",
+        "en": "What pets are allowed? Are there size restrictions?"
+      },
+      "answer": {
+        "zh": "目前接受犬类和猫类入住。犬类体重上限根据房型不同而异（宠物友好房 25kg、套房 30kg、别墅 40kg）。具体宠物类型和品种限制请在预约时确认。",
+        "ja": "現在、犬と猫のご宿泊を受け付けております。犬の体重制限はお部屋タイプにより異なります（ペットフレンドリールーム25kg、スイート30kg、ヴィラ40kg）。具体的なペットの種類や犬種制限はご予約時にご確認ください。",
+        "en": "We currently accept dogs and cats. Weight limits for dogs vary by room type (Pet-Friendly Room: 25kg, Suite: 30kg, Villa: 40kg). Please confirm specific pet types and breed restrictions when booking."
+      },
+      "sortOrder": 1
+    },
+    {
+      "id": "faq-room-price",
+      "category": "room-price",
+      "question": {
+        "zh": "房间价格是多少？如何预订？",
+        "ja": "お部屋の料金はいくらですか？予約方法は？",
+        "en": "What are the room rates? How can I book?"
+      },
+      "answer": {
+        "zh": "目前各房型价格正在最终确认中，即将公布。您可以通过预约表单提交咨询，我们的工作人员会在48小时内与您联系确认价格和可用日期。",
+        "ja": "現在、各お部屋タイプの料金を最終確認中です。まもなく公開予定です。ご予約フォームからお問い合わせいただければ、48時間以内にスタッフが料金と空室状況をご連絡いたします。",
+        "en": "Room rates are currently being finalized and will be announced soon. You can submit an inquiry through our booking form, and our team will contact you within 48 hours with pricing and availability."
+      },
+      "sortOrder": 2
+    },
+    {
+      "id": "faq-pet-vaccine",
+      "category": "pet",
+      "question": {
+        "zh": "携宠入住需要哪些疫苗证明？",
+        "ja": "ペット宿泊にはどのような予防接種証明が必要ですか？",
+        "en": "What vaccination certificates are required for pets?"
+      },
+      "answer": {
+        "zh": "所有犬类需提供有效期内的狂犬病疫苗接种证明和混合疫苗（五联或以上）接种证明。猫类需提供猫三联疫苗接种证明。证明需在入住前30天内有效。具体要求待运营确认后发布。",
+        "ja": "すべての犬は有効期限内の狂犬病予防接種証明書と混合ワクチン（5種以上）接種証明書が必要です。猫は3種混合ワクチン接種証明書が必要です。証明書はチェックイン前30日以内に有効である必要があります。詳細は運営確認後に公開いたします。",
+        "en": "All dogs require valid rabies vaccination certificates and combined vaccine (5-in-1 or above) certificates. Cats require 3-in-1 vaccine certificates. Certificates must be valid within 30 days before check-in. Specific requirements to be confirmed by operations."
+      },
+      "sortOrder": 3
+    },
+    {
+      "id": "faq-onsen-private",
+      "category": "onsen",
+      "question": {
+        "zh": "私汤温泉需要预约吗？可以带宠物吗？",
+        "ja": "貸切風呂は予約が必要ですか？ペットは一緒に入れますか？",
+        "en": "Do I need to reserve the private onsen? Can I bring my pet?"
+      },
+      "answer": {
+        "zh": "私汤采用预约制，每组45分钟。人类温泉区域不可携带宠物。我们设有专门的宠物温泉服务，可另行预约。",
+        "ja": "貸切風呂は予約制で、1回45分です。人間用温泉エリアにはペットの同伴はできません。別途ペット温泉サービスをご予約いただけます。",
+        "en": "The private onsen requires reservation, 45 minutes per session. Pets are not allowed in human onsen areas. We offer a separate pet onsen service that can be booked separately."
+      },
+      "sortOrder": 4
+    },
+    {
+      "id": "faq-transport-access",
+      "category": "transport",
+      "question": {
+        "zh": "如何到达酒店？有接送服务吗？",
+        "ja": "ホテルへのアクセス方法は？送迎サービスはありますか？",
+        "en": "How do I get to the hotel? Is there a shuttle service?"
+      },
+      "answer": {
+        "zh": "从JR二本松站出发，驾车约20分钟。也可乘坐当地巴士至岳温泉站下车。关于接送服务的安排，请在预约时备注咨询，我们会根据实际情况提供协助。",
+        "ja": "JR二本松駅からお車で約20分。地元バスで岳温泉停留所まで行くことも可能です。送迎サービスについてはご予約時にお問い合わせください。状況に応じてご対応いたします。",
+        "en": "About 20 minutes by car from JR Nihonmatsu Station. You can also take a local bus to the Dake Onsen stop. For shuttle service arrangements, please inquire when booking and we'll assist based on availability."
+      },
+      "sortOrder": 5
+    }
+  ]
+}

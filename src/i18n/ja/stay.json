@@ -1,0 +1,37 @@
+{
+  "pageTitle": "客室タイプ",
+  "pageSubtitle": "スタンダードルームからペットフレンドリースイート、森のキャンプヴィラまで——愛するペットと温泉のひとときを",
+  "filter": {
+    "all": "すべて",
+    "petFriendly": "ペット可",
+    "standard": "スタンダード",
+    "villa": "キャンプヴィラ",
+    "hasPet": "ペット同伴"
+  },
+  "card": {
+    "area": "広さ",
+    "guests": "定員",
+    "bed": "ベッドタイプ",
+    "noPet": "ペット不可",
+    "comingSoon": "近日オープン",
+    "viewDetails": "詳細を見る"
+  },
+  "comparison": {
+    "title": "客室タイプ比較",
+    "category": "カテゴリー",
+    "petAllowed": "ペット同伴",
+    "maxGuests": "最大定員",
+    "yes": "可",
+    "no": "不可"
+  },
+  "detail": {
+    "amenities": "客室設備",
+    "suitableFor": "こんな方におすすめ",
+    "petInfo": "ペット同伴情報",
+    "maxPets": "ペット数上限",
+    "maxPetWeight": "ペット体重上限",
+    "rules": "ご利用規約・注意事項",
+    "relatedRooms": "その他のおすすめ客室",
+    "bookThisRoom": "この客室を予約する"
+  }
+}

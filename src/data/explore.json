@@ -1,0 +1,376 @@
+{
+  "mapCenter": { "lat": 37.6158, "lng": 140.3194 },
+  "spots": [
+    {
+      "name": {
+        "zh": "岳温泉街",
+        "ja": "岳温泉街",
+        "en": "Dake Onsen Town"
+      },
+      "description": {
+        "zh": "拥有1200年历史的温泉小镇，酸性硫磺泉闻名全日本。步行即可到达多家日归温泉和温泉旅馆，体验地道日本温泉文化。",
+        "ja": "1200年の歴史を持つ温泉街。酸性硫黄泉で全国的に有名です。日帰り温泉や旅館が徒歩圏内にあり、本格的な日本の温泉文化を体験できます。",
+        "en": "A hot spring town with 1,200 years of history, famous across Japan for its acidic sulfur springs. Multiple day-trip onsen and ryokan within walking distance for an authentic Japanese hot spring experience."
+      },
+      "category": "onsen",
+      "distance": "步行5分钟",
+      "image": {
+        "id": "explore-dake-onsen",
+        "src": "/images/explore/explore-dake-onsen-town-01.png",
+        "alt": {
+          "zh": "岳温泉街景",
+          "ja": "岳温泉街並み",
+          "en": "Dake Onsen town street"
+        },
+        "category": "nearby",
+        "isRendering": false,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      }
+    },
+    {
+      "name": {
+        "zh": "安达太良山",
+        "ja": "安達太良山",
+        "en": "Mount Adatara"
+      },
+      "description": {
+        "zh": "日本百名山之一，四季景色各异。春看山花烂漫，夏行绿荫登山道，秋赏红叶绝景，冬享滑雪温泉。缆车可达中腹瞭望台。",
+        "ja": "日本百名山のひとつで、四季折々の景色が楽しめます。春は花、夏は緑のトレイル、秋は紅葉の絶景、冬はスキーと温泉。ロープウェイで中腹の展望台まで行けます。",
+        "en": "One of Japan's 100 Famous Mountains with distinct seasonal beauty. Spring flowers, summer green trails, autumn foliage, and winter skiing. A ropeway takes you to the mid-mountain observation deck."
+      },
+      "category": "nature",
+      "distance": "车程10分钟至缆车站",
+      "image": {
+        "id": "explore-adatara",
+        "src": "/images/explore/explore-nature-trail-01.png",
+        "alt": {
+          "zh": "安达太良山景色",
+          "ja": "安達太良山の景色",
+          "en": "Mount Adatara scenery"
+        },
+        "category": "nearby",
+        "isRendering": false,
+        "sortOrder": 2,
+        "width": 1200,
+        "height": 800
+      }
+    },
+    {
+      "name": {
+        "zh": "东北野生动物园",
+        "ja": "東北サファリパーク",
+        "en": "Tohoku Safari Park"
+      },
+      "description": {
+        "zh": "日本东北地区最大的野生动物园，可驾车近距离观赏狮子、长颈鹿等动物。设有抚触动物区，适合亲子家庭。",
+        "ja": "東北最大のサファリパーク。マイカーでライオンやキリンなどを間近に観察できます。ふれあい動物エリアもあり、お子様連れにぴったりです。",
+        "en": "The largest safari park in the Tohoku region. Drive through to see lions, giraffes, and more up close. Features a petting zoo area, perfect for families with children."
+      },
+      "category": "attraction",
+      "distance": "车程15分钟",
+      "image": {
+        "id": "explore-safari",
+        "src": "/images/explore/explore-dake-onsen-town-01.png",
+        "alt": {
+          "zh": "东北野生动物园",
+          "ja": "東北サファリパーク",
+          "en": "Tohoku Safari Park"
+        },
+        "category": "nearby",
+        "isRendering": false,
+        "sortOrder": 3,
+        "width": 1200,
+        "height": 800
+      }
+    },
+    {
+      "name": {
+        "zh": "二本松城迹（霞城公園）",
+        "ja": "二本松城跡（霞ヶ城公園）",
+        "en": "Nihonmatsu Castle Ruins (Kasumigajo Park)"
+      },
+      "description": {
+        "zh": "拥有600年历史的城堡遗址，现为美丽的城市公园。春季樱花、秋季菊人形展闻名。适合散步和历史文化体验。",
+        "ja": "600年の歴史を持つ城跡で、現在は美しい都市公園です。春の桜と秋の菊人形展で有名。お散歩や歴史文化体験に最適です。",
+        "en": "A 600-year-old castle ruin now serving as a beautiful city park. Famous for spring cherry blossoms and autumn chrysanthemum doll exhibitions. Perfect for walks and historical exploration."
+      },
+      "category": "culture",
+      "distance": "车程20分钟"
+    },
+    {
+      "name": {
+        "zh": "エビスサーキット（Ebisu Circuit）",
+        "ja": "エビスサーキット",
+        "en": "Ebisu Circuit"
+      },
+      "description": {
+        "zh": "国际知名的汽车赛道，漂移文化圣地。提供体验驾驶和观赛服务，赛车爱好者不可错过的打卡地。",
+        "ja": "国際的に有名なサーキットで、ドリフト文化の聖地。体験走行や観戦サービスを提供しており、モータースポーツファン必見です。",
+        "en": "An internationally renowned racing circuit and drifting culture mecca. Offers driving experiences and spectator events — a must-visit for motorsport enthusiasts."
+      },
+      "category": "attraction",
+      "distance": "车程25分钟"
+    },
+    {
+      "name": {
+        "zh": "奥岳自然散步道",
+        "ja": "奥岳自然遊歩道",
+        "en": "Okudake Nature Trail"
+      },
+      "description": {
+        "zh": "适合轻度徒步的自然散步路线，全程平缓无障碍。可携宠同行，沿途可观察野鸟和高山植物。四季风景不同，秋季红叶尤其壮观。",
+        "ja": "軽いハイキングに最適な自然遊歩道。全コース平坦でバリアフリー。ペット同伴可能で、野鳥や高山植物を観察できます。四季の風景が楽しめ、特に秋の紅葉は見事です。",
+        "en": "A gentle nature trail perfect for light hiking, fully flat and accessible. Pets welcome along the route where you can observe wild birds and alpine plants. Beautiful in all seasons, especially stunning autumn foliage."
+      },
+      "category": "nature",
+      "distance": "车程5分钟",
+      "image": {
+        "id": "explore-nature-trail",
+        "src": "/images/explore/explore-nature-trail-01.png",
+        "alt": {
+          "zh": "奥岳自然散步道",
+          "ja": "奥岳自然遊歩道",
+          "en": "Okudake nature trail"
+        },
+        "category": "nearby",
+        "isRendering": false,
+        "sortOrder": 6,
+        "width": 1200,
+        "height": 800
+      }
+    },
+    {
+      "name": {
+        "zh": "当地农产直卖所",
+        "ja": "地元農産物直売所",
+        "en": "Local Farm Produce Market"
+      },
+      "description": {
+        "zh": "二本松地区的新鲜农产品直销市场，可购买当季蔬果、手工味噌、地酒等本地特产。适合带回BBQ食材。",
+        "ja": "二本松エリアの新鮮な農産物直売所。旬の野菜や果物、手作り味噌、地酒などの地元特産品をお買い求めいただけます。BBQ食材の調達にも最適です。",
+        "en": "A fresh produce market in the Nihonmatsu area offering seasonal vegetables, handmade miso, local sake, and regional specialties. Great for picking up BBQ ingredients."
+      },
+      "category": "food",
+      "distance": "车程15分钟"
+    }
+  ],
+  "itineraries": [
+    {
+      "title": {
+        "zh": "一日游：温泉 & 自然散步",
+        "ja": "日帰り：温泉＆自然散策",
+        "en": "Day Trip: Onsen & Nature Walk"
+      },
+      "duration": "1天",
+      "tags": {
+        "zh": ["轻松", "温泉", "自然", "携宠"],
+        "ja": ["のんびり", "温泉", "自然", "ペット可"],
+        "en": ["Relaxing", "Onsen", "Nature", "Pet-friendly"]
+      },
+      "steps": [
+        {
+          "name": {
+            "zh": "上午：奥岳自然散步",
+            "ja": "午前：奥岳自然散策",
+            "en": "Morning: Okudake Nature Walk"
+          },
+          "description": {
+            "zh": "带着爱宠在奥岳自然散步道享受清晨的新鲜空气和山间美景",
+            "ja": "愛犬と一緒に奥岳自然遊歩道で朝の新鮮な空気と山の景色を楽しみましょう",
+            "en": "Enjoy fresh morning air and mountain views with your pet along the Okudake Nature Trail"
+          }
+        },
+        {
+          "name": {
+            "zh": "中午：营地 BBQ 午餐",
+            "ja": "昼食：キャンプBBQランチ",
+            "en": "Lunch: Campsite BBQ"
+          },
+          "description": {
+            "zh": "回到营地享用户外BBQ，宠物在围栏区域陪伴用餐",
+            "ja": "キャンプ場に戻り屋外BBQを楽しみましょう。ペットはフェンスエリアでお食事にお付き合い",
+            "en": "Return to the campsite for outdoor BBQ with your pet in the fenced dining area"
+          }
+        },
+        {
+          "name": {
+            "zh": "下午：岳温泉泡汤",
+            "ja": "午後：岳温泉入浴",
+            "en": "Afternoon: Dake Onsen Bath"
+          },
+          "description": {
+            "zh": "前往私汤或公共温泉享受天然硫磺泉，宠物可同时预约宠物温泉",
+            "ja": "貸切風呂または大浴場で天然硫黄泉をお楽しみください。ペットはペット温泉を同時予約可能",
+            "en": "Enjoy the natural sulfur springs at the private or public onsen. Pets can be booked for the pet onsen simultaneously"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "两天一夜：携宠全体验",
+        "ja": "1泊2日：ペット連れフル体験",
+        "en": "2 Days 1 Night: Full Pet Experience"
+      },
+      "duration": "2天1夜",
+      "tags": {
+        "zh": ["携宠", "全体验", "温泉", "活动"],
+        "ja": ["ペット連れ", "フル体験", "温泉", "アクティビティ"],
+        "en": ["Pet-friendly", "Full experience", "Onsen", "Activities"]
+      },
+      "steps": [
+        {
+          "name": {
+            "zh": "Day1 上午：入住 & Dog Run",
+            "ja": "1日目午前：チェックイン＆ドッグラン",
+            "en": "Day 1 AM: Check-in & Dog Run"
+          },
+          "description": {
+            "zh": "办理入住后，带爱宠到Dog Run区域自由活动，熟悉环境",
+            "ja": "チェックイン後、ドッグランで愛犬と自由に遊び、環境に慣れましょう",
+            "en": "After check-in, let your pet run free in the Dog Run area to get familiar with the surroundings"
+          }
+        },
+        {
+          "name": {
+            "zh": "Day1 下午：宠物温泉 + 梳理",
+            "ja": "1日目午後：ペット温泉＋グルーミング",
+            "en": "Day 1 PM: Pet Onsen + Grooming"
+          },
+          "description": {
+            "zh": "预约宠物温泉和梳理服务，让毛孩子享受专属SPA",
+            "ja": "ペット温泉とグルーミングを予約して、わんちゃんに専用スパ体験を",
+            "en": "Book pet onsen and grooming services for a dedicated spa experience for your furry friend"
+          }
+        },
+        {
+          "name": {
+            "zh": "Day1 晚上：BBQ 晚餐 + 星空",
+            "ja": "1日目夜：BBQディナー＋星空",
+            "en": "Day 1 Evening: BBQ Dinner + Stargazing"
+          },
+          "description": {
+            "zh": "户外BBQ晚餐后，在福岛纯净夜空下欣赏满天星斗",
+            "ja": "屋外BBQディナーの後、福島の澄んだ夜空で満天の星を楽しみましょう",
+            "en": "Enjoy outdoor BBQ dinner followed by stargazing under Fukushima's pristine night sky"
+          }
+        },
+        {
+          "name": {
+            "zh": "Day2 上午：自然散步 + 咖啡",
+            "ja": "2日目午前：自然散策＋カフェ",
+            "en": "Day 2 AM: Nature Walk + Café"
+          },
+          "description": {
+            "zh": "晨间散步后到营地咖啡厅享用早餐和本地烘焙咖啡",
+            "ja": "朝の散策後、キャンプカフェで朝食と地元焙煎コーヒーをお楽しみください",
+            "en": "After a morning walk, enjoy breakfast and locally roasted coffee at the campsite café"
+          }
+        },
+        {
+          "name": {
+            "zh": "Day2 下午：周边观光或温泉",
+            "ja": "2日目午後：周辺観光または温泉",
+            "en": "Day 2 PM: Sightseeing or Onsen"
+          },
+          "description": {
+            "zh": "可选择前往东北野生动物园、安达太良山缆车，或再享受一次温泉后退房",
+            "ja": "東北サファリパーク、安達太良山ロープウェイへの観光、またはもう一度温泉を楽しんでからチェックアウト",
+            "en": "Visit Tohoku Safari Park, ride the Adatara ropeway, or enjoy one more onsen session before checkout"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "zh": "亲子携宠周末：自然教育之旅",
+        "ja": "親子ペット週末：自然教育の旅",
+        "en": "Family & Pet Weekend: Nature Education"
+      },
+      "duration": "2天1夜",
+      "tags": {
+        "zh": ["亲子", "携宠", "教育", "自然"],
+        "ja": ["親子", "ペット連れ", "教育", "自然"],
+        "en": ["Family", "Pet-friendly", "Education", "Nature"]
+      },
+      "steps": [
+        {
+          "name": {
+            "zh": "Day1：零碳花园 + Dog Run",
+            "ja": "1日目：ゼロカーボンガーデン＋ドッグラン",
+            "en": "Day 1: Solar Garden + Dog Run"
+          },
+          "description": {
+            "zh": "参观零碳光伏花园了解可持续理念，之后全家在Dog Run区域互动玩耍",
+            "ja": "ゼロカーボンソーラーガーデンでサステナビリティを学び、その後ドッグランで家族全員で遊びましょう",
+            "en": "Visit the zero-carbon solar garden to learn about sustainability, then enjoy family playtime at the Dog Run"
+          }
+        },
+        {
+          "name": {
+            "zh": "Day2：野生动物园 + 农产市场",
+            "ja": "2日目：サファリパーク＋農産物市場",
+            "en": "Day 2: Safari Park + Farm Market"
+          },
+          "description": {
+            "zh": "上午参观东北野生动物园，下午到当地农产直卖所采购新鲜食材",
+            "ja": "午前は東北サファリパークを見学し、午後は地元農産物直売所で新鮮食材をお買い物",
+            "en": "Morning visit to Tohoku Safari Park, afternoon shopping at the local farm produce market"
+          }
+        }
+      ]
+    }
+  ],
+  "seasonalContent": {
+    "spring": {
+      "title": {
+        "zh": "春 · 樱花与新生",
+        "ja": "春・桜と新しい季節",
+        "en": "Spring · Cherry Blossoms & Renewal"
+      },
+      "highlights": {
+        "zh": ["岳温泉周边樱花绽放", "安达太良山花季登山", "春季宠物散步会", "当地春野菜料理"],
+        "ja": ["岳温泉周辺の桜", "安達太良山の花季登山", "春のペット散歩会", "地元春野菜の料理"],
+        "en": ["Cherry blossoms around Dake Onsen", "Mount Adatara spring flower hikes", "Spring pet walking events", "Local spring vegetable cuisine"]
+      }
+    },
+    "summer": {
+      "title": {
+        "zh": "夏 · 绿荫与清凉",
+        "ja": "夏・緑陰と涼",
+        "en": "Summer · Green Shade & Cool Escape"
+      },
+      "highlights": {
+        "zh": ["高原避暑度假", "夏日BBQ宠物派对", "水池嬉戏活动", "安达太良山避暑登山"],
+        "ja": ["高原避暑地での休暇", "サマーBBQペットパーティー", "水遊びイベント", "安達太良山の避暑ハイキング"],
+        "en": ["Highland summer retreat", "Summer BBQ pet parties", "Splash pool events", "Cool hikes on Mount Adatara"]
+      }
+    },
+    "autumn": {
+      "title": {
+        "zh": "秋 · 红叶与温泉",
+        "ja": "秋・紅葉と温泉",
+        "en": "Autumn · Foliage & Hot Springs"
+      },
+      "highlights": {
+        "zh": ["安达太良山红叶绝景", "秋夜星空观赏", "温泉 × 红叶体验", "二本松菊人形展"],
+        "ja": ["安達太良山の紅葉絶景", "秋の星空観賞会", "温泉×紅葉体験", "二本松菊人形展"],
+        "en": ["Mount Adatara autumn foliage", "Autumn stargazing nights", "Onsen & foliage experience", "Nihonmatsu Chrysanthemum Festival"]
+      }
+    },
+    "winter": {
+      "title": {
+        "zh": "冬 · 雪景与养生",
+        "ja": "冬・雪景色とウェルネス",
+        "en": "Winter · Snow & Wellness"
+      },
+      "highlights": {
+        "zh": ["冬日温泉养生套餐", "安达太良山滑雪", "雪中露天风吕", "温暖的室内Dog Run"],
+        "ja": ["冬の温泉ウェルネスパッケージ", "安達太良山スキー", "雪見露天風呂", "暖かい屋内ドッグラン"],
+        "en": ["Winter onsen wellness packages", "Skiing on Mount Adatara", "Snow-viewing outdoor baths", "Cozy indoor Dog Run"]
+      }
+    }
+  }
+}

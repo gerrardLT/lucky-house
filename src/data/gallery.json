@@ -1,0 +1,226 @@
+[
+  {
+    "id": "gallery-room-pet-suite",
+    "src": "/images/rooms/room-pet-friendly-interior-01.png",
+    "alt": {
+      "zh": "宠物友好套房内部空间",
+      "ja": "ペットフレンドリースイート室内",
+      "en": "Pet-friendly suite interior"
+    },
+    "category": "room",
+    "isRendering": true,
+    "linkedPage": "/stay/pet-friendly-suite",
+    "sortOrder": 1,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-room-villa-exterior",
+    "src": "/images/rooms/room-villa-exterior-01.png",
+    "alt": {
+      "zh": "林间营地小别墅外观",
+      "ja": "森の中のキャンプヴィラ外観",
+      "en": "Forest campsite villa exterior"
+    },
+    "category": "room",
+    "isRendering": true,
+    "linkedPage": "/stay/campsite-villa-a",
+    "sortOrder": 2,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-onsen-private",
+    "src": "/images/facilities/facility-onsen-outdoor-01.png",
+    "alt": {
+      "zh": "傍晚私汤温泉氛围",
+      "ja": "夕暮れの貸切風呂",
+      "en": "Private onsen in the evening"
+    },
+    "category": "onsen",
+    "isRendering": true,
+    "linkedPage": "/facilities",
+    "sortOrder": 3,
+    "width": 1200,
+    "height": 900
+  },
+  {
+    "id": "gallery-onsen-outdoor",
+    "src": "/images/facilities/facility-onsen-outdoor-01.png",
+    "alt": {
+      "zh": "露天风吕远眺安达太良山",
+      "ja": "露天風呂から望む安達太良山",
+      "en": "Outdoor rotenburo with Adatara mountain view"
+    },
+    "category": "onsen",
+    "isRendering": true,
+    "linkedPage": "/facilities",
+    "sortOrder": 4,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-pet-dogrun",
+    "src": "/images/facilities/facility-dog-run-01.png",
+    "alt": {
+      "zh": "Dog Run区域嬉戏的狗狗",
+      "ja": "ドッグランで遊ぶ犬たち",
+      "en": "Dogs playing in the Dog Run"
+    },
+    "category": "dog-run",
+    "isRendering": true,
+    "linkedPage": "/pet-friendly",
+    "sortOrder": 5,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-pet-onsen-bath",
+    "src": "/images/facilities/facility-pet-onsen-01.png",
+    "alt": {
+      "zh": "宠物温泉入浴场景",
+      "ja": "ペット温泉入浴シーン",
+      "en": "Pet onsen bathing scene"
+    },
+    "category": "pet",
+    "isRendering": true,
+    "linkedPage": "/pet-friendly",
+    "sortOrder": 6,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-pet-walk",
+    "src": "/images/facilities/facility-pet-onsen-01.png",
+    "alt": {
+      "zh": "携宠自然散步小径",
+      "ja": "ペットと自然散策路",
+      "en": "Pet nature walk trail"
+    },
+    "category": "pet",
+    "isRendering": false,
+    "linkedPage": "/pet-friendly",
+    "sortOrder": 7,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-bbq-family",
+    "src": "/images/facilities/facility-bbq-terrace-01.png",
+    "alt": {
+      "zh": "家庭BBQ聚会",
+      "ja": "ファミリーBBQの集い",
+      "en": "Family BBQ gathering"
+    },
+    "category": "bbq-cafe",
+    "isRendering": true,
+    "linkedPage": "/facilities",
+    "sortOrder": 8,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-cafe-terrace",
+    "src": "/images/facilities/facility-bbq-terrace-01.png",
+    "alt": {
+      "zh": "咖啡厅露台午后时光",
+      "ja": "カフェテラスの午後",
+      "en": "Café terrace afternoon"
+    },
+    "category": "bbq-cafe",
+    "isRendering": true,
+    "linkedPage": "/facilities",
+    "sortOrder": 9,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-activity-meetup",
+    "src": "/images/activities/activity-pet-sports-01.png",
+    "alt": {
+      "zh": "宠物交流会活动现场",
+      "ja": "ペット交流会イベント",
+      "en": "Pet meetup event"
+    },
+    "category": "activity",
+    "isRendering": true,
+    "linkedPage": "/activities",
+    "sortOrder": 10,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-nearby-dake-onsen",
+    "src": "/images/explore/explore-dake-onsen-town-01.png",
+    "alt": {
+      "zh": "岳温泉街景",
+      "ja": "岳温泉街並み",
+      "en": "Dake Onsen town street"
+    },
+    "category": "nearby",
+    "isRendering": false,
+    "linkedPage": "/explore",
+    "sortOrder": 11,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-nearby-adatara",
+    "src": "/images/explore/explore-nature-trail-01.png",
+    "alt": {
+      "zh": "安达太良山秋色",
+      "ja": "安達太良山の紅葉",
+      "en": "Mount Adatara autumn colors"
+    },
+    "category": "nearby",
+    "isRendering": false,
+    "linkedPage": "/explore",
+    "sortOrder": 12,
+    "width": 1200,
+    "height": 900
+  },
+  {
+    "id": "gallery-eco-solar-path",
+    "src": "/images/facilities/facility-solar-tree-01.png",
+    "alt": {
+      "zh": "零碳光伏花园步道",
+      "ja": "ゼロカーボンソーラーガーデン散策路",
+      "en": "Zero-carbon solar garden pathway"
+    },
+    "category": "eco",
+    "isRendering": true,
+    "sortOrder": 13,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-room-standard-view",
+    "src": "/images/rooms/room-standard-interior-01.png",
+    "alt": {
+      "zh": "标准房窗外山景",
+      "ja": "スタンダードルームからの山の眺め",
+      "en": "Standard room mountain view"
+    },
+    "category": "room",
+    "isRendering": true,
+    "linkedPage": "/stay/standard-twin",
+    "sortOrder": 14,
+    "width": 1200,
+    "height": 800
+  },
+  {
+    "id": "gallery-activity-stargazing",
+    "src": "/images/activities/activity-pet-photography-01.png",
+    "alt": {
+      "zh": "星空观赏夜景",
+      "ja": "星空観賞の夜",
+      "en": "Stargazing night sky"
+    },
+    "category": "activity",
+    "isRendering": false,
+    "linkedPage": "/activities",
+    "sortOrder": 15,
+    "width": 1200,
+    "height": 800
+  }
+]

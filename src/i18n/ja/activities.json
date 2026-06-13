@@ -1,0 +1,23 @@
+{
+  "pageTitle": "イベント・コミュニティ",
+  "pageSubtitle": "ペット連れの仲間と一緒に、温泉キャンプならではのイベントを楽しもう",
+  "filter": {
+    "all": "すべてのイベント",
+    "month": "月別",
+    "category": "カテゴリー別"
+  },
+  "card": {
+    "date": "開催日",
+    "target": "対象",
+    "capacity": "定員",
+    "tbd": "日程未定",
+    "register": "参加申し込み",
+    "interest": "リマインダー登録",
+    "full": "満員"
+  },
+  "interestTags": {
+    "title": "興味タグ登録",
+    "subtitle": "気になるイベントカテゴリーを選んで、開催時にお知らせを受け取りましょう",
+    "submit": "設定を保存"
+  }
+}

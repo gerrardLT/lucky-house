@@ -1,0 +1,19 @@
+{
+  "pageTitle": "FAQ",
+  "pageSubtitle": "Quick answers to your questions",
+  "search": {
+    "placeholder": "Search questions...",
+    "noResults": "No matching questions found",
+    "contactUs": "Contact us for assistance"
+  },
+  "categories": {
+    "all": "All",
+    "pet": "Pet Stay",
+    "roomPrice": "Rooms & Pricing",
+    "onsen": "Onsen",
+    "facility": "Facilities",
+    "transport": "Getting Here",
+    "activity": "Events",
+    "cancel": "Cancellation"
+  }
+}

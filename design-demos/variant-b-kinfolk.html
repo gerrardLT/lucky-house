@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Variant B · Kinfolk Editorial Dark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --bg-alt: #111111;
+    --ivory: #f5f0e8;
+    --sienna: #c9785c;
+    --sienna-dim: #a05a3e;
+    --gold-muted: #b8976a;
+    --text: rgba(245,240,232,0.85);
+    --text-dim: rgba(245,240,232,0.42);
+    --rule: rgba(245,240,232,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  .display { font-family: 'Playfair Display', serif; }
+  .italic { font-style: italic; }
+
+  /* === HERO === */
+  .hero {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6vw 0 7vw;
+  }
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7) saturate(0.85);
+  }
+  .hero-right-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 20%);
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin-bottom: 2.5rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(64px, 8vw, 112px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ivory);
+    margin-bottom: 2rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--sienna);
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 380px;
+    line-height: 1.9;
+    margin-bottom: 3rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    border-top: 1px solid var(--rule);
+    padding-top: 2rem;
+    max-width: 420px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--ivory);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-bottom: 2.5rem;
+    transition: color 0.3s;
+  }
+  .hero-cta:hover { color: var(--sienna); }
+  .hero-cta svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+  /* === SECTION RULE === */
+  .section-rule {
+    height: 1px;
+    background: var(--rule);
+    margin: 0 7vw;
+  }
+
+  /* === EDITORIAL STRIP === */
+  .editorial-strip {
+    padding: 3rem 7vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    border-top: 1px solid var(--rule);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .editorial-strip .active { color: var(--sienna); }
+
+  /* === VALUES — ASYMMETRIC GRID === */
+  .values {
+    padding: 10rem 7vw;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 8vw;
+  }
+  .values-left {}
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.1;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--sienna); }
+  .section-intro {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 360px;
+    line-height: 1.9;
+  }
+  .values-right {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+  .value-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .value-card:last-child { border-bottom: none; padding-bottom: 0; }
+  .value-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+  }
+  .value-card-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sienna-dim);
+  }
+  .value-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--ivory);
+    line-height: 1.3;
+  }
+  .value-card-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    max-width: 520px;
+  }
+  .value-card-link {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ivory);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sienna-dim);
+    padding-bottom: 2px;
+    align-self: flex-start;
+    transition: all 0.3s;
+  }
+  .value-card-link:hover { color: var(--sienna); border-color: var(--sienna); }
+
+  /* === BIG QUOTE === */
+  .pull-quote {
+    padding: 12rem 7vw;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6vw;
+    align-items: center;
+    background: var(--bg-alt);
+  }
+  .pull-quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.35;
+    color: var(--ivory);
+    letter-spacing: -0.01em;
+  }
+  .pull-quote-attr {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sienna-dim);
+    margin-top: 2rem;
+  }
+  .pull-quote-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    filter: brightness(0.75) saturate(0.8);
+  }
+
+  /* === ROOMS === */
+  .rooms {
+    padding: 10rem 7vw;
+  }
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 5rem;
+  }
+  .room-block {}
+  .room-block-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    filter: brightness(0.82) saturate(0.88);
+    margin-bottom: 1.5rem;
+  }
+  .room-block-category {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sienna-dim);
+    margin-bottom: 0.6rem;
+  }
+  .room-block-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ivory);
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+  .room-block-specs {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .room-block-price {
+    font-size: 12px;
+    color: var(--gold-muted);
+    letter-spacing: 0.08em;
+    margin-top: 1rem;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* === BOTTOM CTA === */
+  .bottom-cta {
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .bottom-cta-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/hero/hero-02-shiba-onsen-veranda.png') center/cover no-repeat;
+    filter: brightness(0.3) saturate(0.7);
+  }
+  .bottom-cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bg) 0%, transparent 40%, transparent 60%, var(--bg) 100%);
+  }
+  .bottom-cta-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 680px;
+    padding: 0 2rem;
+  }
+  .cta-social {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin-bottom: 2.5rem;
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.05;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .cta-title em { font-style: italic; color: var(--sienna); }
+  .cta-sub {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 15px 50px;
+    background: var(--sienna);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .cta-button:hover { background: var(--ivory); }
+  .cta-trust {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+  }
+
+  /* === FOOTER === */
+  .footer {
+    padding: 3rem 7vw;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">岳温泉 · Zero-Carbon Pet Resort</div>
+    <h1 class="hero-title">Pet &<br><em>Onsen</em><br>Retreat</h1>
+    <p class="hero-subtitle">福岛岳温泉 · 人与宠物共享的千年天然硫磺泉疗愈体验。一座零碳宠物营地，重新定义携宠度假。</p>
+    <a href="#" class="hero-cta">
+      立即预约
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="hero-meta">
+      <span>福岛县二本松市</span>
+      <span>天然硫磺泉</span>
+      <span>宠物全房型开放</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="/images/hero/hero-01-family-pet-walkway.png" alt="Hero">
+    <div class="hero-right-overlay"></div>
+  </div>
+</section>
+
+<!-- EDITORIAL STRIP -->
+<div class="editorial-strip">
+  <span class="active">No. 01 · Values</span>
+  <span>No. 02 · Rooms</span>
+  <span>No. 03 · Reserve</span>
+  <span>Lucky House · Dake Onsen</span>
+</div>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-left">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Three<br><em>Core</em> Values</h2>
+    <p class="section-intro">从宠物专属温泉到零碳自然营地，我们为每一个携宠家庭打造有温度的度假体验。</p>
+  </div>
+  <div class="values-right">
+    <div class="value-card">
+      <img class="value-card-img" src="/images/facilities/facility-pet-onsen-01.png" alt="宠物温泉">
+      <div class="value-card-meta">
+        <span>01</span>
+        <span>Onsen</span>
+      </div>
+      <h3 class="value-card-title">宠物友好温泉</h3>
+      <p class="value-card-desc">人与宠物各有专属温泉体验，共享岳温泉千年天然硫磺泉的疗愈力量。</p>
+      <a href="#" class="value-card-link">了解更多</a>
+    </div>
+    <div class="value-card">
+      <img class="value-card-img" src="/images/hero/hero-03-eco-campsite-aerial.png" alt="自然营地">
+      <div class="value-card-meta">
+        <span>02</span>
+        <span>Nature</span>
+      </div>
+      <h3 class="value-card-title">零碳自然营地</h3>
+      <p class="value-card-desc">融入安达太良山脚自然景观的可持续度假空间，让每一次旅行都对地球温柔。</p>
+      <a href="#" class="value-card-link">了解更多</a>
+    </div>
+    <div class="value-card">
+      <img class="value-card-img" src="/images/facilities/facility-bbq-terrace-01.png" alt="BBQ">
+      <div class="value-card-meta">
+        <span>03</span>
+        <span>Community</span>
+      </div>
+      <h3 class="value-card-title">周末社群活动</h3>
+      <p class="value-card-desc">BBQ 派对、宠物交流会、星空观赏——为携宠家庭打造有温度的社群连接。</p>
+      <a href="#" class="value-card-link">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- BIG PULL QUOTE -->
+<section class="pull-quote">
+  <div>
+    <p class="pull-quote-text">"A place where pets are not just allowed—they are <em>welcomed</em> as family."</p>
+    <div class="pull-quote-attr">— Lucky House Philosophy</div>
+  </div>
+  <img class="pull-quote-img" src="/images/facilities/facility-onsen-outdoor-01.png" alt="温泉">
+</section>
+
+<!-- ROOMS -->
+<section class="rooms">
+  <div class="section-label">Accommodation</div>
+  <h2 class="section-title" style="max-width:420px">Featured <em>Rooms</em></h2>
+  <div class="rooms-grid">
+    <div class="room-block">
+      <img class="room-block-img" src="/images/rooms/room-pet-friendly-interior-01.png" alt="宠物友好双床房">
+      <div class="room-block-category">Pet-Friendly</div>
+      <div class="room-block-name">宠物友好双床房</div>
+      <div class="room-block-specs">35㎡ · 最多 2 人 · 单人床 × 2</div>
+      <div class="room-block-price">¥12,800 / 晚</div>
+    </div>
+    <div class="room-block">
+      <img class="room-block-img" src="/images/rooms/room-standard-interior-01.png" alt="舒适标准双床房">
+      <div class="room-block-category">Standard</div>
+      <div class="room-block-name">舒适标准双床房</div>
+      <div class="room-block-specs">28㎡ · 最多 2 人 · 单人床 × 2</div>
+      <div class="room-block-price">¥8,800 / 晚</div>
+    </div>
+    <div class="room-block">
+      <img class="room-block-img" src="/images/rooms/room-villa-exterior-01.png" alt="别墅式宠物套房">
+      <div class="room-block-category">Premium</div>
+      <div class="room-block-name">别墅式宠物套房</div>
+      <div class="room-block-specs">72㎡ · 最多 4 人 · 大床 + 沙发床</div>
+      <div class="room-block-price">¥25,800 / 晚</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-bg"></div>
+  <div class="bottom-cta-overlay"></div>
+  <div class="bottom-cta-inner">
+    <div class="cta-social">已有 128 位宠物家庭关注</div>
+    <h2 class="cta-title">Your <em>Next</em><br>Chapter</h2>
+    <p class="cta-sub">加入首批携宠入住名单，享受专属优惠</p>
+    <a href="#" class="cta-button">立即预约</a>
+    <div class="cta-trust">
+      <span>· 免费取消</span>
+      <span>· 48 小时确认</span>
+      <span>· 携宠入住</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>© 2025 Lucky House</span>
+  <span>岳温泉零碳宠物营地 & 温泉酒店</span>
+</footer>
+
+</body>
+</html>

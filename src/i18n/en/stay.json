@@ -1,0 +1,37 @@
+{
+  "pageTitle": "Accommodations",
+  "pageSubtitle": "From comfortable standard rooms to pet-friendly suites and forest campsite villas — find the perfect space to share an onsen getaway with your companion",
+  "filter": {
+    "all": "All",
+    "petFriendly": "Pet Friendly",
+    "standard": "Standard",
+    "villa": "Campsite Villa",
+    "hasPet": "Traveling with Pet"
+  },
+  "card": {
+    "area": "Area",
+    "guests": "Max Guests",
+    "bed": "Bed Type",
+    "noPet": "No Pets Allowed",
+    "comingSoon": "Coming Soon",
+    "viewDetails": "View Details"
+  },
+  "comparison": {
+    "title": "Room Comparison",
+    "category": "Category",
+    "petAllowed": "Pet Allowed",
+    "maxGuests": "Max Guests",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "detail": {
+    "amenities": "Room Amenities",
+    "suitableFor": "Ideal For",
+    "petInfo": "Pet Stay Information",
+    "maxPets": "Max Pets",
+    "maxPetWeight": "Max Pet Weight",
+    "rules": "Policies & Notes",
+    "relatedRooms": "You May Also Like",
+    "bookThisRoom": "Book This Room"
+  }
+}

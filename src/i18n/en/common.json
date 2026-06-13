@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "Home",
+    "stay": "Accommodations",
+    "petFriendly": "Pet Friendly",
+    "facilities": "Onsen & Facilities",
+    "activities": "Events & Community",
+    "explore": "Explore Nearby",
+    "gallery": "Gallery",
+    "faq": "FAQ",
+    "booking": "Book Now",
+    "contact": "Contact Us"
+  },
+  "buttons": {
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "backToHome": "Back to Home",
+    "viewDetails": "View Details",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "subscribe": "Subscribe",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "brand": "Fukushima Dake Onsen Zero-Carbon Pet Camp — Your pet-friendly hot spring retreat",
+    "copyright": "© {year} Lucky House. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Booking Terms",
+    "cookiePolicy": "Cookie Policy",
+    "petRules": "Pet Stay Rules",
+    "cancelPolicy": "Cancellation & Refund Policy",
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact Information",
+    "legalLinks": "Legal",
+    "socialMedia": "Social Media",
+    "newsletter": "Newsletter",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterConsent": "I agree to receive marketing emails"
+  },
+  "language": {
+    "zh": "中文",
+    "ja": "日本語",
+    "en": "English",
+    "switchTo": "Switch Language"
+  },
+  "meta": {
+    "renderingLabel": "Concept Image"
+  },
+  "cookie": {
+    "message": "This website uses cookies to enhance your browsing experience. By continuing to use this site, you consent to our use of cookies.",
+    "accept": "Accept",
+    "learnMore": "Learn More"
+  }
+}

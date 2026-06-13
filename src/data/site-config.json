@@ -1,0 +1,53 @@
+{
+  "siteName": {
+    "zh": "岳温泉零碳宠物营地 & 温泉酒店",
+    "ja": "岳温泉ゼロカーボンペットキャンプ＆温泉ホテル",
+    "en": "Dake Onsen Zero-Carbon Pet Camp & Onsen Hotel"
+  },
+  "siteDescription": {
+    "zh": "福岛岳温泉畔，人与宠物共享的零碳自然度假体验。天然硫磺温泉、宠物专属服务、营地BBQ、社群活动，为携宠家庭打造理想的短途旅行目的地。",
+    "ja": "福島岳温泉のほとり、人とペットが共に楽しむゼロカーボンの自然バケーション。天然硫黄温泉、ペット専用サービス、キャンプBBQ、コミュニティイベントなど、ペット連れご家族に理想的な旅先をお届けします。",
+    "en": "A zero-carbon nature retreat by Fukushima's Dake Onsen, where humans and pets share unforgettable moments. Natural sulfur hot springs, dedicated pet services, campsite BBQ, and community events — the ideal getaway for families with pets."
+  },
+  "contact": {
+    "address": {
+      "zh": "〒964-0074 福岛县二本松市岳温泉 1丁目（具体地址待确认）",
+      "ja": "〒964-0074 福島県二本松市岳温泉1丁目（詳細住所は確認中）",
+      "en": "1-chome, Dake Onsen, Nihonmatsu City, Fukushima 964-0074, Japan (exact address TBC)"
+    },
+    "phone": "+81-243-XX-XXXX",
+    "email": "info@dake-pet-camp.jp",
+    "serviceHours": {
+      "zh": "每日 9:00 - 18:00（日本标准时间）",
+      "ja": "毎日 9:00〜18:00（日本標準時間）",
+      "en": "Daily 9:00 AM - 6:00 PM (JST)"
+    }
+  },
+  "social": [
+    {
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/dake-pet-camp",
+      "icon": "instagram"
+    },
+    {
+      "platform": "LINE",
+      "url": "https://line.me/R/ti/p/@dake-pet-camp",
+      "icon": "line"
+    },
+    {
+      "platform": "WeChat",
+      "url": "#wechat-qr",
+      "icon": "wechat"
+    },
+    {
+      "platform": "小红书",
+      "url": "https://www.xiaohongshu.com/user/dake-pet-camp",
+      "icon": "xiaohongshu"
+    },
+    {
+      "platform": "Facebook",
+      "url": "https://www.facebook.com/dakepetcamp",
+      "icon": "facebook"
+    }
+  ]
+}

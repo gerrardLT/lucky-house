@@ -1,0 +1,46 @@
+{
+  "pageTitle": "ペットと一緒に",
+  "pageSubtitle": "ペットも大切な家族——ここでは、すべてのペットが温かく迎えられます",
+  "services": {
+    "title": "ペットサービス",
+    "onsen": "ペット温泉",
+    "grooming": "ブロー・グルーミング",
+    "cleaning": "クリーニングサービス",
+    "boarding": "ペット預かり",
+    "indoorRun": "室内ドッグラン",
+    "outdoorRun": "屋外ドッグラン",
+    "open": "ご利用可能",
+    "comingSoon": "近日オープン"
+  },
+  "process": {
+    "title": "ご利用の流れ",
+    "step1": "オンライン予約",
+    "step2": "ペット情報のご提出",
+    "step3": "到着時の確認",
+    "step4": "チェックイン",
+    "step5": "施設のご利用"
+  },
+  "rules": {
+    "title": "ペット同伴規約",
+    "petCount": "ペット数",
+    "size": "体格制限",
+    "vaccine": "ワクチン接種",
+    "leash": "リード着用",
+    "noise": "騒音管理",
+    "cleaning": "清掃責任",
+    "damage": "破損賠償",
+    "tbd": "確定次第公開"
+  },
+  "lifestyle": {
+    "title": "ペットとの過ごし方",
+    "walking": "お散歩",
+    "exercise": "運動",
+    "bbq": "BBQタイム",
+    "cafe": "カフェでまったり",
+    "social": "交流イベント"
+  },
+  "cta": {
+    "viewRooms": "ペット可の客室を見る",
+    "bookWithPet": "ペット連れで予約"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "rooms": "Featured Rooms",
+    "petServices": "Pet Services",
+    "facilities": "Onsen & Facilities",
+    "explore": "Explore Nearby",
+    "gallery": "Gallery",
+    "faq": "FAQ",
+    "cta": "Start Your Pet-Friendly Onsen Journey"
+  },
+  "subtitles": {
+    "rooms": "Carefully curated spaces for you and your furry companion",
+    "petServices": "Gentle care for every furry guest",
+    "facilities": "Enjoy rich facilities in the embrace of Dake Onsen's nature",
+    "explore": "Discover rich experiences of Fukushima Nihonmatsu from Dake Onsen",
+    "gallery": "Explore our spaces and atmosphere",
+    "faq": "Quick answers to your questions",
+    "cta": "Join our early pet-stay list for exclusive benefits"
+  },
+  "viewAll": {
+    "rooms": "View All Rooms",
+    "petServices": "Pet-Friendly Details",
+    "facilities": "View All Facilities",
+    "explore": "Explore More",
+    "gallery": "View Full Gallery",
+    "faq": "View All FAQ"
+  },
+  "hero": {
+    "primaryCta": "Book Your Stay",
+    "secondaryCta": "Pet-Friendly Info"
+  }
+}

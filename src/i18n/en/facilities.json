@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Onsen & Facilities",
+  "pageSubtitle": "Enjoy rich facilities in the embrace of Dake Onsen's nature",
+  "filter": {
+    "all": "All",
+    "onsen": "Onsen",
+    "petService": "Pet Services",
+    "dining": "Dining",
+    "leisure": "Leisure",
+    "eco": "Zero-Carbon Landscape"
+  },
+  "status": {
+    "open": "Open",
+    "openingSoon": "Opening Soon",
+    "maintenance": "Under Maintenance"
+  },
+  "card": {
+    "learnMore": "Learn More"
+  },
+  "eco": {
+    "description": "A sustainable retreat experience amidst zero-carbon landscapes"
+  }
+}

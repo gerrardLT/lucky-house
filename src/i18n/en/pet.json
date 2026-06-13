@@ -1,0 +1,46 @@
+{
+  "pageTitle": "Pet Friendly",
+  "pageSubtitle": "Pets are family — here, every furry companion is warmly welcomed",
+  "services": {
+    "title": "Pet Services",
+    "onsen": "Pet Onsen",
+    "grooming": "Blow Dry & Grooming",
+    "cleaning": "Cleaning Service",
+    "boarding": "Pet Boarding",
+    "indoorRun": "Indoor Dog Run",
+    "outdoorRun": "Outdoor Dog Run",
+    "open": "Available",
+    "comingSoon": "Coming Soon"
+  },
+  "process": {
+    "title": "Check-in Process",
+    "step1": "Book Online",
+    "step2": "Submit Pet Information",
+    "step3": "On-site Verification",
+    "step4": "Check In",
+    "step5": "Use Facilities"
+  },
+  "rules": {
+    "title": "Pet Stay Rules",
+    "petCount": "Number of Pets",
+    "size": "Size Restrictions",
+    "vaccine": "Vaccination Requirements",
+    "leash": "Leash Policy",
+    "noise": "Noise Management",
+    "cleaning": "Cleaning Responsibility",
+    "damage": "Damage Liability",
+    "tbd": "To Be Announced"
+  },
+  "lifestyle": {
+    "title": "Pet Lifestyle",
+    "walking": "Walks",
+    "exercise": "Exercise",
+    "bbq": "BBQ Companionship",
+    "cafe": "Café Relaxation",
+    "social": "Social Events"
+  },
+  "cta": {
+    "viewRooms": "View Pet-Friendly Rooms",
+    "bookWithPet": "Book with Your Pet"
+  }
+}

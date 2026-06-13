@@ -1,0 +1,356 @@
+[
+  {
+    "slug": "standard-twin",
+    "category": "standard",
+    "name": {
+      "zh": "标准双床房",
+      "ja": "スタンダードツインルーム",
+      "en": "Standard Twin Room"
+    },
+    "description": {
+      "zh": "舒适宁静的日式简约空间，配备独立温泉入浴券，尽享岳温泉的天然硫磺泉质。落地窗外可远眺安达太良山四季变幻的风景。",
+      "ja": "落ち着いた和モダンの空間で、岳温泉の天然硫黄泉をお楽しみいただけます。大きな窓からは安達太良山の四季折々の景色をご覧いただけます。",
+      "en": "A serene Japanese-modern space with access to Dake Onsen's natural sulfur hot springs. Floor-to-ceiling windows offer panoramic views of Mount Adatara through the seasons."
+    },
+    "area": 28,
+    "maxGuests": 2,
+    "maxChildren": 1,
+    "bedType": {
+      "zh": "单人床 × 2",
+      "ja": "シングルベッド × 2",
+      "en": "Single Bed × 2"
+    },
+    "isPetFriendly": false,
+    "maxPets": 0,
+    "priceStatus": "coming_soon",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "onsen-ticket", "parking", "towels"],
+    "images": [
+      {
+        "id": "room-std-twin-1",
+        "src": "/images/rooms/room-standard-interior-01.png",
+        "alt": {
+          "zh": "标准双床房全景",
+          "ja": "スタンダードツインルーム全景",
+          "en": "Standard Twin Room panoramic view"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "id": "room-std-twin-2",
+        "src": "/images/rooms/room-standard-interior-01.png",
+        "alt": {
+          "zh": "标准双床房窗景",
+          "ja": "スタンダードツインルーム窓からの眺め",
+          "en": "Standard Twin Room window view"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 2,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["情侣", "温泉客", "商务出行"],
+      "ja": ["カップル", "温泉好き", "ビジネス"],
+      "en": ["Couples", "Onsen lovers", "Business travelers"]
+    },
+    "status": "active",
+    "sortOrder": 1
+  },
+  {
+    "slug": "standard-double",
+    "category": "standard",
+    "name": {
+      "zh": "标准大床房",
+      "ja": "スタンダードダブルルーム",
+      "en": "Standard Double Room"
+    },
+    "description": {
+      "zh": "宽敞明亮的大床客房，配有独立阳台和舒适沙发区。温泉入浴券含于住宿中，步行即可抵达公共温泉区。",
+      "ja": "広々としたダブルルームには専用バルコニーとくつろぎのソファスペースを完備。温泉入浴券付きで、共用温泉まで徒歩圏内です。",
+      "en": "A spacious double room with a private balcony and comfortable lounge area. Onsen passes included — the shared hot spring is just a short walk away."
+    },
+    "area": 32,
+    "maxGuests": 2,
+    "maxChildren": 2,
+    "bedType": {
+      "zh": "大床 × 1",
+      "ja": "ダブルベッド × 1",
+      "en": "Double Bed × 1"
+    },
+    "isPetFriendly": false,
+    "maxPets": 0,
+    "priceStatus": "coming_soon",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "onsen-ticket", "parking", "balcony", "towels", "sofa"],
+    "images": [
+      {
+        "id": "room-std-dbl-1",
+        "src": "/images/rooms/room-standard-interior-01.png",
+        "alt": {
+          "zh": "标准大床房全景",
+          "ja": "スタンダードダブルルーム全景",
+          "en": "Standard Double Room panoramic view"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["情侣", "亲子", "温泉客"],
+      "ja": ["カップル", "ファミリー", "温泉好き"],
+      "en": ["Couples", "Families", "Onsen lovers"]
+    },
+    "status": "active",
+    "sortOrder": 2
+  },
+  {
+    "slug": "pet-friendly-twin",
+    "category": "pet-friendly",
+    "name": {
+      "zh": "宠物友好双床房",
+      "ja": "ペットフレンドリーツインルーム",
+      "en": "Pet-Friendly Twin Room"
+    },
+    "description": {
+      "zh": "专为携宠家庭设计的温馨客房，配备宠物床、食碗、围栏等用品。地板采用防滑耐磨材质，让毛孩子自在活动。客房直通室外Dog Run区域。",
+      "ja": "ペット連れのご家族のために設計されたお部屋です。ペットベッド、食器、ゲートなどをご用意。滑りにくい床材を使用し、わんちゃんも快適にお過ごしいただけます。お部屋から屋外ドッグランへ直接アクセス可能です。",
+      "en": "A cozy room designed for families with pets. Equipped with pet bed, food bowls, and safety gate. Slip-resistant flooring keeps your furry friend comfortable, with direct access to the outdoor Dog Run area."
+    },
+    "area": 35,
+    "maxGuests": 2,
+    "maxChildren": 2,
+    "bedType": {
+      "zh": "单人床 × 2",
+      "ja": "シングルベッド × 2",
+      "en": "Single Bed × 2"
+    },
+    "isPetFriendly": true,
+    "maxPets": 2,
+    "maxPetWeight": 25,
+    "priceStatus": "inquiry",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "onsen-ticket", "parking", "pet-bed", "pet-bowls", "pet-gate", "slip-resistant-floor", "dog-run-access"],
+    "images": [
+      {
+        "id": "room-pet-twin-1",
+        "src": "/images/rooms/room-pet-friendly-interior-01.png",
+        "alt": {
+          "zh": "宠物友好双床房全景",
+          "ja": "ペットフレンドリーツインルーム全景",
+          "en": "Pet-Friendly Twin Room panoramic view"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "id": "room-pet-twin-2",
+        "src": "/images/rooms/room-pet-friendly-interior-01.png",
+        "alt": {
+          "zh": "宠物友好双床房宠物区域",
+          "ja": "ペットフレンドリーツインルームのペットスペース",
+          "en": "Pet-Friendly Twin Room pet area"
+        },
+        "category": "pet",
+        "isRendering": true,
+        "sortOrder": 2,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["携宠家庭", "情侣携宠", "宠物旅行"],
+      "ja": ["ペット連れファミリー", "カップル＆ペット", "ペット旅行"],
+      "en": ["Pet families", "Couples with pets", "Pet travel"]
+    },
+    "status": "active",
+    "sortOrder": 3
+  },
+  {
+    "slug": "pet-friendly-suite",
+    "category": "pet-friendly",
+    "name": {
+      "zh": "宠物友好套房",
+      "ja": "ペットフレンドリースイート",
+      "en": "Pet-Friendly Suite"
+    },
+    "description": {
+      "zh": "宽敞的套房空间，独立客厅与卧室分隔设计，配备专属宠物活动区和私汤露台。让您和爱宠共享奢适温泉时光，尽享岳温泉的恬静之美。",
+      "ja": "広々としたスイートルームで、独立したリビングと寝室をご用意。専用ペットスペースとプライベート露天風呂テラス付き。愛犬・愛猫と共に岳温泉の静かな贅沢をお楽しみください。",
+      "en": "A spacious suite with separate living and bedroom areas, featuring a dedicated pet zone and private open-air onsen terrace. Share the tranquil luxury of Dake Onsen with your beloved companion."
+    },
+    "area": 52,
+    "maxGuests": 4,
+    "maxChildren": 2,
+    "bedType": {
+      "zh": "大床 × 1 + 沙发床 × 1",
+      "ja": "ダブルベッド × 1 + ソファベッド × 1",
+      "en": "Double Bed × 1 + Sofa Bed × 1"
+    },
+    "isPetFriendly": true,
+    "maxPets": 3,
+    "maxPetWeight": 30,
+    "priceStatus": "inquiry",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "private-onsen", "parking", "pet-bed", "pet-bowls", "pet-gate", "slip-resistant-floor", "dog-run-access", "balcony", "sofa", "separate-living"],
+    "images": [
+      {
+        "id": "room-pet-suite-1",
+        "src": "/images/rooms/room-pet-friendly-interior-01.png",
+        "alt": {
+          "zh": "宠物友好套房全景",
+          "ja": "ペットフレンドリースイート全景",
+          "en": "Pet-Friendly Suite panoramic view"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "id": "room-pet-suite-2",
+        "src": "/images/rooms/room-pet-friendly-interior-01.png",
+        "alt": {
+          "zh": "宠物友好套房私汤露台",
+          "ja": "ペットフレンドリースイートの露天風呂テラス",
+          "en": "Pet-Friendly Suite private onsen terrace"
+        },
+        "category": "onsen",
+        "isRendering": true,
+        "sortOrder": 2,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["携宠家庭", "亲子携宠", "豪华度假"],
+      "ja": ["ペット連れファミリー", "お子様＆ペット連れ", "贅沢バケーション"],
+      "en": ["Pet families", "Families with kids & pets", "Luxury getaway"]
+    },
+    "status": "active",
+    "sortOrder": 4
+  },
+  {
+    "slug": "campsite-villa-a",
+    "category": "villa",
+    "name": {
+      "zh": "营地小别墅 A（林间型）",
+      "ja": "キャンプヴィラ A（森林タイプ）",
+      "en": "Campsite Villa A (Forest Type)"
+    },
+    "description": {
+      "zh": "隐匿于林间的独栋小别墅，开放式露台与自然融为一体。配备私人BBQ区和宠物围栏庭院，是携宠家庭亲近自然的理想选择。零碳光伏景观环绕，享受可持续的度假体验。",
+      "ja": "森の中に佇む独立型ヴィラ。オープンテラスが自然と一体化し、プライベートBBQスペースとペット用フェンス付きお庭を完備。ペット連れご家族に最適な自然体験をお届けします。ゼロカーボンの景観に囲まれたサステナブルなステイ。",
+      "en": "A secluded standalone villa nestled in the forest. Open terrace merges with nature, featuring a private BBQ area and fenced pet garden. The perfect nature retreat for families with pets, surrounded by zero-carbon eco landscapes."
+    },
+    "area": 65,
+    "maxGuests": 6,
+    "maxChildren": 3,
+    "bedType": {
+      "zh": "大床 × 1 + 上下铺 × 1",
+      "ja": "ダブルベッド × 1 + 二段ベッド × 1",
+      "en": "Double Bed × 1 + Bunk Bed × 1"
+    },
+    "isPetFriendly": true,
+    "maxPets": 3,
+    "maxPetWeight": 40,
+    "priceStatus": "coming_soon",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "private-bbq", "parking", "pet-bed", "pet-bowls", "fenced-garden", "terrace", "kitchen", "washer"],
+    "images": [
+      {
+        "id": "room-villa-a-1",
+        "src": "/images/rooms/room-villa-exterior-01.png",
+        "alt": {
+          "zh": "营地小别墅A外观",
+          "ja": "キャンプヴィラA外観",
+          "en": "Campsite Villa A exterior"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      },
+      {
+        "id": "room-villa-a-2",
+        "src": "/images/rooms/room-villa-exterior-01.png",
+        "alt": {
+          "zh": "营地小别墅A露台BBQ区",
+          "ja": "キャンプヴィラAテラスBBQエリア",
+          "en": "Campsite Villa A terrace BBQ area"
+        },
+        "category": "bbq-cafe",
+        "isRendering": true,
+        "sortOrder": 2,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["携宠家庭", "亲子出行", "自然露营"],
+      "ja": ["ペット連れファミリー", "お子様連れ", "ネイチャーキャンプ"],
+      "en": ["Pet families", "Family trips", "Nature camping"]
+    },
+    "status": "coming_soon",
+    "sortOrder": 5
+  },
+  {
+    "slug": "campsite-villa-b",
+    "category": "villa",
+    "name": {
+      "zh": "营地小别墅 B（湖景型）",
+      "ja": "キャンプヴィラ B（レイクビュータイプ）",
+      "en": "Campsite Villa B (Lake View Type)"
+    },
+    "description": {
+      "zh": "面朝人工湖景的开阔别墅，超大落地窗引入自然光线。独立Dog Run区域直连公共活动草坪，适合爱社交的毛孩子。清晨可在露台观赏薄雾环绕的湖面。",
+      "ja": "人工湖を望む開放的なヴィラ。大きな窓から自然光がたっぷり入ります。専用ドッグランは共用アクティビティ芝生に直結。社交的なわんちゃんにぴったりです。朝は霧に包まれた湖面をテラスからご覧いただけます。",
+      "en": "A lakefront villa with expansive windows flooding the space with natural light. Private Dog Run connects directly to the communal activity lawn — ideal for sociable pups. Wake up to misty lake views from your terrace."
+    },
+    "area": 70,
+    "maxGuests": 6,
+    "maxChildren": 3,
+    "bedType": {
+      "zh": "大床 × 2",
+      "ja": "ダブルベッド × 2",
+      "en": "Double Bed × 2"
+    },
+    "isPetFriendly": true,
+    "maxPets": 3,
+    "maxPetWeight": 40,
+    "priceStatus": "coming_soon",
+    "amenities": ["wifi", "air-conditioning", "refrigerator", "hairdryer", "private-bbq", "parking", "pet-bed", "pet-bowls", "fenced-garden", "terrace", "kitchen", "washer", "lake-view", "dog-run-access"],
+    "images": [
+      {
+        "id": "room-villa-b-1",
+        "src": "/images/rooms/room-villa-exterior-01.png",
+        "alt": {
+          "zh": "营地小别墅B湖景外观",
+          "ja": "キャンプヴィラB湖側外観",
+          "en": "Campsite Villa B lake view exterior"
+        },
+        "category": "room",
+        "isRendering": true,
+        "sortOrder": 1,
+        "width": 1200,
+        "height": 800
+      }
+    ],
+    "tags": {
+      "zh": ["携宠家庭", "亲子出行", "湖景度假"],
+      "ja": ["ペット連れファミリー", "お子様連れ", "レイクビューバケーション"],
+      "en": ["Pet families", "Family trips", "Lakeside retreat"]
+    },
+    "status": "coming_soon",
+    "sortOrder": 6
+  }
+]

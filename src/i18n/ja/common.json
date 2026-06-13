@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "stay": "客室・宿泊",
+    "petFriendly": "ペットと一緒に",
+    "facilities": "温泉・施設",
+    "activities": "イベント・コミュニティ",
+    "explore": "周辺観光",
+    "gallery": "ギャラリー",
+    "faq": "よくある質問",
+    "booking": "ご予約",
+    "contact": "お問い合わせ"
+  },
+  "buttons": {
+    "bookNow": "ご予約はこちら",
+    "learnMore": "詳しく見る",
+    "backToHome": "トップへ戻る",
+    "viewDetails": "詳細を見る",
+    "submit": "送信する",
+    "cancel": "キャンセル",
+    "next": "次へ",
+    "previous": "戻る",
+    "close": "閉じる",
+    "subscribe": "登録する",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
+  },
+  "footer": {
+    "brand": "福島岳温泉ゼロカーボンペットキャンプ — 愛犬・愛猫と過ごす温泉リゾート",
+    "copyright": "© {year} Lucky House. All rights reserved.",
+    "privacy": "プライバシーポリシー",
+    "terms": "ご宿泊約款",
+    "cookiePolicy": "Cookieポリシー",
+    "petRules": "ペット同伴規約",
+    "cancelPolicy": "キャンセル・返金規定",
+    "quickLinks": "クイックリンク",
+    "contactInfo": "お問い合わせ情報",
+    "legalLinks": "法的情報",
+    "socialMedia": "ソーシャルメディア",
+    "newsletter": "メールマガジン",
+    "newsletterPlaceholder": "メールアドレスを入力",
+    "newsletterConsent": "メールマガジンの配信を希望する"
+  },
+  "language": {
+    "zh": "中文",
+    "ja": "日本語",
+    "en": "English",
+    "switchTo": "言語を切り替える"
+  },
+  "meta": {
+    "renderingLabel": "イメージ図"
+  },
+  "cookie": {
+    "message": "当サイトでは、より良い閲覧体験のためにCookieを使用しています。サイトの利用を続けることで、Cookieの使用に同意したものとみなします。",
+    "accept": "同意する",
+    "learnMore": "詳しく見る"
+  }
+}

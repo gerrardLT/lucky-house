@@ -1,0 +1,36 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "sections": {
+      "collection": "Information We Collect",
+      "usage": "How We Use Your Information",
+      "storage": "Data Storage & Retention",
+      "thirdParty": "Third-Party Services",
+      "rights": "Your Rights",
+      "contact": "Contact Us"
+    }
+  },
+  "terms": {
+    "title": "Booking Terms & Conditions",
+    "lastUpdated": "Last Updated",
+    "sections": {
+      "checkIn": "Check-in & Check-out",
+      "cancellation": "Cancellation Policy",
+      "refund": "Refund Policy",
+      "liability": "Disclaimer",
+      "damage": "Damage Liability"
+    }
+  },
+  "petRules": {
+    "title": "Pet Stay Rules",
+    "lastUpdated": "Last Updated",
+    "sections": {
+      "allowed": "Permitted Pets",
+      "requirements": "Stay Requirements",
+      "facilities": "Pet Facility Usage",
+      "behavior": "Behavioral Guidelines",
+      "liability": "Liability & Damages"
+    }
+  }
+}

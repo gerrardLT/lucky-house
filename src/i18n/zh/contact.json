@@ -1,0 +1,35 @@
+{
+  "pageTitle": "联系我们",
+  "pageSubtitle": "有任何问题？我们随时为您提供帮助",
+  "info": {
+    "title": "联系信息",
+    "address": "地址",
+    "phone": "电话",
+    "email": "邮箱",
+    "hours": "客服时间"
+  },
+  "form": {
+    "title": "咨询表单",
+    "subject": "咨询主题",
+    "subjects": {
+      "accommodation": "住宿预约",
+      "pet": "宠物入住",
+      "activity": "活动咨询",
+      "general": "一般咨询"
+    },
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话（选填）",
+    "message": "留言内容",
+    "submit": "发送消息"
+  },
+  "social": {
+    "title": "社交媒体"
+  },
+  "transport": {
+    "title": "交通方式",
+    "viewMore": "查看周边探索"
+  },
+  "success": "您的消息已发送成功，我们将尽快回复。",
+  "error": "发送失败，请稍后重试或直接联系客服。"
+}

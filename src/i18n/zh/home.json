@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "rooms": "精选房型",
+    "petServices": "宠物服务",
+    "facilities": "温泉与设施",
+    "explore": "周边探索",
+    "gallery": "精彩瞬间",
+    "faq": "常见问题",
+    "cta": "开启您的携宠温泉之旅"
+  },
+  "subtitles": {
+    "rooms": "为您和毛孩子精心准备的舒适空间",
+    "petServices": "让每一位毛孩子都被温柔以待",
+    "facilities": "在岳温泉的自然怀抱中，享受丰富的设施体验",
+    "explore": "从岳温泉出发，探索福岛二本松地区的丰富体验",
+    "gallery": "探索我们的空间与氛围",
+    "faq": "快速解答您的疑问",
+    "cta": "加入首批携宠入住名单，享受专属优惠"
+  },
+  "viewAll": {
+    "rooms": "查看全部房型",
+    "petServices": "了解宠物友好详情",
+    "facilities": "查看全部设施",
+    "explore": "探索更多玩法",
+    "gallery": "查看完整画廊",
+    "faq": "查看全部 FAQ"
+  },
+  "hero": {
+    "primaryCta": "预约首住",
+    "secondaryCta": "了解宠物友好"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "privacy": {
+    "title": "隐私政策",
+    "lastUpdated": "最后更新",
+    "sections": {
+      "collection": "信息收集",
+      "usage": "信息使用",
+      "storage": "数据存储",
+      "thirdParty": "第三方服务",
+      "rights": "您的权利",
+      "contact": "联系方式"
+    }
+  },
+  "terms": {
+    "title": "预订条款",
+    "lastUpdated": "最后更新",
+    "sections": {
+      "checkIn": "入住与退房",
+      "cancellation": "取消政策",
+      "refund": "退款规定",
+      "liability": "免责声明",
+      "damage": "损坏赔偿"
+    }
+  },
+  "petRules": {
+    "title": "宠物入住规则",
+    "lastUpdated": "最后更新",
+    "sections": {
+      "allowed": "允许入住的宠物",
+      "requirements": "入住要求",
+      "facilities": "宠物设施使用",
+      "behavior": "行为规范",
+      "liability": "责任与赔偿"
+    }
+  }
+}

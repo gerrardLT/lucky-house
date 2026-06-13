@@ -1,0 +1,72 @@
+{
+  "pageTitle": "ご予約・お問い合わせ",
+  "pageSubtitle": "以下のフォームにご記入のうえ、ご予約をお申し込みください。24時間以内にご連絡いたします。",
+  "steps": {
+    "dates": "日程・人数",
+    "room": "客室タイプ",
+    "pet": "ペット情報",
+    "contact": "ご連絡先",
+    "confirm": "規約確認"
+  },
+  "step1": {
+    "checkIn": "チェックイン日",
+    "checkOut": "チェックアウト日",
+    "adults": "大人",
+    "children": "お子様",
+    "rooms": "客室数",
+    "hasPet": "ペット同伴",
+    "petCount": "ペット数"
+  },
+  "step2": {
+    "roomPreference": "ご希望の客室タイプ",
+    "standard": "スタンダード",
+    "petFriendly": "ペットフレンドリー",
+    "villa": "キャンプヴィラ",
+    "noPreference": "おまかせ",
+    "acceptAlternative": "代替客室をご希望されますか"
+  },
+  "step3": {
+    "petType": "ペットの種類",
+    "dog": "犬",
+    "cat": "猫",
+    "other": "その他",
+    "breed": "犬種・猫種",
+    "count": "頭数",
+    "weight": "体重 (kg)",
+    "age": "年齢",
+    "vaccineStatus": "ワクチン接種証明",
+    "rabiesStatus": "狂犬病予防証明",
+    "ready": "準備済み",
+    "canProvide": "後日提出可",
+    "unsure": "未確認",
+    "needOnsen": "ペット温泉ご利用",
+    "needGrooming": "グルーミングご利用",
+    "specialNotes": "特記事項"
+  },
+  "step4": {
+    "name": "お名前",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "country": "国・地域",
+    "preferredChannel": "ご希望の連絡方法"
+  },
+  "step5": {
+    "privacyPolicy": "プライバシーポリシーに同意する",
+    "petRules": "ペット同伴規約に同意する",
+    "cancelPolicy": "キャンセルポリシーに同意する",
+    "marketingSubscribe": "お得な情報やイベントのお知らせを受け取る"
+  },
+  "submit": "予約を送信する",
+  "success": {
+    "title": "ご予約を承りました",
+    "subtitle": "お申し込みありがとうございます。24時間以内にご連絡いたします。",
+    "confirmationId": "確認番号",
+    "contactSupport": "ご不明点はお問い合わせください"
+  },
+  "errors": {
+    "submitFailed": "送信に失敗しました。もう一度お試しいただくか、お問い合わせください",
+    "dateInvalid": "チェックイン日は本日以降をご指定ください",
+    "checkoutBeforeCheckin": "チェックアウト日はチェックイン日より後の日付をご指定ください",
+    "required": "この項目は必須です"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "pageTitle": "Explore Nearby",
+  "pageSubtitle": "Discover rich experiences of Fukushima Nihonmatsu from Dake Onsen",
+  "map": {
+    "title": "Location & Access",
+    "driving": "By Car",
+    "publicTransport": "Public Transport",
+    "loadError": "Map failed to load. Please use the external map link"
+  },
+  "spots": {
+    "title": "Nearby Attractions",
+    "distance": "Distance"
+  },
+  "itineraries": {
+    "title": "Recommended Itineraries",
+    "oneDay": "Day Trip",
+    "twoDay": "Overnight Stay",
+    "family": "Family & Pet",
+    "duration": "Duration"
+  },
+  "seasonal": {
+    "title": "Seasonal Highlights",
+    "spring": "Spring",
+    "summer": "Summer",
+    "autumn": "Autumn",
+    "winter": "Winter"
+  }
+}

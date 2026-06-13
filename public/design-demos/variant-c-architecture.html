@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Variant C · 隈研吾式戏剧暗场</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0908;
+    --bg-deep: #060504;
+    --wood: #1a1410;
+    --gold: #c9a055;
+    --gold-dim: rgba(201,160,85,0.35);
+    --amber: rgba(201,160,85,0.12);
+    --ivory: #ede6d6;
+    --text: rgba(237,230,214,0.82);
+    --text-dim: rgba(237,230,214,0.38);
+    --rule: rgba(201,160,85,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 15px;
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+  .display { font-family: 'Cormorant Garamond', serif; }
+
+  /* WOOD LATTICE TEXTURE */
+  .wood-wall {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 58px,
+        rgba(201,160,85,0.04) 58px,
+        rgba(201,160,85,0.04) 60px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 118px,
+        rgba(201,160,85,0.03) 118px,
+        rgba(201,160,85,0.03) 120px
+      ),
+      var(--wood);
+  }
+
+  /* === HERO === */
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 10vw 10vh;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.28) saturate(0.75) contrast(1.05);
+  }
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--bg) 0%, rgba(10,9,8,0.6) 30%, transparent 60%);
+  }
+  .hero-lattice {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 118px,
+        rgba(201,160,85,0.03) 118px,
+        rgba(201,160,85,0.03) 120px
+      );
+    pointer-events: none;
+  }
+  .hero-frame {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6rem;
+    width: 100%;
+    align-items: end;
+  }
+  .hero-title-block {}
+  .hero-kanji {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 2.5rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1.08;
+    color: var(--ivory);
+    letter-spacing: 0.01em;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-side {
+    text-align: right;
+    padding-bottom: 0.5rem;
+  }
+  .hero-side-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.5rem;
+  }
+  .hero-side-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 240px;
+  }
+
+  /* === THRESHOLD LINE === */
+  .threshold {
+    padding: 0 10vw;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .threshold span {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .threshold .line {
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dim), transparent);
+  }
+
+  /* === PAW ARCHITECTURE === */
+  .paw-arch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    gap: 2rem;
+  }
+  .paw-arch .beam {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .paw-arch .beam:last-child {
+    background: linear-gradient(to left, transparent, var(--gold-dim));
+  }
+  .paw-arch svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* === VALUES — ARCHITECTURAL GRID === */
+  .values {
+    padding: 8rem 10vw;
+  }
+  .values-header {
+    margin-bottom: 6rem;
+    max-width: 560px;
+  }
+  .section-kanji {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.15;
+    color: var(--ivory);
+  }
+  .section-heading em { font-style: italic; color: var(--gold); }
+
+  .values-arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .arch-cell {
+    padding: 3.5rem 2.5rem;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+  }
+  .arch-cell:last-child { border-right: none; }
+  .arch-cell-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.18;
+    line-height: 1;
+    margin-bottom: 2rem;
+  }
+  .arch-cell-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.8rem;
+  }
+  .arch-cell-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--ivory);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .arch-cell-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.9;
+    flex: 1;
+  }
+  .arch-cell-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    filter: brightness(0.75) saturate(0.85);
+    margin-top: 2rem;
+    border: 1px solid var(--rule);
+  }
+  .arch-cell-link {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 2px;
+    align-self: flex-start;
+    transition: all 0.3s;
+  }
+  .arch-cell-link:hover { color: var(--ivory); border-color: var(--ivory); }
+
+  /* === ROOMS — OPENINGS IN DARK WALL === */
+  .rooms { padding: 8rem 10vw; }
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 1.5rem;
+    margin-top: 5rem;
+  }
+  .room-opening {
+    position: relative;
+    overflow: hidden;
+  }
+  .room-opening img {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    object-fit: cover;
+    filter: brightness(0.7) saturate(0.8);
+    display: block;
+  }
+  .room-opening-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.5rem 2rem;
+    background: linear-gradient(to top, rgba(10,9,8,0.92) 0%, transparent 100%);
+  }
+  .room-opening-cat {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.5rem;
+  }
+  .room-opening-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--ivory);
+    margin-bottom: 0.5rem;
+  }
+  .room-opening-specs {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .room-opening-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--gold);
+    margin-top: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* === BOTTOM CTA === */
+  .bottom-cta {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .bottom-cta-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .bottom-cta-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.22) saturate(0.7) contrast(1.1);
+  }
+  .bottom-cta-lattice {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 118px,
+        rgba(201,160,85,0.025) 118px,
+        rgba(201,160,85,0.025) 120px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 118px,
+        rgba(201,160,85,0.02) 118px,
+        rgba(201,160,85,0.02) 120px
+      );
+  }
+  .bottom-cta-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 80%);
+  }
+  .bottom-cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    padding: 0 2rem;
+  }
+  .cta-proof {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 3rem;
+  }
+  .cta-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.15;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+  }
+  .cta-heading em { font-style: italic; color: var(--gold); }
+  .cta-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 2;
+    margin-bottom: 3.5rem;
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 15px 52px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.5s ease;
+  }
+  .cta-button:hover { background: var(--gold); color: var(--bg-deep); }
+  .cta-trust {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+  }
+
+  /* === FOOTER === */
+  .footer {
+    padding: 3rem 10vw;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="/images/hero/hero-01-family-pet-walkway.png" alt="Hero">
+  </div>
+  <div class="hero-grain"></div>
+  <div class="hero-lattice"></div>
+  <div class="hero-frame">
+    <div class="hero-title-block">
+      <div class="hero-kanji">岳温泉 · Dake Onsen · Fukushima</div>
+      <h1 class="hero-title">Where Pets<br>Become <em>Family</em></h1>
+    </div>
+    <div class="hero-side">
+      <div class="hero-side-label">Philosophy</div>
+      <p class="hero-side-text">一座零碳宠物营地，重新定义携宠度假。人与宠物共享千年天然硫磺泉的疗愈力量。</p>
+    </div>
+  </div>
+</section>
+
+<!-- THRESHOLD -->
+<div class="threshold">
+  <span>I · Onsen</span>
+  <div class="line"></div>
+  <span>II · Nature</span>
+  <div class="line"></div>
+  <span>III · Community</span>
+</div>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-header">
+    <div class="section-kanji">Core Values · 核心理念</div>
+    <h2 class="section-heading">Three pillars of<br>the <em>Lucky House</em><br>experience</h2>
+  </div>
+
+  <div class="values-arch">
+    <div class="arch-cell">
+      <div class="arch-cell-number">01</div>
+      <div class="arch-cell-label">Onsen</div>
+      <h3 class="arch-cell-title">宠物友好温泉</h3>
+      <p class="arch-cell-desc">人与宠物各有专属温泉体验，共享岳温泉千年天然硫磺泉的疗愈力量。</p>
+      <img class="arch-cell-img" src="/images/facilities/facility-pet-onsen-01.png" alt="宠物温泉">
+      <a href="#" class="arch-cell-link">了解更多</a>
+    </div>
+    <div class="arch-cell">
+      <div class="arch-cell-number">02</div>
+      <div class="arch-cell-label">Nature</div>
+      <h3 class="arch-cell-title">零碳自然营地</h3>
+      <p class="arch-cell-desc">融入安达太良山脚自然景观的可持续度假空间，让每一次旅行都对地球温柔。</p>
+      <img class="arch-cell-img" src="/images/hero/hero-03-eco-campsite-aerial.png" alt="自然营地">
+      <a href="#" class="arch-cell-link">了解更多</a>
+    </div>
+    <div class="arch-cell">
+      <div class="arch-cell-number">03</div>
+      <div class="arch-cell-label">Community</div>
+      <h3 class="arch-cell-title">周末社群活动</h3>
+      <p class="arch-cell-desc">BBQ 派对、宠物交流会、星空观赏——为携宠家庭打造有温度的社群连接。</p>
+      <img class="arch-cell-img" src="/images/facilities/facility-bbq-terrace-01.png" alt="BBQ">
+      <a href="#" class="arch-cell-link">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAW ARCHITECTURE -->
+<div class="paw-arch">
+  <div class="beam"></div>
+  <svg viewBox="0 0 24 24"><ellipse cx="7.5" cy="7" rx="2" ry="2.5"/><ellipse cx="16.5" cy="7" rx="2" ry="2.5"/><ellipse cx="5" cy="12" rx="1.8" ry="2.2"/><ellipse cx="19" cy="12" rx="1.8" ry="2.2"/><path d="M12 21s-5-3.5-5-7.5c0-2.5 1.5-4.5 3.5-4.5 1 0 1.5.4 1.5.4s.5-.4 1.5-.4c2 0 3.5 2 3.5 4.5 0 4-5 7.5-5 7.5z"/></svg>
+  <div class="beam"></div>
+</div>
+
+<!-- ROOMS -->
+<section class="rooms">
+  <div class="section-kanji">Accommodation · 住宿</div>
+  <h2 class="section-heading">Featured <em>Rooms</em></h2>
+
+  <div class="rooms-grid">
+    <div class="room-opening">
+      <img src="/images/rooms/room-pet-friendly-interior-01.png" alt="宠物友好双床房">
+      <div class="room-opening-info">
+        <div class="room-opening-cat">Pet-Friendly</div>
+        <div class="room-opening-name">宠物友好双床房</div>
+        <div class="room-opening-specs">35㎡ · 最多 2 人</div>
+        <div class="room-opening-price">¥12,800 / 晚</div>
+      </div>
+    </div>
+    <div class="room-opening">
+      <img src="/images/rooms/room-standard-interior-01.png" alt="舒适标准双床房">
+      <div class="room-opening-info">
+        <div class="room-opening-cat">Standard</div>
+        <div class="room-opening-name">舒适标准双床房</div>
+        <div class="room-opening-specs">28㎡ · 最多 2 人</div>
+        <div class="room-opening-price">¥8,800 / 晚</div>
+      </div>
+    </div>
+    <div class="room-opening">
+      <img src="/images/rooms/room-villa-exterior-01.png" alt="别墅式宠物套房">
+      <div class="room-opening-info">
+        <div class="room-opening-cat">Premium</div>
+        <div class="room-opening-name">别墅式宠物套房</div>
+        <div class="room-opening-specs">72㎡ · 最多 4 人</div>
+        <div class="room-opening-price">¥25,800 / 晚</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <div class="bottom-cta-bg">
+    <img src="/images/hero/hero-02-shiba-onsen-veranda.png" alt="CTA background">
+  </div>
+  <div class="bottom-cta-lattice"></div>
+  <div class="bottom-cta-vignette"></div>
+  <div class="bottom-cta-content">
+    <div class="cta-proof">已有 128 位宠物家庭关注</div>
+    <h2 class="cta-heading">Begin Your<br><em>Journey</em></h2>
+    <p class="cta-sub">加入首批携宠入住名单，享受专属优惠</p>
+    <a href="#" class="cta-button">立即预约</a>
+    <div class="cta-trust">
+      <span>· 免费取消</span>
+      <span>· 48 小时确认</span>
+      <span>· 携宠入住</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>© 2025 Lucky House</span>
+  <span>岳温泉零碳宠物营地 & 温泉酒店</span>
+</footer>
+
+</body>
+</html>

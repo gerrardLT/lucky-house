@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "首页",
+    "stay": "住宿房型",
+    "petFriendly": "宠物友好",
+    "facilities": "温泉与设施",
+    "activities": "活动社群",
+    "explore": "周边探索",
+    "gallery": "画廊",
+    "faq": "常见问题",
+    "booking": "立即预约",
+    "contact": "联系我们"
+  },
+  "buttons": {
+    "bookNow": "立即预约",
+    "learnMore": "了解更多",
+    "backToHome": "返回首页",
+    "viewDetails": "查看详情",
+    "submit": "提交",
+    "cancel": "取消",
+    "next": "下一步",
+    "previous": "上一步",
+    "close": "关闭",
+    "subscribe": "订阅",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "footer": {
+    "brand": "福岛岳温泉零碳宠物营地 — 携宠家庭的温泉度假首选",
+    "copyright": "© {year} Lucky House. 保留所有权利。",
+    "privacy": "隐私政策",
+    "terms": "预订条款",
+    "cookiePolicy": "Cookie 政策",
+    "petRules": "宠物入住规则",
+    "cancelPolicy": "取消与退款政策",
+    "quickLinks": "快速链接",
+    "contactInfo": "联系信息",
+    "legalLinks": "法律信息",
+    "socialMedia": "社交媒体",
+    "newsletter": "邮件订阅",
+    "newsletterPlaceholder": "输入您的邮箱",
+    "newsletterConsent": "我同意接收营销邮件"
+  },
+  "language": {
+    "zh": "中文",
+    "ja": "日本語",
+    "en": "English",
+    "switchTo": "切换语言"
+  },
+  "meta": {
+    "renderingLabel": "示意图"
+  },
+  "cookie": {
+    "message": "本网站使用 Cookie 以提升您的浏览体验。继续使用即表示您同意我们使用 Cookie。",
+    "accept": "接受",
+    "learnMore": "了解更多"
+  }
+}

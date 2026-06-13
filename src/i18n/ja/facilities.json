@@ -1,0 +1,23 @@
+{
+  "pageTitle": "温泉・施設",
+  "pageSubtitle": "岳温泉の自然の中で、充実した施設をお楽しみください",
+  "filter": {
+    "all": "すべて",
+    "onsen": "温泉",
+    "petService": "ペットサービス",
+    "dining": "お食事",
+    "leisure": "レジャー",
+    "eco": "ゼロカーボン景観"
+  },
+  "status": {
+    "open": "営業中",
+    "openingSoon": "近日オープン",
+    "maintenance": "メンテナンス中"
+  },
+  "card": {
+    "learnMore": "詳しく見る"
+  },
+  "eco": {
+    "description": "サステナブルな滞在体験、ゼロカーボン景観をお楽しみください"
+  }
+}

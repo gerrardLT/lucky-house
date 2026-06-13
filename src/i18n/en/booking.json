@@ -1,0 +1,72 @@
+{
+  "pageTitle": "Book Your Stay",
+  "pageSubtitle": "Fill out the form below to submit your booking request. We will contact you within 24 hours to confirm.",
+  "steps": {
+    "dates": "Dates & Guests",
+    "room": "Room Preference",
+    "pet": "Pet Information",
+    "contact": "Contact Details",
+    "confirm": "Confirmation"
+  },
+  "step1": {
+    "checkIn": "Check-in Date",
+    "checkOut": "Check-out Date",
+    "adults": "Adults",
+    "children": "Children",
+    "rooms": "Rooms",
+    "hasPet": "Traveling with Pet",
+    "petCount": "Number of Pets"
+  },
+  "step2": {
+    "roomPreference": "Room Preference",
+    "standard": "Standard Room",
+    "petFriendly": "Pet-Friendly Room",
+    "villa": "Campsite Villa",
+    "noPreference": "No Preference",
+    "acceptAlternative": "Accept alternative room if unavailable"
+  },
+  "step3": {
+    "petType": "Pet Type",
+    "dog": "Dog",
+    "cat": "Cat",
+    "other": "Other",
+    "breed": "Breed",
+    "count": "Number of Pets",
+    "weight": "Weight (kg)",
+    "age": "Age",
+    "vaccineStatus": "Vaccination Certificate",
+    "rabiesStatus": "Rabies Certificate",
+    "ready": "Ready",
+    "canProvide": "Can Provide Later",
+    "unsure": "Not Sure",
+    "needOnsen": "Pet Onsen Service",
+    "needGrooming": "Grooming Service",
+    "specialNotes": "Special Notes"
+  },
+  "step4": {
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "country": "Country / Region",
+    "preferredChannel": "Preferred Contact Method"
+  },
+  "step5": {
+    "privacyPolicy": "I have read and agree to the Privacy Policy",
+    "petRules": "I have read and agree to the Pet Stay Rules",
+    "cancelPolicy": "I have read and agree to the Cancellation Policy",
+    "marketingSubscribe": "I would like to receive promotional emails and offers"
+  },
+  "submit": "Submit Booking Request",
+  "success": {
+    "title": "Booking Request Received",
+    "subtitle": "Thank you for your request. We will contact you within 24 hours to confirm.",
+    "confirmationId": "Confirmation Number",
+    "contactSupport": "Questions? Contact our support team"
+  },
+  "errors": {
+    "submitFailed": "Submission failed. Please try again or contact support",
+    "dateInvalid": "Check-in date must be today or later",
+    "checkoutBeforeCheckin": "Check-out date must be after check-in date",
+    "required": "This field is required"
+  }
+}

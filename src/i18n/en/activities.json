@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Events & Community",
+  "pageSubtitle": "Join fellow pet owners for unique onsen camp experiences and seasonal events",
+  "filter": {
+    "all": "All Events",
+    "month": "By Month",
+    "category": "By Category"
+  },
+  "card": {
+    "date": "Date",
+    "target": "Suitable For",
+    "capacity": "Capacity",
+    "tbd": "Date TBD",
+    "register": "Register Now",
+    "interest": "Get Notified",
+    "full": "Fully Booked"
+  },
+  "interestTags": {
+    "title": "Interest Tags",
+    "subtitle": "Select the event categories you're interested in and we'll notify you when new events are announced",
+    "submit": "Save Preferences"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "pageTitle": "住宿房型",
+  "pageSubtitle": "从舒适标准房到宠物友好套房，再到林间营地别墅——总有一个空间，让您与爱宠共度温泉时光",
+  "filter": {
+    "all": "全部",
+    "petFriendly": "宠物友好",
+    "standard": "普通房",
+    "villa": "营地别墅",
+    "hasPet": "携宠入住"
+  },
+  "card": {
+    "area": "面积",
+    "guests": "可住人数",
+    "bed": "床型",
+    "noPet": "不可携宠",
+    "comingSoon": "即将开放",
+    "viewDetails": "查看详情"
+  },
+  "comparison": {
+    "title": "房型对比",
+    "category": "类别",
+    "petAllowed": "可否携宠",
+    "maxGuests": "最大入住人数",
+    "yes": "是",
+    "no": "否"
+  },
+  "detail": {
+    "amenities": "客房设施",
+    "suitableFor": "适合人群",
+    "petInfo": "宠物入住信息",
+    "maxPets": "宠物数量上限",
+    "maxPetWeight": "宠物体重上限",
+    "rules": "规则与备注",
+    "relatedRooms": "更多推荐房型",
+    "bookThisRoom": "预约此房型"
+  }
+}
