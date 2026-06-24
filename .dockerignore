@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+docs/
+screenshots/
+example/
+design-demos/
+.kiro/
+.skills/
+.agents/
+.vscode/
+vitest.config.ts
+tsconfig.tsbuildinfo
+eslint.config.mjs
