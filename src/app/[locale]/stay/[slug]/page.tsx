@@ -8,8 +8,6 @@ import Image from 'next/image'
 import { getRoomTypes, getRoomBySlug } from '@/lib/cms'
 import { ImageCarousel } from '@/components/ui/ImageCarousel'
 import { PriceDisplay } from '@/components/ui/PriceDisplay'
-import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
 import { RoomCard } from '@/components/stay/RoomCard'
 import { isValidLocale } from '@/lib/i18n/config'
 import type { Locale, RoomType } from '@/types'
@@ -192,110 +190,119 @@ export default async function RoomDetailPage({
   const ctaDisabled = room.status === 'coming_soon'
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
       {/* 返回列表链接 */}
-      <nav className="mb-6">
+      <nav className="px-8 lg:px-[60px] pt-8 pb-6 border-b border-[rgba(234,224,204,0.08)]">
         <a
           href={`/${typedLocale}/stay`}
-          className="inline-flex items-center text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          className="inline-flex items-center text-[11px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.5)] hover:text-[#A07850] transition-colors duration-300"
         >
           {TEXTS.backToList[typedLocale]}
         </a>
       </nav>
 
-      {/* 主内容区域：桌面端双栏布局 */}
-      <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+      {/* 主内容区域 */}
+      <div className="lg:grid lg:grid-cols-3 lg:gap-0">
         {/* 左侧：图片 + 信息（占 2 列） */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 border-r border-[rgba(234,224,204,0.08)]">
           {/* 图片轮播 */}
-          <ImageCarousel images={carouselImages} className="mb-8" />
+          <div className="relative">
+            <ImageCarousel images={carouselImages} className="" />
+          </div>
 
-          {/* 房型名称 + 状态标签 */}
-          <div className="mb-6">
-            <div className="flex flex-wrap items-center gap-3 mb-2">
-              <h1 className="text-2xl font-bold text-white sm:text-3xl">
+          {/* 房型名称 + 状态 */}
+          <div className="px-8 lg:px-[60px] pt-10 pb-8 border-b border-[rgba(234,224,204,0.08)]">
+            {/* Kicker */}
+            <div className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-4">
+              {room.category === 'standard' ? 'Standard Room' : room.category === 'pet-friendly' ? 'Pet-Friendly Room' : 'Campsite Villa'}
+            </div>
+            <div className="flex flex-wrap items-start gap-4 mb-3">
+              <h1 className="font-serif text-[clamp(28px,4vw,52px)] font-normal leading-[1.1] text-[#EAE0CC]">
                 {room.name[typedLocale]}
               </h1>
               {room.status === 'coming_soon' && (
-                <Badge variant="coming-soon">{TEXTS.comingSoon[typedLocale]}</Badge>
+                <span className="text-[9px] tracking-[0.25em] uppercase text-[rgba(234,224,204,0.35)] border border-[rgba(234,224,204,0.1)] px-3 py-1.5 mt-2">
+                  {TEXTS.comingSoon[typedLocale]}
+                </span>
               )}
             </div>
-
-            {/* 宠物状态标识 */}
+            {typedLocale !== 'en' && (
+              <div className="font-serif italic text-[14px] text-[rgba(234,224,204,0.4)] mb-4">{room.name.en}</div>
+            )}
+            {/* 宠物状态 */}
             {room.isPetFriendly ? (
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="pet-friendly">{TEXTS.petFriendly[typedLocale]}</Badge>
-                <span className="text-sm text-stone-400">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 border border-[rgba(160,120,80,0.3)] text-[#A07850]">
+                  {TEXTS.petFriendly[typedLocale]}
+                </span>
+                <span className="text-[13px] text-[rgba(234,224,204,0.5)]">
                   {TEXTS.maxPets[typedLocale].replace('{count}', String(room.maxPets))}
                 </span>
                 {room.maxPetWeight && (
-                  <span className="text-sm text-stone-400">
+                  <span className="text-[13px] text-[rgba(234,224,204,0.5)]">
                     · {TEXTS.maxPetWeight[typedLocale].replace('{weight}', String(room.maxPetWeight))}
                   </span>
                 )}
               </div>
             ) : (
-              <Badge variant="maintenance">{TEXTS.noPets[typedLocale]}</Badge>
+              <span className="text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 border border-[rgba(234,224,204,0.1)] text-[rgba(234,224,204,0.35)]">
+                {TEXTS.noPets[typedLocale]}
+              </span>
             )}
           </div>
 
-          {/* 基本信息卡片 */}
-          <div className="grid grid-cols-3 gap-4 rounded-xl bg-[#141414] p-5 mb-8">
-            <div className="text-center">
-              <p className="text-xs text-stone-400 mb-1">{TEXTS.area[typedLocale]}</p>
-              <p className="text-lg font-semibold text-white">
-                {room.area} {TEXTS.areaUnit[typedLocale]}
-              </p>
+          {/* 基本信息规格行 */}
+          <div className="flex border-b border-[rgba(234,224,204,0.08)]">
+            <div className="flex-1 px-8 lg:px-[60px] py-6 border-r border-[rgba(234,224,204,0.08)]">
+              <p className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-2">{TEXTS.area[typedLocale]}</p>
+              <p className="font-serif text-[22px] font-normal text-[#EAE0CC]">{room.area} {TEXTS.areaUnit[typedLocale]}</p>
             </div>
-            <div className="text-center border-x border-stone-700">
-              <p className="text-xs text-stone-400 mb-1">{TEXTS.maxGuests[typedLocale]}</p>
-              <p className="text-lg font-semibold text-white">
-                {room.maxGuests}{TEXTS.guestUnit[typedLocale]}
-              </p>
+            <div className="flex-1 px-6 py-6 border-r border-[rgba(234,224,204,0.08)]">
+              <p className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-2">{TEXTS.maxGuests[typedLocale]}</p>
+              <p className="font-serif text-[22px] font-normal text-[#EAE0CC]">{room.maxGuests}{TEXTS.guestUnit[typedLocale]}</p>
             </div>
-            <div className="text-center">
-              <p className="text-xs text-stone-400 mb-1">{TEXTS.bedType[typedLocale]}</p>
-              <p className="text-lg font-semibold text-white">
-                {room.bedType[typedLocale]}
-              </p>
+            <div className="flex-1 px-6 py-6">
+              <p className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-2">{TEXTS.bedType[typedLocale]}</p>
+              <p className="text-[15px] text-[#EAE0CC]">{room.bedType[typedLocale]}</p>
             </div>
           </div>
 
           {/* 房型描述 */}
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-white mb-3">
+          <section className="px-8 lg:px-[60px] py-10 border-b border-[rgba(234,224,204,0.08)]">
+            <h2 className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-6">
               {TEXTS.description[typedLocale]}
             </h2>
-            <p className="text-stone-300 leading-relaxed">
+            <p className="text-[15px] leading-[1.9] text-[rgba(234,224,204,0.7)]">
               {room.description[typedLocale]}
             </p>
           </section>
 
           {/* 设施列表 */}
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-white mb-4">
+          <section className="px-8 lg:px-[60px] py-10 border-b border-[rgba(234,224,204,0.08)]">
+            <h2 className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-6">
               {TEXTS.amenities[typedLocale]}
             </h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {room.amenities.map((amenity) => (
                 <div
                   key={amenity}
-                  className="flex items-center gap-2 rounded-lg bg-[#1a1a1a] px-3 py-2"
+                  className="flex items-center gap-2.5 px-3 py-2.5"
+                  style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
                 >
-                  <span className="inline-flex items-center justify-center w-6 h-6" aria-hidden="true">
+                  <span className="inline-flex items-center justify-center w-5 h-5" aria-hidden="true">
                     {AMENITY_ICONS[amenity] ? (
                       <Image
                         src={AMENITY_ICONS[amenity]}
                         alt=""
-                        width={20}
-                        height={20}
-                        className="opacity-70"
+                        width={18}
+                        height={18}
+                        className="opacity-50"
                       />
                     ) : (
-                      <span className="text-xs text-stone-400">•</span>
+                      <span className="text-xs text-[rgba(234,224,204,0.3)]">-</span>
                     )}
                   </span>
-                  <span className="text-sm text-stone-300">
+                  <span className="text-[13px] text-[rgba(234,224,204,0.6)]">
                     {AMENITY_LABELS[amenity]?.[typedLocale] || amenity}
                   </span>
                 </div>
@@ -304,15 +311,19 @@ export default async function RoomDetailPage({
           </section>
 
           {/* 适合人群标签 */}
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold text-white mb-3">
+          <section className="px-8 lg:px-[60px] py-10 border-b border-[rgba(234,224,204,0.08)]">
+            <h2 className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-6">
               {TEXTS.suitableFor[typedLocale]}
             </h2>
             <div className="flex flex-wrap gap-2">
               {room.tags[typedLocale].map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block rounded-full bg-amber-900/20 px-4 py-1.5 text-sm text-amber-400 border border-amber-700/30"
+                  className={`inline-block px-4 py-1.5 text-[11px] tracking-[0.12em] border ${
+                    room.isPetFriendly
+                      ? 'border-[rgba(160,120,80,0.25)] text-[#A07850]'
+                      : 'border-[rgba(234,224,204,0.1)] text-[rgba(234,224,204,0.5)]'
+                  }`}
                 >
                   {tag}
                 </span>
@@ -321,8 +332,8 @@ export default async function RoomDetailPage({
           </section>
 
           {/* 移动端底部固定 CTA（仅移动端可见） */}
-          <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#141414] border-t border-stone-700 p-4 lg:hidden">
-            <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#19160F] lg:hidden" style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}>
+            <div className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
               <div>
                 <PriceDisplay
                   status={room.priceStatus}
@@ -330,24 +341,24 @@ export default async function RoomDetailPage({
                   locale={typedLocale}
                 />
               </div>
-              <Button
-                variant="primary"
-                size="md"
-                href={ctaDisabled ? undefined : ctaHref}
-                disabled={ctaDisabled}
-              >
-                {ctaText}
-              </Button>
+              {!ctaDisabled && (
+                <a
+                  href={ctaHref}
+                  className="text-[11px] tracking-[0.2em] uppercase px-6 py-3 bg-[#A07850] text-[#19160F] font-medium hover:bg-[#C49A6A] transition-colors duration-300"
+                >
+                  {ctaText}
+                </a>
+              )}
             </div>
           </div>
         </div>
 
         {/* 右侧：Sticky 预订侧边栏（桌面端） */}
         <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-xl border border-stone-700 bg-[#141414] p-6 shadow-sm">
+          <div className="sticky top-20 p-10" style={{ borderLeft: '1px solid rgba(234,224,204,0.08)' }}>
             {/* 价格状态 */}
-            <div className="mb-4">
-              <p className="text-sm text-stone-400 mb-1">{TEXTS.priceLabel[typedLocale]}</p>
+            <div className="mb-6 pb-6" style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}>
+              <p className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-3">{TEXTS.priceLabel[typedLocale]}</p>
               <PriceDisplay
                 status={room.priceStatus}
                 price={room.price}
@@ -357,37 +368,43 @@ export default async function RoomDetailPage({
             </div>
 
             {/* 房型基本信息摘要 */}
-            <div className="mb-6 space-y-2 text-sm text-stone-400 border-t border-stone-700 pt-4">
-              <p>{TEXTS.area[typedLocale]}：{room.area} {TEXTS.areaUnit[typedLocale]}</p>
-              <p>{TEXTS.maxGuests[typedLocale]}：{room.maxGuests}{TEXTS.guestUnit[typedLocale]}</p>
-              <p>{TEXTS.bedType[typedLocale]}：{room.bedType[typedLocale]}</p>
+            <div className="mb-8 space-y-3 pb-6" style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}>
+              <p className="text-[13px] text-[rgba(234,224,204,0.5)]">{TEXTS.area[typedLocale]}：{room.area} {TEXTS.areaUnit[typedLocale]}</p>
+              <p className="text-[13px] text-[rgba(234,224,204,0.5)]">{TEXTS.maxGuests[typedLocale]}：{room.maxGuests}{TEXTS.guestUnit[typedLocale]}</p>
+              <p className="text-[13px] text-[rgba(234,224,204,0.5)]">{TEXTS.bedType[typedLocale]}：{room.bedType[typedLocale]}</p>
               {room.isPetFriendly && (
-                <p className="text-amber-400 font-medium">
+                <p className="text-[13px] text-[#A07850]">
                   {TEXTS.petFriendly[typedLocale]} · {TEXTS.maxPets[typedLocale].replace('{count}', String(room.maxPets))}
                 </p>
               )}
             </div>
 
             {/* CTA 按钮 */}
-            <Button
-              variant="primary"
-              size="lg"
-              href={ctaDisabled ? undefined : ctaHref}
-              disabled={ctaDisabled}
-              className="w-full"
-            >
-              {ctaText}
-            </Button>
+            {ctaDisabled ? (
+              <div className="text-[11px] tracking-[0.2em] uppercase px-6 py-3 text-center border border-[rgba(234,224,204,0.1)] text-[rgba(234,224,204,0.35)]">
+                {ctaText}
+              </div>
+            ) : (
+              <a
+                href={ctaHref}
+                className="block text-[11px] tracking-[0.2em] uppercase px-6 py-4 text-center bg-[#A07850] text-[#19160F] font-medium hover:bg-[#C49A6A] transition-colors duration-300 w-full"
+              >
+                {ctaText}
+              </a>
+            )}
           </div>
         </aside>
       </div>
 
       {/* 相关推荐房型 */}
       {relatedRooms.length > 0 && (
-        <section className="mt-16 mb-20 lg:mb-8">
-          <h2 className="text-2xl font-semibold text-white mb-6">
-            {TEXTS.relatedRooms[typedLocale]}
-          </h2>
+        <section className="px-8 lg:px-[60px] py-16 border-t border-[rgba(234,224,204,0.08)] mb-20 lg:mb-8">
+          <div className="flex items-center gap-5 mb-10">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] flex-shrink-0">
+              {TEXTS.relatedRooms[typedLocale]}
+            </span>
+            <span className="flex-1 h-px bg-[rgba(234,224,204,0.08)]" />
+          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {relatedRooms.map((relatedRoom) => (
               <RoomCard

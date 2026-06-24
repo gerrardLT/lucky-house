@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Direction A · Gallery Dark — Luckyhouse Stay</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080806;--surface:#0e0d0a;--text:#EDE9E0;--text-50:rgba(237,233,224,0.5);
+  --text-25:rgba(237,233,224,0.25);--gold:#C8975E;--rule:rgba(237,233,224,0.07);
+  --font-display:'Cormorant Garamond','Noto Serif SC',serif;
+  --font-mono:'Space Mono',monospace;
+}
+html{background:var(--bg);color:var(--text)}
+body{font-family:var(--font-display);min-height:100vh}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:28px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to bottom,rgba(8,8,6,0.9),transparent);
+}
+.nav-brand{font-size:15px;letter-spacing:0.3em;text-transform:uppercase;font-weight:400;color:var(--gold)}
+.nav-links{display:flex;gap:32px}
+.nav-links a{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--text-50);text-decoration:none;
+  transition:color 0.3s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+
+/* ── HERO TITLE ── */
+.page-hero{
+  padding:160px 56px 80px;
+  border-bottom:1px solid var(--rule);
+}
+.page-hero-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
+}
+.page-hero h1{
+  font-size:clamp(48px,6vw,88px);font-weight:300;letter-spacing:-0.02em;
+  line-height:1.05;color:var(--text);
+}
+.page-hero h1 em{font-style:italic;color:var(--text-50)}
+.page-hero-sub{
+  max-width:560px;margin-top:24px;
+  font-size:16px;line-height:1.75;color:var(--text-50);font-weight:300;
+}
+.page-hero-meta{
+  margin-top:48px;display:flex;align-items:center;gap:40px;
+}
+.hero-meta-item{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--text-25);
+}
+.hero-meta-item span{display:block;font-size:22px;font-family:var(--font-display);color:var(--text-50);letter-spacing:-0.02em;margin-bottom:4px}
+
+/* ── FILTER ── */
+.filter-bar{
+  padding:0 56px;
+  display:flex;align-items:center;gap:0;
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;
+}
+.filter-item{
+  padding:20px 0;margin-right:36px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--text-25);cursor:pointer;
+  border-bottom:1px solid transparent;transition:all 0.3s;white-space:nowrap;
+}
+.filter-item:hover,.filter-item.active{color:var(--text);border-bottom-color:var(--gold)}
+
+/* ── ROOM LIST ── */
+.rooms{padding:0}
+
+/* single room exhibit */
+.room-exhibit{
+  padding:80px 56px;
+  border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+}
+.room-exhibit:nth-child(even) .room-image{order:2}
+.room-exhibit:nth-child(even) .room-content{order:1}
+
+/* image block */
+.room-image{position:relative}
+.room-img-frame{
+  aspect-ratio:4/3;width:100%;position:relative;overflow:hidden;
+}
+.room-img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:flex-end;padding:24px;
+}
+.room-img-placeholder.standard{
+  background:linear-gradient(160deg,#2C2318 0%,#3A2E20 50%,#201A12 100%);
+}
+.room-img-placeholder.pet{
+  background:linear-gradient(160deg,#1A2218 0%,#222D1E 50%,#141A12 100%);
+}
+.room-img-placeholder.villa{
+  background:linear-gradient(160deg,#1E1C14 0%,#26241A 50%,#181610 100%);
+}
+.room-img-label{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.25em;
+  text-transform:uppercase;color:rgba(237,233,224,0.3);
+}
+.room-index-num{
+  position:absolute;top:24px;right:24px;
+  font-family:var(--font-mono);font-size:11px;color:var(--text-25);
+  letter-spacing:0.15em;
+}
+/* thumbnail strip */
+.thumb-strip{
+  display:flex;gap:8px;margin-top:12px;
+}
+.thumb{
+  width:60px;height:40px;
+  opacity:0.3;border:1px solid var(--rule);
+  cursor:pointer;transition:opacity 0.3s;
+}
+.thumb:hover,.thumb.active{opacity:1;border-color:var(--gold)}
+.thumb.standard{background:linear-gradient(160deg,#2C2318,#201A12)}
+.thumb.pet{background:linear-gradient(160deg,#1A2218,#141A12)}
+.thumb.villa{background:linear-gradient(160deg,#1E1C14,#181610)}
+
+/* content block */
+.room-content{}
+.room-catalog-label{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.room-catalog-label::after{
+  content:'';flex:1;height:1px;background:var(--rule);max-width:80px;
+}
+.room-name{
+  font-size:clamp(28px,3vw,44px);font-weight:300;letter-spacing:-0.02em;
+  line-height:1.15;color:var(--text);margin-bottom:8px;
+}
+.room-name-sub{
+  font-size:14px;font-style:italic;color:var(--text-50);margin-bottom:32px;
+}
+.room-desc{
+  font-size:15px;line-height:1.85;color:var(--text-50);font-weight:300;
+  max-width:480px;margin-bottom:40px;
+}
+
+/* metadata grid */
+.room-meta-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-top:1px solid var(--rule);
+}
+.meta-cell{
+  padding:16px 0;border-bottom:1px solid var(--rule);
+}
+.meta-cell:nth-child(odd){padding-right:24px;border-right:1px solid var(--rule)}
+.meta-cell:nth-child(even){padding-left:24px}
+.meta-key{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--text-25);margin-bottom:6px;
+}
+.meta-val{
+  font-size:15px;font-weight:400;color:var(--text);
+}
+
+/* price */
+.room-price-block{margin-top:32px}
+.price-status{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 20px;border:1px solid var(--rule);
+}
+.price-status-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--text-25);
+}
+.price-status.coming-soon .price-status-dot{background:#5a4a30;animation:blink 2s ease-in-out infinite}
+.price-status.inquiry .price-status-dot{background:var(--gold)}
+.price-status-label{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--text-50);
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* tags */
+.room-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;padding:4px 10px;
+  border:1px solid var(--rule);color:var(--text-25);
+}
+
+/* CTA */
+.room-cta{
+  margin-top:32px;display:inline-flex;align-items:center;gap:12px;
+  color:var(--text);font-size:13px;letter-spacing:0.1em;text-decoration:none;
+  border-bottom:1px solid var(--text-25);padding-bottom:4px;
+  transition:border-color 0.3s;
+}
+.room-cta:hover{border-color:var(--gold);color:var(--gold)}
+
+/* pet badge */
+.pet-badge{
+  display:inline-flex;align-items:center;gap:6px;margin-left:12px;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);
+  padding:3px 8px;border:1px solid rgba(200,151,94,0.3);vertical-align:middle;
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:48px 56px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-brand{
+  font-size:12px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-25)
+}
+.footer-note{
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;color:var(--text-25);
+}
+
+/* design label */
+.design-label{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--text-25);
+  border:1px solid var(--rule);padding:8px 14px;background:var(--bg);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Luckyhouse · 岳温泉</div>
+  <div class="nav-links">
+    <a href="#">住宿</a>
+    <a href="#">温泉设施</a>
+    <a href="#">活动</a>
+    <a href="#">宠物友好</a>
+    <a href="#">画廊</a>
+    <a href="#">预约</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-eyebrow">Accommodations</div>
+  <h1>住宿<br><em>房型一览</em></h1>
+  <p class="page-hero-sub">从舒适标准房到宠物友好套房，再到林间营地别墅——总有一个空间，让您与爱宠共度温泉时光</p>
+  <div class="page-hero-meta">
+    <div class="hero-meta-item"><span>6</span>房型总数</div>
+    <div class="hero-meta-item"><span>3</span>空间类别</div>
+    <div class="hero-meta-item"><span>4</span>可携宠房型</div>
+  </div>
+</section>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <div class="filter-item active">全部</div>
+  <div class="filter-item">标准房</div>
+  <div class="filter-item">宠物友好房</div>
+  <div class="filter-item">营地别墅</div>
+</div>
+
+<!-- ROOMS -->
+<main class="rooms">
+
+  <!-- Room 1: Standard Twin -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder standard">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">01 / 06</div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb standard active"></div>
+        <div class="thumb standard"></div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label">Standard · 标准双床</div>
+      <h2 class="room-name">标准<br>双床房</h2>
+      <div class="room-name-sub">Standard Twin Room</div>
+      <p class="room-desc">舒适宁静的日式简约空间，配备独立温泉入浴券，尽享岳温泉的天然硫磺泉质。落地窗外可远眺安达太良山四季变幻的风景。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">28 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">单人床 × 2</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">2 位成人</div></div>
+        <div class="meta-cell"><div class="meta-key">宠物入住</div><div class="meta-val">不可携宠</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status coming-soon">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">价格待定 · Coming Soon</div>
+        </div>
+      </div>
+      <div class="room-tags">
+        <div class="tag">情侣</div>
+        <div class="tag">温泉客</div>
+        <div class="tag">商务出行</div>
+      </div>
+      <a href="#" class="room-cta">了解详情 →</a>
+    </div>
+  </div>
+
+  <!-- Room 2: Standard Double -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder standard">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">02 / 06</div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb standard active"></div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label">Standard · 标准大床</div>
+      <h2 class="room-name">标准<br>大床房</h2>
+      <div class="room-name-sub">Standard Double Room</div>
+      <p class="room-desc">宽敞明亮的大床客房，配有独立阳台和舒适沙发区。温泉入浴券含于住宿中，步行即可抵达公共温泉区。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">32 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">大床 × 1</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">2 位成人</div></div>
+        <div class="meta-cell"><div class="meta-key">宠物入住</div><div class="meta-val">不可携宠</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status coming-soon">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">价格待定 · Coming Soon</div>
+        </div>
+      </div>
+      <div class="room-tags">
+        <div class="tag">情侣</div>
+        <div class="tag">亲子</div>
+        <div class="tag">温泉客</div>
+      </div>
+      <a href="#" class="room-cta">了解详情 →</a>
+    </div>
+  </div>
+
+  <!-- Room 3: Pet-Friendly Twin -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder pet">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">03 / 06</div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb pet active"></div>
+        <div class="thumb pet"></div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label">Pet-Friendly · 宠物友好</div>
+      <h2 class="room-name">宠物友好<br>双床房 <span class="pet-badge">Pet ·</span></h2>
+      <div class="room-name-sub">Pet-Friendly Twin Room</div>
+      <p class="room-desc">专为携宠家庭设计的温馨客房，配备宠物床、食碗、围栏等用品。地板采用防滑耐磨材质，让毛孩子自在活动。客房直通室外Dog Run区域。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">35 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">单人床 × 2</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">2 位成人</div></div>
+        <div class="meta-cell"><div class="meta-key">宠物</div><div class="meta-val">最多 2 只（25kg↓）</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status inquiry">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">价格请咨询 · Inquiry</div>
+        </div>
+      </div>
+      <div class="room-tags">
+        <div class="tag">携宠家庭</div>
+        <div class="tag">情侣携宠</div>
+        <div class="tag">Dog Run</div>
+      </div>
+      <a href="#" class="room-cta">了解详情 →</a>
+    </div>
+  </div>
+
+  <!-- Room 4: Pet-Friendly Suite -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder pet">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">04 / 06</div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb pet active"></div>
+        <div class="thumb pet"></div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label">Suite · 私汤套房</div>
+      <h2 class="room-name">宠物友好<br>套房 <span class="pet-badge">Pet ·</span></h2>
+      <div class="room-name-sub">Pet-Friendly Suite</div>
+      <p class="room-desc">宽敞的套房空间，独立客厅与卧室分隔设计，配备专属宠物活动区和私汤露台。让您和爱宠共享奢适温泉时光，尽享岳温泉的恬静之美。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">52 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">大床 + 沙发床</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">4 位成人</div></div>
+        <div class="meta-cell"><div class="meta-key">私汤</div><div class="meta-val">专属露台温泉</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status inquiry">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">价格请咨询 · Inquiry</div>
+        </div>
+      </div>
+      <div class="room-tags">
+        <div class="tag">携宠家庭</div>
+        <div class="tag">豪华度假</div>
+        <div class="tag">私汤</div>
+      </div>
+      <a href="#" class="room-cta">了解详情 →</a>
+    </div>
+  </div>
+
+  <!-- Room 5: Villa A -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder villa">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">05 / 06</div>
+      </div>
+      <div class="thumb-strip">
+        <div class="thumb villa active"></div>
+        <div class="thumb villa"></div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label" style="color:var(--text-25)">Villa · 即将开放</div>
+      <h2 class="room-name" style="color:var(--text-50)">营地小别墅 A<br><em style="font-size:0.65em">林间型</em></h2>
+      <div class="room-name-sub">Campsite Villa A — Forest Type</div>
+      <p class="room-desc">隐匿于林间的独栋小别墅，开放式露台与自然融为一体。配备私人BBQ区和宠物围栏庭院，是携宠家庭亲近自然的理想选择。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">65 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">大床 + 上下铺</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">6 位</div></div>
+        <div class="meta-cell"><div class="meta-key">特色</div><div class="meta-val">BBQ + 围栏庭院</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status coming-soon">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">即将开放 · Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Room 6: Villa B -->
+  <div class="room-exhibit">
+    <div class="room-image">
+      <div class="room-img-frame">
+        <div class="room-img-placeholder villa">
+          <div class="room-img-label">概念示意图 · Concept Render</div>
+        </div>
+        <div class="room-index-num">06 / 06</div>
+      </div>
+    </div>
+    <div class="room-content">
+      <div class="room-catalog-label" style="color:var(--text-25)">Villa · 即将开放</div>
+      <h2 class="room-name" style="color:var(--text-50)">营地小别墅 B<br><em style="font-size:0.65em">湖景型</em></h2>
+      <div class="room-name-sub">Campsite Villa B — Lake View Type</div>
+      <p class="room-desc">面朝人工湖景的开阔别墅，超大落地窗引入自然光线。独立Dog Run区域直连公共活动草坪，清晨可在露台观赏薄雾环绕的湖面。</p>
+      <div class="room-meta-grid">
+        <div class="meta-cell"><div class="meta-key">面积</div><div class="meta-val">70 m²</div></div>
+        <div class="meta-cell"><div class="meta-key">床型</div><div class="meta-val">大床 × 2</div></div>
+        <div class="meta-cell"><div class="meta-key">最多入住</div><div class="meta-val">6 位</div></div>
+        <div class="meta-cell"><div class="meta-key">特色</div><div class="meta-val">湖景 + Dog Run</div></div>
+      </div>
+      <div class="room-price-block">
+        <div class="price-status coming-soon">
+          <div class="price-status-dot"></div>
+          <div class="price-status-label">即将开放 · Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-brand">Luckyhouse · 岳温泉零碳宠物营地</div>
+  <div class="footer-note">© 2025 Fukushima Dake Onsen · All rights reserved</div>
+</footer>
+
+<div class="design-label">Direction A · Gallery Dark #18</div>
+</body>
+</html>

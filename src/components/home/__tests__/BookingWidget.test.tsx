@@ -57,7 +57,7 @@ describe('BookingWidget', () => {
     expect(petCheckbox.checked).toBe(false)
   })
 
-  it('navigates to booking page with query params on submit', () => {
+  it('navigates to stay page with query params on submit', () => {
     render(<BookingWidget visible={true} locale="zh" />)
 
     // Change adults to 3
@@ -70,7 +70,7 @@ describe('BookingWidget', () => {
 
     expect(mockPush).toHaveBeenCalledTimes(1)
     const pushUrl = mockPush.mock.calls[0][0] as string
-    expect(pushUrl).toContain('/zh/booking?')
+    expect(pushUrl).toContain('/zh/stay?')
     expect(pushUrl).toContain('adults=3')
     expect(pushUrl).toContain('hasPet=true')
   })
@@ -80,7 +80,7 @@ describe('BookingWidget', () => {
     fireEvent.click(screen.getByText('Check Availability'))
 
     const pushUrl = mockPush.mock.calls[0][0] as string
-    expect(pushUrl.startsWith('/en/booking?')).toBe(true)
+    expect(pushUrl.startsWith('/en/stay?')).toBe(true)
   })
 
   it('adults select has options 1-6', () => {

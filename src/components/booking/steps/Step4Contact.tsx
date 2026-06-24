@@ -167,6 +167,7 @@ export function Step4Contact({ data, errors, locale, onChange }: Step4Props) {
         </label>
         <Select
           id="contactCountry"
+          locale={locale}
           value={data.country || ''}
           options={[
             { value: '', label: t.countryPlaceholder },

@@ -304,6 +304,7 @@ export function ContactForm({ locale }: ContactFormProps) {
         </label>
         <Select
           id="contact-subject"
+          locale={locale}
           value={subject}
           placeholder={t.subjectPlaceholder}
           options={SUBJECT_OPTIONS.map(option => ({ value: option, label: subjectLabels[option] }))}

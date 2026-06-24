@@ -80,20 +80,64 @@ export default async function GalleryPage({
   const typedLocale = locale as Locale
   const assets = await getGalleryAssets()
 
+  const kicker: Record<Locale, string> = {
+    zh: 'Gallery · 影像画廊',
+    ja: 'ギャラリー',
+    en: 'Photo Gallery',
+  }
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 页面标题区域 */}
-      <header className="mb-12 text-center">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-          {PAGE_TITLE[typedLocale]}
-        </h1>
-        <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-          {PAGE_SUBTITLE[typedLocale]}
-        </p>
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页头 */}
+      <header
+        className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px]"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] items-end">
+          <div>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+              {kicker[typedLocale]}
+            </p>
+            <h1
+              className="font-serif font-normal leading-[1.1] text-[#EAE0CC]"
+              style={{ fontSize: 'clamp(32px,4.5vw,60px)' }}
+            >
+              {PAGE_TITLE[typedLocale]}
+              <br />
+              <em className="italic" style={{ color: 'rgba(234,224,204,0.55)' }}>
+                {typedLocale === 'zh' ? '用镜头记录美好' : typedLocale === 'ja' ? '美しい時間を画像に' : 'Moments in Frame'}
+              </em>
+            </h1>
+          </div>
+          <div className="lg:pb-1">
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(234,224,204,0.6)' }}>
+              {PAGE_SUBTITLE[typedLocale]}
+            </p>
+            <div
+              className="flex gap-8 mt-6 pt-6"
+              style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+            >
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">15</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {typedLocale === 'zh' ? '影像' : typedLocale === 'ja' ? '写真' : 'Photos'}
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">8</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {typedLocale === 'zh' ? '主题分类' : typedLocale === 'ja' ? 'カテゴリー' : 'Categories'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* 画廊网格（含分类筛选 + Lightbox + 概念图标注 + 关联跳转） */}
-      <GalleryGrid assets={assets} locale={typedLocale} />
+      <section className="px-8 lg:px-[60px] py-12 lg:py-16">
+        <GalleryGrid assets={assets} locale={typedLocale} />
+      </section>
     </div>
   )
 }

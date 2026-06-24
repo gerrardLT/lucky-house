@@ -11,7 +11,6 @@ import { isValidLocale, BCP47_MAP, BASE_URL } from '@/lib/i18n/config'
 import type { Locale } from '@/lib/i18n/config'
 import { generateHreflangLinks } from '@/lib/i18n/hreflang'
 import { ContactForm } from '@/components/contact/ContactForm'
-import { FadeInUp, AnimatedSection, StaggerContainer, StaggerItem } from '@/components/motion'
 
 /** 页面 SEO 元数据 */
 export async function generateMetadata({
@@ -217,102 +216,101 @@ export default async function ContactPage({
         : 'See more about the area →'
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 1. 页面标题 */}
-      <FadeInUp className="mb-12 text-center">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-          {pageTitle}
-        </h1>
-        <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-          {pageSubtitle}
-        </p>
-      </FadeInUp>
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页面标题 */}
+      <header className="px-8 lg:px-[60px] pt-[60px] pb-[40px] border-b border-[rgba(234,224,204,0.08)]">
+        <div className="text-[11px] tracking-[0.35em] uppercase text-[#A07850] mb-5">
+          {locale === 'zh' ? 'Contact · 联系我们' : locale === 'ja' ? 'お問い合わせ · Contact' : 'Contact Us'}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+          <h1 className="font-serif text-[clamp(32px,4.5vw,60px)] font-normal leading-[1.1] text-[#EAE0CC]">
+            {locale === 'zh' ? (
+              <>联系我们<br /><em className="italic text-[rgba(234,224,204,0.6)]">随时为您解答</em></>
+            ) : locale === 'ja' ? (
+              <>お問い合わせ<br /><em className="italic text-[rgba(234,224,204,0.6)]">お気軽にどうぞ</em></>
+            ) : (
+              <>Get in Touch<br /><em className="italic text-[rgba(234,224,204,0.6)]">We&apos;re Here to Help</em></>
+            )}
+          </h1>
+          <p className="text-[15px] leading-[1.9] text-[rgba(234,224,204,0.6)] font-light">
+            {pageSubtitle}
+          </p>
+        </div>
+      </header>
 
-      {/* 2. 主内容区 — 2列布局（桌面端：表单左、信息右） */}
-      <div className="grid gap-12 lg:grid-cols-2">
+      {/* 主内容区 — 表单 + 信息 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* 左列：联系表单 */}
-        <section aria-labelledby="contact-form-title">
-          <h2 id="contact-form-title" className="sr-only">
+        <section
+          aria-labelledby="contact-form-title"
+          className="px-8 lg:px-[60px] py-12"
+          style={{ borderRight: '1px solid rgba(234,224,204,0.08)', borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+        >
+          <h2 id="contact-form-title" className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-8">
             {locale === 'zh' ? '咨询表单' : locale === 'ja' ? 'お問い合わせフォーム' : 'Contact Form'}
           </h2>
           <ContactForm locale={locale} />
         </section>
 
         {/* 右列：联系信息 + 社交链接 */}
-        <aside className="space-y-8">
+        <aside className="px-8 lg:px-[60px] py-12 space-y-10" style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}>
           {/* 联系信息 */}
           <section aria-labelledby="contact-info-title">
-            <h2
-              id="contact-info-title"
-              className="text-xl font-bold text-white mb-4"
-            >
+            <h2 id="contact-info-title" className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-8">
               {contactInfoTitle}
             </h2>
-            <dl className="space-y-4">
-              {/* 地址 */}
-              <div className="flex items-start gap-3">
+            <dl className="space-y-6">
+              <div className="flex items-start gap-4">
                 <dt className="sr-only">{addressLabel}</dt>
-                <span className="mt-0.5 text-amber-400" aria-hidden="true">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="text-[#A07850] mt-0.5 flex-shrink-0" aria-hidden="true">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </span>
                 <dd>
-                  <p className="text-sm font-medium text-stone-300">{addressLabel}</p>
-                  <p className="text-sm text-stone-400">{siteConfig.contact.address[locale]}</p>
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-[rgba(234,224,204,0.4)] mb-1">{addressLabel}</p>
+                  <p className="text-[14px] text-[rgba(234,224,204,0.7)]">{siteConfig.contact.address[locale]}</p>
                 </dd>
               </div>
-
-              {/* 电话 */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-4">
                 <dt className="sr-only">{phoneLabel}</dt>
-                <span className="mt-0.5 text-amber-400" aria-hidden="true">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="text-[#A07850] mt-0.5 flex-shrink-0" aria-hidden="true">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </span>
                 <dd>
-                  <p className="text-sm font-medium text-stone-300">{phoneLabel}</p>
-                  <a
-                    href={`tel:${siteConfig.contact.phone}`}
-                    className="text-sm text-amber-400 hover:text-amber-300 underline"
-                  >
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-[rgba(234,224,204,0.4)] mb-1">{phoneLabel}</p>
+                  <a href={`tel:${siteConfig.contact.phone}`} className="text-[14px] text-[#A07850] hover:text-[#C49A6A] transition-colors">
                     {siteConfig.contact.phone}
                   </a>
                 </dd>
               </div>
-
-              {/* 邮箱 */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-4">
                 <dt className="sr-only">{emailLabel}</dt>
-                <span className="mt-0.5 text-amber-400" aria-hidden="true">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="text-[#A07850] mt-0.5 flex-shrink-0" aria-hidden="true">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </span>
                 <dd>
-                  <p className="text-sm font-medium text-stone-300">{emailLabel}</p>
-                  <a
-                    href={`mailto:${siteConfig.contact.email}`}
-                    className="text-sm text-amber-400 hover:text-amber-300 underline"
-                  >
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-[rgba(234,224,204,0.4)] mb-1">{emailLabel}</p>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="text-[14px] text-[#A07850] hover:text-[#C49A6A] transition-colors">
                     {siteConfig.contact.email}
                   </a>
                 </dd>
               </div>
-
-              {/* 客服时间 */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-4">
                 <dt className="sr-only">{hoursLabel}</dt>
-                <span className="mt-0.5 text-amber-400" aria-hidden="true">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <span className="text-[#A07850] mt-0.5 flex-shrink-0" aria-hidden="true">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </span>
                 <dd>
-                  <p className="text-sm font-medium text-stone-300">{hoursLabel}</p>
-                  <p className="text-sm text-stone-400">{siteConfig.contact.serviceHours[locale]}</p>
+                  <p className="text-[11px] tracking-[0.15em] uppercase text-[rgba(234,224,204,0.4)] mb-1">{hoursLabel}</p>
+                  <p className="text-[14px] text-[rgba(234,224,204,0.7)]">{siteConfig.contact.serviceHours[locale]}</p>
                 </dd>
               </div>
             </dl>
@@ -320,10 +318,7 @@ export default async function ContactPage({
 
           {/* 社交媒体链接 */}
           <section aria-labelledby="social-links-title">
-            <h2
-              id="social-links-title"
-              className="text-xl font-bold text-white mb-4"
-            >
+            <h2 id="social-links-title" className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-6">
               {socialTitle}
             </h2>
             <div className="flex flex-wrap gap-3">
@@ -333,7 +328,8 @@ export default async function ContactPage({
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-sm text-stone-300 transition-colors hover:border-amber-500/50 hover:bg-white/5 hover:text-amber-400"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 text-[12px] tracking-[0.1em] text-[rgba(234,224,204,0.5)] hover:text-[#A07850] transition-colors duration-300"
+                  style={{ border: '1px solid rgba(234,224,204,0.08)' }}
                   aria-label={social.platform}
                 >
                   <SocialIcon icon={social.icon} />
@@ -345,62 +341,63 @@ export default async function ContactPage({
         </aside>
       </div>
 
-      {/* 3. 嵌入 Google Map（lazy iframe） */}
-      <AnimatedSection className="mt-16" aria-labelledby="map-title">
-        <h2
-          id="map-title"
-          className="text-2xl font-bold text-white mb-6"
-        >
-          {mapTitle}
-        </h2>
-        <div className="rounded-xl overflow-hidden shadow-sm border border-white/10">
+      {/* Google Map */}
+      <section
+        className="px-8 lg:px-[60px] py-12"
+        aria-labelledby="map-title"
+        style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <div className="flex items-center gap-5 mb-8">
+          <h2 id="map-title" className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] flex-shrink-0">
+            {mapTitle}
+          </h2>
+          <span className="flex-1 h-px bg-[rgba(234,224,204,0.08)]" />
+        </div>
+        <div className="overflow-hidden" style={{ border: '1px solid rgba(234,224,204,0.08)' }}>
           <iframe
-            title={
-              locale === 'zh'
-                ? '岳温泉零碳宠物营地位置地图'
-                : locale === 'ja'
-                  ? '岳温泉ゼロカーボンペットキャンプの地図'
-                  : 'Dake Onsen Zero-Carbon Pet Camp Location Map'
-            }
+            title={locale === 'zh' ? '岳温泉零碳宠物营地位置地图' : locale === 'ja' ? '岳温泉ゼロカーボンペットキャンプの地図' : 'Dake Onsen Location Map'}
             src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}&q=37.5905,140.3489&zoom=14`}
             width="100%"
             height="400"
-            style={{ border: 0 }}
+            style={{ border: 0, display: 'block' }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="w-full"
           />
         </div>
-      </AnimatedSection>
+      </section>
 
-      {/* 4. 交通到达方式 */}
-      <AnimatedSection className="mt-16" aria-labelledby="transport-title">
-        <h2
-          id="transport-title"
-          className="text-2xl font-bold text-white mb-6"
-        >
-          {transportTitle}
-        </h2>
-        <StaggerContainer staggerDelay={0.1} className="grid gap-4 sm:grid-cols-2">
+      {/* 交通到达方式 */}
+      <section
+        className="px-8 lg:px-[60px] py-12"
+        aria-labelledby="transport-title"
+        style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <div className="flex items-center gap-5 mb-8">
+          <h2 id="transport-title" className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] flex-shrink-0">
+            {transportTitle}
+          </h2>
+          <span className="flex-1 h-px bg-[rgba(234,224,204,0.08)]" />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
           {transportItems.map((item, index) => (
-            <StaggerItem key={index}>
-              <div className="rounded-lg border border-white/10 bg-[#141414] p-4">
-                <p className="font-medium text-white mb-1">{item.mode}</p>
-                <p className="text-sm text-stone-400">{item.detail}</p>
-              </div>
-            </StaggerItem>
+            <div key={index} className="p-5" style={{ border: '1px solid rgba(234,224,204,0.08)', background: '#211D14' }}>
+              <p className="text-[13px] font-medium text-[#EAE0CC] mb-2">{item.mode}</p>
+              <p className="text-[13px] leading-[1.7] text-[rgba(234,224,204,0.5)]">{item.detail}</p>
+            </div>
           ))}
-        </StaggerContainer>
-        <div className="mt-6">
+        </div>
+        <div className="mt-8">
           <Link
             href={`/${locale}/explore`}
-            className="inline-flex items-center text-sm font-medium text-amber-400 hover:text-amber-300 transition-colors"
+            className="inline-flex items-center text-[12px] tracking-[0.15em] text-[rgba(234,224,204,0.5)] hover:text-[#A07850] transition-colors duration-300"
+            style={{ borderBottom: '1px solid rgba(160,120,80,0.3)', paddingBottom: '2px' }}
           >
             {exploreMoreLabel}
           </Link>
         </div>
-      </AnimatedSection>
+      </section>
     </div>
   )
 }
+

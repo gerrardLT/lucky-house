@@ -1,6 +1,7 @@
 'use client'
 
 import * as SelectPrimitive from '@radix-ui/react-select'
+import type { Locale } from '@/types'
 
 export interface SelectOption {
   value: string | number
@@ -13,6 +14,7 @@ export interface SelectProps {
   options: SelectOption[]
   onChange: (value: string | number) => void
   placeholder?: string
+  locale?: Locale
   className?: string
   disabled?: boolean
   'aria-invalid'?: boolean
@@ -21,12 +23,20 @@ export interface SelectProps {
   embedded?: boolean
 }
 
+/** 各语言默认占位文案 */
+const PLACEHOLDER_MAP: Record<Locale, string> = {
+  zh: '请选择',
+  ja: '選択してください',
+  en: 'Please select',
+}
+
 export function Select({
   id,
   value,
   options,
   onChange,
-  placeholder = '请选择',
+  placeholder,
+  locale = 'zh',
   className = '',
   disabled = false,
   'aria-invalid': ariaInvalid,
@@ -61,7 +71,7 @@ export function Select({
           aria-invalid={ariaInvalid}
           aria-describedby={ariaDescribedby}
         >
-          <SelectPrimitive.Value placeholder={placeholder} />
+          <SelectPrimitive.Value placeholder={placeholder || PLACEHOLDER_MAP[locale]} />
           <SelectPrimitive.Icon asChild>
             <svg
               className="h-4 w-4 text-white/60 shrink-0"

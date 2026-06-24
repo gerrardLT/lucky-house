@@ -1,16 +1,15 @@
-'use client'
-
 // src/app/[locale]/booking/success/page.tsx
-// 预约成功页 — Client Component
-// 展示确认编号、后续流程说明、客服联系方式
+// 预约成功页 — Server Component
+// 展示确认编号、后续流程说明、客服联系方式（从 site-config 读取）
 // 使用 router.replace 方式到达（由 BookingForm 提交成功后替换历史记录）
 
-import { Suspense } from 'react'
-import { useParams, useSearchParams } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { isValidLocale } from '@/lib/i18n/config'
+import { getSiteConfig } from '@/lib/cms'
 import type { Locale } from '@/lib/i18n/config'
 
-/** 多语言文案 */
+/** 多语言文案（不含联系方式，联系方式统一从 site-config 获取） */
 const CONTENT: Record<Locale, {
   title: string
   subtitle: string
@@ -18,9 +17,9 @@ const CONTENT: Record<Locale, {
   nextStepsTitle: string
   nextSteps: string[]
   contactTitle: string
-  contactEmail: string
-  contactPhone: string
-  serviceHours: string
+  contactEmailLabel: string
+  contactPhoneLabel: string
+  serviceHoursLabel: string
   backToHome: string
 }> = {
   zh: {
@@ -34,9 +33,9 @@ const CONTENT: Record<Locale, {
       '如有任何变更需求，请随时联系我们的客服团队。',
     ],
     contactTitle: '客服联系方式',
-    contactEmail: '邮箱：info@dake-pet-camp.jp',
-    contactPhone: '电话：+81-243-XX-XXXX',
-    serviceHours: '服务时间：每日 9:00 - 18:00（日本标准时间）',
+    contactEmailLabel: '邮箱',
+    contactPhoneLabel: '电话',
+    serviceHoursLabel: '服务时间',
     backToHome: '返回首页',
   },
   ja: {
@@ -50,9 +49,9 @@ const CONTENT: Record<Locale, {
       '変更がございましたら、お気軽にカスタマーサービスまでご連絡ください。',
     ],
     contactTitle: 'カスタマーサービス',
-    contactEmail: 'メール：info@dake-pet-camp.jp',
-    contactPhone: '電話：+81-243-XX-XXXX',
-    serviceHours: '受付時間：毎日 9:00〜18:00（日本標準時間）',
+    contactEmailLabel: 'メール',
+    contactPhoneLabel: '電話',
+    serviceHoursLabel: '受付時間',
     backToHome: 'トップページへ戻る',
   },
   en: {
@@ -63,122 +62,177 @@ const CONTENT: Record<Locale, {
     nextSteps: [
       'Our team will reach out to you within 24 hours via your preferred contact method.',
       'A confirmation email has been sent to the email address you provided.',
-      'If you need to make any changes, please don\'t hesitate to contact our customer service team.',
+      "If you need to make any changes, please don't hesitate to contact our customer service team.",
     ],
     contactTitle: 'Customer Service',
-    contactEmail: 'Email: info@dake-pet-camp.jp',
-    contactPhone: 'Phone: +81-243-XX-XXXX',
-    serviceHours: 'Hours: Daily 9:00 AM - 6:00 PM (JST)',
+    contactEmailLabel: 'Email',
+    contactPhoneLabel: 'Phone',
+    serviceHoursLabel: 'Hours',
     backToHome: 'Back to Home',
   },
 }
 
-/** 预约成功页内容（使用 useSearchParams） */
-function BookingSuccessContent() {
-  const params = useParams()
-  const searchParams = useSearchParams()
+/** 预约成功页面 — Server Component */
+export default async function BookingSuccessPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ id?: string }>
+}) {
+  const { locale } = await params
+  const { id } = await searchParams
 
-  const locale = (params.locale as Locale) || 'zh'
-  const confirmationId = searchParams.get('id') || '—'
+  if (!isValidLocale(locale)) {
+    notFound()
+  }
 
-  const content = CONTENT[locale] || CONTENT.zh
+  const typedLocale = locale as Locale
+  const confirmationId = id || '—'
+  const content = CONTENT[typedLocale]
+
+  // 从 site-config 读取统一的联系信息
+  const siteConfig = await getSiteConfig()
+  const { email, phone, serviceHours } = siteConfig.contact
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 成功图标 */}
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-900/20 mb-4">
-          <svg
-            className="w-8 h-8 text-amber-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      <div className="max-w-2xl mx-auto px-8 py-16 lg:py-24">
+        {/* 成功图标 */}
+        <div className="text-center mb-10">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5"
+            style={{ background: 'rgba(160,120,80,0.12)', border: '1px solid rgba(160,120,80,0.25)' }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+            <svg
+              className="w-8 h-8"
+              style={{ color: '#A07850' }}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+  
+          <h1
+            className="font-serif font-normal text-[#EAE0CC]"
+            style={{ fontSize: 'clamp(24px,3.5vw,40px)' }}
+          >
+            {content.title}
+          </h1>
+          <p className="mt-3 text-sm" style={{ color: 'rgba(234,224,204,0.6)' }}>
+            {content.subtitle}
+          </p>
         </div>
-
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">
-          {content.title}
-        </h1>
-        <p className="mt-2 text-stone-400">
-          {content.subtitle}
-        </p>
-      </div>
-
-      {/* 确认编号 */}
-      <div className="bg-[#141414] border border-amber-700/50 rounded-xl p-6 text-center mb-8">
-        <p className="text-sm text-amber-400 font-medium mb-1">
-          {content.confirmationLabel}
-        </p>
-        <p className="text-2xl font-bold text-white font-mono tracking-wider">
-          {confirmationId}
-        </p>
-      </div>
-
-      {/* 后续流程说明 */}
-      <div className="bg-[#141414] border border-white/10 rounded-xl p-6 mb-8">
-        <h2 className="text-lg font-semibold text-white mb-4">
-          {content.nextStepsTitle}
-        </h2>
-        <ol className="space-y-3">
-          {content.nextSteps.map((step, index) => (
-            <li key={index} className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-white/5 text-stone-300 text-sm font-medium flex items-center justify-center">
-                {index + 1}
-              </span>
-              <span className="text-stone-300 text-sm leading-relaxed">
-                {step}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* 客服联系方式 */}
-      <div className="bg-[#141414] border border-white/10 rounded-xl p-6 mb-8">
-        <h2 className="text-lg font-semibold text-white mb-3">
-          {content.contactTitle}
-        </h2>
-        <div className="space-y-2 text-sm text-stone-300">
-          <p>{content.contactEmail}</p>
-          <p>{content.contactPhone}</p>
-          <p>{content.serviceHours}</p>
-        </div>
-      </div>
-
-      {/* 返回首页按钮 */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/`}
-          className="inline-flex items-center justify-center rounded-lg bg-amber-600 px-6 py-3 text-sm font-medium text-white hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 transition-colors"
+  
+        {/* 确认编号 */}
+        <div
+          className="p-6 text-center mb-6"
+          style={{
+            background: '#211D14',
+            border: '1px solid rgba(160,120,80,0.3)',
+          }}
         >
-          {content.backToHome}
-        </Link>
+          <p
+            className="text-[10px] tracking-[0.2em] uppercase mb-2 text-[#A07850]"
+          >
+            {content.confirmationLabel}
+          </p>
+          <p className="font-serif text-3xl tracking-wider text-[#EAE0CC] font-normal">
+            {confirmationId}
+          </p>
+        </div>
+  
+        {/* 后续流程说明 */}
+        <div
+          className="p-6 mb-4"
+          style={{
+            background: '#211D14',
+            border: '1px solid rgba(234,224,204,0.08)',
+          }}
+        >
+          <h2
+            className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-5"
+          >
+            {content.nextStepsTitle}
+          </h2>
+          <ol className="space-y-4">
+            {content.nextSteps.map((step, index) => (
+              <li key={index} className="flex gap-4">
+                <span
+                  className="flex-shrink-0 font-serif text-lg leading-none"
+                  style={{ color: '#A07850' }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span
+                  className="text-sm leading-relaxed"
+                  style={{ color: 'rgba(234,224,204,0.7)' }}
+                >
+                  {step}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+  
+        {/* 客服联系方式 */}
+        <div
+          className="p-6 mb-8"
+          style={{
+            background: '#211D14',
+            border: '1px solid rgba(234,224,204,0.08)',
+          }}
+        >
+          <h2
+            className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-5"
+          >
+            {content.contactTitle}
+          </h2>
+          <div className="space-y-3 text-sm">
+            <p style={{ color: 'rgba(234,224,204,0.6)' }}>
+              <span style={{ color: 'rgba(234,224,204,0.4)' }}>{content.contactEmailLabel}  </span>
+              <a
+                href={`mailto:${email}`}
+                className="text-[#A07850] hover:text-[#C49A6A] transition-colors"
+              >
+                {email}
+              </a>
+            </p>
+            <p style={{ color: 'rgba(234,224,204,0.6)' }}>
+              <span style={{ color: 'rgba(234,224,204,0.4)' }}>{content.contactPhoneLabel}  </span>
+              <a
+                href={`tel:${phone}`}
+                className="text-[#A07850] hover:text-[#C49A6A] transition-colors"
+              >
+                {phone}
+              </a>
+            </p>
+            <p style={{ color: 'rgba(234,224,204,0.6)' }}>
+              <span style={{ color: 'rgba(234,224,204,0.4)' }}>{content.serviceHoursLabel}  </span>
+              {serviceHours[typedLocale]}
+            </p>
+          </div>
+        </div>
+  
+        {/* 返回首页 */}
+        <div className="text-center">
+          <Link
+            href={`/${typedLocale}/`}
+            className="inline-flex items-center justify-center px-8 py-3 text-sm tracking-[0.1em] uppercase font-medium transition-colors"
+            style={{ background: '#A07850', color: '#19160F' }}
+          >
+            {content.backToHome}
+          </Link>
+        </div>
       </div>
     </div>
-  )
-}
-
-/** 预约成功页面（包裹 Suspense 以支持 useSearchParams） */
-export default function BookingSuccessPage() {
-  return (
-    <Suspense fallback={
-      <div className="mx-auto max-w-2xl px-4 py-12 text-center">
-        <div className="animate-pulse">
-          <div className="w-16 h-16 rounded-full bg-stone-700 mx-auto mb-4" />
-          <div className="h-8 bg-stone-700 rounded w-64 mx-auto mb-2" />
-          <div className="h-4 bg-stone-700 rounded w-96 mx-auto" />
-        </div>
-      </div>
-    }>
-      <BookingSuccessContent />
-    </Suspense>
   )
 }

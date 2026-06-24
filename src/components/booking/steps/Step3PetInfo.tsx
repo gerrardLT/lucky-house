@@ -141,6 +141,7 @@ export function Step3PetInfo({ data, errors, locale, onChange }: Step3Props) {
           </label>
           <Select
             id="petInfoCount"
+            locale={locale}
             value={data.count ?? 1}
             options={[1, 2, 3].map((n) => ({ value: n, label: String(n) }))}
             onChange={(v) => onChange('count', Number(v))}
@@ -197,6 +198,7 @@ export function Step3PetInfo({ data, errors, locale, onChange }: Step3Props) {
           </label>
           <Select
             id="vaccineStatus"
+            locale={locale}
             value={data.vaccineStatus || ''}
             options={[
               { value: '', label: '--' },
@@ -216,6 +218,7 @@ export function Step3PetInfo({ data, errors, locale, onChange }: Step3Props) {
           </label>
           <Select
             id="rabiesStatus"
+            locale={locale}
             value={data.rabiesStatus || ''}
             options={[
               { value: '', label: '--' },

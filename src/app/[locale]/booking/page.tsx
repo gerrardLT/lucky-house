@@ -3,6 +3,7 @@
 // 从 CMS 获取宠物入住规则 FAQ 数据，传递给 BookingForm 组件
 
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { getFAQs } from '@/lib/cms'
 import { isValidLocale, BCP47_MAP, BASE_URL } from '@/lib/i18n/config'
@@ -89,19 +90,45 @@ export default async function BookingPage({
         : 'Fill out the form below to submit your booking request. We will contact you within 24 hours to confirm.'
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 页面标题 */}
-      <header className="mb-10 text-center">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl">
-          {pageTitle}
-        </h1>
-        <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-          {pageSubtitle}
-        </p>
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页面标题 */}
+      <header className="px-8 lg:px-[60px] pt-[60px] pb-[40px] border-b border-[rgba(234,224,204,0.08)]">
+        <div className="text-[11px] tracking-[0.35em] uppercase text-[#A07850] mb-5">
+          {typedLocale === 'zh' ? 'Reservations · 预约咨询' : typedLocale === 'ja' ? 'ご予約 · Reservations' : 'Reservations'}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+          <div>
+            <h1 className="font-serif text-[clamp(32px,4.5vw,60px)] font-normal leading-[1.1] text-[#EAE0CC]">
+              {typedLocale === 'zh' ? (
+                <>预约咨询<br /><em className="italic text-[rgba(234,224,204,0.6)]">五步完成申请</em></>
+              ) : typedLocale === 'ja' ? (
+                <>ご予約<br /><em className="italic text-[rgba(234,224,204,0.6)]">五ステップでシンプルに</em></>
+              ) : (
+                <>Book Your Stay<br /><em className="italic text-[rgba(234,224,204,0.6)]">Five Simple Steps</em></>
+              )}
+            </h1>
+          </div>
+          <div>
+            <p className="text-[15px] leading-[1.9] text-[rgba(234,224,204,0.6)] font-light">
+              {pageSubtitle}
+            </p>
+          </div>
+        </div>
       </header>
 
-      {/* 预约表单 */}
-      <BookingForm locale={typedLocale} faqRules={faqRules} />
+      {/* 预约表单区域 */}
+      <div className="px-8 lg:px-[60px] py-12 lg:py-16">
+        <Suspense fallback={
+          <div className="w-full max-w-2xl mx-auto">
+            <div className="animate-pulse space-y-4">
+              <div className="h-2 bg-[rgba(234,224,204,0.08)] rounded w-full" />
+              <div className="h-64 rounded" style={{ background: '#211D14', border: '1px solid rgba(234,224,204,0.08)' }} />
+            </div>
+          </div>
+        }>
+          <BookingForm locale={typedLocale} faqRules={faqRules} />
+        </Suspense>
+      </div>
     </div>
   )
 }

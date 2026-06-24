@@ -108,6 +108,7 @@ export function Step1DateGuests({ data, errors, locale, onChange }: Step1Props) 
           </label>
           <Select
             id="adults"
+            locale={locale}
             value={data.adults ?? 1}
             options={[1, 2, 3, 4, 5, 6].map((n) => ({ value: n, label: String(n) }))}
             onChange={(v) => onChange('adults', Number(v))}
@@ -126,6 +127,7 @@ export function Step1DateGuests({ data, errors, locale, onChange }: Step1Props) 
           </label>
           <Select
             id="children"
+            locale={locale}
             value={data.children ?? 0}
             options={[0, 1, 2, 3, 4].map((n) => ({ value: n, label: String(n) }))}
             onChange={(v) => onChange('children', Number(v))}
@@ -144,6 +146,7 @@ export function Step1DateGuests({ data, errors, locale, onChange }: Step1Props) 
           </label>
           <Select
             id="rooms"
+            locale={locale}
             value={data.rooms ?? 1}
             options={[1, 2, 3].map((n) => ({ value: n, label: String(n) }))}
             onChange={(v) => onChange('rooms', Number(v))}
@@ -192,6 +195,7 @@ export function Step1DateGuests({ data, errors, locale, onChange }: Step1Props) 
           </label>
           <Select
             id="petCount"
+            locale={locale}
             value={data.petCount ?? 1}
             options={[1, 2, 3].map((n) => ({ value: n, label: String(n) }))}
             onChange={(v) => onChange('petCount', Number(v))}

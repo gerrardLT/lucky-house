@@ -83,23 +83,76 @@ export default async function ActivitiesPage({
       ? '同じ想いを持つペット連れファミリーと、多彩なコミュニティイベントをお楽しみください'
       : 'Join like-minded pet families and explore our vibrant community activities'
 
+  const kicker = locale === 'zh'
+    ? 'Activities · 活动社群'
+    : locale === 'ja'
+      ? 'イベントガイド'
+      : 'Community Events'
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 页面标题 / Hero 区域 */}
-      <header className="mb-12 text-center">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-          {pageTitle}
-        </h1>
-        <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-          {pageSubtitle}
-        </p>
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页头 */}
+      <header
+        className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px]"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] items-end">
+          <div>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+              {kicker}
+            </p>
+            <h1
+              className="font-serif font-normal leading-[1.1] text-[#EAE0CC]"
+              style={{ fontSize: 'clamp(32px,4.5vw,60px)' }}
+            >
+              {pageTitle}
+              <br />
+              <em className="italic" style={{ color: 'rgba(234,224,204,0.55)' }}>
+                {locale === 'zh' ? '共同的截距点滴' : locale === 'ja' ? 'ともにあゆみの時間' : 'Shared Moments'}
+              </em>
+            </h1>
+          </div>
+          <div className="lg:pb-1">
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(234,224,204,0.6)' }}>
+              {pageSubtitle}
+            </p>
+            <div
+              className="flex gap-8 mt-6 pt-6"
+              style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+            >
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">6</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '近期活动' : locale === 'ja' ? 'イベント' : 'Events'}
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">4</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '活动类型' : locale === 'ja' ? 'カテゴリー' : 'Categories'}
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">12</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '每年场次' : locale === 'ja' ? '年間回数' : 'Times / Year'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* 活动卡片网格 + 筛选 */}
-      <ActivitiesGrid activities={activities} locale={locale as Locale} />
+      <section className="px-8 lg:px-[60px] py-12 lg:py-16">
+        <ActivitiesGrid activities={activities} locale={locale as Locale} />
+      </section>
 
       {/* 会员兴趣标签登记 */}
-      <section className="mt-16">
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+      >
         <InterestTagsForm locale={locale as Locale} />
       </section>
     </div>

@@ -138,7 +138,7 @@ export function BookingWidget({ visible, locale, embedded = false }: BookingWidg
       children: String(children),
       hasPet: String(hasPet),
     })
-    router.push(`/${locale}/booking?${params.toString()}`)
+    router.push(`/${locale}/stay?${params.toString()}`)
   }
 
   // 今天的 ISO 日期字符串（用于 min 属性）

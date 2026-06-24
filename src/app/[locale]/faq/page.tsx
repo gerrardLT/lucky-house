@@ -115,19 +115,40 @@ export default async function FAQPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        {/* 页面标题 */}
-        <header className="mb-10 text-center">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-            {pageTitle}
-          </h1>
-          <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-            {pageSubtitle}
-          </p>
+      <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+        {/* Editorial 页头 */}
+        <header
+          className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px]"
+          style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] items-end">
+            <div>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+                {typedLocale === 'zh' ? 'FAQ · 常见问题' : typedLocale === 'ja' ? 'よくある質問' : 'FAQ'}
+              </p>
+              <h1
+                className="font-serif font-normal leading-[1.1] text-[#EAE0CC]"
+                style={{ fontSize: 'clamp(32px,4.5vw,60px)' }}
+              >
+                {pageTitle}
+                <br />
+                <em className="italic" style={{ color: 'rgba(234,224,204,0.55)' }}>
+                  {typedLocale === 'zh' ? '快速找到答案' : typedLocale === 'ja' ? '答えを見つける' : 'Find Your Answers'}
+                </em>
+              </h1>
+            </div>
+            <div className="lg:pb-1">
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(234,224,204,0.6)' }}>
+                {pageSubtitle}
+              </p>
+            </div>
+          </div>
         </header>
 
         {/* FAQ 搜索 + 筛选 + 手风琴 */}
-        <FAQSection faqs={faqs} locale={typedLocale} />
+        <div className="px-8 lg:px-[60px] py-12 lg:py-16">
+          <FAQSection faqs={faqs} locale={typedLocale} />
+        </div>
       </div>
     </>
   )

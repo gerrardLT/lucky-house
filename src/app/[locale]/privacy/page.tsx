@@ -297,28 +297,60 @@ export default async function PrivacyPage({
   const content = getPrivacyContent(locale as Locale)
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl">
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页头 */}
+      <header
+        className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px]"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+          {locale === 'zh' ? 'Legal · 隐私政策' : locale === 'ja' ? 'プライバシー' : 'Privacy Policy'}
+        </p>
+        <h1
+          className="font-serif font-normal leading-[1.1] text-[#EAE0CC] mb-3"
+          style={{ fontSize: 'clamp(28px,4vw,52px)' }}
+        >
           {content.title}
         </h1>
-        <p className="mt-2 text-sm text-stone-400">{content.lastUpdated}</p>
-        <p className="mt-4 rounded-md bg-amber-900/20 border border-amber-700/30 px-4 py-3 text-sm text-amber-400">
-          {content.placeholder}
+        <p className="text-[11px] tracking-[0.1em]" style={{ color: 'rgba(234,224,204,0.35)' }}>
+          {content.lastUpdated}
         </p>
+        <div
+          className="mt-5 px-4 py-3 text-sm"
+          style={{
+            background: 'rgba(160,120,80,0.08)',
+            border: '1px solid rgba(160,120,80,0.2)',
+            color: '#A07850',
+          }}
+        >
+          {content.placeholder}
+        </div>
       </header>
 
-      <div className="space-y-8">
-        {content.sections.map((section, index) => (
-          <section key={index}>
-            <h2 className="text-xl font-semibold text-white mb-3">
-              {section.heading}
-            </h2>
-            <div className="text-stone-400 leading-relaxed whitespace-pre-line">
-              {section.body}
-            </div>
-          </section>
-        ))}
+      {/* 正文 */}
+      <div className="px-8 lg:px-[60px] py-12 lg:py-16 max-w-4xl">
+        <div className="space-y-10">
+          {content.sections.map((section, index) => (
+            <section
+              key={index}
+              className="pb-10"
+              style={{ borderBottom: '1px solid rgba(234,224,204,0.06)' }}
+            >
+              <h2
+                className="font-serif font-normal text-[#EAE0CC] mb-4"
+                style={{ fontSize: 'clamp(16px,2vw,22px)' }}
+              >
+                {section.heading}
+              </h2>
+              <div
+                className="text-sm leading-[1.9] whitespace-pre-line"
+                style={{ color: 'rgba(234,224,204,0.65)' }}
+              >
+                {section.body}
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   )

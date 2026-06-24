@@ -5,8 +5,8 @@ import Link from 'next/link'
 import type { Locale, SiteConfig } from '@/types'
 import { createTranslator } from '@/lib/i18n/translate'
 import { getSiteConfig } from '@/lib/cms'
-import { Checkbox } from '@/components/ui'
 import { label as labelTypo } from '@/lib/i18n/locale-typo'
+import { FooterNewsletterForm } from './FooterNewsletterForm'
 
 interface FooterProps {
   locale: Locale
@@ -116,6 +116,7 @@ export default async function Footer({ locale }: FooterProps) {
     { key: 'gallery', href: `/${locale}/gallery` },
     { key: 'faq', href: `/${locale}/faq` },
     { key: 'booking', href: `/${locale}/booking` },
+    { key: 'contact', href: `/${locale}/contact` },
   ]
 
   // Legal links
@@ -191,42 +192,7 @@ export default async function Footer({ locale }: FooterProps) {
             <h3 className={`text-sm font-semibold text-white ${labelTypo(locale)}`}>
               {t('footer.newsletter')}
             </h3>
-            <form
-              className="space-y-3"
-              action="#"
-              aria-label={t('footer.newsletter')}
-            >
-              <div className="flex">
-                <label htmlFor="footer-email" className="sr-only">
-                  {t('footer.newsletterPlaceholder')}
-                </label>
-                <input
-                  id="footer-email"
-                  type="email"
-                  placeholder={t('footer.newsletterPlaceholder')}
-                  className="w-full rounded-l-md border border-stone-600 bg-stone-800 px-3 py-2 text-sm text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="rounded-r-md bg-amber-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-500"
-                >
-                  {t('buttons.subscribe')}
-                </button>
-              </div>
-              <div className="flex items-start gap-2">
-                <Checkbox
-                  id="footer-newsletter-consent"
-                  defaultChecked={false}
-                />
-                <label
-                  htmlFor="footer-newsletter-consent"
-                  className="text-xs leading-tight text-stone-400"
-                >
-                  {t('footer.newsletterConsent')}
-                </label>
-              </div>
-            </form>
+            <FooterNewsletterForm locale={locale} />
           </div>
         </div>
 

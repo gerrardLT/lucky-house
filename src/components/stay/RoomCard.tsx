@@ -12,8 +12,8 @@ import { subtitle as subtitleTypo, label as labelTypo, watermark as watermarkTyp
 export interface RoomCardProps {
   room: RoomType
   locale: Locale
-  /** 布局变体：standard(默认) | featured-left(图左文右大图) | featured-right(文左图右大图) | banner(全宽横幅) */
-  layout?: 'standard' | 'featured-left' | 'featured-right' | 'banner'
+  /** 布局变体：standard(默认) | featured-left | featured-right | banner | editorial-left | editorial-right */
+  layout?: 'standard' | 'featured-left' | 'featured-right' | 'banner' | 'editorial-left' | 'editorial-right'
 }
 
 /** 房型类别对应的 Badge variant 和文案 */
@@ -103,6 +103,40 @@ const COMING_SOON_TEXT: Record<Locale, string> = {
   en: 'Coming Soon',
 }
 
+/** Editorial 布局 — 分类标签 */
+const EDITORIAL_CATEGORY_LABEL: Record<string, Record<Locale, string>> = {
+  standard: { zh: 'Standard · 标准客房', ja: 'スタンダード', en: 'Standard' },
+  'pet-friendly': { zh: 'Pet-Friendly · 宠物友好', ja: 'ペットフレンドリー', en: 'Pet-Friendly' },
+  villa: { zh: 'Villa · 营地别墅', ja: 'キャンプヴィラ', en: 'Campsite Villa' },
+}
+
+/** Editorial 布局 — 渐变背景（按房型类别） */
+const EDITORIAL_GRADIENT: Record<string, string> = {
+  standard: 'from-[#2E2616] via-[#3C3020] to-[#1A1409]',
+  'pet-friendly': 'from-[#1C261A] via-[#243020] to-[#101608]',
+  villa: 'from-[#1E1E12] via-[#262616] to-[#101009]',
+}
+
+/** Editorial 布局 — 规格行标签 */
+const EDITORIAL_SPEC_LABELS: Record<string, Record<Locale, string>> = {
+  area: { zh: '面积', ja: '広さ', en: 'Area' },
+  bed: { zh: '床型', ja: 'ベッドタイプ', en: 'Bed' },
+  guests: { zh: '入住', ja: '宿泊', en: 'Guests' },
+}
+
+/** Editorial 布局 — 价格状态文案 */
+const EDITORIAL_PRICE_TEXT: Record<string, Record<Locale, string>> = {
+  inquiry: { zh: '价格请咨询 · Inquiry', ja: 'お問合せ', en: 'On Inquiry' },
+  coming_soon: { zh: '价格待定 · Coming Soon', ja: '近日公開', en: 'Coming Soon' },
+}
+
+/** Editorial 布局 — CTA文案 */
+const EDITORIAL_CTA: Record<Locale, string> = {
+  zh: '查看详情 ↗',
+  ja: '詳細を見る ↗',
+  en: 'View Details ↗',
+}
+
 /**
  * RoomCard 组件 — "Luxury Suite Showcase" 豪华套房展示
  *
@@ -118,6 +152,134 @@ export function RoomCard({ room, locale, layout = 'standard' }: RoomCardProps) {
   const isComingSoon = room.status === 'coming_soon'
   const isBanner = layout === 'banner'
   const isFeatured = layout === 'featured-left' || layout === 'featured-right'
+
+  /* ===== Editorial-Left/Right 布局：Hoshinoya Editorial 杂志对开风格 ===== */
+  if (layout === 'editorial-left' || layout === 'editorial-right') {
+    const isRight = layout === 'editorial-right'
+    const gradient = EDITORIAL_GRADIENT[room.category] || EDITORIAL_GRADIENT.standard
+    const catLabel = (EDITORIAL_CATEGORY_LABEL[room.category] || {})[locale] || room.category
+    const priceText = (EDITORIAL_PRICE_TEXT[room.priceStatus] || {})[locale] || room.priceStatus
+    const isInquiry = room.priceStatus === 'inquiry'
+    const indexNum = String(room.sortOrder).padStart(2, '0')
+
+    return (
+      <article className="flex flex-col lg:flex-row border-b border-[rgba(234,224,204,0.08)]">
+        {/* 图片面板 */}
+        <div
+          className={`relative w-full lg:w-[55%] min-h-[280px] lg:min-h-[520px] overflow-hidden flex-shrink-0 ${isRight ? 'lg:order-2' : 'lg:order-1'}`}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(160,120,80,0.06),transparent_60%)]" />
+          {mainImage && (
+            <Image
+              src={mainImage.src}
+              alt={mainImage.alt[locale]}
+              fill
+              className="object-cover opacity-25 mix-blend-luminosity"
+              sizes="(max-width: 1024px) 100vw, 55vw"
+            />
+          )}
+          <div className="absolute bottom-5 left-6 text-[10px] tracking-[0.2em] text-[rgba(234,224,204,0.3)] font-light">
+            Concept Render · 概念示意
+          </div>
+          <div className="absolute top-5 right-5 text-[11px] text-[rgba(234,224,204,0.3)] tracking-[0.15em]">
+            {indexNum}
+          </div>
+          {isComingSoon && (
+            <div className="absolute top-5 left-5 text-[9px] tracking-[0.25em] uppercase text-[rgba(234,224,204,0.35)] border border-[rgba(234,224,204,0.1)] px-3 py-1.5 bg-[rgba(25,22,15,0.75)] backdrop-blur-sm">
+              即将开放 · Coming Soon
+            </div>
+          )}
+        </div>
+
+        {/* 内容面板 */}
+        <div
+          className={`flex-1 bg-[#211D14] px-8 py-10 lg:px-12 lg:py-[52px] flex flex-col justify-center ${isComingSoon ? 'opacity-70' : ''} ${isRight ? 'lg:order-1' : 'lg:order-2'}`}
+          style={{
+            borderLeft: !isRight ? '1px solid rgba(234,224,204,0.08)' : undefined,
+            borderRight: isRight ? '1px solid rgba(234,224,204,0.08)' : undefined,
+          }}
+        >
+          <div className="text-[10px] tracking-[0.3em] uppercase text-[#A07850] mb-4">{catLabel}</div>
+          <h3 className="font-serif text-[clamp(22px,2.5vw,36px)] font-normal leading-[1.2] text-[#EAE0CC] mb-1.5">
+            {room.name[locale]}
+          </h3>
+          {locale !== 'en' && (
+            <div className="font-serif italic text-[13px] text-[rgba(234,224,204,0.35)] mb-7">
+              {room.name.en}
+            </div>
+          )}
+          <p className="text-[14px] leading-[1.9] text-[rgba(234,224,204,0.6)] mb-8 line-clamp-3">
+            {room.description[locale]}
+          </p>
+          {/* 规格行 */}
+          <div className="flex border-t border-b border-[rgba(234,224,204,0.08)] mb-7">
+            <div className="flex-1 px-3 py-3.5 border-r border-[rgba(234,224,204,0.08)]">
+              <div className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-1.5">
+                {EDITORIAL_SPEC_LABELS.area[locale]}
+              </div>
+              <div className="text-[13px] text-[#EAE0CC]">{room.area} ㎡</div>
+            </div>
+            <div className="flex-1 px-3 py-3.5 border-r border-[rgba(234,224,204,0.08)]">
+              <div className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-1.5">
+                {EDITORIAL_SPEC_LABELS.bed[locale]}
+              </div>
+              <div className="text-[13px] text-[#EAE0CC] truncate">{room.bedType[locale]}</div>
+            </div>
+            <div className="flex-1 px-3 py-3.5">
+              <div className="text-[9px] tracking-[0.2em] uppercase text-[rgba(234,224,204,0.35)] mb-1.5">
+                {EDITORIAL_SPEC_LABELS.guests[locale]}
+              </div>
+              <div className="text-[13px] text-[#EAE0CC]">
+                {locale === 'zh'
+                  ? `最多 ${room.maxGuests} 位`
+                  : locale === 'ja'
+                    ? `最大 ${room.maxGuests} 名`
+                    : `Up to ${room.maxGuests}`}
+              </div>
+            </div>
+          </div>
+          {/* 价格标签 */}
+          <div className="mb-6">
+            <span
+              className={`text-[10px] tracking-[0.2em] uppercase px-4 py-2 inline-block border ${
+                isInquiry
+                  ? 'border-[rgba(160,120,80,0.3)] text-[#A07850]'
+                  : 'border-[rgba(234,224,204,0.1)] text-[rgba(234,224,204,0.35)]'
+              }`}
+            >
+              {priceText}
+            </span>
+          </div>
+          {/* 标签 */}
+          <div className="flex flex-wrap gap-1.5 mb-7">
+            {room.tags[locale].map((tag) => (
+              <span
+                key={tag}
+                className={`text-[10px] tracking-[0.12em] px-2.5 py-1 border ${
+                  room.isPetFriendly
+                    ? 'border-[rgba(160,120,80,0.25)] text-[#A07850]'
+                    : 'border-[rgba(234,224,204,0.08)] text-[rgba(234,224,204,0.35)]'
+                }`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          {/* CTA */}
+          {!isComingSoon && (
+            <a
+              href={`/${locale}/stay/${room.slug}`}
+              className="inline-flex items-center gap-2.5 text-[12px] tracking-[0.15em] text-[#EAE0CC] no-underline pb-0.5 w-fit hover:text-[#A07850] transition-colors duration-300"
+              style={{ borderBottom: '1px solid #A07850' }}
+            >
+              {EDITORIAL_CTA[locale]}
+            </a>
+          )}
+        </div>
+      </article>
+    )
+  }
 
   /* ===== Banner 布局：全宽横幅，图上文下 ===== */
   if (isBanner) {

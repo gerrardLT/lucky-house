@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Direction C · Kenya Hara White — Luckyhouse Stay</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F8F5EF;--surface:#F2EDE5;--surface-2:#EBE5DA;
+  --text:#1A1614;--text-60:rgba(26,22,20,0.6);--text-35:rgba(26,22,20,0.35);--text-20:rgba(26,22,20,0.2);
+  --accent:#7C6248;--accent-light:#9A7D60;
+  --rule:rgba(26,22,20,0.08);--rule-strong:rgba(26,22,20,0.14);
+  --font-serif:'Cormorant Garamond','Noto Serif SC',serif;
+  --font-sans:'Inter','Noto Serif SC',sans-serif;
+}
+html{background:var(--bg);color:var(--text)}
+body{font-family:var(--font-sans)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;padding:0 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--rule);
+  background:rgba(248,245,239,0.94);backdrop-filter:blur(16px);
+}
+.nav-logo{
+  font-family:var(--font-serif);font-size:16px;font-weight:400;
+  letter-spacing:0.04em;color:var(--text);
+}
+.nav-links{display:flex;gap:36px}
+.nav-link{
+  font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-60);text-decoration:none;transition:color 0.25s;
+}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-cta{
+  font-size:11px;letter-spacing:0.15em;font-weight:500;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:1px;
+  transition:color 0.25s;
+}
+.nav-cta:hover{color:var(--accent-light)}
+
+/* ── PAGE INTRO ── */
+.page-intro{
+  padding:128px 60px 80px;
+  max-width:800px;
+}
+.intro-label{
+  font-size:10px;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--text-35);margin-bottom:28px;
+}
+.intro-title{
+  font-family:var(--font-serif);
+  font-size:clamp(40px,5vw,68px);font-weight:300;
+  letter-spacing:-0.02em;line-height:1.1;color:var(--text);
+  margin-bottom:28px;
+}
+.intro-title em{font-style:italic;color:var(--text-60)}
+.intro-text{
+  font-size:16px;line-height:1.9;color:var(--text-60);font-weight:300;
+  max-width:560px;
+}
+
+/* ── DIVIDER ── */
+.section-divider{
+  margin:0 60px;
+  height:1px;background:var(--rule);
+}
+
+/* ── FILTER ── */
+.filter{
+  padding:0 60px;
+  display:flex;align-items:center;gap:48px;
+  border-bottom:1px solid var(--rule);
+}
+.filter-btn{
+  padding:20px 0;
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-35);cursor:pointer;
+  border-bottom:1px solid transparent;transition:all 0.25s;
+  background:none;border:none;border-bottom-width:1px;
+}
+.filter-btn:hover,.filter-btn.active{color:var(--text);border-bottom-color:var(--accent)}
+.filter-count{
+  display:inline-block;margin-left:6px;
+  font-size:9px;font-weight:400;
+  vertical-align:middle;color:var(--text-20);
+}
+
+/* ── ROOMS GRID ── */
+.rooms-section{padding:80px 60px}
+.rooms-label{
+  font-size:10px;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--text-35);margin-bottom:40px;
+  display:flex;align-items:center;gap:20px;
+}
+.rooms-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+.rooms-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+}
+
+/* ── ROOM CARD ── */
+.room-card{
+  display:flex;flex-direction:column;
+  cursor:pointer;
+}
+.room-card:hover .card-img-inner{transform:scale(1.02)}
+
+/* image */
+.card-img{
+  aspect-ratio:4/3;overflow:hidden;
+  margin-bottom:20px;position:relative;
+}
+.card-img-inner{
+  width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.card-img-inner.standard{
+  background:linear-gradient(145deg,#D8CCB8 0%,#C4B49C 40%,#B8A68A 100%);
+}
+.card-img-inner.pet{
+  background:linear-gradient(145deg,#C4CCB4 0%,#B0BC9C 40%,#A4B08A 100%);
+}
+.card-img-inner.villa{
+  background:linear-gradient(145deg,#C8C4B0 0%,#B8B49C 40%,#ACA888 100%);
+}
+.card-img-render-note{
+  position:absolute;bottom:10px;left:12px;
+  font-size:9px;letter-spacing:0.15em;color:rgba(26,22,20,0.35);
+}
+
+/* pet mark */
+.pet-mark{
+  position:absolute;top:12px;right:12px;
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  padding:4px 8px;background:rgba(248,245,239,0.9);color:var(--accent);
+  border:1px solid rgba(124,98,72,0.2);
+}
+
+/* coming soon overlay */
+.coming-soon-dim{
+  position:absolute;inset:0;background:rgba(248,245,239,0.45);
+  display:flex;align-items:center;justify-content:center;
+}
+.coming-soon-text{
+  font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--text-35);border:1px solid var(--rule);padding:8px 14px;
+  background:rgba(248,245,239,0.9);
+}
+
+/* card content */
+.card-body{padding:0}
+.card-category{
+  font-size:9px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.card-name{
+  font-family:var(--font-serif);font-size:22px;font-weight:400;
+  line-height:1.2;color:var(--text);margin-bottom:4px;
+}
+.card-name-en{
+  font-family:var(--font-serif);font-style:italic;
+  font-size:13px;color:var(--text-35);margin-bottom:14px;
+}
+.card-desc{
+  font-size:13px;line-height:1.8;color:var(--text-60);
+  margin-bottom:20px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+/* specs inline */
+.card-specs{
+  display:flex;gap:0;border-top:1px solid var(--rule);
+  padding-top:16px;margin-bottom:16px;
+}
+.card-spec{
+  flex:1;padding-right:16px;border-right:1px solid var(--rule);margin-right:16px;
+}
+.card-spec:last-child{border-right:none;margin-right:0;padding-right:0}
+.card-spec-key{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-20);margin-bottom:3px}
+.card-spec-val{font-size:12px;color:var(--text-60)}
+
+/* price */
+.card-price{
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-35);
+}
+.card-price.inquiry{color:var(--accent)}
+.card-link{
+  margin-top:14px;display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text-35);text-decoration:none;
+  border-bottom:1px solid var(--rule);padding-bottom:2px;
+  transition:all 0.25s;
+}
+.card-link:hover{color:var(--text);border-bottom-color:var(--text)}
+
+/* ── VILLA SECTION ── */
+.villa-section{padding:0 60px 80px}
+.villa-label{
+  font-size:10px;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--text-35);margin-bottom:40px;
+  display:flex;align-items:center;gap:20px;
+}
+.villa-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+.villa-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+}
+.villa-card{
+  border:1px solid var(--rule);
+}
+.villa-img{
+  aspect-ratio:16/9;overflow:hidden;position:relative;
+}
+.villa-img-inner{
+  width:100%;height:100%;
+  background:linear-gradient(145deg,#C8C4B0 0%,#B8B49C 40%,#ACA888 100%);
+}
+.villa-coming{
+  position:absolute;inset:0;background:rgba(248,245,239,0.6);
+  display:flex;align-items:center;justify-content:center;
+}
+.villa-coming-label{
+  font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--text-35);border:1px solid var(--rule);padding:8px 16px;
+  background:rgba(248,245,239,0.95);
+}
+.villa-body{padding:28px}
+.villa-category{font-size:9px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.villa-name{font-family:var(--font-serif);font-size:24px;font-weight:400;margin-bottom:4px}
+.villa-name-en{font-family:var(--font-serif);font-style:italic;font-size:13px;color:var(--text-35);margin-bottom:16px}
+.villa-desc{font-size:13px;line-height:1.8;color:var(--text-60);margin-bottom:20px}
+.villa-specs{display:flex;gap:24px;border-top:1px solid var(--rule);padding-top:16px}
+.v-spec{flex:1}
+.v-spec-key{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-20);margin-bottom:3px}
+.v-spec-val{font-size:12px;color:var(--text-60)}
+
+/* ── CLOSING QUOTE ── */
+.closing{
+  margin:0 60px 80px;
+  padding:60px;background:var(--surface);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.closing-quote{
+  font-family:var(--font-serif);font-size:clamp(20px,2.5vw,30px);
+  font-weight:300;font-style:italic;
+  line-height:1.6;color:var(--text-60);
+  max-width:600px;margin-bottom:20px;
+}
+.closing-attr{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-20)}
+.closing-cta{
+  margin-top:32px;
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  padding:14px 32px;border:1px solid var(--accent);color:var(--accent);
+  text-decoration:none;transition:all 0.3s;
+}
+.closing-cta:hover{background:var(--accent);color:var(--bg)}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 60px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-brand{font-family:var(--font-serif);font-size:14px;color:var(--text-60)}
+.footer-note{font-size:10px;letter-spacing:0.15em;color:var(--text-20)}
+
+.design-label{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  font-size:9px;letter-spacing:0.15em;font-family:'Inter',sans-serif;
+  color:var(--text-35);border:1px solid var(--rule);padding:8px 14px;
+  background:var(--bg);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Luckyhouse · 岳温泉</div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#">住宿</a>
+    <a class="nav-link" href="#">设施</a>
+    <a class="nav-link" href="#">活动</a>
+    <a class="nav-link" href="#">宠物</a>
+    <a class="nav-link" href="#">探索</a>
+  </div>
+  <a class="nav-cta" href="#">预约入住</a>
+</nav>
+
+<!-- INTRO -->
+<section class="page-intro">
+  <div class="intro-label">Accommodations · 住宿房型</div>
+  <h1 class="intro-title">一处<em>与您的</em><br>爱宠同行的空间</h1>
+  <p class="intro-text">从舒适标准房到宠物友好套房，再到林间营地别墅——总有一个空间，让您与爱宠共度岳温泉的温柔时光</p>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FILTER -->
+<div class="filter">
+  <button class="filter-btn active">全部<span class="filter-count">6</span></button>
+  <button class="filter-btn">标准房<span class="filter-count">2</span></button>
+  <button class="filter-btn">宠物友好<span class="filter-count">2</span></button>
+  <button class="filter-btn">营地别墅<span class="filter-count">2</span></button>
+</div>
+
+<!-- ROOMS GRID -->
+<section class="rooms-section">
+  <div class="rooms-label">客房 · Standard &amp; Pet-Friendly</div>
+  <div class="rooms-grid">
+
+    <!-- Card 1 -->
+    <div class="room-card">
+      <div class="card-img">
+        <div class="card-img-inner standard"></div>
+        <div class="card-img-render-note">Concept Render</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Standard · 标准</div>
+        <div class="card-name">标准双床房</div>
+        <div class="card-name-en">Standard Twin Room</div>
+        <p class="card-desc">舒适宁静的日式简约空间，配备独立温泉入浴券。落地窗外可远眺安达太良山四季变幻的风景。</p>
+        <div class="card-specs">
+          <div class="card-spec"><div class="card-spec-key">面积</div><div class="card-spec-val">28 m²</div></div>
+          <div class="card-spec"><div class="card-spec-key">床型</div><div class="card-spec-val">单人 × 2</div></div>
+          <div class="card-spec"><div class="card-spec-key">入住</div><div class="card-spec-val">2 位</div></div>
+        </div>
+        <div class="card-price">价格待定</div>
+        <a class="card-link" href="#">查看详情 →</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="room-card">
+      <div class="card-img">
+        <div class="card-img-inner standard"></div>
+        <div class="card-img-render-note">Concept Render</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Standard · 标准</div>
+        <div class="card-name">标准大床房</div>
+        <div class="card-name-en">Standard Double Room</div>
+        <p class="card-desc">宽敞明亮的大床客房，配有独立阳台和舒适沙发区。温泉入浴券含于住宿中，步行即可抵达。</p>
+        <div class="card-specs">
+          <div class="card-spec"><div class="card-spec-key">面积</div><div class="card-spec-val">32 m²</div></div>
+          <div class="card-spec"><div class="card-spec-key">床型</div><div class="card-spec-val">大床 × 1</div></div>
+          <div class="card-spec"><div class="card-spec-key">入住</div><div class="card-spec-val">2 位</div></div>
+        </div>
+        <div class="card-price">价格待定</div>
+        <a class="card-link" href="#">查看详情 →</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="room-card">
+      <div class="card-img">
+        <div class="card-img-inner pet"></div>
+        <div class="pet-mark">Pet · Friendly</div>
+        <div class="card-img-render-note">Concept Render</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category" style="color:var(--accent)">Pet-Friendly · 宠物友好</div>
+        <div class="card-name">宠物友好双床房</div>
+        <div class="card-name-en">Pet-Friendly Twin Room</div>
+        <p class="card-desc">专为携宠家庭设计，防滑地板、专属宠物用品，直通 Dog Run。最多 2 只（25kg以下）。</p>
+        <div class="card-specs">
+          <div class="card-spec"><div class="card-spec-key">面积</div><div class="card-spec-val">35 m²</div></div>
+          <div class="card-spec"><div class="card-spec-key">宠物</div><div class="card-spec-val">2 只↓25kg</div></div>
+          <div class="card-spec"><div class="card-spec-key">特色</div><div class="card-spec-val">Dog Run</div></div>
+        </div>
+        <div class="card-price inquiry">咨询价格</div>
+        <a class="card-link" href="#">查看详情 →</a>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="room-card">
+      <div class="card-img">
+        <div class="card-img-inner pet"></div>
+        <div class="pet-mark">Pet · Friendly</div>
+        <div class="card-img-render-note">Concept Render</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category" style="color:var(--accent)">Suite · 私汤套房</div>
+        <div class="card-name">宠物友好套房</div>
+        <div class="card-name-en">Pet-Friendly Suite</div>
+        <p class="card-desc">独立客厅卧室，专属宠物活动区，私汤露台。与爱宠共享岳温泉的奢适宁静。</p>
+        <div class="card-specs">
+          <div class="card-spec"><div class="card-spec-key">面积</div><div class="card-spec-val">52 m²</div></div>
+          <div class="card-spec"><div class="card-spec-key">私汤</div><div class="card-spec-val">露台温泉</div></div>
+          <div class="card-spec"><div class="card-spec-key">宠物</div><div class="card-spec-val">3 只↓30kg</div></div>
+        </div>
+        <div class="card-price inquiry">咨询价格</div>
+        <a class="card-link" href="#">查看详情 →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VILLA SECTION -->
+<section class="villa-section">
+  <div class="villa-label">营地别墅 · Campsite Villas</div>
+  <div class="villa-grid">
+
+    <!-- Villa A -->
+    <div class="villa-card">
+      <div class="villa-img">
+        <div class="villa-img-inner"></div>
+        <div class="villa-coming">
+          <div class="villa-coming-label">即将开放 · Coming Soon</div>
+        </div>
+      </div>
+      <div class="villa-body">
+        <div class="villa-category">Villa A · 林间型</div>
+        <div class="villa-name">营地小别墅 A</div>
+        <div class="villa-name-en">Campsite Villa A — Forest Type</div>
+        <p class="villa-desc">隐匿于林间的独栋小别墅，私人BBQ区和宠物围栏庭院。零碳光伏景观，可持续度假体验。</p>
+        <div class="villa-specs">
+          <div class="v-spec"><div class="v-spec-key">面积</div><div class="v-spec-val">65 m²</div></div>
+          <div class="v-spec"><div class="v-spec-key">入住</div><div class="v-spec-val">最多 6 位</div></div>
+          <div class="v-spec"><div class="v-spec-key">宠物</div><div class="v-spec-val">最多 3 只</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Villa B -->
+    <div class="villa-card">
+      <div class="villa-img">
+        <div class="villa-img-inner" style="background:linear-gradient(145deg,#C0BCA8 0%,#B0AC98 40%,#A4A08C 100%)"></div>
+        <div class="villa-coming">
+          <div class="villa-coming-label">即将开放 · Coming Soon</div>
+        </div>
+      </div>
+      <div class="villa-body">
+        <div class="villa-category">Villa B · 湖景型</div>
+        <div class="villa-name">营地小别墅 B</div>
+        <div class="villa-name-en">Campsite Villa B — Lake View</div>
+        <p class="villa-desc">面朝人工湖景，超大落地窗，清晨可在露台观赏薄雾环绕的湖面，Dog Run直连活动草坪。</p>
+        <div class="villa-specs">
+          <div class="v-spec"><div class="v-spec-key">面积</div><div class="v-spec-val">70 m²</div></div>
+          <div class="v-spec"><div class="v-spec-key">入住</div><div class="v-spec-val">最多 6 位</div></div>
+          <div class="v-spec"><div class="v-spec-key">特色</div><div class="v-spec-val">湖景露台</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-quote">「空寂不是虚无，而是让万物可以被感知的余白」</div>
+  <div class="closing-attr">原研哉 · 设计中的设计</div>
+  <a href="#" class="closing-cta">立即预约入住 →</a>
+</div>
+
+<footer>
+  <div class="footer-brand">Luckyhouse · 岳温泉零碳宠物营地</div>
+  <div class="footer-note">© 2025 Fukushima Dake Onsen · All rights reserved</div>
+</footer>
+
+<div class="design-label">Direction C · Kenya Hara White</div>
+</body>
+</html>

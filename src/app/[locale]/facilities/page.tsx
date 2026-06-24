@@ -10,7 +10,6 @@ import { isValidLocale, BCP47_MAP, BASE_URL } from '@/lib/i18n/config'
 import type { Locale } from '@/lib/i18n/config'
 import { generateHreflangLinks } from '@/lib/i18n/hreflang'
 import { FacilitiesGrid } from '@/components/facilities/FacilitiesGrid'
-import { FadeInUp } from '@/components/motion'
 
 /** 页面 SEO 元数据 */
 export async function generateMetadata({
@@ -83,20 +82,70 @@ export default async function FacilitiesPage({
       ? '岳温泉の自然の中で、充実した施設をお楽しみください'
       : 'Enjoy a rich variety of facilities in the embrace of Dake Onsen\'s nature'
 
+  const kicker = locale === 'zh'
+    ? 'Facilities · 设施一览'
+    : locale === 'ja'
+      ? '施設ガイド'
+      : 'Facilities Guide'
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* 页面标题 / Hero 区域 */}
-      <FadeInUp className="mb-12 text-center">
-        <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-          {pageTitle}
-        </h1>
-        <p className="mt-4 text-lg text-stone-400 max-w-2xl mx-auto">
-          {pageSubtitle}
-        </p>
-      </FadeInUp>
+    <div className="bg-[#19160F] text-[#EAE0CC] min-h-screen">
+      {/* Editorial 页头 */}
+      <header
+        className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[40px] lg:pb-[60px]"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] items-end">
+          <div>
+            <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+              {kicker}
+            </p>
+            <h1
+              className="font-serif font-normal leading-[1.1] text-[#EAE0CC]"
+              style={{ fontSize: 'clamp(32px,4.5vw,60px)' }}
+            >
+              {pageTitle}
+              <br />
+              <em className="italic" style={{ color: 'rgba(234,224,204,0.55)' }}>
+                {locale === 'zh' ? 'Onsen & Facilities' : locale === 'ja' ? 'Onsen & Facilities' : 'Onsen & Facilities'}
+              </em>
+            </h1>
+          </div>
+          <div className="lg:pb-1">
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(234,224,204,0.6)' }}>
+              {pageSubtitle}
+            </p>
+            <div
+              className="flex gap-8 mt-6 pt-6"
+              style={{ borderTop: '1px solid rgba(234,224,204,0.08)' }}
+            >
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">10</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '项设施' : locale === 'ja' ? '施設' : 'Facilities'}
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">5</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '大类别' : locale === 'ja' ? 'カテゴリー' : 'Categories'}
+                </p>
+              </div>
+              <div>
+                <p className="font-serif text-2xl text-[#EAE0CC]">2</p>
+                <p className="text-[10px] tracking-[0.15em] uppercase mt-1" style={{ color: 'rgba(234,224,204,0.4)' }}>
+                  {locale === 'zh' ? '温泉浴池' : locale === 'ja' ? '温泉風呂' : 'Onsen Baths'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
       {/* 设施卡片网格 + 筛选 */}
-      <FacilitiesGrid facilities={facilities} locale={locale as Locale} />
+      <section className="px-8 lg:px-[60px] py-12 lg:py-16">
+        <FacilitiesGrid facilities={facilities} locale={locale as Locale} />
+      </section>
     </div>
   )
 }

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Luckyhouse 项目全景图</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0a0a0a;--surface:#141414;--surface-2:#1c1c1c;--surface-3:#242424;
+    --gold:#d97706;--gold-light:#f59e0b;--gold-dim:rgba(217,119,6,0.15);
+    --text:#fff;--text-70:rgba(255,255,255,0.7);--text-40:rgba(255,255,255,0.4);
+    --green:#34d399;--blue:#60a5fa;--rose:#fb7185;--violet:#a78bfa;--amber:#fbbf24;
+    --font-display:'Playfair Display','Noto Serif SC',serif;
+    --font-body:'Jost','Noto Serif SC',sans-serif;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  html{background:var(--bg);color:var(--text);font-family:var(--font-body)}
+  body{min-height:100vh;padding:60px 48px 80px;position:relative;overflow-x:hidden}
+
+  /* 极淡网格底纹 */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(rgba(217,119,6,0.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(217,119,6,0.03) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+
+  .container{max-width:1344px;margin:0 auto;position:relative;z-index:1}
+
+  /* ─── Header ─── */
+  .header{text-align:center;margin-bottom:64px}
+  .header-eyebrow{
+    font-family:var(--font-body);font-weight:300;font-size:13px;
+    letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:16px;
+  }
+  .header-title{
+    font-family:var(--font-display);font-size:48px;font-weight:700;
+    letter-spacing:-0.02em;line-height:1.2;margin-bottom:12px;
+  }
+  .header-title em{font-style:italic;color:var(--gold)}
+  .header-sub{
+    font-size:15px;color:var(--text-40);font-weight:300;letter-spacing:0.04em;
+  }
+
+  /* ─── Stats Bar ─── */
+  .stats{
+    display:flex;justify-content:center;gap:48px;margin-bottom:56px;
+    padding:24px 0;border-top:1px solid rgba(217,119,6,0.12);border-bottom:1px solid rgba(217,119,6,0.12);
+  }
+  .stat{text-align:center}
+  .stat-num{
+    font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--gold);
+    line-height:1;
+  }
+  .stat-label{font-size:12px;color:var(--text-40);letter-spacing:0.15em;text-transform:uppercase;margin-top:6px}
+
+  /* ─── Section Title ─── */
+  .section-title{
+    font-family:var(--font-display);font-size:22px;font-weight:600;
+    margin-bottom:24px;display:flex;align-items:center;gap:12px;
+  }
+  .section-title::before{
+    content:'';width:3px;height:20px;background:var(--gold);border-radius:2px;flex-shrink:0;
+  }
+  .section-title .count{
+    font-family:var(--font-body);font-size:12px;font-weight:400;
+    color:var(--text-40);letter-spacing:0.1em;margin-left:8px;
+  }
+
+  /* ─── Layer System ─── */
+  .layers{display:flex;flex-direction:column;gap:40px;margin-bottom:56px}
+
+  .layer{
+    background:var(--surface);border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px;padding:28px 32px;position:relative;
+    transition:border-color 0.4s var(--ease);
+  }
+  .layer:hover{border-color:rgba(217,119,6,0.2)}
+  .layer-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .layer-badge{
+    font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
+    padding:4px 10px;border-radius:3px;flex-shrink:0;
+  }
+  .layer-name{font-family:var(--font-display);font-size:18px;font-weight:600}
+  .layer-desc{font-size:13px;color:var(--text-40);margin-bottom:20px;line-height:1.6}
+
+  /* badge colors */
+  .badge-route{background:rgba(96,165,250,0.15);color:var(--blue)}
+  .badge-component{background:rgba(52,211,153,0.15);color:var(--green)}
+  .badge-data{background:rgba(251,191,36,0.15);color:var(--amber)}
+  .badge-infra{background:rgba(167,139,250,0.15);color:var(--violet)}
+  .badge-design{background:rgba(251,113,133,0.15);color:var(--rose)}
+
+  /* ─── Chips ─── */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-size:12px;padding:5px 12px;border-radius:4px;
+    background:var(--surface-2);border:1px solid rgba(255,255,255,0.05);
+    color:var(--text-70);font-weight:400;letter-spacing:0.02em;
+    transition:all 0.3s var(--ease);cursor:default;
+  }
+  .chip:hover{background:var(--surface-3);border-color:rgba(217,119,6,0.25);color:var(--text)}
+  .chip.dynamic{border-left:2px solid var(--gold)}
+  .chip.api{font-family:'SF Mono',Consolas,monospace;font-size:11px;color:var(--blue)}
+
+  /* ─── Component Tree ─── */
+  .comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .comp-group{
+    background:var(--surface-2);border-radius:6px;padding:16px 20px;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+  .comp-group-label{
+    font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:10px;
+  }
+  .comp-list{font-size:12px;color:var(--text-70);line-height:1.8}
+  .comp-list span{display:inline-block;margin-right:6px}
+  .comp-list span::after{content:'·';margin-left:6px;color:var(--text-40)}
+  .comp-list span:last-child::after{content:''}
+
+  /* ─── Two Column ─── */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+
+  /* ─── Data Flow Diagram ─── */
+  .flow-section{margin-bottom:56px}
+  .flow-diagram{
+    background:var(--surface);border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px;padding:40px 32px;position:relative;overflow:hidden;
+  }
+  .flow-row{
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    margin-bottom:24px;position:relative;
+  }
+  .flow-row:last-child{margin-bottom:0}
+  .flow-node{
+    padding:10px 20px;border-radius:6px;font-size:13px;font-weight:500;
+    text-align:center;min-width:120px;position:relative;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .flow-node.gold{background:var(--gold-dim);border-color:rgba(217,119,6,0.3);color:var(--gold-light)}
+  .flow-node.blue{background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.25);color:var(--blue)}
+  .flow-node.green{background:rgba(52,211,153,0.1);border-color:rgba(52,211,153,0.25);color:var(--green)}
+  .flow-node.violet{background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--violet)}
+  .flow-node.amber{background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.25);color:var(--amber)}
+  .flow-arrow{
+    color:var(--text-40);font-size:18px;flex-shrink:0;
+  }
+  .flow-arrow-down{
+    text-align:center;color:var(--text-40);font-size:14px;margin:8px 0;
+    letter-spacing:0.3em;
+  }
+
+  /* ─── i18n Block ─── */
+  .i18n-block{
+    background:var(--surface);border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px;padding:28px 32px;margin-bottom:56px;
+  }
+  .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+  .lang-col{text-align:center}
+  .lang-flag{font-size:28px;margin-bottom:6px}
+  .lang-code{font-family:'SF Mono',Consolas,monospace;font-size:13px;color:var(--gold);font-weight:600}
+  .lang-label{font-size:11px;color:var(--text-40);margin-top:2px}
+  .ns-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;justify-content:center}
+  .ns-tag{
+    font-size:10px;padding:3px 8px;border-radius:3px;
+    background:var(--surface-2);color:var(--text-40);
+    font-family:'SF Mono',Consolas,monospace;letter-spacing:0.05em;
+  }
+
+  /* ─── Design System ─── */
+  .ds-section{margin-bottom:56px}
+  .ds-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .ds-card{
+    background:var(--surface);border:1px solid rgba(255,255,255,0.06);
+    border-radius:8px;padding:20px;
+  }
+  .ds-card-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-40);margin-bottom:12px}
+  .color-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .color-swatch{width:28px;height:28px;border-radius:4px;flex-shrink:0;border:1px solid rgba(255,255,255,0.08)}
+  .color-info{font-size:12px}
+  .color-hex{font-family:'SF Mono',Consolas,monospace;color:var(--text-40);font-size:11px}
+  .font-sample{margin-bottom:10px}
+  .font-sample-name{font-size:11px;color:var(--text-40);margin-bottom:4px}
+  .font-sample-text{font-size:18px;line-height:1.3}
+  .font-sample-text.playfair{font-family:'Playfair Display',serif}
+  .font-sample-text.noto{font-family:'Noto Serif SC',serif}
+  .font-sample-text.jost{font-family:'Jost',sans-serif}
+  .ease-viz{
+    height:48px;position:relative;margin-top:8px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    border-left:1px solid rgba(255,255,255,0.08);
+  }
+  .ease-curve{
+    position:absolute;inset:4px;
+    /* 用 SVG 画曲线 */
+  }
+  .ease-label{font-family:'SF Mono',Consolas,monospace;font-size:11px;color:var(--gold);margin-top:8px}
+
+  /* ─── Footer ─── */
+  .footer{
+    text-align:center;padding-top:40px;border-top:1px solid rgba(217,119,6,0.08);
+  }
+  .footer-text{font-size:12px;color:var(--text-40);letter-spacing:0.1em}
+  .footer-text em{color:var(--gold);font-style:normal}
+
+  /* ─── Connector Lines (decorative) ─── */
+  .connector{
+    position:absolute;left:50%;width:1px;height:24px;
+    background:linear-gradient(to bottom,rgba(217,119,6,0.3),transparent);
+    bottom:-24px;z-index:2;
+  }
+
+  /* ─── Booking Flow ─── */
+  .booking-flow{
+    display:flex;align-items:center;gap:4px;margin-top:16px;
+    padding:16px 20px;background:var(--surface-2);border-radius:6px;
+    overflow-x:auto;
+  }
+  .booking-step{
+    flex:1;min-width:0;text-align:center;padding:8px 4px;
+    font-size:11px;color:var(--text-70);position:relative;
+  }
+  .booking-step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--gold-dim);color:var(--gold);font-size:10px;font-weight:600;
+    margin-bottom:4px;
+  }
+  .booking-step-label{display:block;font-size:11px}
+  .booking-arrow{color:var(--text-40);font-size:12px;flex-shrink:0}
+
+  @media print{
+    body{padding:24px}
+    .layer:hover{border-color:rgba(255,255,255,0.06)}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="header-eyebrow">Architecture Panorama</div>
+    <h1 class="header-title">Luckyhouse <em>岳温泉</em></h1>
+    <p class="header-sub">零碳宠物营地 & 温泉酒店 · 官网系统架构全景</p>
+  </header>
+
+  <!-- ═══ STATS ═══ -->
+  <div class="stats">
+    <div class="stat"><div class="stat-num">14</div><div class="stat-label">Pages</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">API Routes</div></div>
+    <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Components</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Languages</div></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Data Files</div></div>
+    <div class="stat"><div class="stat-num">36</div><div class="stat-label">i18n Files</div></div>
+  </div>
+
+  <!-- ═══ ROUTES ═══ -->
+  <div class="layers">
+    <div class="layer">
+      <div class="layer-header">
+        <span class="layer-badge badge-route">Routes</span>
+        <span class="layer-name">页面路由层</span>
+      </div>
+      <p class="layer-desc">基于 Next.js 15 App Router，支持 [locale] 动态前缀（zh / ja / en），Middleware 自动检测并重定向</p>
+
+      <div style="margin-bottom:12px;font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase">Public Pages</div>
+      <div class="chips" style="margin-bottom:16px">
+        <span class="chip">/ 首页</span>
+        <span class="chip">/stay 住宿列表</span>
+        <span class="chip dynamic">/stay/[slug] 房型详情</span>
+        <span class="chip">/booking 预约</span>
+        <span class="chip">/booking/success</span>
+        <span class="chip">/facilities 温泉设施</span>
+        <span class="chip">/activities 活动</span>
+        <span class="chip">/explore 周边探索</span>
+        <span class="chip">/gallery 画廊</span>
+        <span class="chip">/pet-friendly</span>
+        <span class="chip">/pet-rules</span>
+        <span class="chip">/contact</span>
+        <span class="chip">/faq</span>
+        <span class="chip">/privacy</span>
+        <span class="chip">/terms</span>
+      </div>
+
+      <div style="margin-bottom:12px;font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase">API Routes</div>
+      <div class="chips">
+        <span class="chip api">POST /api/booking</span>
+        <span class="chip api">POST /api/contact</span>
+        <span class="chip api">POST /api/subscribe</span>
+        <span class="chip api">POST /api/activity-interest</span>
+      </div>
+
+      <!-- Booking Flow -->
+      <div style="margin-top:20px;font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px">预约流程（5 Steps）</div>
+      <div class="booking-flow">
+        <div class="booking-step"><span class="booking-step-num">1</span><span class="booking-step-label">日期 & 客人</span></div>
+        <span class="booking-arrow">→</span>
+        <div class="booking-step"><span class="booking-step-num">2</span><span class="booking-step-label">房型偏好</span></div>
+        <span class="booking-arrow">→</span>
+        <div class="booking-step"><span class="booking-step-num">3</span><span class="booking-step-label">宠物信息</span></div>
+        <span class="booking-arrow">→</span>
+        <div class="booking-step"><span class="booking-step-num">4</span><span class="booking-step-label">联系方式</span></div>
+        <span class="booking-arrow">→</span>
+        <div class="booking-step"><span class="booking-step-num">5</span><span class="booking-step-label">协议确认</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ COMPONENTS ═══ -->
+    <div class="layer">
+      <div class="layer-header">
+        <span class="layer-badge badge-component">Components</span>
+        <span class="layer-name">组件体系</span>
+        <span class="count">7 layers · 40+ components</span>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-group">
+          <div class="comp-group-label">Layout 布局层</div>
+          <div class="comp-list">
+            <span>Header</span><span>Footer</span><span>MobileDrawerNav</span><span>LanguageSwitcher</span><span>Breadcrumb</span><span>CookieConsent</span><span>FooterNewsletterForm</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <div class="comp-group-label">Home 首页层</div>
+          <div class="comp-list">
+            <span>HeroSection</span><span>BookingWidget</span><span>ValueCards</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <div class="comp-group-label">Stay 住宿层</div>
+          <div class="comp-list">
+            <span>RoomCard</span><span>RoomGrid</span><span>RoomComparisonTable</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <div class="comp-group-label">Booking 预约层</div>
+          <div class="comp-list">
+            <span>BookingForm</span><span>Step1DateGuests</span><span>Step2RoomPreference</span><span>Step3PetInfo</span><span>Step4Contact</span><span>Step5Agreements</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <div class="comp-group-label">Motion 动画层</div>
+          <div class="comp-list">
+            <span>FadeInUp</span><span>HeroTitle</span><span>SlideUp</span><span>AnimatedSection</span><span>ScrollReveal</span><span>LineReveal</span><span>StaggerChildren</span>
+          </div>
+        </div>
+        <div class="comp-group">
+          <div class="comp-group-label">Business 业务层</div>
+          <div class="comp-list">
+            <span>ActivitiesGrid</span><span>ContactForm</span><span>FacilitiesGrid</span><span>FAQSection</span><span>GalleryGrid</span><span>PetServiceList</span>
+          </div>
+        </div>
+        <div class="comp-group" style="grid-column:span 2">
+          <div class="comp-group-label">UI 基础组件库 · 23 个</div>
+          <div class="comp-list">
+            <span>Button</span><span>Card</span><span>Badge</span><span>Accordion</span><span>Checkbox</span><span>RadioGroup</span><span>Select</span><span>DatePicker</span><span>NumberInput</span><span>ImageCarousel</span><span>ImageWithLabel</span><span>Lightbox</span><span>MagneticButton</span><span>PawDivider</span><span>PriceDisplay</span><span>StepIndicator</span><span>FilterBar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DATA + LIB ═══ -->
+    <div class="two-col">
+      <div class="layer" style="margin-bottom:0">
+        <div class="layer-header">
+          <span class="layer-badge badge-data">Data</span>
+          <span class="layer-name">数据层</span>
+        </div>
+        <p class="layer-desc">8 个 JSON 数据文件，通过 CMS 抽象层统一访问，未来可无缝切换 Headless CMS</p>
+        <div class="chips">
+          <span class="chip">homepage.json</span>
+          <span class="chip">rooms.json</span>
+          <span class="chip">facilities.json</span>
+          <span class="chip">activities.json</span>
+          <span class="chip">gallery.json</span>
+          <span class="chip">faq.json</span>
+          <span class="chip">explore.json</span>
+          <span class="chip">site-config.json</span>
+        </div>
+        <div style="margin-top:16px;font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">CMS 抽象层 API</div>
+        <div class="chips">
+          <span class="chip api">getRoomTypes()</span>
+          <span class="chip api">getRoomBySlug()</span>
+          <span class="chip api">getFacilities()</span>
+          <span class="chip api">getActivities()</span>
+          <span class="chip api">getGalleryAssets()</span>
+          <span class="chip api">getFAQs()</span>
+          <span class="chip api">getHomepageData()</span>
+          <span class="chip api">getExploreData()</span>
+          <span class="chip api">getSiteConfig()</span>
+        </div>
+      </div>
+
+      <div class="layer" style="margin-bottom:0">
+        <div class="layer-header">
+          <span class="layer-badge badge-infra">Lib</span>
+          <span class="layer-name">工具层</span>
+        </div>
+        <p class="layer-desc">i18n 系统、Schema 验证、路径工具，统一从 src/lib 导出</p>
+        <div style="font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">i18n 系统</div>
+        <div class="chips" style="margin-bottom:14px">
+          <span class="chip">translate.ts</span>
+          <span class="chip">hreflang.ts</span>
+          <span class="chip">locale-path.ts</span>
+          <span class="chip">locale-detection.ts</span>
+          <span class="chip">locale-typo.ts</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">Schema 验证 (Zod)</div>
+        <div class="chips" style="margin-bottom:14px">
+          <span class="chip">booking.ts</span>
+          <span class="chip">contact.ts</span>
+          <span class="chip">subscribe.ts</span>
+          <span class="chip">activity-interest.ts</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-40);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">SEO</div>
+        <div class="chips">
+          <span class="chip">robots.ts</span>
+          <span class="chip">sitemap.ts</span>
+          <span class="chip">JSON-LD</span>
+          <span class="chip">hreflang</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DATA FLOW ═══ -->
+  <div class="flow-section">
+    <div class="section-title">数据流向</div>
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <div class="flow-node blue">Browser 请求</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node gold">Middleware<br><small style="font-size:10px;opacity:0.6">i18n 检测 & 重定向</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node green">Next.js App Router<br><small style="font-size:10px;opacity:0.6">[locale] 路由匹配</small></div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row">
+        <div class="flow-node violet">Server Component<br><small style="font-size:10px;opacity:0.6">数据获取 + i18n 翻译</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node amber">CMS 抽象层<br><small style="font-size:10px;opacity:0.6">cms.ts</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node amber">JSON 数据<br><small style="font-size:10px;opacity:0.6">8 files</small></div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row">
+        <div class="flow-node violet">Client Component<br><small style="font-size:10px;opacity:0.6">交互 + 动画</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node green">UI 组件库<br><small style="font-size:10px;opacity:0.6">23 基础 + 业务组件</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node blue">Motion 动画层<br><small style="font-size:10px;opacity:0.6">7 动画组件</small></div>
+      </div>
+      <div class="flow-arrow-down">↓</div>
+      <div class="flow-row">
+        <div class="flow-node gold">API Routes<br><small style="font-size:10px;opacity:0.6">Zod 校验 + 幂等去重</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-node" style="background:var(--surface-2);border-color:rgba(255,255,255,0.1);color:var(--text-70)">
+          归因记录<br><small style="font-size:10px;opacity:0.6">UTM tracking</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ i18n ═══ -->
+  <div class="i18n-block">
+    <div class="section-title">国际化系统 <span class="count">3 languages × 12 namespaces = 36 files</span></div>
+    <div class="lang-grid">
+      <div class="lang-col">
+        <div class="lang-flag">中</div>
+        <div class="lang-code">zh</div>
+        <div class="lang-label">中文 · 默认语言</div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-flag">日</div>
+        <div class="lang-code">ja</div>
+        <div class="lang-label">日本語</div>
+      </div>
+      <div class="lang-col">
+        <div class="lang-flag">EN</div>
+        <div class="lang-code">en</div>
+        <div class="lang-label">English</div>
+      </div>
+    </div>
+    <div class="ns-grid">
+      <span class="ns-tag">common</span>
+      <span class="ns-tag">home</span>
+      <span class="ns-tag">stay</span>
+      <span class="ns-tag">booking</span>
+      <span class="ns-tag">contact</span>
+      <span class="ns-tag">facilities</span>
+      <span class="ns-tag">activities</span>
+      <span class="ns-tag">explore</span>
+      <span class="ns-tag">gallery</span>
+      <span class="ns-tag">faq</span>
+      <span class="ns-tag">pet</span>
+      <span class="ns-tag">legal</span>
+    </div>
+  </div>
+
+  <!-- ═══ DESIGN SYSTEM ═══ -->
+  <div class="ds-section">
+    <div class="section-title">设计系统</div>
+    <div class="ds-grid">
+      <div class="ds-card">
+        <div class="ds-card-title">色彩</div>
+        <div class="color-row">
+          <div class="color-swatch" style="background:#0a0a0a"></div>
+          <div class="color-info">Background<div class="color-hex">#0a0a0a</div></div>
+        </div>
+        <div class="color-row">
+          <div class="color-swatch" style="background:#141414"></div>
+          <div class="color-info">Surface<div class="color-hex">#141414</div></div>
+        </div>
+        <div class="color-row">
+          <div class="color-swatch" style="background:#d97706"></div>
+          <div class="color-info">Gold Accent<div class="color-hex">#d97706</div></div>
+        </div>
+        <div class="color-row">
+          <div class="color-swatch" style="background:#f59e0b"></div>
+          <div class="color-info">Gold Hover<div class="color-hex">#f59e0b</div></div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-card-title">字体</div>
+        <div class="font-sample">
+          <div class="font-sample-name">Display · 英文</div>
+          <div class="font-sample-text playfair">Playfair Display</div>
+        </div>
+        <div class="font-sample">
+          <div class="font-sample-name">Display · 中日</div>
+          <div class="font-sample-text noto">Noto Serif 温泉</div>
+        </div>
+        <div class="font-sample">
+          <div class="font-sample-name">Body</div>
+          <div class="font-sample-text jost">Jost Sans-serif</div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-card-title">动画</div>
+        <div style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--text-40);margin-bottom:4px">Easing</div>
+          <div class="ease-label">[0.16, 1, 0.3, 1]</div>
+          <div style="font-size:11px;color:var(--text-40);margin-top:8px">高端酒店感极缓出入</div>
+        </div>
+        <div style="margin-top:16px">
+          <div style="font-size:11px;color:var(--text-40);margin-bottom:4px">无障碍</div>
+          <div style="font-size:12px;color:var(--green)">useReducedMotion() ✓</div>
+        </div>
+      </div>
+      <div class="ds-card">
+        <div class="ds-card-title">技术栈</div>
+        <div class="chips" style="gap:6px">
+          <span class="chip" style="font-size:11px">Next.js 15</span>
+          <span class="chip" style="font-size:11px">React 19</span>
+          <span class="chip" style="font-size:11px">TypeScript 5</span>
+          <span class="chip" style="font-size:11px">Tailwind 4</span>
+          <span class="chip" style="font-size:11px">Motion</span>
+          <span class="chip" style="font-size:11px">Radix UI</span>
+          <span class="chip" style="font-size:11px">Zod</span>
+          <span class="chip" style="font-size:11px">pnpm</span>
+          <span class="chip" style="font-size:11px">Vitest</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <p class="footer-text"><em>Luckyhouse</em> · 岳温泉零碳宠物营地 · Architecture Panorama</p>
+  </footer>
+
+</div>
+</body>
+</html>

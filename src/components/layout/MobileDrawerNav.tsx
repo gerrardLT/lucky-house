@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import type { Locale } from '@/lib/i18n/config'
 import { createTranslator } from '@/lib/i18n/translate'
+import { replaceLocaleInPath } from '@/lib/i18n/locale-path'
 
 interface MobileDrawerNavProps {
   isOpen: boolean
@@ -22,10 +24,12 @@ const NAV_ITEMS = [
   { key: 'gallery', href: '/gallery' },
   { key: 'faq', href: '/faq' },
   { key: 'booking', href: '/booking' },
+  { key: 'contact', href: '/contact' },
 ] as const
 
 export function MobileDrawerNav({ isOpen, onClose, locale }: MobileDrawerNavProps) {
   const t = createTranslator(locale, 'common')
+  const pathname = usePathname()
   const drawerRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -152,7 +156,7 @@ export function MobileDrawerNav({ isOpen, onClose, locale }: MobileDrawerNavProp
               {(['zh', 'ja', 'en'] as const).map((lang) => (
                 <Link
                   key={lang}
-                  href={`/${lang}`}
+                  href={replaceLocaleInPath(pathname, lang)}
                   onClick={handleNavClick}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
                     lang === locale

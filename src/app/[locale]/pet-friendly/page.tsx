@@ -7,10 +7,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getFacilities, getFAQs } from '@/lib/cms'
 import { PetServiceList } from '@/components/pet/PetServiceList'
-import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { isValidLocale } from '@/lib/i18n/config'
-import { FadeInUp, AnimatedSection, StaggerContainer, StaggerItem } from '@/components/motion'
 import type { Locale } from '@/types'
 
 // === 多语言文案 ===
@@ -230,219 +227,313 @@ export default async function PetFriendlyPage({
   const petFAQs = await getFAQs('pet')
 
   return (
-    <div className="flex flex-col">
-      {/* Section 1: Hero / 价值主张 */}
-      <section className="relative bg-[#141414] py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            <div className="space-y-6">
-              <Badge variant="pet-friendly">{locale === 'zh' ? '🐾 宠物友好' : locale === 'ja' ? '🐾 ペットフレンドリー' : '🐾 Pet Friendly'}</Badge>
-              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                {text.heroTitle}
-              </h1>
-              <p className="text-lg text-amber-400 sm:text-xl">
-                {text.heroSubtitle}
-              </p>
-              <p className="text-base leading-relaxed text-stone-400">
-                {text.heroDescription}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button href={`/${locale}/stay`} variant="primary" size="lg">
-                  {text.ctaPrimary}
-                </Button>
-                <Button href={`/${locale}/booking`} variant="outline" size="lg">
-                  {text.ctaSecondary}
-                </Button>
-              </div>
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-              <Image
-                src="/images/hero/hero-02-shiba-onsen-veranda.png"
-                alt={text.heroTitle}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute bottom-3 left-3">
-                <Badge variant="rendering">
-                  {locale === 'zh' ? '示意图' : locale === 'ja' ? 'イメージ' : 'Concept'}
-                </Badge>
-              </div>
-            </div>
+    <div className="bg-[#19160F] text-[#EAE0CC]">
+      {/* Section 1: Editorial Hero */}
+      <section
+        className="grid lg:grid-cols-2"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        {/* 文字列 */}
+        <div className="px-8 lg:px-[60px] pt-[60px] lg:pt-[80px] pb-[48px] lg:pb-[64px] flex flex-col justify-end">
+          <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-4">
+            {locale === 'zh' ? 'Pet-Friendly · 宠物友好' : locale === 'ja' ? 'ペットフレンドリー' : 'Pet Friendly'}
+          </p>
+          <h1
+            className="font-serif font-normal leading-[1.1] text-[#EAE0CC]"
+            style={{ fontSize: 'clamp(36px,5vw,68px)' }}
+          >
+            {text.heroTitle}
+            <br />
+            <em className="italic" style={{ color: 'rgba(234,224,204,0.5)' }}>
+              {text.heroSubtitle}
+            </em>
+          </h1>
+          <p
+            className="mt-6 text-sm leading-relaxed max-w-md"
+            style={{ color: 'rgba(234,224,204,0.6)' }}
+          >
+            {text.heroDescription}
+          </p>
+          <div className="flex flex-wrap gap-5 mt-8">
+            <a
+              href={`/${locale}/stay`}
+              className="text-sm tracking-[0.1em] uppercase text-[#A07850] hover:text-[#C49A6A] transition-colors"
+            >
+              {text.ctaPrimary} →
+            </a>
+            <a
+              href={`/${locale}/booking`}
+              className="text-sm tracking-[0.1em] uppercase transition-colors hover:text-[#EAE0CC]"
+              style={{ color: 'rgba(234,224,204,0.5)' }}
+            >
+              {text.ctaSecondary} →
+            </a>
+          </div>
+        </div>
+        {/* 图片列 */}
+        <div
+          className="relative min-h-[360px] lg:min-h-0 overflow-hidden"
+          style={{ background: '#211D14' }}
+        >
+          <Image
+            src="/images/hero/hero-02-shiba-onsen-veranda.png"
+            alt={text.heroTitle}
+            fill
+            className="object-cover opacity-25 mix-blend-luminosity"
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <div
+            className="absolute bottom-4 left-4 px-2 py-1 text-[9px] tracking-[0.15em] uppercase"
+            style={{
+              background: 'rgba(160,120,80,0.15)',
+              color: '#A07850',
+              border: '1px solid rgba(160,120,80,0.25)',
+            }}
+          >
+            {locale === 'zh' ? '示意图' : locale === 'ja' ? 'イメージ' : 'Concept'}
           </div>
         </div>
       </section>
-
-      {/* Section: 核心问题回答 — "我的宠物能住吗？" (Requirement 6.7) */}
-      <AnimatedSection className="bg-[#0a0a0a] py-12">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+  
+      {/* Section: 核心问题回答 */}
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{
+          background: '#211D14',
+          borderBottom: '1px solid rgba(234,224,204,0.08)',
+        }}
+      >
+        <div className="max-w-3xl">
+          <h2
+            className="font-serif font-normal text-[#EAE0CC]"
+            style={{ fontSize: 'clamp(20px,2.8vw,34px)' }}
+          >
             {text.coreAnswer}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-stone-400 sm:text-lg">
+          <p
+            className="mt-4 text-sm leading-relaxed"
+            style={{ color: 'rgba(234,224,204,0.65)' }}
+          >
             {text.coreAnswerText}
           </p>
         </div>
-      </AnimatedSection>
-
-      {/* Section 2: 宠物服务清单 (Requirement 6.2) */}
-      <section className="bg-[#141414] py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {text.servicesTitle}
-            </h2>
-            <p className="mt-2 text-stone-400">{text.servicesSubtitle}</p>
-          </div>
-          <PetServiceList facilities={facilities} locale={locale} />
+      </section>
+  
+      {/* Section 2: 宠物服务清单 */}
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-2">
+          {text.servicesTitle}
+        </p>
+        <p
+          className="font-serif font-normal text-[#EAE0CC] mb-10"
+          style={{ fontSize: 'clamp(18px,2.5vw,28px)' }}
+        >
+          {text.servicesSubtitle}
+        </p>
+        <PetServiceList facilities={facilities} locale={locale} />
+      </section>
+  
+      {/* Section 3: 入住流程 */}
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{
+          background: '#211D14',
+          borderBottom: '1px solid rgba(234,224,204,0.08)',
+        }}
+      >
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-2">
+          {text.flowTitle}
+        </p>
+        <p
+          className="font-serif font-normal text-[#EAE0CC] mb-10"
+          style={{ fontSize: 'clamp(18px,2.5vw,28px)' }}
+        >
+          {text.flowSubtitle}
+        </p>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {text.flowSteps.map((step, index) => (
+            <div
+              key={index}
+              className="p-6"
+              style={{
+                background: '#19160F',
+                border: '1px solid rgba(234,224,204,0.08)',
+              }}
+            >
+              <p
+                className="font-serif text-3xl font-normal mb-4"
+                style={{ color: '#A07850' }}
+              >
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <h3 className="text-sm font-medium text-[#EAE0CC] mb-2">
+                {step.title}
+              </h3>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: 'rgba(234,224,204,0.55)' }}
+              >
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* Section 3: 入住流程 (Requirement 6.3) */}
-      <AnimatedSection className="bg-[#0a0a0a] py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {text.flowTitle}
-            </h2>
-            <p className="mt-2 text-stone-400">{text.flowSubtitle}</p>
-          </div>
-          <StaggerContainer staggerDelay={0.15} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {text.flowSteps.map((step, index) => (
-              <StaggerItem key={index}>
-                <div className="relative rounded-xl border border-white/10 bg-[#141414] p-6 shadow-sm">
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-amber-600 text-lg font-bold text-white">
-                    {index + 1}
-                  </div>
-                  <h3 className="text-lg font-semibold text-white">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-stone-400">
-                    {step.description}
-                  </p>
-                  {/* 连接线（非最后一项，仅桌面端可见） */}
-                  {index < text.flowSteps.length - 1 && (
-                    <div className="absolute -right-3 top-1/2 hidden h-0.5 w-6 bg-amber-600/30 lg:block" aria-hidden="true" />
-                  )}
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </AnimatedSection>
-
-      {/* Section 4: 规则说明 (Requirement 6.4) */}
-      <section className="bg-[#141414] py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {text.rulesTitle}
-            </h2>
-            <p className="mt-2 text-stone-400">{text.rulesSubtitle}</p>
-          </div>
-          <div className="space-y-4">
-            {petFAQs.map((faq) => (
-              <div
-                key={faq.id}
-                className="rounded-lg border border-white/10 bg-[#0a0a0a] p-5 shadow-sm"
+  
+      {/* Section 4: 规则说明 */}
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{ borderBottom: '1px solid rgba(234,224,204,0.08)' }}
+      >
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-2">
+          {text.rulesTitle}
+        </p>
+        <p
+          className="font-serif font-normal text-[#EAE0CC] mb-8"
+          style={{ fontSize: 'clamp(18px,2.5vw,28px)' }}
+        >
+          {text.rulesSubtitle}
+        </p>
+        <div className="space-y-3">
+          {petFAQs.map((faq) => (
+            <div
+              key={faq.id}
+              className="p-5"
+              style={{
+                background: '#211D14',
+                border: '1px solid rgba(234,224,204,0.08)',
+              }}
+            >
+              <h3 className="text-sm font-medium text-[#EAE0CC] mb-2">
+                {faq.question[locale]}
+              </h3>
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: 'rgba(234,224,204,0.6)' }}
               >
-                <h3 className="text-base font-semibold text-white">
-                  {faq.question[locale]}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-stone-400">
-                  {faq.answer[locale]}
+                {faq.answer[locale]}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p
+          className="mt-5 text-xs"
+          style={{ color: 'rgba(234,224,204,0.35)' }}
+        >
+          ⚠️ {text.rulesNote}
+        </p>
+      </section>
+  
+      {/* Section 5: 生活方式场景 */}
+      <section
+        className="px-8 lg:px-[60px] py-12 lg:py-16"
+        style={{
+          background: '#211D14',
+          borderBottom: '1px solid rgba(234,224,204,0.08)',
+        }}
+      >
+        <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07850] mb-2">
+          {text.lifestyleTitle}
+        </p>
+        <p
+          className="font-serif font-normal text-[#EAE0CC] mb-10"
+          style={{ fontSize: 'clamp(18px,2.5vw,28px)' }}
+        >
+          {text.lifestyleSubtitle}
+        </p>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {text.scenes.map((scene, index) => (
+            <div
+              key={index}
+              style={{
+                background: '#19160F',
+                border: '1px solid rgba(234,224,204,0.08)',
+              }}
+            >
+              <div className="relative aspect-[3/2] overflow-hidden">
+                <Image
+                  src={[
+                    '/images/hero/hero-01-family-pet-walkway.png',
+                    '/images/facilities/facility-dog-run-01.png',
+                    '/images/facilities/facility-bbq-terrace-01.png',
+                    '/images/rooms/room-pet-friendly-interior-01.png',
+                    '/images/activities/activity-pet-sports-01.png',
+                  ][index]}
+                  alt={scene.title}
+                  fill
+                  className="object-cover opacity-25 mix-blend-luminosity"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+                <div
+                  className="absolute bottom-3 left-3 px-2 py-0.5 text-[9px] tracking-[0.15em] uppercase"
+                  style={{
+                    background: 'rgba(160,120,80,0.12)',
+                    color: '#A07850',
+                    border: '1px solid rgba(160,120,80,0.2)',
+                  }}
+                >
+                  {locale === 'zh' ? '示意图' : locale === 'ja' ? 'イメージ' : 'Concept'}
+                </div>
+              </div>
+              <div className="p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg" aria-hidden="true">{scene.icon}</span>
+                  <h3 className="text-sm font-medium text-[#EAE0CC]">
+                    {scene.title}
+                  </h3>
+                </div>
+                <p
+                  className="text-xs leading-relaxed"
+                  style={{ color: 'rgba(234,224,204,0.6)' }}
+                >
+                  {scene.description}
                 </p>
               </div>
-            ))}
-          </div>
-          {/* Requirement 6.8: 标注待确认内容 */}
-          <p className="mt-6 text-center text-xs text-stone-500">
-            ⚠️ {text.rulesNote}
-          </p>
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* Section 5: 生活方式场景 (Requirement 6.5) */}
-      <AnimatedSection className="bg-[#0a0a0a] py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">
-              {text.lifestyleTitle}
-            </h2>
-            <p className="mt-2 text-stone-400">{text.lifestyleSubtitle}</p>
-          </div>
-          <StaggerContainer staggerDelay={0.12} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {text.scenes.map((scene, index) => (
-              <StaggerItem key={index}>
-                <div className="group overflow-hidden rounded-xl border border-white/10 bg-[#141414] shadow-sm transition-shadow hover:shadow-md">
-                  {/* 占位图片区域 */}
-                  <div className="relative aspect-[3/2] bg-stone-800">
-                    <Image
-                      src={[
-                        '/images/hero/hero-01-family-pet-walkway.png',
-                        '/images/facilities/facility-dog-run-01.png',
-                        '/images/facilities/facility-bbq-terrace-01.png',
-                        '/images/rooms/room-pet-friendly-interior-01.png',
-                        '/images/activities/activity-pet-sports-01.png',
-                      ][index]}
-                      alt={scene.title}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="absolute bottom-3 left-3">
-                      <Badge variant="rendering">
-                        {locale === 'zh' ? '示意图' : locale === 'ja' ? 'イメージ' : 'Concept'}
-                      </Badge>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl" aria-hidden="true">{scene.icon}</span>
-                      <h3 className="text-lg font-semibold text-white">
-                        {scene.title}
-                      </h3>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-stone-400">
-                      {scene.description}
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </AnimatedSection>
-
-      {/* Section 6: 底部 CTA (Requirement 6.6) */}
-      <AnimatedSection className="bg-[#0a0a0a] py-16">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+  
+      {/* Section 6: 底部 CTA */}
+      <section className="px-8 lg:px-[60px] py-16 lg:py-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2
+            className="font-serif font-normal text-[#EAE0CC] mb-4"
+            style={{ fontSize: 'clamp(22px,3vw,40px)' }}
+          >
             {text.ctaBottomTitle}
           </h2>
-          <p className="mt-4 text-base text-white/70">
+          <p
+            className="text-sm mb-8"
+            style={{ color: 'rgba(234,224,204,0.6)' }}
+          >
             {text.ctaBottomDescription}
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
               href={`/${locale}/stay`}
-              variant="secondary"
-              size="lg"
+              className="inline-flex items-center px-8 py-3 text-sm tracking-[0.1em] uppercase font-medium transition-colors"
+              style={{ background: '#A07850', color: '#19160F' }}
             >
               {text.ctaPrimary}
-            </Button>
-            <Button
+            </a>
+            <a
               href={`/${locale}/booking`}
-              variant="outline"
-              size="lg"
-              className="border-amber-500 text-amber-400 hover:bg-amber-500/10"
+              className="inline-flex items-center px-8 py-3 text-sm tracking-[0.1em] uppercase transition-colors hover:border-[#A07850] hover:text-[#A07850]"
+              style={{
+                border: '1px solid rgba(234,224,204,0.25)',
+                color: 'rgba(234,224,204,0.7)',
+              }}
             >
               {text.ctaSecondary}
-            </Button>
+            </a>
           </div>
         </div>
-      </AnimatedSection>
+      </section>
     </div>
   )
 }

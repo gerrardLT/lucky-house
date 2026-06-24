@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback, useMemo, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { StepIndicator } from '@/components/ui/StepIndicator'
 import { Button } from '@/components/ui/Button'
 import { step1Schema, step2Schema, step3Schema, step4Schema, step5Schema } from '@/lib/schemas/booking'
@@ -59,13 +59,25 @@ function getUtmParams() {
 
 export function BookingForm({ locale, faqRules }: BookingFormProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // 从 URL 参数中读取 BookingWidget 传入的预填数据
+  const initCheckIn = searchParams.get('checkIn') ?? undefined
+  const initCheckOut = searchParams.get('checkOut') ?? undefined
+  const initAdults = searchParams.get('adults') ? Number(searchParams.get('adults')) : 1
+  const initChildren = searchParams.get('children') ? Number(searchParams.get('children')) : 0
+  const hasPetParam = searchParams.get('hasPet')
+  const initHasPet: boolean | undefined =
+    hasPetParam === 'true' ? true : hasPetParam === 'false' ? false : undefined
 
   // Form data state for each step
   const [step1Data, setStep1Data] = useState<Partial<Step1Data>>({
-    adults: 1,
-    children: 0,
+    checkIn: initCheckIn,
+    checkOut: initCheckOut,
+    adults: initAdults,
+    children: initChildren,
     rooms: 1,
-    hasPet: undefined,
+    hasPet: initHasPet,
   })
   const [step2Data, setStep2Data] = useState<Partial<Step2Data>>({
     acceptAlternative: true,
