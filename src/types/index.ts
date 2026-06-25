@@ -306,3 +306,94 @@ export interface ApiErrorResponse {
     fields?: Record<string, string> // 字段级错误
   }
 }
+
+// === 后台管理类型 ===
+
+/** 预约状态 */
+export type BookingStatus = 'pending' | 'confirmed' | 'cancelled'
+
+/** 联系工单状态 */
+export type ContactStatus = 'pending' | 'resolved'
+
+/** 活动兴趣登记类型 */
+export type InterestType = 'interest' | 'register'
+
+/** 预约记录（DB 行类型） */
+export interface BookingRecord {
+  id: string
+  idempotencyKey: string
+  checkIn: string
+  checkOut: string
+  adults: number
+  children: number
+  rooms: number
+  hasPet: boolean
+  petCount: number | null
+  roomPreference: string
+  acceptAlternative: boolean
+  petInfo: PetInfo | null
+  contact: ContactInfo
+  agreements: AgreementFlags
+  source: AttributionData
+  status: BookingStatus
+  createdAt: string
+  updatedAt: string
+}
+
+/** 联系工单记录 */
+export interface ContactRecord {
+  id: string
+  subject: string
+  name: string
+  email: string
+  phone: string | null
+  message: string
+  locale: string
+  routedTo: string
+  status: ContactStatus
+  createdAt: string
+}
+
+/** 订阅者记录 */
+export interface SubscriberRecord {
+  id: string
+  email: string
+  interests: string[]
+  locale: string
+  subscribedAt: string
+}
+
+/** 活动兴趣记录 */
+export interface ActivityInterestRecord {
+  id: string
+  activitySlug: string
+  name: string
+  email: string
+  phone: string | null
+  type: InterestType
+  locale: string
+  message: string | null
+  createdAt: string
+}
+
+/** Dashboard 统计数据 */
+export interface DashboardStats {
+  totalBookings: number
+  pendingBookings: number
+  confirmedBookings: number
+  cancelledBookings: number
+  totalContacts: number
+  pendingContacts: number
+  totalSubscribers: number
+  totalActivityInterests: number
+  recentBookings: BookingRecord[]
+}
+
+/** 分页结果 */
+export interface PaginatedResult<T> {
+  data: T[]
+  total: number
+  page: number
+  pageSize: number
+  totalPages: number
+}

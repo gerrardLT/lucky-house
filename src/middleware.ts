@@ -1,31 +1,55 @@
+// src/middleware.ts
+// 链式中间件：/admin 路径走 Auth.js 认证，其他路径走 i18n 语言检测
+
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { auth } from '@/lib/auth/config'
 import { LOCALE_COOKIE_NAME, DEFAULT_LOCALE, isValidLocale } from '@/lib/i18n/config'
 import type { Locale } from '@/lib/i18n/config'
 import { detectLocaleFromHeader } from '@/lib/i18n/locale-detection'
 import { extractLocaleFromPath, getPathWithoutLocale } from '@/lib/i18n/locale-path'
 
 /**
- * i18n 中间件
+ * Admin 认证处理
  *
  * 流程:
- * 1. 跳过静态资源、API 路由和 _next 路径
- * 2. 检查 URL 是否已包含有效的 locale 前缀
- *    - 是: 放行请求
- *    - 否: 进入语言检测流程
- * 3. 语言检测优先级:
- *    a. 检查 cookie（NEXT_LOCALE）
- *    b. 解析 Accept-Language 头
- *    c. 使用默认语言 zh
- * 4. 302 重定向至 /{detected_locale}/{原路径}
+ * 1. 检查 session 是否存在
+ * 2. /admin/login 始终放行（已登录用户由登录页自行重定向）
+ * 3. 其他 /admin 路径无 session 则重定向至登录页
  */
-export function middleware(request: NextRequest) {
+async function handleAdminAuth(request: NextRequest): Promise<NextResponse> {
+  const session = await auth()
+  const { pathname } = request.nextUrl
+
+  // /admin/login 始终公开
+  if (pathname === '/admin/login') {
+    return NextResponse.next()
+  }
+
+  // 无 session → 重定向至登录页
+  if (!session) {
+    const loginUrl = new URL('/admin/login', request.url)
+    loginUrl.searchParams.set('callbackUrl', pathname)
+    return NextResponse.redirect(loginUrl, 302)
+  }
+
+  return NextResponse.next()
+}
+
+/**
+ * i18n 语言检测处理
+ *
+ * 流程:
+ * 1. 检查 URL 是否已包含有效的 locale 前缀 → 放行
+ * 2. 检测语言（cookie → Accept-Language → 默认 zh）
+ * 3. 302 重定向至 /{locale}/{原路径}
+ */
+function handleI18n(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl
 
   // 检查 URL 是否已包含有效的 locale 段
   const pathLocale = extractLocaleFromPath(pathname)
   if (pathLocale) {
-    // URL 已包含有效 locale，放行
     return NextResponse.next()
   }
 
@@ -46,7 +70,6 @@ export function middleware(request: NextRequest) {
   const pathWithoutLocale = getPathWithoutLocale(pathname)
   const search = request.nextUrl.search || ''
 
-  // 构建目标路径: /{locale}{原路径}
   let redirectPath: string
   if (pathWithoutLocale === '/') {
     redirectPath = `/${detectedLocale}/`
@@ -55,9 +78,23 @@ export function middleware(request: NextRequest) {
   }
 
   const redirectUrl = new URL(`${redirectPath}${search}`, request.url)
-
-  // 302 临时重定向
   return NextResponse.redirect(redirectUrl, 302)
+}
+
+/**
+ * 主中间件入口
+ *
+ * - /admin 路径 → Auth.js 认证
+ * - 其他路径 → i18n 语言检测
+ */
+export default async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  if (pathname.startsWith('/admin')) {
+    return handleAdminAuth(request)
+  }
+
+  return handleI18n(request)
 }
 
 /**
@@ -65,19 +102,12 @@ export function middleware(request: NextRequest) {
  *
  * 排除以下路径:
  * - /_next/ (Next.js 内部资源)
- * - /api/ (API 路由)
- * - 静态文件（含扩展名的路径，如 .ico, .svg, .png, .jpg 等）
+ * - /api/ (API 路由，含 /api/auth)
+ * - 静态文件（含扩展名的路径）
+ * - favicon.ico, sitemap.xml, robots.txt
  */
 export const config = {
   matcher: [
-    /*
-     * 匹配所有路径，除了:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     * - 含文件扩展名的静态资源
-     */
     '/((?!api|_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\..*).*)',
   ],
 }

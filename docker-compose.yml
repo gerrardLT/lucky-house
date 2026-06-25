@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:16-alpine
+    container_name: luckyhouse-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-luckyhouse}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-luckyhouse}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-luckyhouse} -d ${POSTGRES_DB:-luckyhouse}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
   web:
     build: .
     container_name: luckyhouse
@@ -9,8 +26,21 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL:-postgresql://luckyhouse:password@db:5432/luckyhouse}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - EMAIL_FROM=${EMAIL_FROM:-noreply@luckyhouse.jp}
+      - AUTH_SECRET=${AUTH_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/zh"]
       interval: 30s
       timeout: 5s
       retries: 3
+
+volumes:
+  pgdata:
+    driver: local

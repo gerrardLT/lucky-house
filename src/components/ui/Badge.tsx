@@ -6,6 +6,10 @@ export interface BadgeProps {
     | 'rendering'
     | 'open'
     | 'maintenance'
+    | 'pending'
+    | 'confirmed'
+    | 'cancelled'
+    | 'resolved'
   children: React.ReactNode
   className?: string
 }
@@ -17,6 +21,10 @@ const variantStyles: Record<BadgeProps['variant'], string> = {
   rendering: 'bg-blue-900/30 text-blue-400 border-blue-700/50',
   maintenance: 'bg-red-900/30 text-red-400 border-red-700/50',
   normal: 'bg-stone-800 text-stone-300 border-stone-600',
+  pending: 'bg-yellow-900/30 text-yellow-400 border-yellow-700/50',
+  confirmed: 'bg-green-900/30 text-green-400 border-green-700/50',
+  cancelled: 'bg-red-900/30 text-red-400 border-red-700/50',
+  resolved: 'bg-blue-900/30 text-blue-400 border-blue-700/50',
 }
 
 export function Badge({ variant, children, className = '' }: BadgeProps) {

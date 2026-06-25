@@ -4,15 +4,10 @@
 
 import { NextResponse } from 'next/server'
 import { subscribeSchema } from '@/lib/schemas/subscribe'
+import { db } from '@/lib/db'
+import { subscribers } from '@/lib/db/schema'
+import { sql } from 'drizzle-orm'
 import type { ApiErrorResponse } from '@/types'
-
-/** MVP 内存存储：订阅记录 */
-const subscribers = new Map<string, {
-  email: string
-  interests: string[]
-  locale: string
-  subscribedAt: string
-}>()
 
 export async function POST(request: Request) {
   try {
@@ -43,27 +38,26 @@ export async function POST(request: Request) {
 
     const data = result.data
 
-    // 存储订阅记录（以 email 为 key 去重，新提交覆盖旧记录的兴趣标签）
-    const existing = subscribers.get(data.email)
+    // Upsert 订阅记录（邮箱去重 + 兴趣标签合并）
+    const id = `sub-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`
     const interests = data.interests || []
 
-    if (existing) {
-      // 合并兴趣标签（去重）
-      const mergedInterests = [...new Set([...existing.interests, ...interests])]
-      subscribers.set(data.email, {
-        ...existing,
-        interests: mergedInterests,
-        locale: data.locale,
-        subscribedAt: new Date().toISOString(),
-      })
-    } else {
-      subscribers.set(data.email, {
+    await db
+      .insert(subscribers)
+      .values({
+        id,
         email: data.email,
         interests,
         locale: data.locale,
-        subscribedAt: new Date().toISOString(),
       })
-    }
+      .onConflictDoUpdate({
+        target: subscribers.email,
+        set: {
+          interests: sql`ARRAY(SELECT DISTINCT unnest(array_cat(${subscribers.interests}, ${interests}::text[])))`,
+          locale: data.locale,
+          subscribedAt: new Date(),
+        },
+      })
 
     return NextResponse.json({
       success: true,

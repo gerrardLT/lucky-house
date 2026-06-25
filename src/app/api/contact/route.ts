@@ -4,6 +4,11 @@
 
 import { NextResponse } from 'next/server'
 import { contactSchema } from '@/lib/schemas/contact'
+import { db } from '@/lib/db'
+import { contacts } from '@/lib/db/schema'
+import { createElement } from 'react'
+import { sendEmail } from '@/lib/email'
+import ContactAutoReplyEmail from '@/lib/email/templates/ContactAutoReply'
 import type { ApiErrorResponse } from '@/types'
 
 /** 主题对应的运营标签/邮箱（MVP 阶段 mock） */
@@ -13,19 +18,6 @@ const SUBJECT_ROUTING: Record<string, string> = {
   activity: 'events@luckyhouse.jp',
   general: 'info@luckyhouse.jp',
 }
-
-/** MVP 内存存储：联系表单提交记录 */
-const contactSubmissions: Array<{
-  id: string
-  subject: string
-  name: string
-  email: string
-  phone?: string
-  message: string
-  locale: string
-  routedTo: string
-  createdAt: string
-}> = []
 
 /** 生成工单 ID */
 function generateTicketId(): string {
@@ -69,27 +61,30 @@ export async function POST(request: Request) {
     // 生成工单 ID
     const ticketId = generateTicketId()
 
-    // 存储联系记录
-    contactSubmissions.push({
+    // 持久化联系记录到 PostgreSQL
+    await db.insert(contacts).values({
       id: ticketId,
       subject: data.subject,
       name: data.name,
       email: data.email,
-      phone: data.phone,
+      phone: data.phone ?? null,
       message: data.message,
       locale: data.locale,
       routedTo,
-      createdAt: new Date().toISOString(),
+      status: 'pending',
     })
 
-    // 自动确认邮件占位（MVP 阶段仅记录日志）
-    // TODO: Phase 1+ 接入邮件服务发送自动确认
-    console.log('[Contact] Auto-confirmation email placeholder:', {
-      ticketId,
-      userEmail: data.email,
-      subject: data.subject,
-      routedTo,
-    })
+    // 发送自动确认邮件（fire-and-forget）
+    void sendEmail(
+      data.email,
+      'Message Received - Luckyhouse',
+      createElement(ContactAutoReplyEmail, {
+        ticketId,
+        name: data.name,
+        subject: data.subject,
+        locale: data.locale,
+      })
+    )
 
     return NextResponse.json({
       success: true,

@@ -4,10 +4,14 @@
 
 import { NextResponse } from 'next/server'
 import { bookingSchema } from '@/lib/schemas/booking'
+import { db } from '@/lib/db'
+import { bookings } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
+import { createElement } from 'react'
+import { sendEmail } from '@/lib/email'
+import BookingConfirmationEmail from '@/lib/email/templates/BookingConfirmation'
+import BookingNotificationEmail from '@/lib/email/templates/BookingNotification'
 import type { ApiErrorResponse } from '@/types'
-
-/** MVP 内存存储：已提交的预约记录（按 idempotencyKey 去重） */
-const submittedBookings = new Map<string, { confirmationId: string; createdAt: string }>()
 
 /** 生成确认编号 */
 function generateConfirmationId(): string {
@@ -46,11 +50,16 @@ export async function POST(request: Request) {
     const data = result.data
 
     // 幂等性检查：如果同一 idempotencyKey 已提交过，返回已有确认号
-    const existing = submittedBookings.get(data.idempotencyKey)
+    const [existing] = await db
+      .select()
+      .from(bookings)
+      .where(eq(bookings.idempotencyKey, data.idempotencyKey))
+      .limit(1)
+
     if (existing) {
       return NextResponse.json({
         success: true,
-        confirmationId: existing.confirmationId,
+        confirmationId: existing.id,
         duplicate: true,
       })
     }
@@ -58,35 +67,70 @@ export async function POST(request: Request) {
     // 生成确认编号
     const confirmationId = generateConfirmationId()
 
-    // 记录归因数据（MVP 阶段仅内存存储）
-    const bookingRecord = {
-      confirmationId,
-      createdAt: new Date().toISOString(),
-      // 归因数据
-      attribution: {
-        sourceUrl: data.source.sourceUrl,
-        utmSource: data.source.utmSource,
-        utmMedium: data.source.utmMedium,
-        utmCampaign: data.source.utmCampaign,
+    // 持久化预约记录到 PostgreSQL（ON CONFLICT 幂等去重）
+    await db
+      .insert(bookings)
+      .values({
+        id: confirmationId,
+        idempotencyKey: data.idempotencyKey,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+        adults: data.adults,
+        children: data.children,
+        rooms: data.rooms,
+        hasPet: data.hasPet,
+        petCount: data.petCount ?? null,
+        roomPreference: data.roomPreference,
+        acceptAlternative: data.acceptAlternative,
+        petInfo: data.petInfo ?? null,
+        contact: data.contact,
+        agreements: data.agreements,
+        source: data.source,
+        status: 'pending',
+      })
+      .onConflictDoNothing({ target: bookings.idempotencyKey })
+
+    // 发送邮件（fire-and-forget，不阻塞响应）
+    /* eslint-disable react/no-children-prop -- children is a data field (number of kids), not React children */
+    void sendEmail(
+      data.contact.email,
+      'Booking Confirmation - Luckyhouse',
+      createElement(BookingConfirmationEmail, {
+        confirmationId,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+        adults: data.adults,
+        children: data.children,
+        rooms: data.rooms,
+        roomPreference: data.roomPreference,
+        hasPet: data.hasPet,
+        contactName: data.contact.name,
         locale: data.source.locale,
-        deviceType: data.source.deviceType,
-        timestamp: data.source.timestamp,
-      },
-    }
+      })
+    )
 
-    // 存储预约记录
-    submittedBookings.set(data.idempotencyKey, bookingRecord)
-
-    // 邮件触发占位（MVP 阶段仅记录日志）
-    // TODO: Phase 1+ 接入邮件服务
-    // - 60秒内发送用户确认邮件（含确认编号与提交摘要）
-    // - 60秒内发送运营通知邮件（含用户信息、宠物信息、来源与 UTM）
-    console.log('[Booking] Email trigger placeholder:', {
-      confirmationId,
-      userEmail: data.contact.email,
-      hasPet: data.hasPet,
-      attribution: bookingRecord.attribution,
-    })
+    void sendEmail(
+      'booking@luckyhouse.jp',
+      `New Booking: ${confirmationId}`,
+      createElement(BookingNotificationEmail, {
+        confirmationId,
+        checkIn: data.checkIn,
+        checkOut: data.checkOut,
+        adults: data.adults,
+        children: data.children,
+        rooms: data.rooms,
+        roomPreference: data.roomPreference,
+        hasPet: data.hasPet,
+        petInfo: data.petInfo ?? null,
+        contactName: data.contact.name,
+        contactEmail: data.contact.email,
+        contactPhone: data.contact.phone,
+        country: data.contact.country,
+        preferredChannel: data.contact.preferredChannel,
+        source: data.source,
+      })
+    )
+    /* eslint-enable react/no-children-prop */
 
     return NextResponse.json({
       success: true,

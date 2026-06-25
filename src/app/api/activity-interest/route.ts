@@ -4,20 +4,12 @@
 
 import { NextResponse } from 'next/server'
 import { activityInterestSchema } from '@/lib/schemas/activity-interest'
+import { db } from '@/lib/db'
+import { activityInterests } from '@/lib/db/schema'
+import { createElement } from 'react'
+import { sendEmail } from '@/lib/email'
+import ActivityConfirmationEmail from '@/lib/email/templates/ActivityConfirmation'
 import type { ApiErrorResponse } from '@/types'
-
-/** MVP 内存存储：活动兴趣/报名记录 */
-const activityRegistrations: Array<{
-  id: string
-  activitySlug: string
-  name: string
-  email: string
-  phone?: string
-  type: 'interest' | 'register'
-  locale: string
-  message?: string
-  createdAt: string
-}> = []
 
 /** 生成登记 ID */
 function generateRegistrationId(): string {
@@ -58,27 +50,30 @@ export async function POST(request: Request) {
     // 生成登记 ID
     const registrationId = generateRegistrationId()
 
-    // 存储登记记录
-    activityRegistrations.push({
+    // 持久化活动兴趣记录到 PostgreSQL
+    await db.insert(activityInterests).values({
       id: registrationId,
       activitySlug: data.activitySlug,
       name: data.name,
       email: data.email,
-      phone: data.phone,
+      phone: data.phone ?? null,
       type: data.type,
       locale: data.locale,
-      message: data.message,
-      createdAt: new Date().toISOString(),
+      message: data.message ?? null,
     })
 
-    // 确认邮件占位（MVP 阶段仅记录日志）
-    // TODO: Phase 1+ 接入邮件服务发送确认邮件
-    console.log('[Activity Interest] Confirmation email placeholder:', {
-      registrationId,
-      userEmail: data.email,
-      activitySlug: data.activitySlug,
-      type: data.type,
-    })
+    // 发送确认邮件（fire-and-forget）
+    void sendEmail(
+      data.email,
+      'Activity Registration - Luckyhouse',
+      createElement(ActivityConfirmationEmail, {
+        registrationId,
+        activityName: data.activitySlug,
+        type: data.type,
+        name: data.name,
+        locale: data.locale,
+      })
+    )
 
     // 根据类型返回不同的成功消息
     const message = data.type === 'register'
