@@ -12,7 +12,7 @@ import type { ApiErrorResponse } from '@/types'
 /** 将 JS 字符串数组转为 PostgreSQL ARRAY 字面量 */
 function toPgArray(arr: string[]): string {
   if (arr.length === 0) return "'{}'::text[]"
-  const escaped = arr.map((s) => `"${s.replace(/"/g, '\\"')}"`).join(',')
+  const escaped = arr.map((s) => `'${s.replace(/'/g, "''")}'`).join(',')
   return `ARRAY[${escaped}]::text[]`
 }
 
