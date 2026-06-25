@@ -91,7 +91,8 @@ export async function POST(request: Request) {
       ticketId,
       message: '您的消息已收到，我们会尽快回复。',
     })
-  } catch {
+  } catch (error) {
+    console.error('[Contact API] Error:', error)
     const errorResponse: ApiErrorResponse = {
       success: false,
       error: {

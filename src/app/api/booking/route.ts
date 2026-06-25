@@ -136,7 +136,8 @@ export async function POST(request: Request) {
       success: true,
       confirmationId,
     })
-  } catch {
+  } catch (error) {
+    console.error('[Booking API] Error:', error)
     const errorResponse: ApiErrorResponse = {
       success: false,
       error: {

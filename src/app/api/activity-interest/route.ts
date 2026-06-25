@@ -85,7 +85,8 @@ export async function POST(request: Request) {
       registrationId,
       message,
     })
-  } catch {
+  } catch (error) {
+    console.error('[ActivityInterest API] Error:', error)
     const errorResponse: ApiErrorResponse = {
       success: false,
       error: {

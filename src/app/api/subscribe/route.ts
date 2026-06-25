@@ -63,7 +63,8 @@ export async function POST(request: Request) {
       success: true,
       message: '订阅成功',
     })
-  } catch {
+  } catch (error) {
+    console.error('[Subscribe API] Error:', error)
     const errorResponse: ApiErrorResponse = {
       success: false,
       error: {
