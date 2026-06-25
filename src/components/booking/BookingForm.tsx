@@ -28,9 +28,9 @@ const navLabels: Record<Locale, Record<string, string>> = {
 }
 
 const errorMessages: Record<Locale, Record<string, string>> = {
-  zh: { submitFailed: '提交失败，请重试或联系客服。', networkError: '网络错误，请检查网络连接后重试。' },
-  ja: { submitFailed: '送信に失敗しました。再度お試しいただくか、カスタマーサービスにご連絡ください。', networkError: 'ネットワークエラーです。接続を確認して再度お試しください。' },
-  en: { submitFailed: 'Submission failed. Please try again or contact customer service.', networkError: 'Network error. Please check your connection and try again.' },
+  zh: { submitFailed: '提交失败，请重试或联系客服。', networkError: '网络错误，请检查网络连接后重试。', noPetStep: '您未选择携带宠物，此步骤将自动跳过。' },
+  ja: { submitFailed: '送信に失敗しました。再度お試しいただくか、カスタマーサービスにご連絡ください。', networkError: 'ネットワークエラーです。接続を確認して再度お試しください。', noPetStep: 'ペット同伴なしのため、このステップはスキップされます。' },
+  en: { submitFailed: 'Submission failed. Please try again or contact customer service.', networkError: 'Network error. Please check your connection and try again.', noPetStep: 'You are not traveling with a pet. This step will be skipped.' },
 }
 
 /**
@@ -105,13 +105,10 @@ export function BookingForm({ locale, faqRules }: BookingFormProps) {
   // Determine if Step 3 should be shown
   const hasPet = step1Data.hasPet === true
 
-  // Compute actual step sequence based on hasPet
+  // Always show all 5 steps — Step 3 shows simplified UI when no pet
   const stepSequence = useMemo(() => {
-    if (hasPet) {
-      return [1, 2, 3, 4, 5]
-    }
-    return [1, 2, 4, 5] // Skip Step 3
-  }, [hasPet])
+    return [1, 2, 3, 4, 5]
+  }, [])
 
   // Current position in the step sequence
   const currentPositionIndex = stepSequence.indexOf(currentStep)
@@ -169,6 +166,11 @@ export function BookingForm({ locale, faqRules }: BookingFormProps) {
         result = step2Schema.safeParse(step2Data) as typeof result
         break
       case 3:
+        // Skip validation when no pet — Step 3 is a pass-through
+        if (!hasPet) {
+          setErrors({})
+          return true
+        }
         result = step3Schema.safeParse(step3Data) as typeof result
         break
       case 4:
@@ -358,14 +360,24 @@ export function BookingForm({ locale, faqRules }: BookingFormProps) {
           />
         )}
 
-        {/* Step 3 - Only rendered when hasPet === true */}
-        {currentStep === 3 && hasPet && (
-          <Step3PetInfo
-            data={step3Data}
-            errors={errors}
-            locale={locale}
-            onChange={handleStep3Change}
-          />
+        {/* Step 3 — Full form when hasPet, simplified skip-view when no pet */}
+        {currentStep === 3 && (
+          hasPet ? (
+            <Step3PetInfo
+              data={step3Data}
+              errors={errors}
+              locale={locale}
+              onChange={handleStep3Change}
+            />
+          ) : (
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold text-white">{stepLabels[locale][2]}</h2>
+              <div className="flex items-center gap-4 p-5 rounded-lg bg-[#1a1a1a] border border-stone-700/50">
+                <span className="text-2xl flex-shrink-0" aria-hidden="true">🐾</span>
+                <p className="text-sm text-stone-400">{errorMessages[locale].noPetStep}</p>
+              </div>
+            </div>
+          )
         )}
 
         {/* Step 4 */}

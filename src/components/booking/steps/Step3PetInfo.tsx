@@ -199,12 +199,12 @@ export function Step3PetInfo({ data, errors, locale, onChange }: Step3Props) {
           <Select
             id="vaccineStatus"
             locale={locale}
-            value={data.vaccineStatus || ''}
+            value={data.vaccineStatus || 'placeholder'}
             options={[
-              { value: '', label: '--' },
+              { value: 'placeholder', label: '--' },
               ...vaccineOptions.map((opt) => ({ value: opt, label: t[opt] })),
             ]}
-            onChange={(v) => onChange('vaccineStatus', v)}
+            onChange={(v) => onChange('vaccineStatus', v === 'placeholder' ? '' : v)}
             aria-invalid={!!errors.vaccineStatus}
             aria-describedby={errors.vaccineStatus ? 'vaccineStatus-error' : undefined}
           />
@@ -219,12 +219,12 @@ export function Step3PetInfo({ data, errors, locale, onChange }: Step3Props) {
           <Select
             id="rabiesStatus"
             locale={locale}
-            value={data.rabiesStatus || ''}
+            value={data.rabiesStatus || 'placeholder'}
             options={[
-              { value: '', label: '--' },
+              { value: 'placeholder', label: '--' },
               ...vaccineOptions.map((opt) => ({ value: opt, label: t[opt] })),
             ]}
-            onChange={(v) => onChange('rabiesStatus', v)}
+            onChange={(v) => onChange('rabiesStatus', v === 'placeholder' ? '' : v)}
             aria-invalid={!!errors.rabiesStatus}
             aria-describedby={errors.rabiesStatus ? 'rabiesStatus-error' : undefined}
           />

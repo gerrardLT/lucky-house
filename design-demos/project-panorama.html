@@ -2,6 +2,804 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luckyhouse 项目全景图</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #8b8d97;
+    --accent: #6ee7b7;
+    --accent2: #93c5fd;
+    --accent3: #fbbf24;
+    --accent4: #f472b6;
+    --accent5: #a78bfa;
+    --accent6: #fb923c;
+    --radius: 10px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    padding: 40px 24px; line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    text-align: center; margin-bottom: 48px;
+    padding-bottom: 32px; border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 32px; font-weight: 700; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header .subtitle { color: var(--muted); font-size: 15px; }
+  .header .meta {
+    display: flex; gap: 24px; justify-content: center; margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .header .meta span {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 4px 14px; border-radius: 20px; font-size: 13px; color: var(--muted);
+  }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-size: 18px; font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* Grid layouts */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a3d4a; }
+  .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+  .card .items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 6px;
+    font-size: 12px; font-weight: 500;
+  }
+
+  /* Color variants */
+  .tag-green { background: #064e3b; color: #6ee7b7; }
+  .tag-blue { background: #1e3a5f; color: #93c5fd; }
+  .tag-yellow { background: #451a03; color: #fbbf24; }
+  .tag-pink { background: #4a0d2e; color: #f472b6; }
+  .tag-purple { background: #2e1065; color: #a78bfa; }
+  .tag-orange { background: #431407; color: #fb923c; }
+  .tag-gray { background: #27272a; color: #a1a1aa; }
+
+  /* Architecture diagram */
+  .arch-flow {
+    display: flex; align-items: stretch; gap: 0;
+    overflow-x: auto; padding: 8px 0;
+  }
+  .arch-layer {
+    flex: 1; min-width: 160px; background: var(--card);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; text-align: center; position: relative;
+  }
+  .arch-layer h4 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .arch-layer ul { list-style: none; font-size: 13px; }
+  .arch-layer li {
+    padding: 4px 0; color: var(--muted);
+    border-bottom: 1px solid #1f2230;
+  }
+  .arch-layer li:last-child { border-bottom: none; }
+  .arch-arrow {
+    display: flex; align-items: center; color: var(--muted);
+    font-size: 20px; padding: 0 4px; flex-shrink: 0;
+  }
+
+  /* Page map */
+  .page-map {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .page-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .page-item .route { font-size: 12px; color: var(--accent); font-family: monospace; }
+  .page-item .name { font-size: 14px; font-weight: 500; }
+  .page-item .desc { font-size: 11px; color: var(--muted); }
+  .page-item .status {
+    font-size: 11px; margin-top: 4px;
+    padding: 2px 8px; border-radius: 4px; align-self: flex-start;
+  }
+  .status-done { background: #064e3b; color: #6ee7b7; }
+  .status-partial { background: #451a03; color: #fbbf24; }
+
+  /* Component tree */
+  .comp-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .comp-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px;
+  }
+  .comp-item .folder { font-size: 12px; color: var(--accent2); font-family: monospace; margin-bottom: 6px; }
+  .comp-item .count { font-size: 24px; font-weight: 700; }
+  .comp-item .label { font-size: 12px; color: var(--muted); }
+  .comp-item .files { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* Data flow */
+  .data-flow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; flex-wrap: wrap; padding: 16px 0;
+  }
+  .flow-node {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 20px; text-align: center;
+    min-width: 120px;
+  }
+  .flow-node .icon { font-size: 24px; margin-bottom: 4px; }
+  .flow-node .label { font-size: 13px; font-weight: 500; }
+  .flow-node .sub { font-size: 11px; color: var(--muted); }
+  .flow-arrow { color: var(--muted); font-size: 18px; padding: 0 8px; }
+
+  /* Stats bar */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 40px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; text-align: center;
+  }
+  .stat .num { font-size: 28px; font-weight: 700; }
+  .stat .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* i18n */
+  .i18n-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .i18n-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; text-align: center;
+  }
+  .i18n-card .flag { font-size: 28px; margin-bottom: 6px; }
+  .i18n-card .lang { font-size: 14px; font-weight: 600; }
+  .i18n-card .files { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* API routes */
+  .api-list { display: flex; flex-direction: column; gap: 8px; }
+  .api-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .api-method {
+    font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 4px; font-family: monospace;
+  }
+  .method-post { background: #064e3b; color: #6ee7b7; }
+  .api-path { font-family: monospace; font-size: 13px; }
+  .api-desc { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+  /* Phase timeline */
+  .timeline { display: flex; gap: 0; align-items: stretch; }
+  .phase {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    padding: 16px; position: relative;
+  }
+  .phase:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .phase:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+  .phase h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .phase ul { list-style: none; font-size: 12px; color: var(--muted); }
+  .phase li { padding: 2px 0; }
+  .phase .version {
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    display: inline-block; margin-bottom: 8px;
+  }
+
+  /* Separator */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Luckyhouse 项目全景图</h1>
+    <div class="subtitle">福岛岳温泉零碳宠物营地 & 温泉酒店 — C端官方网站</div>
+    <div class="meta">
+      <span>Next.js 15 + React 19</span>
+      <span>TypeScript</span>
+      <span>Tailwind CSS 4</span>
+      <span>pnpm + Turbopack</span>
+      <span>3 语言 i18n</span>
+      <span>Docker 部署</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat"><div class="num" style="color:var(--accent)">17</div><div class="label">页面路由</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent2)">77</div><div class="label">组件文件</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent3)">4</div><div class="label">API 路由</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent4)">8</div><div class="label">数据文件</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent5)">36</div><div class="label">i18n 翻译文件</div></div>
+    <div class="stat"><div class="num" style="color:var(--accent6)">30+</div><div class="label">测试文件</div></div>
+  </div>
+
+  <!-- Architecture -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent)"></div>系统架构</div>
+    <div class="arch-flow">
+      <div class="arch-layer">
+        <h4 style="color:var(--accent4)">用户层</h4>
+        <ul>
+          <li>携宠家庭</li>
+          <li>普通温泉客</li>
+          <li>亲子家庭</li>
+          <li>宠物社群/KOL</li>
+          <li>海外游客</li>
+        </ul>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-layer">
+        <h4 style="color:var(--accent2)">中间件</h4>
+        <ul>
+          <li>i18n 路由重定向</li>
+          <li>Locale 检测</li>
+          <li>Cookie / Accept-Lang</li>
+          <li>静态资源跳过</li>
+        </ul>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-layer">
+        <h4 style="color:var(--accent)">应用层</h4>
+        <ul>
+          <li>App Router 页面</li>
+          <li>Server Components</li>
+          <li>Client Components</li>
+          <li>API Routes</li>
+        </ul>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-layer">
+        <h4 style="color:var(--accent3)">数据层</h4>
+        <ul>
+          <li>JSON 静态数据</li>
+          <li>Zod Schema 校验</li>
+          <li>CMS 接口 (lib/cms)</li>
+          <li>i18n 翻译系统</li>
+        </ul>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-layer">
+        <h4 style="color:var(--accent5)">基础设施</h4>
+        <ul>
+          <li>Docker 容器化</li>
+          <li>Next.js standalone</li>
+          <li>健康检查</li>
+          <li>SEO / Sitemap</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Pages -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent2)"></div>页面路由地图 <span style="font-size:12px;color:var(--muted);font-weight:400">[locale] = /zh /ja /en</span></div>
+    <div class="page-map">
+      <div class="page-item">
+        <div class="route">/[locale]/</div>
+        <div class="name">首页 Home</div>
+        <div class="desc">Hero + 价值卡 + 房型预览 + CTA</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/stay</div>
+        <div class="name">住宿房型 Stay</div>
+        <div class="desc">房型列表 + 筛选 + 对比表</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/stay/[slug]</div>
+        <div class="name">房型详情 Room</div>
+        <div class="desc">图片轮播 + 设施 + 预订侧栏</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/pet-friendly</div>
+        <div class="name">宠物友好</div>
+        <div class="desc">宠物服务 + 规则 + 流程</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/facilities</div>
+        <div class="name">温泉与设施</div>
+        <div class="desc">温泉 + Dog Run + BBQ + 零碳</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/activities</div>
+        <div class="name">活动社群</div>
+        <div class="desc">活动日历 + 兴趣登记</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/explore</div>
+        <div class="name">周边探索</div>
+        <div class="desc">交通 + 景点 + 行程推荐</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/gallery</div>
+        <div class="name">画廊 Gallery</div>
+        <div class="desc">分类筛选 + 瀑布流 + Lightbox</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/faq</div>
+        <div class="name">FAQ / Rules</div>
+        <div class="desc">搜索 + 分类折叠</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/booking</div>
+        <div class="name">预约预订</div>
+        <div class="desc">5步分步表单</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/booking/success</div>
+        <div class="name">预约成功</div>
+        <div class="desc">确认编号 + 后续流程</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/contact</div>
+        <div class="name">联系我们</div>
+        <div class="desc">分流表单 + 地图 + 社交</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/privacy</div>
+        <div class="name">隐私政策</div>
+        <div class="desc">数据收集 + Cookie + GDPR</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/terms</div>
+        <div class="name">预订条款</div>
+        <div class="desc">入住 + 取消 + 退款 + 赔偿</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+      <div class="page-item">
+        <div class="route">/[locale]/pet-rules</div>
+        <div class="name">宠物入住规则</div>
+        <div class="desc">品种 + 体型 + 疫苗 + 赔偿</div>
+        <div class="status status-done">✅ 已实现</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- API Routes -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent3)"></div>API 路由</div>
+    <div class="api-list">
+      <div class="api-item">
+        <span class="api-method method-post">POST</span>
+        <span class="api-path">/api/booking</span>
+        <span class="api-desc">预约/候补名单提交</span>
+      </div>
+      <div class="api-item">
+        <span class="api-method method-post">POST</span>
+        <span class="api-path">/api/contact</span>
+        <span class="api-desc">联系咨询表单提交</span>
+      </div>
+      <div class="api-item">
+        <span class="api-method method-post">POST</span>
+        <span class="api-path">/api/subscribe</span>
+        <span class="api-desc">邮件订阅 / 开业通知</span>
+      </div>
+      <div class="api-item">
+        <span class="api-method method-post">POST</span>
+        <span class="api-path">/api/activity-interest</span>
+        <span class="api-desc">活动兴趣登记</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Components -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent4)"></div>组件架构 <span style="font-size:12px;color:var(--muted);font-weight:400">src/components/</span></div>
+    <div class="comp-grid">
+      <div class="comp-item">
+        <div class="folder">ui/</div>
+        <div class="count" style="color:var(--accent)">20</div>
+        <div class="label">基础 UI 组件</div>
+        <div class="files">Button, Card, Badge, Accordion, DatePicker, Select, Lightbox, ImageCarousel, StepIndicator, PriceDisplay, MagneticButton, FilterBar, PawDivider…</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">layout/</div>
+        <div class="count" style="color:var(--accent2)">9</div>
+        <div class="label">布局组件</div>
+        <div class="files">Header, Footer, Breadcrumb, MobileDrawerNav, LanguageSwitcher, CookieConsent, FooterNewsletterForm…</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">booking/</div>
+        <div class="count" style="color:var(--accent3)">7</div>
+        <div class="label">预约流程组件</div>
+        <div class="files">BookingForm, Step1~Step5 (日期/房型/宠物/联系/规则)</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">home/</div>
+        <div class="count" style="color:var(--accent4)">4</div>
+        <div class="label">首页组件</div>
+        <div class="files">HeroSection, BookingWidget, ValueCards</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">stay/</div>
+        <div class="count" style="color:var(--accent5)">3</div>
+        <div class="label">住宿组件</div>
+        <div class="files">RoomCard, RoomGrid, RoomComparisonTable</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">其他业务组件</div>
+        <div class="count" style="color:var(--accent6)">9</div>
+        <div class="label">activities / contact / facilities / faq / gallery / pet</div>
+        <div class="files">ActivitiesGrid, InterestTagsForm, ContactForm, FacilitiesGrid, FAQSection, GalleryGrid, PetServiceList</div>
+      </div>
+      <div class="comp-item">
+        <div class="folder">motion/</div>
+        <div class="count" style="color:var(--accent)">1</div>
+        <div class="label">动效组件</div>
+        <div class="files">Motion 动画封装 (642行)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Data Layer -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent5)"></div>数据层</div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>📦 静态数据文件 <span style="color:var(--muted);font-weight:400">src/data/</span></h3>
+        <div class="items">
+          <span class="tag tag-green">rooms.json</span>
+          <span class="tag tag-green">homepage.json</span>
+          <span class="tag tag-green">facilities.json</span>
+          <span class="tag tag-green">activities.json</span>
+          <span class="tag tag-green">explore.json</span>
+          <span class="tag tag-green">gallery.json</span>
+          <span class="tag tag-green">faq.json</span>
+          <span class="tag tag-green">site-config.json</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🔒 Zod Schema 校验 <span style="color:var(--muted);font-weight:400">src/lib/schemas/</span></h3>
+        <div class="items">
+          <span class="tag tag-blue">booking.ts</span>
+          <span class="tag tag-blue">contact.ts</span>
+          <span class="tag tag-blue">subscribe.ts</span>
+          <span class="tag tag-blue">activity-interest.ts</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🌐 i18n 翻译系统 <span style="color:var(--muted);font-weight:400">src/lib/i18n/</span></h3>
+        <div class="items">
+          <span class="tag tag-purple">config.ts — 语言配置</span>
+          <span class="tag tag-purple">translate.ts — 翻译函数</span>
+          <span class="tag tag-purple">locale-path.ts — 路径处理</span>
+          <span class="tag tag-purple">locale-detection.ts — 语言检测</span>
+          <span class="tag tag-purple">hreflang.ts — SEO hreflang</span>
+          <span class="tag tag-purple">locale-typo.ts — 容错纠正</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🛠 工具库 <span style="color:var(--muted);font-weight:400">src/lib/</span></h3>
+        <div class="items">
+          <span class="tag tag-orange">cms.ts — CMS 数据加载</span>
+          <span class="tag tag-orange">types/index.ts — 全局类型 (308行)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- i18n -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent6)"></div>多语言 i18n 体系</div>
+    <div class="i18n-grid">
+      <div class="i18n-card">
+        <div class="flag">🇨🇳</div>
+        <div class="lang">中文 (zh)</div>
+        <div class="files">12 个翻译文件 · 默认语言</div>
+        <div style="margin-top:8px">
+          <span class="tag tag-gray" style="font-size:11px">common</span>
+          <span class="tag tag-gray" style="font-size:11px">home</span>
+          <span class="tag tag-gray" style="font-size:11px">stay</span>
+          <span class="tag tag-gray" style="font-size:11px">booking</span>
+          <span class="tag tag-gray" style="font-size:11px">contact</span>
+          <span class="tag tag-gray" style="font-size:11px">pet</span>
+          <span class="tag tag-gray" style="font-size:11px">facilities</span>
+          <span class="tag tag-gray" style="font-size:11px">activities</span>
+          <span class="tag tag-gray" style="font-size:11px">explore</span>
+          <span class="tag tag-gray" style="font-size:11px">gallery</span>
+          <span class="tag tag-gray" style="font-size:11px">faq</span>
+          <span class="tag tag-gray" style="font-size:11px">legal</span>
+        </div>
+      </div>
+      <div class="i18n-card">
+        <div class="flag">🇯🇵</div>
+        <div class="lang">日文 (ja)</div>
+        <div class="files">12 个翻译文件 · 首发语言</div>
+        <div style="margin-top:8px">
+          <span class="tag tag-gray" style="font-size:11px">common</span>
+          <span class="tag tag-gray" style="font-size:11px">home</span>
+          <span class="tag tag-gray" style="font-size:11px">stay</span>
+          <span class="tag tag-gray" style="font-size:11px">booking</span>
+          <span class="tag tag-gray" style="font-size:11px">contact</span>
+          <span class="tag tag-gray" style="font-size:11px">pet</span>
+          <span class="tag tag-gray" style="font-size:11px">facilities</span>
+          <span class="tag tag-gray" style="font-size:11px">activities</span>
+          <span class="tag tag-gray" style="font-size:11px">explore</span>
+          <span class="tag tag-gray" style="font-size:11px">gallery</span>
+          <span class="tag tag-gray" style="font-size:11px">faq</span>
+          <span class="tag tag-gray" style="font-size:11px">legal</span>
+        </div>
+      </div>
+      <div class="i18n-card">
+        <div class="flag">🇬🇧</div>
+        <div class="lang">英文 (en)</div>
+        <div class="files">12 个翻译文件 · Phase 1</div>
+        <div style="margin-top:8px">
+          <span class="tag tag-gray" style="font-size:11px">common</span>
+          <span class="tag tag-gray" style="font-size:11px">home</span>
+          <span class="tag tag-gray" style="font-size:11px">stay</span>
+          <span class="tag tag-gray" style="font-size:11px">booking</span>
+          <span class="tag tag-gray" style="font-size:11px">contact</span>
+          <span class="tag tag-gray" style="font-size:11px">pet</span>
+          <span class="tag tag-gray" style="font-size:11px">facilities</span>
+          <span class="tag tag-gray" style="font-size:11px">activities</span>
+          <span class="tag tag-gray" style="font-size:11px">explore</span>
+          <span class="tag tag-gray" style="font-size:11px">gallery</span>
+          <span class="tag tag-gray" style="font-size:11px">faq</span>
+          <span class="tag tag-gray" style="font-size:11px">legal</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--muted)">
+      中间件流程: Cookie → Accept-Language → 默认 zh → 302 重定向至 /{locale}/{path}
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Tech Stack -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent)"></div>技术栈详情</div>
+    <div class="grid-3">
+      <div class="card">
+        <h3 style="color:var(--accent)">核心框架</h3>
+        <div class="items">
+          <span class="tag tag-green">Next.js 15.3</span>
+          <span class="tag tag-green">React 19</span>
+          <span class="tag tag-green">TypeScript 5</span>
+          <span class="tag tag-green">App Router</span>
+          <span class="tag tag-green">Turbopack</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent2)">UI & 样式</h3>
+        <div class="items">
+          <span class="tag tag-blue">Tailwind CSS 4</span>
+          <span class="tag tag-blue">Motion (Framer)</span>
+          <span class="tag tag-blue">Radix UI</span>
+          <span class="tag tag-blue">react-day-picker</span>
+          <span class="tag tag-blue">date-fns</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent3)">数据 & 校验</h3>
+        <div class="items">
+          <span class="tag tag-yellow">Zod 4</span>
+          <span class="tag tag-yellow">JSON 静态数据</span>
+          <span class="tag tag-yellow">CMS 抽象层</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent4)">测试</h3>
+        <div class="items">
+          <span class="tag tag-pink">Vitest 3</span>
+          <span class="tag tag-pink">Testing Library</span>
+          <span class="tag tag-pink">fast-check (属性测试)</span>
+          <span class="tag tag-pink">jsdom</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent5)">代码质量</h3>
+        <div class="items">
+          <span class="tag tag-purple">ESLint 9</span>
+          <span class="tag tag-purple">typescript-eslint</span>
+          <span class="tag tag-purple">jsx-a11y</span>
+          <span class="tag tag-purple">react-hooks</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="color:var(--accent6)">部署 & 工具链</h3>
+        <div class="items">
+          <span class="tag tag-orange">pnpm</span>
+          <span class="tag tag-orange">Docker</span>
+          <span class="tag tag-orange">docker-compose</span>
+          <span class="tag tag-orange">standalone output</span>
+          <span class="tag tag-orange">PostCSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Data Flow -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent2)"></div>用户转化流程</div>
+    <div class="data-flow">
+      <div class="flow-node">
+        <div class="icon">🔍</div>
+        <div class="label">发现</div>
+        <div class="sub">SEO / 社媒 / 搜索</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="icon">🏠</div>
+        <div class="label">首页</div>
+        <div class="sub">Hero + 卖点 + CTA</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="icon">🛏</div>
+        <div class="label">浏览</div>
+        <div class="sub">房型 / 设施 / 宠物</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="icon">❓</div>
+        <div class="label">评估</div>
+        <div class="sub">FAQ / 探索 / 画廊</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="icon">📝</div>
+        <div class="label">预约</div>
+        <div class="sub">5步表单 → 成功页</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="icon">📧</div>
+        <div class="label">跟进</div>
+        <div class="sub">邮件确认 / CRM</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Phases -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--accent3)"></div>版本迭代路线</div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="version" style="background:#064e3b;color:#6ee7b7">V0.5 MVP</div>
+        <h4 style="color:var(--accent)">预上线</h4>
+        <ul>
+          <li>✅ 完整首页+品牌</li>
+          <li>✅ 房型展示+详情</li>
+          <li>✅ 宠物友好页</li>
+          <li>✅ 预约候补表单</li>
+          <li>✅ FAQ + 法律页</li>
+          <li>✅ 多语言(中/日)</li>
+          <li>✅ SEO 基础</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="version" style="background:#1e3a5f;color:#93c5fd">V1.0</div>
+        <h4 style="color:var(--accent2)">正式开业</h4>
+        <ul>
+          <li>○ 库存/价格/支付</li>
+          <li>○ 确认邮件自动化</li>
+          <li>○ 入住规则确认</li>
+          <li>○ CRM 对接</li>
+          <li>○ 英文上线</li>
+          <li>○ 事件埋点</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="version" style="background:#451a03;color:#fbbf24">V1.5</div>
+        <h4 style="color:var(--accent3)">活动运营</h4>
+        <ul>
+          <li>○ 活动日历+报名</li>
+          <li>○ 会员兴趣体系</li>
+          <li>○ 相册 UGC</li>
+          <li>○ A/B 测试</li>
+          <li>○ 天气/地图集成</li>
+          <li>○ OTA 对接</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Directory Structure -->
+  <div class="section">
+    <div class="section-title"><div class="dot" style="background:var(--muted)"></div>项目目录结构</div>
+    <div class="card" style="font-family:monospace;font-size:13px;line-height:2;color:var(--muted)">
+      <span style="color:var(--accent)">Luckyhouse/</span><br>
+      ├── <span style="color:var(--accent2)">src/</span><br>
+      │   ├── <span style="color:var(--accent)">app/</span> — App Router 页面 + API 路由<br>
+      │   │   ├── <span style="color:var(--text)">[locale]/</span> — 15 个国际化页面<br>
+      │   │   ├── <span style="color:var(--text)">api/</span> — 4 个 API 端点<br>
+      │   │   ├── layout.tsx — 根布局<br>
+      │   │   ├── not-found.tsx — 404 页面<br>
+      │   │   ├── robots.ts — SEO robots<br>
+      │   │   └── sitemap.ts — 动态站点地图<br>
+      │   ├── <span style="color:var(--accent4)">components/</span> — 12 个模块目录, 77 个文件<br>
+      │   ├── <span style="color:var(--accent3)">data/</span> — 8 个 JSON 数据文件<br>
+      │   ├── <span style="color:var(--accent5)">i18n/</span> — 3 语言 × 12 模块 = 36 翻译文件<br>
+      │   ├── <span style="color:var(--accent6)">lib/</span> — CMS, i18n, schemas<br>
+      │   ├── <span style="color:var(--accent2)">types/</span> — TypeScript 类型定义<br>
+      │   ├── <span style="color:var(--accent)">test/</span> — 测试工具<br>
+      │   └── middleware.ts — i18n 路由中间件<br>
+      ├── <span style="color:var(--accent2)">public/</span> — 静态资源 (图片/图标/视频/Logo)<br>
+      ├── <span style="color:var(--accent2)">docs/</span> — PRD + 竞品分析 + 线框图 + 设计文档<br>
+      ├── <span style="color:var(--accent2)">design-demos/</span> — HTML 设计变体 Demo<br>
+      ├── <span style="color:var(--accent2)">screenshots/</span> — 页面截图 + 评审截图<br>
+      ├── Dockerfile + docker-compose.yml — 容器化部署<br>
+      └── next.config.ts + tsconfig.json — 构建配置
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:32px 0 16px;color:var(--muted);font-size:12px">
+    Luckyhouse 项目全景图 · 生成于 2026-06-25
+  </div>
+
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=1440">
 <title>Luckyhouse 项目全景图</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
