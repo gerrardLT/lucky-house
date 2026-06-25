@@ -4,7 +4,8 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { DataTable, type Column } from '@/components/admin/DataTable'
+import { Users, Download } from 'lucide-react'
+import { DataTable, DataTableSkeleton, type Column } from '@/components/admin/DataTable'
 import { Pagination } from '@/components/admin/Pagination'
 import type { SubscriberRecord, PaginatedResult } from '@/types'
 
@@ -30,24 +31,25 @@ export default function SubscribersPage() {
       <span className="text-xs text-stone-400">{r.interests.join(', ') || '—'}</span>
     )},
     { key: 'locale', header: 'Locale' },
-    { key: 'subscribedAt', header: 'Subscribed', render: (r) => new Date(r.subscribedAt).toLocaleDateString() },
+    { key: 'subscribedAt', header: 'Subscribed', render: (r) => <span className="text-xs text-stone-500">{new Date(r.subscribedAt).toLocaleDateString()}</span> },
   ]
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-stone-100">Subscribers</h1>
+        <h1 className="text-xl font-semibold text-stone-100">Subscribers</h1>
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- CSV download, not page navigation */}
         <a
           href="/api/admin/subscribers/export"
-          className="px-4 py-2 text-sm bg-stone-800 border border-stone-700 rounded-lg text-stone-300 hover:bg-stone-700 transition-colors"
+          className="inline-flex items-center gap-2 px-3 py-2 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-300 hover:bg-stone-800 transition-colors"
         >
+          <Download className="w-3.5 h-3.5" strokeWidth={1.5} />
           Export CSV
         </a>
       </div>
 
       {loading ? (
-        <p className="text-stone-500">Loading...</p>
+        <DataTableSkeleton columns={4} />
       ) : result ? (
         <>
           <DataTable
@@ -55,6 +57,7 @@ export default function SubscribersPage() {
             data={result.data}
             keyField="id"
             emptyMessage="No subscribers yet"
+            emptyIcon={Users}
           />
           <Pagination page={result.page} totalPages={result.totalPages} onPageChange={setPage} />
         </>

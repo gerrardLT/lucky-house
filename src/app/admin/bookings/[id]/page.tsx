@@ -5,6 +5,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import type { BookingRecord, BookingStatus } from '@/types'
 
@@ -40,30 +41,63 @@ export default function BookingDetailPage() {
     }
   }
 
-  if (loading) return <p className="text-stone-500">Loading...</p>
-  if (!booking) return <p className="text-red-400">Booking not found</p>
+  if (loading) {
+    return (
+      <div>
+        <div className="h-4 w-16 bg-stone-800 rounded animate-pulse mb-6" />
+        <div className="h-7 w-48 bg-stone-800 rounded animate-pulse mb-2" />
+        <div className="h-4 w-32 bg-stone-800 rounded animate-pulse mb-8" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-stone-900 border border-stone-800 rounded-xl p-5">
+              <div className="h-4 w-24 bg-stone-800 rounded animate-pulse mb-4" />
+              {Array.from({ length: 4 }).map((_, j) => (
+                <div key={j} className="h-3.5 bg-stone-800/50 rounded animate-pulse mb-3" />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (!booking) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <p className="text-sm text-red-400">Booking not found</p>
+      </div>
+    )
+  }
 
   const contact = booking.contact as unknown as Record<string, string>
   const petInfo = booking.petInfo as Record<string, unknown> | null
 
   return (
     <div>
-      <button onClick={() => router.back()} className="text-sm text-stone-500 hover:text-stone-300 mb-4">
-        ← Back
+      {/* Back nav */}
+      <button
+        onClick={() => router.back()}
+        className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        Back
       </button>
 
-      <div className="flex items-center justify-between mb-6">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-stone-100">{booking.id}</h1>
-          <p className="text-sm text-stone-500 mt-1">
-            Created: {new Date(booking.createdAt).toLocaleString()}
+          <h1 className="text-xl font-semibold text-stone-100 font-mono">{booking.id}</h1>
+          <p className="text-xs text-stone-500 mt-1">
+            {new Date(booking.createdAt).toLocaleString()}
           </p>
         </div>
         <StatusBadge type="booking" status={booking.status} />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <InfoSection title="Booking Details">
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        {/* Booking Details */}
+        <InfoSection title="Booking Details" icon={Calendar}>
           <InfoRow label="Check-in" value={booking.checkIn} />
           <InfoRow label="Check-out" value={booking.checkOut} />
           <InfoRow label="Adults" value={String(booking.adults)} />
@@ -72,15 +106,17 @@ export default function BookingDetailPage() {
           <InfoRow label="Room Preference" value={booking.roomPreference} />
         </InfoSection>
 
-        <InfoSection title="Contact">
+        {/* Contact */}
+        <InfoSection title="Contact" icon={Users}>
           <InfoRow label="Name" value={contact?.name || ''} />
           <InfoRow label="Email" value={contact?.email || ''} />
           <InfoRow label="Phone" value={contact?.phone || ''} />
           <InfoRow label="Country" value={contact?.country || ''} />
         </InfoSection>
 
+        {/* Pet Info */}
         {booking.hasPet && petInfo && (
-          <InfoSection title="Pet Info">
+          <InfoSection title="Pet Info" icon={PawPrint}>
             <InfoRow label="Type" value={String(petInfo.petType || '')} />
             <InfoRow label="Breed" value={String(petInfo.breed || '')} />
             <InfoRow label="Weight" value={`${petInfo.weight} kg`} />
@@ -88,22 +124,30 @@ export default function BookingDetailPage() {
           </InfoSection>
         )}
 
-        <InfoSection title="Actions">
-          <div className="flex gap-2 mt-2">
-            {(['pending', 'confirmed', 'cancelled'] as BookingStatus[]).map((s) => (
-              <button
-                key={s}
-                onClick={() => updateStatus(s)}
-                disabled={updating || booking.status === s}
-                className={`px-4 py-2 text-sm rounded-lg border transition-colors ${
-                  booking.status === s
-                    ? 'border-amber-500 bg-amber-900/30 text-amber-400'
-                    : 'border-stone-700 text-stone-400 hover:bg-stone-800'
-                } disabled:opacity-50`}
-              >
-                {s.charAt(0).toUpperCase() + s.slice(1)}
-              </button>
-            ))}
+        {/* Actions */}
+        <InfoSection title="Status Actions" icon={MapPin}>
+          <div className="flex gap-2 mt-1">
+            {(['pending', 'confirmed', 'cancelled'] as BookingStatus[]).map((s) => {
+              const isActive = booking.status === s
+              return (
+                <button
+                  key={s}
+                  onClick={() => updateStatus(s)}
+                  disabled={updating || isActive}
+                  className={`flex-1 px-3 py-2 text-xs rounded-lg border transition-colors ${
+                    isActive
+                      ? 'border-amber-600/50 bg-amber-600/10 text-amber-500 font-medium'
+                      : 'border-stone-800 text-stone-500 hover:bg-stone-800 hover:text-stone-300'
+                  } disabled:opacity-50`}
+                >
+                  {updating && !isActive ? (
+                    <Loader2 className="w-3 h-3 animate-spin mx-auto" />
+                  ) : (
+                    s.charAt(0).toUpperCase() + s.slice(1)
+                  )}
+                </button>
+              )
+            })}
           </div>
         </InfoSection>
       </div>
@@ -111,20 +155,31 @@ export default function BookingDetailPage() {
   )
 }
 
-function InfoSection({ title, children }: { title: string; children: React.ReactNode }) {
+function InfoSection({
+  title,
+  icon: Icon,
+  children,
+}: {
+  title: string
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
+  children: React.ReactNode
+}) {
   return (
-    <div className="bg-stone-800 border border-stone-700 rounded-xl p-6">
-      <h2 className="text-lg font-medium text-stone-200 mb-4">{title}</h2>
-      <div className="space-y-3">{children}</div>
+    <div className="bg-stone-900 border border-stone-800 rounded-xl p-5">
+      <div className="flex items-center gap-2 mb-4">
+        <Icon className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
+        <h2 className="text-sm font-medium text-stone-200">{title}</h2>
+      </div>
+      <div className="space-y-2.5">{children}</div>
     </div>
   )
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex justify-between">
-      <span className="text-sm text-stone-500">{label}</span>
-      <span className="text-sm text-stone-200">{value}</span>
+    <div className="flex justify-between items-baseline">
+      <span className="text-xs text-stone-500">{label}</span>
+      <span className="text-xs text-stone-200 font-medium">{value}</span>
     </div>
   )
 }

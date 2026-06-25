@@ -3,54 +3,73 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import {
+  LayoutDashboard,
+  CalendarDays,
+  Mail,
+  Users,
+  Compass,
+  LogOut,
+  Mountain,
+} from 'lucide-react'
 
 const navItems = [
-  { href: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/bookings', label: 'Bookings', icon: '📅' },
-  { href: '/admin/contacts', label: 'Contacts', icon: '✉️' },
-  { href: '/admin/subscribers', label: 'Subscribers', icon: '👥' },
-  { href: '/admin/activities', label: 'Activities', icon: '🎯' },
+  { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin/bookings', label: 'Bookings', icon: CalendarDays },
+  { href: '/admin/contacts', label: 'Contacts', icon: Mail },
+  { href: '/admin/subscribers', label: 'Subscribers', icon: Users },
+  { href: '/admin/activities', label: 'Activities', icon: Compass },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="w-64 min-h-screen bg-stone-900 border-r border-stone-700 flex flex-col">
-      <div className="p-6 border-b border-stone-700">
-        <Link href="/admin/dashboard" className="text-xl font-bold text-amber-400">
-          Luckyhouse
+    <aside className="w-60 min-h-screen bg-stone-900 border-r border-stone-800 flex flex-col">
+      {/* Brand */}
+      <div className="px-5 py-5 border-b border-stone-800">
+        <Link href="/admin/dashboard" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+            <Mountain className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <span className="text-sm font-semibold text-stone-100 block leading-tight">Luckyhouse</span>
+            <span className="text-[10px] text-stone-500 uppercase tracking-wider">Admin</span>
+          </div>
         </Link>
-        <p className="text-xs text-stone-500 mt-1">Admin Dashboard</p>
       </div>
 
-      <nav className="flex-1 p-4 space-y-1">
+      {/* Navigation */}
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
         {navItems.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+          const Icon = item.icon
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-colors ${
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-colors ${
                 isActive
-                  ? 'bg-amber-900/30 text-amber-400 font-medium'
+                  ? 'bg-amber-600/10 text-amber-500 font-medium'
                   : 'text-stone-400 hover:bg-stone-800 hover:text-stone-200'
               }`}
             >
-              <span>{item.icon}</span>
+              <Icon className="w-4 h-4 shrink-0" strokeWidth={isActive ? 2 : 1.5} />
               <span>{item.label}</span>
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-4 border-t border-stone-700">
+      {/* Sign Out */}
+      <div className="px-3 py-4 border-t border-stone-800">
         <form action="/api/auth/signout" method="POST">
           <button
             type="submit"
-            className="w-full text-left px-4 py-2.5 text-sm text-stone-500 hover:text-stone-300 transition-colors"
+            className="flex items-center gap-3 w-full px-3 py-2 text-[13px] text-stone-500 hover:text-stone-300 rounded-lg hover:bg-stone-800 transition-colors"
           >
-            ← Sign Out
+            <LogOut className="w-4 h-4" strokeWidth={1.5} />
+            <span>Sign Out</span>
           </button>
         </form>
       </div>
