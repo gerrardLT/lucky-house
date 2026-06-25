@@ -110,7 +110,7 @@ export async function POST(request: Request) {
     )
 
     void sendEmail(
-      'booking@luckyhouse.jp',
+      'booking@luckyhouse-group.com',
       `New Booking: ${confirmationId}`,
       createElement(BookingNotificationEmail, {
         confirmationId,

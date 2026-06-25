@@ -151,7 +151,7 @@ function getTermsContent(locale: Locale) {
 • 协商不成的，由福岛地方法院管辖
 
 如有任何疑问，请联系：
-• 邮箱：info@luckyhouse.jp
+• 邮箱：info@luckyhouse-group.com
 • 电话：待公布`,
         },
       ],
@@ -249,7 +249,7 @@ function getTermsContent(locale: Locale) {
 • 協議で解決しない場合、福島地方裁判所を管轄裁判所とします
 
 ご質問がございましたら、以下までお問い合わせください：
-• メール：info@luckyhouse.jp
+• メール：info@luckyhouse-group.com
 • 電話：後日公開`,
         },
       ],
@@ -347,7 +347,7 @@ function getTermsContent(locale: Locale) {
 • If negotiation fails, the Fukushima District Court shall have jurisdiction
 
 For any questions, please contact:
-• Email: info@luckyhouse.jp
+• Email: info@luckyhouse-group.com
 • Phone: To be announced`,
         },
       ],

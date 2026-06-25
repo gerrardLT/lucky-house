@@ -24,7 +24,7 @@ export const BCP47_MAP: Record<Locale, string> = {
 }
 
 /** 网站基础 URL */
-export const BASE_URL = 'https://luckyhouse.jp'
+export const BASE_URL = 'https://luckyhouse-group.com'
 
 /** 判断是否为有效 locale */
 export function isValidLocale(value: string): value is Locale {

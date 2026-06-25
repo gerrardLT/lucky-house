@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/booking/success'],
     },
-    sitemap: 'https://luckyhouse.jp/sitemap.xml',
+    sitemap: 'https://luckyhouse-group.com/sitemap.xml',
   }
 }

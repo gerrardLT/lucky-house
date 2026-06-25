@@ -13,10 +13,10 @@ import type { ApiErrorResponse } from '@/types'
 
 /** 主题对应的运营标签/邮箱（MVP 阶段 mock） */
 const SUBJECT_ROUTING: Record<string, string> = {
-  accommodation: 'booking@luckyhouse.jp',
-  pet: 'pet@luckyhouse.jp',
-  activity: 'events@luckyhouse.jp',
-  general: 'info@luckyhouse.jp',
+  accommodation: 'booking@luckyhouse-group.com',
+  pet: 'pet@luckyhouse-group.com',
+  activity: 'events@luckyhouse-group.com',
+  general: 'info@luckyhouse-group.com',
 }
 
 /** 生成工单 ID */

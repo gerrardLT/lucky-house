@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getRoomTypes } from '@/lib/cms'
 
-const BASE_URL = 'https://luckyhouse.jp'
+const BASE_URL = 'https://luckyhouse-group.com'
 const locales = ['zh', 'ja', 'en'] as const
 
 // 静态页面路径（不含 locale 前缀）

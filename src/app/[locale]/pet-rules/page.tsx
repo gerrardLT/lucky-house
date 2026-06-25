@@ -192,7 +192,7 @@ function getPetRulesContent(locale: Locale) {
 • 营地将协助搜寻但不承担相关责任
 
 如有任何疑问，请联系：
-• 邮箱：pet@luckyhouse.jp
+• 邮箱：pet@luckyhouse-group.com
 • 电话：待公布`,
         },
       ],
@@ -331,7 +331,7 @@ function getPetRulesContent(locale: Locale) {
 • 施設は捜索に協力しますが、関連する責任は負いません
 
 ご質問がございましたら、以下までお問い合わせください：
-• メール：pet@luckyhouse.jp
+• メール：pet@luckyhouse-group.com
 • 電話：後日公開`,
         },
       ],
@@ -470,7 +470,7 @@ function getPetRulesContent(locale: Locale) {
 • The camp will assist in searching but does not bear related liability
 
 For any questions, please contact:
-• Email: pet@luckyhouse.jp
+• Email: pet@luckyhouse-group.com
 • Phone: To be announced`,
         },
       ],

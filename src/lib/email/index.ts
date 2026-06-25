@@ -6,7 +6,7 @@ import { render } from '@react-email/render'
 import type { ReactElement } from 'react'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM_ADDRESS = process.env.EMAIL_FROM || 'noreply@luckyhouse.jp'
+const FROM_ADDRESS = process.env.EMAIL_FROM || 'noreply@luckyhouse-group.com'
 
 /**
  * 渲染 React Email 模板并发送

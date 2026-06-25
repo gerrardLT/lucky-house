@@ -53,7 +53,7 @@ function createValidBookingData(overrides?: Record<string, unknown>) {
     },
     idempotencyKey: crypto.randomUUID(),
     source: {
-      sourceUrl: 'https://luckyhouse.jp/zh/booking',
+      sourceUrl: 'https://luckyhouse-group.com/zh/booking',
       locale: 'zh',
       deviceType: 'desktop',
       timestamp: new Date().toISOString(),

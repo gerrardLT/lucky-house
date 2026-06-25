@@ -23,10 +23,10 @@ export interface HreflangLink {
  * generateHreflangLinks('/stay')
  * // =>
  * // [
- * //   { locale: 'zh-CN', href: 'https://luckyhouse.jp/zh/stay' },
- * //   { locale: 'ja', href: 'https://luckyhouse.jp/ja/stay' },
- * //   { locale: 'en', href: 'https://luckyhouse.jp/en/stay' },
- * //   { locale: 'x-default', href: 'https://luckyhouse.jp/zh/stay' },
+ * //   { locale: 'zh-CN', href: 'https://luckyhouse-group.com/zh/stay' },
+ * //   { locale: 'ja', href: 'https://luckyhouse-group.com/ja/stay' },
+ * //   { locale: 'en', href: 'https://luckyhouse-group.com/en/stay' },
+ * //   { locale: 'x-default', href: 'https://luckyhouse-group.com/zh/stay' },
  * // ]
  */
 export function generateHreflangLinks(currentPath: string): HreflangLink[] {

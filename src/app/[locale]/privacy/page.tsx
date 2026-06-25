@@ -123,7 +123,7 @@ function getPrivacyContent(locale: Locale) {
         {
           heading: '7. 联系方式',
           body: `如您对本隐私政策有任何疑问或希望行使您的数据权利，请联系：
-• 邮箱：privacy@luckyhouse.jp
+• 邮箱：privacy@luckyhouse-group.com
 • 电话：待公布
 • 地址：福岛县二本松市岳温泉（具体地址待公布）
 
@@ -196,7 +196,7 @@ function getPrivacyContent(locale: Locale) {
         {
           heading: '7. お問い合わせ先',
           body: `本プライバシーポリシーに関するご質問やデータに関する権利の行使については、以下までご連絡ください：
-• メール：privacy@luckyhouse.jp
+• メール：privacy@luckyhouse-group.com
 • 電話：後日公開
 • 住所：福島県二本松市岳温泉（詳細住所は後日公開）
 
@@ -269,7 +269,7 @@ To exercise any of these rights, please contact us using the information below.`
         {
           heading: '7. Contact Information',
           body: `If you have any questions about this privacy policy or wish to exercise your data rights, please contact:
-• Email: privacy@luckyhouse.jp
+• Email: privacy@luckyhouse-group.com
 • Phone: To be announced
 • Address: Dake Onsen, Nihonmatsu City, Fukushima Prefecture (detailed address to be announced)
 

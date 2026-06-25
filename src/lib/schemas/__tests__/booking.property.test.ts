@@ -94,7 +94,7 @@ describe('Property 11: Zod 预约表单 Schema 验证正确性', () => {
       agreements,
       idempotencyKey: crypto.randomUUID(),
       source: {
-        sourceUrl: 'https://luckyhouse.jp/zh/booking',
+        sourceUrl: 'https://luckyhouse-group.com/zh/booking',
         utmSource: 'google',
         locale: 'zh' as const,
         deviceType: 'desktop' as const,
@@ -144,7 +144,7 @@ describe('Property 11: Zod 预约表单 Schema 验证正确性', () => {
             },
             idempotencyKey: crypto.randomUUID(),
             source: {
-              sourceUrl: 'https://luckyhouse.jp/zh/booking',
+              sourceUrl: 'https://luckyhouse-group.com/zh/booking',
               locale: 'zh',
               deviceType: 'desktop',
               timestamp: new Date().toISOString(),
