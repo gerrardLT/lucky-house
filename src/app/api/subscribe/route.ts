@@ -9,6 +9,13 @@ import { subscribers } from '@/lib/db/schema'
 import { sql } from 'drizzle-orm'
 import type { ApiErrorResponse } from '@/types'
 
+/** 将 JS 字符串数组转为 PostgreSQL ARRAY 字面量 */
+function toPgArray(arr: string[]): string {
+  if (arr.length === 0) return "'{}'::text[]"
+  const escaped = arr.map((s) => `"${s.replace(/"/g, '\\"')}"`).join(',')
+  return `ARRAY[${escaped}]::text[]`
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -53,7 +60,7 @@ export async function POST(request: Request) {
       .onConflictDoUpdate({
         target: subscribers.email,
         set: {
-          interests: sql`ARRAY(SELECT DISTINCT unnest(array_cat(${subscribers.interests}, ${interests}::text[])))`,
+          interests: sql`ARRAY(SELECT DISTINCT unnest(array_cat(${subscribers.interests}, ${sql.raw(toPgArray(interests))})))`,
           locale: data.locale,
           subscribedAt: new Date(),
         },
