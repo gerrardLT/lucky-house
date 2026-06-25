@@ -64,7 +64,8 @@ export function Header({ locale }: HeaderProps) {
 
         {/* Right Side: Language Switcher + CTA + Hamburger */}
         <div className="flex items-center gap-4">
-          <LanguageSwitcher locale={locale} />
+          {/* Language Switcher - hidden on mobile to avoid logo overlap; available in drawer */}
+          <LanguageSwitcher locale={locale} className="hidden md:inline-flex" />
 
           {/* CTA Button */}
           <Link

@@ -218,7 +218,7 @@ export default async function ExplorePage({
                   ? '福峳岳温泉の地図'
                   : 'Fukushima Dake Onsen Location Map'
             }
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}&q=${exploreData.mapCenter.lat},${exploreData.mapCenter.lng}&zoom=13&language=${locale}`}
+            src={`https://www.openstreetmap.org/export/embed.html?bbox=${exploreData.mapCenter.lng - 0.04}%2C${exploreData.mapCenter.lat - 0.03}%2C${exploreData.mapCenter.lng + 0.04}%2C${exploreData.mapCenter.lat + 0.03}&layer=mapnik&marker=${exploreData.mapCenter.lat}%2C${exploreData.mapCenter.lng}`}
             width="100%"
             height="420"
             style={{ border: 0, display: 'block' }}

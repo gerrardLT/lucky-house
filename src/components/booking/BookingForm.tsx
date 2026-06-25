@@ -100,7 +100,14 @@ export function BookingForm({ locale, faqRules }: BookingFormProps) {
   const [submitError, setSubmitError] = useState<string | null>(null)
 
   // Idempotency key: generated once per form session
-  const idempotencyKeyRef = useRef<string>(crypto.randomUUID())
+  // crypto.randomUUID() requires HTTPS; use fallback for HTTP environments
+  // useState lazy init avoids React purity lint on useRef default
+  const [idempotencyKey] = useState(() =>
+    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
+  )
+  const idempotencyKeyRef = useRef(idempotencyKey)
 
   // Determine if Step 3 should be shown
   const hasPet = step1Data.hasPet === true
