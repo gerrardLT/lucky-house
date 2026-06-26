@@ -26,7 +26,7 @@ if [ "$CURRENT_COMMIT" = "$NEW_COMMIT" ]; then
 fi
 
 echo "[$(date)] Updating $CURRENT_COMMIT -> $NEW_COMMIT" | tee -a "$LOG_FILE"
-git checkout "$NEW_COMMIT"
+git checkout -f "$NEW_COMMIT"
 
 # Build (no-cache to avoid stale layers)
 echo "[$(date)] Building Docker image..." | tee -a "$LOG_FILE"
@@ -52,7 +52,7 @@ done
 
 # Rollback
 echo "[$(date)] HEALTH CHECK FAILED! Rolling back to $PREV_COMMIT" | tee -a "$LOG_FILE"
-git checkout "$PREV_COMMIT"
+git checkout -f "$PREV_COMMIT"
 docker compose build --no-cache 2>&1 | tee -a "$LOG_FILE"
 docker compose up -d --remove-orphans 2>&1 | tee -a "$LOG_FILE"
 echo "[$(date)] Rollback complete" | tee -a "$LOG_FILE"
