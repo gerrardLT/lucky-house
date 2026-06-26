@@ -18,6 +18,8 @@ jobs:
           port: 22
           script: |
             cd /www/wwwroot/luckyhouse
+            git fetch origin master
+            git checkout -f origin/master
             bash deploy.sh
           script_stop: true
           timeout: 600s
