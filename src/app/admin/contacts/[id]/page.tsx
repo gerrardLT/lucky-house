@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, MessageSquare, CheckCircle2, User, Globe } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ContactRecord } from '@/types'
 
 export default function ContactDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const { t } = useAdminLocale()
   const [contact, setContact] = useState<ContactRecord | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -45,7 +47,7 @@ export default function ContactDetailPage() {
   if (!contact) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-sm text-red-400">Contact not found</p>
+        <p className="text-sm text-red-400">{t('contacts.detail.notFound')}</p>
       </div>
     )
   }
@@ -57,7 +59,7 @@ export default function ContactDetailPage() {
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Back
+        {t('contacts.detail.back')}
       </button>
 
       <div className="flex items-start justify-between mb-6">
@@ -72,26 +74,26 @@ export default function ContactDetailPage() {
         {/* Info section */}
         <div className="flex items-center gap-2 mb-1">
           <User className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-          <span className="text-sm font-medium text-stone-200">Details</span>
+          <span className="text-sm font-medium text-stone-200">{t('contacts.detail.details')}</span>
         </div>
 
-        <InfoRow label="Subject" value={contact.subject} />
-        <InfoRow label="Name" value={contact.name} />
-        <InfoRow label="Email" value={contact.email} />
-        {contact.phone && <InfoRow label="Phone" value={contact.phone} />}
+        <InfoRow label={t('contacts.detail.subject')} value={contact.subject} />
+        <InfoRow label={t('contacts.detail.name')} value={contact.name} />
+        <InfoRow label={t('contacts.detail.email')} value={contact.email} />
+        {contact.phone && <InfoRow label={t('contacts.detail.phone')} value={contact.phone} />}
 
         <div className="flex items-center gap-2 pt-2">
           <Globe className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-          <span className="text-sm font-medium text-stone-200">Routing</span>
+          <span className="text-sm font-medium text-stone-200">{t('contacts.detail.routing')}</span>
         </div>
-        <InfoRow label="Locale" value={contact.locale} />
-        <InfoRow label="Routed To" value={contact.routedTo} />
+        <InfoRow label={t('contacts.detail.locale')} value={contact.locale} />
+        <InfoRow label={t('contacts.detail.routedTo')} value={contact.routedTo} />
 
         {/* Message */}
         <div className="border-t border-stone-800 pt-4">
           <div className="flex items-center gap-2 mb-2">
             <MessageSquare className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-            <span className="text-sm font-medium text-stone-200">Message</span>
+            <span className="text-sm font-medium text-stone-200">{t('contacts.detail.message')}</span>
           </div>
           <p className="text-sm text-stone-300 whitespace-pre-wrap leading-relaxed pl-6">{contact.message}</p>
         </div>
@@ -104,7 +106,7 @@ export default function ContactDetailPage() {
               className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium rounded-lg transition-colors"
             >
               <CheckCircle2 className="w-4 h-4" />
-              Mark as Resolved
+              {t('contacts.detail.markResolved')}
             </button>
           </div>
         )}

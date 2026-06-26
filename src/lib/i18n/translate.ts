@@ -9,6 +9,9 @@ import { DEFAULT_LOCALE, isValidLocale } from './config'
 import zhCommon from '@/i18n/zh/common.json'
 import jaCommon from '@/i18n/ja/common.json'
 import enCommon from '@/i18n/en/common.json'
+import zhAdmin from '@/i18n/zh/admin.json'
+import jaAdmin from '@/i18n/ja/admin.json'
+import enAdmin from '@/i18n/en/admin.json'
 
 /** 翻译文件注册表 */
 type TranslationData = Record<string, unknown>
@@ -17,6 +20,9 @@ const staticTranslations: Record<string, TranslationData> = {
   'zh/common': zhCommon,
   'ja/common': jaCommon,
   'en/common': enCommon,
+  'zh/admin': zhAdmin,
+  'ja/admin': jaAdmin,
+  'en/admin': enAdmin,
 }
 
 /** 动态翻译文件缓存（用于后续动态加载的 namespace） */

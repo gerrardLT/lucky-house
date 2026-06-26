@@ -1,23 +1,9 @@
 // src/components/admin/StatusBadge.tsx
+'use client'
 
-import { Badge } from '@/components/ui/Badge'
+import { Badge, type BadgeProps } from '@/components/ui/Badge'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { BookingStatus, ContactStatus, InterestType } from '@/types'
-
-const bookingStatusMap: Record<BookingStatus, { label: string; variant: 'pending' | 'confirmed' | 'cancelled' }> = {
-  pending: { label: 'Pending', variant: 'pending' },
-  confirmed: { label: 'Confirmed', variant: 'confirmed' },
-  cancelled: { label: 'Cancelled', variant: 'cancelled' },
-}
-
-const contactStatusMap: Record<ContactStatus, { label: string; variant: 'pending' | 'resolved' }> = {
-  pending: { label: 'Pending', variant: 'pending' },
-  resolved: { label: 'Resolved', variant: 'resolved' },
-}
-
-const interestTypeMap: Record<InterestType, { label: string; variant: 'pending' | 'confirmed' }> = {
-  interest: { label: 'Interest', variant: 'pending' },
-  register: { label: 'Registered', variant: 'confirmed' },
-}
 
 interface StatusBadgeProps {
   type: 'booking' | 'contact' | 'interest'
@@ -25,12 +11,25 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ type, status }: StatusBadgeProps) {
-  const config =
-    type === 'booking' ? bookingStatusMap[status as BookingStatus] :
-    type === 'contact' ? contactStatusMap[status as ContactStatus] :
-    interestTypeMap[status as InterestType]
+  const { t } = useAdminLocale()
 
-  if (!config) return <Badge variant="normal">{status}</Badge>
+  let label = status
+  let variant: BadgeProps['variant'] = 'normal'
 
-  return <Badge variant={config.variant}>{config.label}</Badge>
+  if (type === 'booking') {
+    const s = status as BookingStatus
+    if (s === 'pending') { label = t('bookings.pending'); variant = 'pending' }
+    else if (s === 'confirmed') { label = t('bookings.confirmed'); variant = 'confirmed' }
+    else if (s === 'cancelled') { label = t('bookings.cancelled'); variant = 'cancelled' }
+  } else if (type === 'contact') {
+    const s = status as ContactStatus
+    if (s === 'pending') { label = t('contacts.pending'); variant = 'pending' }
+    else if (s === 'resolved') { label = t('contacts.resolved'); variant = 'resolved' }
+  } else if (type === 'interest') {
+    const s = status as InterestType
+    if (s === 'interest') { label = t('activities.interest'); variant = 'pending' }
+    else if (s === 'register') { label = t('activities.register'); variant = 'confirmed' }
+  }
+
+  return <Badge variant={variant}>{label}</Badge>
 }

@@ -9,10 +9,12 @@ import { Compass } from 'lucide-react'
 import { DataTable, DataTableSkeleton, type Column } from '@/components/admin/DataTable'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { Pagination } from '@/components/admin/Pagination'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord, PaginatedResult } from '@/types'
 
 export default function ActivitiesPage() {
   const router = useRouter()
+  const { t } = useAdminLocale()
   const [result, setResult] = useState<PaginatedResult<ActivityInterestRecord> | null>(null)
   const [page, setPage] = useState(1)
   const [typeFilter, setTypeFilter] = useState('')
@@ -33,26 +35,26 @@ export default function ActivitiesPage() {
   useEffect(() => { fetchActivities() }, [fetchActivities]) // eslint-disable-line react-hooks/set-state-in-effect
 
   const columns: Column<ActivityInterestRecord>[] = [
-    { key: 'id', header: 'ID', render: (r) => <span className="font-mono text-amber-500 text-xs">{r.id}</span> },
-    { key: 'activitySlug', header: 'Activity' },
-    { key: 'name', header: 'Name' },
-    { key: 'email', header: 'Email', render: (r) => <span className="text-xs">{r.email}</span> },
-    { key: 'type', header: 'Type', render: (r) => <StatusBadge type="interest" status={r.type} /> },
-    { key: 'createdAt', header: 'Date', render: (r) => <span className="text-xs text-stone-500">{new Date(r.createdAt).toLocaleDateString()}</span> },
+    { key: 'id', header: t('activities.colId'), render: (r) => <span className="font-mono text-amber-500 text-xs">{r.id}</span> },
+    { key: 'activitySlug', header: t('activities.colActivity') },
+    { key: 'name', header: t('activities.colName') },
+    { key: 'email', header: t('activities.colEmail'), render: (r) => <span className="text-xs">{r.email}</span> },
+    { key: 'type', header: t('activities.colType'), render: (r) => <StatusBadge type="interest" status={r.type} /> },
+    { key: 'createdAt', header: t('activities.colDate'), render: (r) => <span className="text-xs text-stone-500">{new Date(r.createdAt).toLocaleDateString()}</span> },
   ]
 
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-semibold text-stone-100">Activities</h1>
+        <h1 className="text-xl font-semibold text-stone-100">{t('activities.title')}</h1>
         <select
           value={typeFilter}
           onChange={(e) => { setTypeFilter(e.target.value); setPage(1) }}
           className="px-3 py-2 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-300 focus:outline-none focus:ring-1 focus:ring-amber-500/30 transition-colors"
         >
-          <option value="">All Types</option>
-          <option value="interest">Interest</option>
-          <option value="register">Registered</option>
+          <option value="">{t('activities.allTypes')}</option>
+          <option value="interest">{t('activities.interest')}</option>
+          <option value="register">{t('activities.register')}</option>
         </select>
       </div>
 
@@ -65,7 +67,7 @@ export default function ActivitiesPage() {
             data={result.data}
             keyField="id"
             onRowClick={(row) => router.push(`/admin/activities/${row.id}`)}
-            emptyMessage="No activity registrations yet"
+            emptyMessage={t('activities.empty')}
             emptyIcon={Compass}
           />
           <Pagination page={result.page} totalPages={result.totalPages} onPageChange={setPage} />

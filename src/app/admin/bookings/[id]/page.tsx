@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { BookingRecord, BookingStatus } from '@/types'
 
 export default function BookingDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const { t } = useAdminLocale()
   const [booking, setBooking] = useState<BookingRecord | null>(null)
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
@@ -64,7 +66,7 @@ export default function BookingDetailPage() {
   if (!booking) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-sm text-red-400">Booking not found</p>
+        <p className="text-sm text-red-400">{t('bookings.detail.notFound')}</p>
       </div>
     )
   }
@@ -80,7 +82,7 @@ export default function BookingDetailPage() {
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Back
+        {t('bookings.detail.back')}
       </button>
 
       {/* Header */}
@@ -97,35 +99,35 @@ export default function BookingDetailPage() {
       {/* Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Booking Details */}
-        <InfoSection title="Booking Details" icon={Calendar}>
-          <InfoRow label="Check-in" value={booking.checkIn} />
-          <InfoRow label="Check-out" value={booking.checkOut} />
-          <InfoRow label="Adults" value={String(booking.adults)} />
-          <InfoRow label="Children" value={String(booking.children)} />
-          <InfoRow label="Rooms" value={String(booking.rooms)} />
-          <InfoRow label="Room Preference" value={booking.roomPreference} />
+        <InfoSection title={t('bookings.detail.bookingDetails')} icon={Calendar}>
+          <InfoRow label={t('bookings.detail.checkIn')} value={booking.checkIn} />
+          <InfoRow label={t('bookings.detail.checkOut')} value={booking.checkOut} />
+          <InfoRow label={t('bookings.detail.adults')} value={String(booking.adults)} />
+          <InfoRow label={t('bookings.detail.children')} value={String(booking.children)} />
+          <InfoRow label={t('bookings.detail.rooms')} value={String(booking.rooms)} />
+          <InfoRow label={t('bookings.detail.roomPreference')} value={booking.roomPreference} />
         </InfoSection>
 
         {/* Contact */}
-        <InfoSection title="Contact" icon={Users}>
-          <InfoRow label="Name" value={contact?.name || ''} />
-          <InfoRow label="Email" value={contact?.email || ''} />
-          <InfoRow label="Phone" value={contact?.phone || ''} />
-          <InfoRow label="Country" value={contact?.country || ''} />
+        <InfoSection title={t('bookings.detail.contact')} icon={Users}>
+          <InfoRow label={t('bookings.detail.name')} value={contact?.name || ''} />
+          <InfoRow label={t('bookings.detail.email')} value={contact?.email || ''} />
+          <InfoRow label={t('bookings.detail.phone')} value={contact?.phone || ''} />
+          <InfoRow label={t('bookings.detail.country')} value={contact?.country || ''} />
         </InfoSection>
 
         {/* Pet Info */}
         {booking.hasPet && petInfo && (
-          <InfoSection title="Pet Info" icon={PawPrint}>
-            <InfoRow label="Type" value={String(petInfo.petType || '')} />
-            <InfoRow label="Breed" value={String(petInfo.breed || '')} />
-            <InfoRow label="Weight" value={`${petInfo.weight} kg`} />
-            <InfoRow label="Age" value={`${petInfo.age} years`} />
+          <InfoSection title={t('bookings.detail.petInfo')} icon={PawPrint}>
+            <InfoRow label={t('bookings.detail.petType')} value={String(petInfo.petType || '')} />
+            <InfoRow label={t('bookings.detail.breed')} value={String(petInfo.breed || '')} />
+            <InfoRow label={t('bookings.detail.weight')} value={`${petInfo.weight} ${t('bookings.detail.weightUnit')}`} />
+            <InfoRow label={t('bookings.detail.age')} value={`${petInfo.age} ${t('bookings.detail.ageUnit')}`} />
           </InfoSection>
         )}
 
         {/* Actions */}
-        <InfoSection title="Status Actions" icon={MapPin}>
+        <InfoSection title={t('bookings.detail.statusActions')} icon={MapPin}>
           <div className="flex gap-2 mt-1">
             {(['pending', 'confirmed', 'cancelled'] as BookingStatus[]).map((s) => {
               const isActive = booking.status === s
@@ -143,7 +145,7 @@ export default function BookingDetailPage() {
                   {updating && !isActive ? (
                     <Loader2 className="w-3 h-3 animate-spin mx-auto" />
                   ) : (
-                    s.charAt(0).toUpperCase() + s.slice(1)
+                    t(`bookings.${s}`)
                   )}
                 </button>
               )

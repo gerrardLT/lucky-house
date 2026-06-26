@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Compass, User, MessageSquare, Globe } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord } from '@/types'
 
 export default function ActivityDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
+  const { t } = useAdminLocale()
   const [record, setRecord] = useState<ActivityInterestRecord | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -40,7 +42,7 @@ export default function ActivityDetailPage() {
   if (!record) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-sm text-red-400">Record not found</p>
+        <p className="text-sm text-red-400">{t('activities.detail.notFound')}</p>
       </div>
     )
   }
@@ -52,7 +54,7 @@ export default function ActivityDetailPage() {
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />
-        Back
+        {t('activities.detail.back')}
       </button>
 
       <div className="flex items-start justify-between mb-6">
@@ -67,32 +69,32 @@ export default function ActivityDetailPage() {
         {/* Activity info */}
         <div className="flex items-center gap-2 mb-1">
           <Compass className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-          <span className="text-sm font-medium text-stone-200">Activity</span>
+          <span className="text-sm font-medium text-stone-200">{t('activities.detail.activity')}</span>
         </div>
-        <InfoRow label="Activity" value={record.activitySlug} />
+        <InfoRow label={t('activities.detail.activitySlug')} value={record.activitySlug} />
 
         {/* Contact info */}
         <div className="flex items-center gap-2 pt-2 mb-1">
           <User className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-          <span className="text-sm font-medium text-stone-200">Contact</span>
+          <span className="text-sm font-medium text-stone-200">{t('activities.detail.contact')}</span>
         </div>
-        <InfoRow label="Name" value={record.name} />
-        <InfoRow label="Email" value={record.email} />
-        {record.phone && <InfoRow label="Phone" value={record.phone} />}
+        <InfoRow label={t('activities.detail.name')} value={record.name} />
+        <InfoRow label={t('activities.detail.email')} value={record.email} />
+        {record.phone && <InfoRow label={t('activities.detail.phone')} value={record.phone} />}
 
         {/* Locale */}
         <div className="flex items-center gap-2 pt-2 mb-1">
           <Globe className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-          <span className="text-sm font-medium text-stone-200">Locale</span>
+          <span className="text-sm font-medium text-stone-200">{t('activities.detail.locale')}</span>
         </div>
-        <InfoRow label="Locale" value={record.locale} />
+        <InfoRow label={t('activities.detail.locale')} value={record.locale} />
 
         {/* Message */}
         {record.message && (
           <div className="border-t border-stone-800 pt-4">
             <div className="flex items-center gap-2 mb-2">
               <MessageSquare className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-stone-200">Message</span>
+              <span className="text-sm font-medium text-stone-200">{t('activities.detail.message')}</span>
             </div>
             <p className="text-sm text-stone-300 whitespace-pre-wrap leading-relaxed pl-6">{record.message}</p>
           </div>

@@ -7,9 +7,11 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Mountain, Lock, AlertCircle, Loader2 } from 'lucide-react'
+import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const { t } = useAdminLocale()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -28,12 +30,12 @@ export default function AdminLoginPage() {
       })
 
       if (result?.error) {
-        setError('Invalid username or password')
+        setError(t('login.errorInvalid'))
       } else {
         router.push('/admin/dashboard')
       }
     } catch {
-      setError('Login failed, please try again')
+      setError(t('login.errorGeneric'))
     } finally {
       setLoading(false)
     }
@@ -48,14 +50,14 @@ export default function AdminLoginPage() {
             <Mountain className="w-6 h-6 text-white" />
           </div>
           <h1 className="text-xl font-semibold text-stone-100">Luckyhouse</h1>
-          <p className="text-xs text-stone-500 mt-1">Admin Dashboard</p>
+          <p className="text-xs text-stone-500 mt-1">{t('login.title')}</p>
         </div>
 
         {/* Form Card */}
         <div className="bg-stone-900 border border-stone-800 rounded-2xl p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-stone-400 mb-1.5">Username</label>
+              <label className="block text-xs font-medium text-stone-400 mb-1.5">{t('login.username')}</label>
               <input
                 type="text"
                 value={username}
@@ -67,7 +69,7 @@ export default function AdminLoginPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-stone-400 mb-1.5">Password</label>
+              <label className="block text-xs font-medium text-stone-400 mb-1.5">{t('login.password')}</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-600" strokeWidth={1.5} />
                 <input
@@ -94,7 +96,7 @@ export default function AdminLoginPage() {
               className="w-full py-2.5 bg-amber-600 hover:bg-amber-500 disabled:bg-amber-800 text-white text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? t('login.signingIn') : t('login.signIn')}
             </button>
           </form>
         </div>
