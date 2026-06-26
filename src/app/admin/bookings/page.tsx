@@ -11,6 +11,7 @@ import { StatusBadge } from '@/components/admin/StatusBadge'
 import { Pagination } from '@/components/admin/Pagination'
 import { SearchInput } from '@/components/admin/SearchInput'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { BookingRecord, PaginatedResult } from '@/types'
 
@@ -30,7 +31,7 @@ export default function BookingsPage() {
     if (statusFilter) params.set('status', statusFilter)
     if (search) params.set('search', search)
 
-    fetch(`/api/admin/bookings?${params}`)
+    adminFetch(`/api/admin/bookings?${params}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()

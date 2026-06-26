@@ -9,6 +9,7 @@ import { CalendarDays, Clock, Mail, Users, ArrowRight } from 'lucide-react'
 import { StatCard } from '@/components/admin/StatCard'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { DashboardStats } from '@/types'
 
@@ -41,7 +42,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/admin/stats')
+    adminFetch('/api/admin/stats')
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()

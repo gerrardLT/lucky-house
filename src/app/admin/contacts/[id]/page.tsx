@@ -9,6 +9,7 @@ import { ArrowLeft, MessageSquare, CheckCircle2, User, Globe, Loader2 } from 'lu
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ContactRecord } from '@/types'
 
@@ -22,7 +23,7 @@ export default function ContactDetailPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch(`/api/admin/contacts/${id}`)
+    adminFetch(`/api/admin/contacts/${id}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()
@@ -36,7 +37,7 @@ export default function ContactDetailPage() {
     setResolving(true)
     setError(null)
     try {
-      const res = await fetch(`/api/admin/contacts/${id}/resolve`, { method: 'PATCH' })
+      const res = await adminFetch(`/api/admin/contacts/${id}/resolve`, { method: 'PATCH' })
       if (res.ok) {
         setContact(await res.json())
       } else {

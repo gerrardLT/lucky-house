@@ -11,6 +11,7 @@ import { StatusBadge } from '@/components/admin/StatusBadge'
 import { Pagination } from '@/components/admin/Pagination'
 import { SearchInput } from '@/components/admin/SearchInput'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord, PaginatedResult } from '@/types'
 
@@ -30,7 +31,7 @@ export default function ActivitiesPage() {
     if (typeFilter) params.set('type', typeFilter)
     if (search) params.set('search', search)
 
-    fetch(`/api/admin/activities?${params}`)
+    adminFetch(`/api/admin/activities?${params}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()

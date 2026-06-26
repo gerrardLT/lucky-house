@@ -9,6 +9,7 @@ import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Loader2 } from 'lucide-re
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoSection, InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { BookingRecord, BookingStatus } from '@/types'
 
@@ -22,7 +23,7 @@ export default function BookingDetailPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch(`/api/admin/bookings/${id}`)
+    adminFetch(`/api/admin/bookings/${id}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()
@@ -36,7 +37,7 @@ export default function BookingDetailPage() {
     setUpdating(true)
     setError(null)
     try {
-      const res = await fetch(`/api/admin/bookings/${id}/status`, {
+      const res = await adminFetch(`/api/admin/bookings/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),

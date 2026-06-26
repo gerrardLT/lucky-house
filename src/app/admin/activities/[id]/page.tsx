@@ -9,6 +9,7 @@ import { ArrowLeft, Compass, User, MessageSquare, Globe } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord } from '@/types'
 
@@ -21,7 +22,7 @@ export default function ActivityDetailPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch(`/api/admin/activities/${id}`)
+    adminFetch(`/api/admin/activities/${id}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
         return r.json()
