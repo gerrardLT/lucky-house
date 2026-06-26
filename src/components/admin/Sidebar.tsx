@@ -2,7 +2,8 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard,
   CalendarDays,
@@ -24,7 +25,13 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const { t } = useAdminLocale()
+
+  async function handleSignOut() {
+    await signOut({ redirect: false })
+    router.push('/admin/login')
+  }
 
   return (
     <aside className="w-60 min-h-screen bg-stone-900 border-r border-stone-800 flex flex-col">
@@ -65,15 +72,13 @@ export function Sidebar() {
 
       {/* Sign Out */}
       <div className="px-3 py-4 border-t border-stone-800">
-        <form action="/api/auth/signout" method="POST">
-          <button
-            type="submit"
-            className="flex items-center gap-3 w-full px-3 py-2 text-[13px] text-stone-500 hover:text-stone-300 rounded-lg hover:bg-stone-800 transition-colors"
-          >
-            <LogOut className="w-4 h-4" strokeWidth={1.5} />
-            <span>{t('sidebar.signOut')}</span>
-          </button>
-        </form>
+        <button
+          onClick={handleSignOut}
+          className="flex items-center gap-3 w-full px-3 py-2 text-[13px] text-stone-500 hover:text-stone-300 rounded-lg hover:bg-stone-800 transition-colors"
+        >
+          <LogOut className="w-4 h-4" strokeWidth={1.5} />
+          <span>{t('sidebar.signOut')}</span>
+        </button>
       </div>
     </aside>
   )

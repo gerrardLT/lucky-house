@@ -3,19 +3,28 @@
 
 'use client'
 
-import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { useState, useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Mountain, Lock, AlertCircle, Loader2 } from 'lucide-react'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { LanguageSwitcher } from '@/components/admin/LanguageSwitcher'
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const { status } = useSession()
   const { t } = useAdminLocale()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
+  // 已登录用户自动跳转到仪表盘
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.replace('/admin/dashboard')
+    }
+  }, [status, router])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -41,8 +50,22 @@ export default function AdminLoginPage() {
     }
   }
 
+  // 已登录时显示加载状态（等待跳转）
+  if (status === 'authenticated' || status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-stone-950">
+        <Loader2 className="w-6 h-6 text-amber-500 animate-spin" />
+      </div>
+    )
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-stone-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-stone-950 px-4 relative">
+      {/* 右上角语言切换 */}
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
+
       <div className="w-full max-w-sm">
         {/* Brand */}
         <div className="text-center mb-8">
