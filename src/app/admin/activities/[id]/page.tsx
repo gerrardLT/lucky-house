@@ -5,21 +5,26 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, Compass, User, MessageSquare, Globe } from 'lucide-react'
+import { ArrowLeft, Compass, User, MessageSquare, Globe, Trash2, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { ConfirmDialog } from '@/components/admin/ConfirmDialog'
 import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { useAdminDate } from '@/lib/i18n/useAdminDate'
 import type { ActivityInterestRecord } from '@/types'
 
 export default function ActivityDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
   const { t } = useAdminLocale()
+  const { formatDateTime } = useAdminDate()
   const [record, setRecord] = useState<ActivityInterestRecord | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   useEffect(() => {
     adminFetch(`/api/admin/activities/${id}`)
@@ -31,6 +36,24 @@ export default function ActivityDetailPage() {
       .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
   }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function handleDelete() {
+    setDeleting(true)
+    setError(null)
+    try {
+      const res = await adminFetch(`/api/admin/activities/${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        router.push('/admin/activities')
+      } else {
+        setError(t('common.errorAction'))
+      }
+    } catch {
+      setError(t('common.errorNetwork'))
+    } finally {
+      setDeleting(false)
+      setShowDeleteConfirm(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -58,6 +81,17 @@ export default function ActivityDetailPage() {
     <div>
       <ErrorToast message={error} onClose={() => setError(null)} />
 
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        title={t('common.confirmDelete')}
+        message={t('common.confirmDeleteMsg')}
+        confirmLabel={deleting ? t('common.deleting') : t('common.delete')}
+        cancelLabel={t('common.cancel')}
+        variant="danger"
+        onConfirm={handleDelete}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
+
       <button
         onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
@@ -69,7 +103,7 @@ export default function ActivityDetailPage() {
       <div className="flex items-start justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-stone-100 font-mono">{record.id}</h1>
-          <p className="text-xs text-stone-500 mt-1">{new Date(record.createdAt).toLocaleString()}</p>
+          <p className="text-xs text-stone-500 mt-1">{formatDateTime(record.createdAt)}</p>
         </div>
         <StatusBadge type="interest" status={record.type} />
       </div>
@@ -108,6 +142,18 @@ export default function ActivityDetailPage() {
             <p className="text-sm text-stone-300 whitespace-pre-wrap leading-relaxed pl-6">{record.message}</p>
           </div>
         )}
+
+        {/* Delete button */}
+        <div className="border-t border-stone-800 pt-4">
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            disabled={deleting}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600/10 hover:bg-red-600/20 text-red-400 text-xs font-medium rounded-lg border border-red-900/30 transition-colors"
+          >
+            {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+            {t('common.delete')}
+          </button>
+        </div>
       </div>
     </div>
   )

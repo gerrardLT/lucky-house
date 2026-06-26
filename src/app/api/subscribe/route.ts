@@ -3,6 +3,7 @@
 // Requirements: 2.9, 8.3
 
 import { NextResponse } from 'next/server'
+import { applyPublicRateLimit } from '@/lib/api-helpers'
 import { subscribeSchema } from '@/lib/schemas/subscribe'
 import { db } from '@/lib/db'
 import { subscribers } from '@/lib/db/schema'
@@ -17,6 +18,10 @@ function toPgArray(arr: string[]): string {
 }
 
 export async function POST(request: Request) {
+  // 速率限制：每 IP 每 10 分钟最多 10 次订阅
+  const rateLimitResponse = applyPublicRateLimit(request, 'api-subscribe', 10)
+  if (rateLimitResponse) return rateLimitResponse
+
   try {
     const body = await request.json()
 

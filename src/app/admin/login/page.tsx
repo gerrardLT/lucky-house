@@ -3,15 +3,29 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { signIn, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Mountain, Lock, AlertCircle, Loader2 } from 'lucide-react'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import { LanguageSwitcher } from '@/components/admin/LanguageSwitcher'
 
 export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-stone-950">
+        <Loader2 className="w-6 h-6 text-amber-500 animate-spin" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
+  )
+}
+
+function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const returnUrl = searchParams.get('returnUrl') || '/admin/dashboard'
   const { status } = useSession()
   const { t } = useAdminLocale()
   const [username, setUsername] = useState('')
@@ -22,9 +36,9 @@ export default function AdminLoginPage() {
   // 已登录用户自动跳转到仪表盘
   useEffect(() => {
     if (status === 'authenticated') {
-      router.replace('/admin/dashboard')
+      router.replace(returnUrl)
     }
-  }, [status, router])
+  }, [status, router, returnUrl])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -39,9 +53,10 @@ export default function AdminLoginPage() {
       })
 
       if (result?.error) {
-        setError(t('login.errorInvalid'))
+        // 速率限制错误直接显示服务端消息，其他显示通用错误
+        setError(result.error.includes('频繁') ? result.error : t('login.errorInvalid'))
       } else {
-        router.push('/admin/dashboard')
+        router.push(returnUrl)
       }
     } catch {
       setError(t('login.errorGeneric'))

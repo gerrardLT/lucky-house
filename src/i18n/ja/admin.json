@@ -26,10 +26,11 @@
     "contacts": "お問い合わせ",
     "pendingCount": "{count} 件未処理",
     "subscribers": "購読者",
+    "activityInterests": "活動登録",
     "recentBookings": "最近の予約",
     "viewAll": "すべて見る",
     "noBookings": "予約はまだありません",
-    "failedLoad": "統計データの読み込みに失敗しました"
+    "newDataAvailable": "新しいデータがあります。更新して確認してください"
   },
   "bookings": {
     "title": "予約管理",
@@ -44,6 +45,7 @@
     "colStatus": "ステータス",
     "colDate": "登録日",
     "empty": "予約はまだありません",
+    "exportCsv": "CSV出力",
     "detail": {
       "back": "戻る",
       "bookingDetails": "予約詳細",
@@ -66,7 +68,19 @@
       "weightUnit": "kg",
       "age": "年齢",
       "ageUnit": "歳",
-      "notFound": "予約が見つかりません"
+      "notFound": "予約が見つかりません",
+      "acceptAlternative": "代替房型可",
+      "yes": "はい",
+      "no": "いいえ",
+      "petCount": "ペット数",
+      "source": "來源情報",
+      "sourceUrl": "來源 URL",
+      "deviceType": "デバイスタイプ",
+      "agreements": "規約確認",
+      "privacyPolicy": "プライバシーポリシー",
+      "petRules": "ペット規則",
+      "cancelPolicy": "キャンセルポリシー",
+      "marketingSubscribe": "マーケティング購読"
     }
   },
   "contacts": {
@@ -81,6 +95,7 @@
     "colStatus": "ステータス",
     "colDate": "日付",
     "empty": "お問い合わせはまだありません",
+    "exportCsv": "CSV出力",
     "detail": {
       "back": "戻る",
       "details": "詳細情報",
@@ -136,13 +151,25 @@
     "prev": "前へ",
     "next": "次へ",
     "back": "戻る",
-    "noData": "データがありません",
     "search": "検索...",
     "errorLoad": "データの読み込みに失敗しました",
     "errorAction": "操作に失敗しました。再度お試しください",
     "errorNetwork": "ネットワークエラー。接続を確認してください",
-    "success": "成功",
     "confirm": "確認",
-    "cancel": "キャンセル"
+    "cancel": "キャンセル",
+    "refresh": "更新",
+    "confirmChangeStatus": "ステータス変更の確認",
+    "confirmChangeStatusMsg": "この予約のステータスを「{status}」に変更しますか？",
+    "confirmDelete": "削除の確認",
+    "confirmDeleteMsg": "この記録を削除しますか？この操作は取り消せません。",
+    "delete": "削除",
+    "deleting": "削除中...",
+    "confirmSignOut": "ログアウトの確認",
+    "confirmSignOutMsg": "管理画面からログアウトしますか？",
+    "unresolve": "未解決に戻す",
+    "batchDelete": "一括削除",
+    "batchDeleteConfirm": "選択した {count} 件の記録を削除しますか？この操作は取り消せません。",
+    "batchDeleting": "削除中...",
+    "selectedCount": "{count} 件選択"
   }
 }

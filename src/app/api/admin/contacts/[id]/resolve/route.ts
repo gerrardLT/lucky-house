@@ -1,5 +1,5 @@
 // src/app/api/admin/contacts/[id]/resolve/route.ts
-// PATCH /api/admin/contacts/:id/resolve — 标记联系工单已解决
+// PATCH /api/admin/contacts/:id/resolve — 切换联系工单状态 (pending ↔ resolved)
 
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/config'
@@ -8,7 +8,7 @@ import { contacts } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 
 export async function PATCH(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth()
@@ -16,9 +16,16 @@ export async function PATCH(
 
   try {
     const { id } = await params
+    const body = await request.json().catch(() => ({}))
+    const { status } = body as { status?: string }
+
+    // 支持双向切换：传入 'pending' 或 'resolved'，否则默认 resolved
+    const newStatus: 'pending' | 'resolved' =
+      status === 'pending' ? 'pending' : 'resolved'
+
     const [updated] = await db
       .update(contacts)
-      .set({ status: 'resolved' })
+      .set({ status: newStatus })
       .where(eq(contacts.id, id))
       .returning()
 

@@ -1,5 +1,6 @@
 // src/app/api/admin/contacts/[id]/route.ts
 // GET /api/admin/contacts/:id — 联系详情
+// DELETE /api/admin/contacts/:id — 删除联系工单
 
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/config'
@@ -25,6 +26,28 @@ export async function GET(
     return NextResponse.json(contact)
   } catch (error) {
     console.error('[Admin Contact Detail] Error:', error)
+    return NextResponse.json({ error: 'Internal error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth()
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const { id } = await params
+    const [deleted] = await db.delete(contacts).where(eq(contacts.id, id)).returning()
+
+    if (!deleted) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('[Admin Contact Delete] Error:', error)
     return NextResponse.json({ error: 'Internal error' }, { status: 500 })
   }
 }

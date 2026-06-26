@@ -3,6 +3,7 @@
 // Requirements: 13.3, 13.6
 
 import { NextResponse } from 'next/server'
+import { applyPublicRateLimit } from '@/lib/api-helpers'
 import { contactSchema } from '@/lib/schemas/contact'
 import { db } from '@/lib/db'
 import { contacts } from '@/lib/db/schema'
@@ -10,6 +11,7 @@ import { createElement } from 'react'
 import { sendEmail } from '@/lib/email'
 import ContactAutoReplyEmail from '@/lib/email/templates/ContactAutoReply'
 import type { ApiErrorResponse } from '@/types'
+import { contactAutoReplySubject } from '@/lib/email-subjects'
 
 /** 主题对应的运营标签/邮箱（MVP 阶段 mock） */
 const SUBJECT_ROUTING: Record<string, string> = {
@@ -27,6 +29,10 @@ function generateTicketId(): string {
 }
 
 export async function POST(request: Request) {
+  // 速率限制：每 IP 每 10 分钟最多 5 次联系
+  const rateLimitResponse = applyPublicRateLimit(request, 'api-contact', 5)
+  if (rateLimitResponse) return rateLimitResponse
+
   try {
     const body = await request.json()
 
@@ -77,7 +83,7 @@ export async function POST(request: Request) {
     // 发送自动确认邮件（fire-and-forget）
     void sendEmail(
       data.email,
-      'Message Received - Luckyhouse',
+      contactAutoReplySubject(data.locale),
       createElement(ContactAutoReplyEmail, {
         ticketId,
         name: data.name,

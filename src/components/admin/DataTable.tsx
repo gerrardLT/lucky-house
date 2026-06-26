@@ -18,6 +18,10 @@ interface DataTableProps<T> {
   onRowClick?: (row: T) => void
   emptyMessage?: string
   emptyIcon?: LucideIcon
+  /** 启用多选模式 */
+  selectable?: boolean
+  selectedKeys?: Set<string>
+  onSelectionChange?: (keys: Set<string>) => void
 }
 
 export function DataTable<T>({
@@ -27,16 +31,52 @@ export function DataTable<T>({
   onRowClick,
   emptyMessage = 'No data available',
   emptyIcon,
+  selectable = false,
+  selectedKeys,
+  onSelectionChange,
 }: DataTableProps<T>) {
   if (data.length === 0) {
     return <EmptyState title={emptyMessage} icon={emptyIcon} />
   }
+
+  function toggleRow(key: string) {
+    if (!selectedKeys || !onSelectionChange) return
+    const next = new Set(selectedKeys)
+    if (next.has(key)) {
+      next.delete(key)
+    } else {
+      next.add(key)
+    }
+    onSelectionChange(next)
+  }
+
+  function toggleAll() {
+    if (!onSelectionChange) return
+    const allKeys = data.map((r) => String((r as Record<string, unknown>)[keyField as string]))
+    const allSelected = allKeys.every((k) => selectedKeys?.has(k))
+    onSelectionChange(allSelected ? new Set() : new Set(allKeys))
+  }
+
+  const allSelected = data.length > 0 && data.every(
+    (r) => selectedKeys?.has(String((r as Record<string, unknown>)[keyField as string]))
+  )
 
   return (
     <div className="overflow-x-auto rounded-xl border border-stone-800">
       <table className="w-full text-sm">
         <thead>
           <tr className="bg-stone-900/50">
+            {selectable && (
+              <th className="px-4 py-3 w-10">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={toggleAll}
+                  onClick={(e) => e.stopPropagation()}
+                  className="rounded border-stone-600 bg-stone-800 text-amber-500 focus:ring-amber-500/30 cursor-pointer"
+                />
+              </th>
+            )}
             {columns.map((col) => (
               <th
                 key={col.key}
@@ -50,14 +90,27 @@ export function DataTable<T>({
           </tr>
         </thead>
         <tbody className="divide-y divide-stone-800/60">
-          {data.map((row) => (
+          {data.map((row) => {
+            const rowKey = String((row as Record<string, unknown>)[keyField as string])
+            const isSelected = selectedKeys?.has(rowKey) ?? false
+            return (
             <tr
-              key={String((row as Record<string, unknown>)[keyField as string])}
+              key={rowKey}
               onClick={() => onRowClick?.(row)}
               className={`group ${
                 onRowClick ? 'cursor-pointer hover:bg-stone-800/30' : ''
-              } transition-colors`}
+              } ${isSelected ? 'bg-amber-500/5' : ''} transition-colors`}
             >
+              {selectable && (
+                <td className="px-4 py-3 w-10" onClick={(e) => e.stopPropagation()}>
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => toggleRow(rowKey)}
+                    className="rounded border-stone-600 bg-stone-800 text-amber-500 focus:ring-amber-500/30 cursor-pointer"
+                  />
+                </td>
+              )}
               {columns.map((col) => (
                 <td key={col.key} className={`px-4 py-3 text-stone-300 ${
                   col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
@@ -66,7 +119,8 @@ export function DataTable<T>({
                 </td>
               ))}
             </tr>
-          ))}
+            )
+          })}
         </tbody>
       </table>
     </div>

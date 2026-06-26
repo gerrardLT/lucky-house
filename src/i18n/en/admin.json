@@ -26,10 +26,12 @@
     "contacts": "Contacts",
     "pendingCount": "{count} pending",
     "subscribers": "Subscribers",
+    "activityInterests": "Activity Registrations",
     "recentBookings": "Recent Bookings",
     "viewAll": "View All",
     "noBookings": "No bookings yet",
-    "failedLoad": "Failed to load stats"
+    "failedLoad": "Failed to load stats",
+    "newDataAvailable": "New data available, click refresh to view"
   },
   "bookings": {
     "title": "Bookings",
@@ -44,6 +46,7 @@
     "colStatus": "Status",
     "colDate": "Date",
     "empty": "No bookings found",
+    "exportCsv": "Export CSV",
     "detail": {
       "back": "Back",
       "bookingDetails": "Booking Details",
@@ -66,7 +69,19 @@
       "weightUnit": "kg",
       "age": "Age",
       "ageUnit": "years",
-      "notFound": "Booking not found"
+      "notFound": "Booking not found",
+      "acceptAlternative": "Accept Alternative",
+      "yes": "Yes",
+      "no": "No",
+      "petCount": "Pet Count",
+      "source": "Source Info",
+      "sourceUrl": "Source URL",
+      "deviceType": "Device Type",
+      "agreements": "Agreements",
+      "privacyPolicy": "Privacy Policy",
+      "petRules": "Pet Rules",
+      "cancelPolicy": "Cancellation Policy",
+      "marketingSubscribe": "Marketing Subscribe"
     }
   },
   "contacts": {
@@ -81,6 +96,7 @@
     "colStatus": "Status",
     "colDate": "Date",
     "empty": "No contacts found",
+    "exportCsv": "Export CSV",
     "detail": {
       "back": "Back",
       "details": "Details",
@@ -136,13 +152,25 @@
     "prev": "Prev",
     "next": "Next",
     "back": "Back",
-    "noData": "No data available",
     "search": "Search...",
     "errorLoad": "Failed to load data",
     "errorAction": "Action failed, please try again",
     "errorNetwork": "Network error, please check connection",
-    "success": "Success",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "refresh": "Refresh",
+    "confirmChangeStatus": "Confirm Status Change",
+    "confirmChangeStatusMsg": "Are you sure you want to change this booking status to '{status}'?",
+    "confirmDelete": "Confirm Delete",
+    "confirmDeleteMsg": "Are you sure you want to delete this record? This action cannot be undone.",
+    "delete": "Delete",
+    "deleting": "Deleting...",
+    "confirmSignOut": "Confirm Sign Out",
+    "confirmSignOutMsg": "Are you sure you want to sign out?",
+    "unresolve": "Reopen",
+    "batchDelete": "Batch Delete",
+    "batchDeleteConfirm": "Are you sure you want to delete {count} selected records? This action cannot be undone.",
+    "batchDeleting": "Deleting...",
+    "selectedCount": "{count} selected"
   }
 }

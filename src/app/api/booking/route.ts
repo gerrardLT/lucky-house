@@ -3,6 +3,7 @@
 // Requirements: 12.11, 12.14, 12.15
 
 import { NextResponse } from 'next/server'
+import { applyPublicRateLimit } from '@/lib/api-helpers'
 import { bookingSchema } from '@/lib/schemas/booking'
 import { db } from '@/lib/db'
 import { bookings } from '@/lib/db/schema'
@@ -12,6 +13,7 @@ import { sendEmail } from '@/lib/email'
 import BookingConfirmationEmail from '@/lib/email/templates/BookingConfirmation'
 import BookingNotificationEmail from '@/lib/email/templates/BookingNotification'
 import type { ApiErrorResponse } from '@/types'
+import { bookingConfirmationSubject, bookingNotificationSubject } from '@/lib/email-subjects'
 
 /** 生成确认编号 */
 function generateConfirmationId(): string {
@@ -21,6 +23,10 @@ function generateConfirmationId(): string {
 }
 
 export async function POST(request: Request) {
+  // 速率限制：每 IP 每 10 分钟最多 5 次预约
+  const rateLimitResponse = applyPublicRateLimit(request, 'api-booking', 5)
+  if (rateLimitResponse) return rateLimitResponse
+
   try {
     const body = await request.json()
 
@@ -94,7 +100,7 @@ export async function POST(request: Request) {
     /* eslint-disable react/no-children-prop -- children is a data field (number of kids), not React children */
     void sendEmail(
       data.contact.email,
-      'Booking Confirmation - Luckyhouse',
+      bookingConfirmationSubject(data.source.locale),
       createElement(BookingConfirmationEmail, {
         confirmationId,
         checkIn: data.checkIn,
@@ -111,7 +117,7 @@ export async function POST(request: Request) {
 
     void sendEmail(
       'booking@luckyhouse-group.com',
-      `New Booking: ${confirmationId}`,
+      bookingNotificationSubject(confirmationId),
       createElement(BookingNotificationEmail, {
         confirmationId,
         checkIn: data.checkIn,

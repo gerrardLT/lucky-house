@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/config'
 import { db } from '@/lib/db'
 import { bookings } from '@/lib/db/schema'
-import { sql, eq, desc, and, ilike } from 'drizzle-orm'
+import { sql, eq, desc, and, ilike, or } from 'drizzle-orm'
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -19,7 +19,13 @@ export async function GET(request: Request) {
     const search = searchParams.get('search')
 
     const statusCond = status ? eq(bookings.status, status as 'pending' | 'confirmed' | 'cancelled') : undefined
-    const searchCond = search ? ilike(bookings.id, `%${search}%`) : undefined
+    const searchCond = search
+      ? or(
+          ilike(bookings.id, `%${search}%`),
+          sql`${bookings.contact}->>'name' ILIKE ${`%${search}%`}`,
+          sql`${bookings.contact}->>'email' ILIKE ${`%${search}%`}`
+        )
+      : undefined
     const conditions = [statusCond, searchCond].filter(Boolean)
     const where = conditions.length > 0 ? and(...conditions) : undefined
 

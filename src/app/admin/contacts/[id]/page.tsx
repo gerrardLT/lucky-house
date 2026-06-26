@@ -5,18 +5,20 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, MessageSquare, CheckCircle2, User, Globe, Loader2 } from 'lucide-react'
+import { ArrowLeft, MessageSquare, CheckCircle2, RotateCcw, User, Globe, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
 import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { useAdminDate } from '@/lib/i18n/useAdminDate'
 import type { ContactRecord } from '@/types'
 
 export default function ContactDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
   const { t } = useAdminLocale()
+  const { formatDateTime } = useAdminDate()
   const [contact, setContact] = useState<ContactRecord | null>(null)
   const [loading, setLoading] = useState(true)
   const [resolving, setResolving] = useState(false)
@@ -33,11 +35,15 @@ export default function ContactDetailPage() {
       .finally(() => setLoading(false))
   }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function markResolved() {
+  async function toggleStatus(targetStatus: 'pending' | 'resolved') {
     setResolving(true)
     setError(null)
     try {
-      const res = await adminFetch(`/api/admin/contacts/${id}/resolve`, { method: 'PATCH' })
+      const res = await adminFetch(`/api/admin/contacts/${id}/resolve`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: targetStatus }),
+      })
       if (res.ok) {
         setContact(await res.json())
       } else {
@@ -87,7 +93,7 @@ export default function ContactDetailPage() {
       <div className="flex items-start justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-stone-100 font-mono">{contact.id}</h1>
-          <p className="text-xs text-stone-500 mt-1">{new Date(contact.createdAt).toLocaleString()}</p>
+          <p className="text-xs text-stone-500 mt-1">{formatDateTime(contact.createdAt)}</p>
         </div>
         <StatusBadge type="contact" status={contact.status} />
       </div>
@@ -120,19 +126,28 @@ export default function ContactDetailPage() {
           <p className="text-sm text-stone-300 whitespace-pre-wrap leading-relaxed pl-6">{contact.message}</p>
         </div>
 
-        {/* Resolve button */}
-        {contact.status === 'pending' && (
-          <div className="border-t border-stone-800 pt-4">
+        {/* Resolve / Reopen button */}
+        <div className="border-t border-stone-800 pt-4">
+          {contact.status === 'pending' ? (
             <button
-              onClick={markResolved}
+              onClick={() => toggleStatus('resolved')}
               disabled={resolving}
               className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800 text-white text-xs font-medium rounded-lg transition-colors"
             >
               {resolving ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
               {t('contacts.detail.markResolved')}
             </button>
-          </div>
-        )}
+          ) : (
+            <button
+              onClick={() => toggleStatus('pending')}
+              disabled={resolving}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-500 disabled:bg-amber-800 text-white text-xs font-medium rounded-lg transition-colors"
+            >
+              {resolving ? <Loader2 className="w-4 h-4 animate-spin" /> : <RotateCcw className="w-4 h-4" />}
+              {t('common.unresolve')}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )

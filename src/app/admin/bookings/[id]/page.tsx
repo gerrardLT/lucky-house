@@ -3,26 +3,30 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Loader2 } from 'lucide-react'
+import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Globe, CheckSquare, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { InfoSection, InfoRow } from '@/components/admin/InfoSection'
 import { ErrorToast } from '@/components/admin/ErrorToast'
+import { ConfirmDialog } from '@/components/admin/ConfirmDialog'
 import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { useAdminDate } from '@/lib/i18n/useAdminDate'
 import type { BookingRecord, BookingStatus } from '@/types'
 
 export default function BookingDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
   const { t } = useAdminLocale()
+  const { formatDateTime } = useAdminDate()
   const [booking, setBooking] = useState<BookingRecord | null>(null)
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [confirmStatus, setConfirmStatus] = useState<BookingStatus | null>(null)
 
-  useEffect(() => {
+  const fetchBooking = useCallback(() => {
     adminFetch(`/api/admin/bookings/${id}`)
       .then((r) => {
         if (!r.ok) throw new Error('HTTP_ERROR')
@@ -32,6 +36,10 @@ export default function BookingDetailPage() {
       .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
   }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    fetchBooking()
+  }, [fetchBooking])
 
   async function updateStatus(newStatus: BookingStatus) {
     setUpdating(true)
@@ -52,6 +60,7 @@ export default function BookingDetailPage() {
       setError(t('common.errorNetwork'))
     } finally {
       setUpdating(false)
+      setConfirmStatus(null)
     }
   }
 
@@ -85,10 +94,29 @@ export default function BookingDetailPage() {
 
   const contact = booking.contact
   const petInfo = booking.petInfo
+  const source = booking.source as { sourceUrl?: string; deviceType?: string; utmSource?: string; utmMedium?: string; utmCampaign?: string } | undefined
+  const agreements = booking.agreements as { privacyPolicy?: boolean; petRules?: boolean; cancelPolicy?: boolean; marketingSubscribe?: boolean } | undefined
+  const statusLabel: Record<BookingStatus, string> = {
+    pending: t('bookings.pending'),
+    confirmed: t('bookings.confirmed'),
+    cancelled: t('bookings.cancelled'),
+  }
 
   return (
     <div>
       <ErrorToast message={error} onClose={() => setError(null)} />
+
+      {/* 确认状态变更弹窗 */}
+      <ConfirmDialog
+        open={confirmStatus !== null}
+        title={t('common.confirmChangeStatus')}
+        message={t('common.confirmChangeStatusMsg').replace('{status}', confirmStatus ? statusLabel[confirmStatus] : '')}
+        confirmLabel={t('common.confirm')}
+        cancelLabel={t('common.cancel')}
+        variant={confirmStatus === 'cancelled' ? 'danger' : 'warning'}
+        onConfirm={() => confirmStatus && updateStatus(confirmStatus)}
+        onCancel={() => setConfirmStatus(null)}
+      />
 
       {/* Back nav */}
       <button
@@ -104,7 +132,7 @@ export default function BookingDetailPage() {
         <div>
           <h1 className="text-xl font-semibold text-stone-100 font-mono">{booking.id}</h1>
           <p className="text-xs text-stone-500 mt-1">
-            {new Date(booking.createdAt).toLocaleString()}
+            {formatDateTime(booking.createdAt)}
           </p>
         </div>
         <StatusBadge type="booking" status={booking.status} />
@@ -120,6 +148,7 @@ export default function BookingDetailPage() {
           <InfoRow label={t('bookings.detail.children')} value={String(booking.children)} />
           <InfoRow label={t('bookings.detail.rooms')} value={String(booking.rooms)} />
           <InfoRow label={t('bookings.detail.roomPreference')} value={booking.roomPreference} />
+          <InfoRow label={t('bookings.detail.acceptAlternative')} value={booking.acceptAlternative ? t('bookings.detail.yes') : t('bookings.detail.no')} />
         </InfoSection>
 
         {/* Contact */}
@@ -137,6 +166,29 @@ export default function BookingDetailPage() {
             <InfoRow label={t('bookings.detail.breed')} value={String(petInfo.breed || '')} />
             <InfoRow label={t('bookings.detail.weight')} value={`${petInfo.weight} ${t('bookings.detail.weightUnit')}`} />
             <InfoRow label={t('bookings.detail.age')} value={`${petInfo.age} ${t('bookings.detail.ageUnit')}`} />
+            {booking.petCount != null && (
+              <InfoRow label={t('bookings.detail.petCount')} value={String(booking.petCount)} />
+            )}
+          </InfoSection>
+        )}
+
+        {/* Source Info */}
+        {source && (
+          <InfoSection title={t('bookings.detail.source')} icon={Globe}>
+            {source.sourceUrl && <InfoRow label={t('bookings.detail.sourceUrl')} value={source.sourceUrl} />}
+            {source.deviceType && <InfoRow label={t('bookings.detail.deviceType')} value={source.deviceType} />}
+          </InfoSection>
+        )}
+
+        {/* Agreements */}
+        {agreements && (
+          <InfoSection title={t('bookings.detail.agreements')} icon={CheckSquare}>
+            <InfoRow label={t('bookings.detail.privacyPolicy')} value={agreements.privacyPolicy ? t('bookings.detail.yes') : t('bookings.detail.no')} />
+            {agreements.petRules !== undefined && (
+              <InfoRow label={t('bookings.detail.petRules')} value={agreements.petRules ? t('bookings.detail.yes') : t('bookings.detail.no')} />
+            )}
+            <InfoRow label={t('bookings.detail.cancelPolicy')} value={agreements.cancelPolicy ? t('bookings.detail.yes') : t('bookings.detail.no')} />
+            <InfoRow label={t('bookings.detail.marketingSubscribe')} value={agreements.marketingSubscribe ? t('bookings.detail.yes') : t('bookings.detail.no')} />
           </InfoSection>
         )}
 
@@ -148,7 +200,7 @@ export default function BookingDetailPage() {
               return (
                 <button
                   key={s}
-                  onClick={() => updateStatus(s)}
+                  onClick={() => !isActive && setConfirmStatus(s)}
                   disabled={updating || isActive}
                   className={`flex-1 px-3 py-2 text-xs rounded-lg border transition-colors ${
                     isActive

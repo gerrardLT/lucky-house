@@ -3,6 +3,11 @@
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
+    // 启动速率限制内存清理
+    const { startRateLimitCleanup } = await import('./lib/rate-limit')
+    startRateLimitCleanup()
+
+    // 启动数据库迁移
     const { runMigrations } = await import('./lib/db/migrate')
     try {
       await runMigrations()

@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 
     const statusCond = status ? eq(contacts.status, status as 'pending' | 'resolved') : undefined
     const searchCond = search
-      ? or(ilike(contacts.name, `%${search}%`), ilike(contacts.email, `%${search}%`), ilike(contacts.subject, `%${search}%`))
+      ? or(ilike(contacts.name, `%${search}%`), ilike(contacts.email, `%${search}%`), ilike(contacts.subject, `%${search}%`), ilike(contacts.message, `%${search}%`))
       : undefined
     const conditions = [statusCond, searchCond].filter(Boolean)
     const where = conditions.length > 0 ? and(...conditions) : undefined

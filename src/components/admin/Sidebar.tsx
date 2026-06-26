@@ -17,6 +17,7 @@ import {
   X,
 } from 'lucide-react'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { ConfirmDialog } from './ConfirmDialog'
 
 const NAV_ITEMS = [
   { href: '/admin/dashboard', key: 'sidebar.dashboard', icon: LayoutDashboard },
@@ -31,8 +32,10 @@ export function Sidebar() {
   const router = useRouter()
   const { t } = useAdminLocale()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [showSignOutConfirm, setShowSignOutConfirm] = useState(false)
 
   async function handleSignOut() {
+    setShowSignOutConfirm(false)
     await signOut({ redirect: false })
     router.push('/admin/login')
   }
@@ -43,6 +46,17 @@ export function Sidebar() {
 
   const navContent = (
     <>
+      {/* Confirm sign out dialog */}
+      <ConfirmDialog
+        open={showSignOutConfirm}
+        title={t('common.confirmSignOut')}
+        message={t('common.confirmSignOutMsg')}
+        confirmLabel={t('sidebar.signOut')}
+        cancelLabel={t('common.cancel')}
+        variant="warning"
+        onConfirm={handleSignOut}
+        onCancel={() => setShowSignOutConfirm(false)}
+      />
       {/* Brand */}
       <div className="px-5 py-5 border-b border-stone-800">
         <Link href="/admin/dashboard" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
@@ -82,7 +96,7 @@ export function Sidebar() {
       {/* Sign Out */}
       <div className="px-3 py-4 border-t border-stone-800">
         <button
-          onClick={handleSignOut}
+          onClick={() => setShowSignOutConfirm(true)}
           className="flex items-center gap-3 w-full px-3 py-2 text-[13px] text-stone-500 hover:text-stone-300 rounded-lg hover:bg-stone-800 transition-colors"
         >
           <LogOut className="w-4 h-4" strokeWidth={1.5} />

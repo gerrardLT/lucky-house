@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export const subscribeSchema = z.object({
   email: z.string().email(),
-  interests: z.array(z.string()).optional(),
+  interests: z.array(z.string().max(50)).max(20).optional(),
   locale: z.enum(['zh', 'ja', 'en']),
 })
 

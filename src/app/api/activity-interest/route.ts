@@ -3,13 +3,16 @@
 // Requirements: 8.3, 8.5
 
 import { NextResponse } from 'next/server'
+import { applyPublicRateLimit } from '@/lib/api-helpers'
 import { activityInterestSchema } from '@/lib/schemas/activity-interest'
 import { db } from '@/lib/db'
 import { activityInterests } from '@/lib/db/schema'
+import { eq, and } from 'drizzle-orm'
 import { createElement } from 'react'
 import { sendEmail } from '@/lib/email'
 import ActivityConfirmationEmail from '@/lib/email/templates/ActivityConfirmation'
 import type { ApiErrorResponse } from '@/types'
+import { activityConfirmationSubject } from '@/lib/email-subjects'
 
 /** 生成登记 ID */
 function generateRegistrationId(): string {
@@ -19,6 +22,10 @@ function generateRegistrationId(): string {
 }
 
 export async function POST(request: Request) {
+  // 速率限制：每 IP 每 10 分钟最多 10 次活动登记
+  const rateLimitResponse = applyPublicRateLimit(request, 'api-activity-interest', 10)
+  if (rateLimitResponse) return rateLimitResponse
+
   try {
     const body = await request.json()
 
@@ -47,6 +54,27 @@ export async function POST(request: Request) {
 
     const data = result.data
 
+    // 幂等性检查：同一邮箱 + 活动 slug 不重复登记
+    const [existing] = await db
+      .select()
+      .from(activityInterests)
+      .where(
+        and(
+          eq(activityInterests.email, data.email),
+          eq(activityInterests.activitySlug, data.activitySlug)
+        )
+      )
+      .limit(1)
+
+    if (existing) {
+      return NextResponse.json({
+        success: true,
+        registrationId: existing.id,
+        duplicate: true,
+        message: '您已经提交过此活动的登记',
+      })
+    }
+
     // 生成登记 ID
     const registrationId = generateRegistrationId()
 
@@ -65,7 +93,7 @@ export async function POST(request: Request) {
     // 发送确认邮件（fire-and-forget）
     void sendEmail(
       data.email,
-      'Activity Registration - Luckyhouse',
+      activityConfirmationSubject(data.locale),
       createElement(ActivityConfirmationEmail, {
         registrationId,
         activityName: data.activitySlug,

@@ -3,14 +3,15 @@
 
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import Link from 'next/link'
-import { CalendarDays, Clock, Mail, Users, ArrowRight } from 'lucide-react'
+import { CalendarDays, Clock, Mail, Users, Compass, ArrowRight, RefreshCw, X } from 'lucide-react'
 import { StatCard } from '@/components/admin/StatCard'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { ErrorToast } from '@/components/admin/ErrorToast'
 import { adminFetch } from '@/lib/admin/adminFetch'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
+import { usePolling } from '@/lib/hooks/usePolling'
 import type { DashboardStats } from '@/types'
 
 function DashboardSkeleton() {
@@ -40,23 +41,75 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [hasNewData, setHasNewData] = useState(false)
+  const prevStatsRef = useRef<DashboardStats | null>(null)
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const r = await adminFetch('/api/admin/stats')
+      if (!r.ok) throw new Error('HTTP_ERROR')
+      const data: DashboardStats = await r.json()
+
+      // 检测是否有新数据（对比 pending 数量）
+      if (prevStatsRef.current) {
+        const prev = prevStatsRef.current
+        if (
+          data.pendingBookings !== prev.pendingBookings ||
+          data.pendingContacts !== prev.pendingContacts ||
+          data.totalActivityInterests !== prev.totalActivityInterests
+        ) {
+          setHasNewData(true)
+        }
+      }
+      prevStatsRef.current = data
+      setStats(data)
+    } catch {
+      setError(t('common.errorLoad'))
+    } finally {
+      setLoading(false)
+    }
+  }, [t])
 
   useEffect(() => {
-    adminFetch('/api/admin/stats')
-      .then((r) => {
-        if (!r.ok) throw new Error('HTTP_ERROR')
-        return r.json()
-      })
-      .then((data) => setStats(data))
-      .catch(() => setError(t('common.errorLoad')))
-      .finally(() => setLoading(false))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    fetchStats()
+  }, [fetchStats])
+
+  // 每 30 秒轮询
+  usePolling(fetchStats, 30_000)
+
+  function handleRefresh() {
+    setHasNewData(false)
+    setLoading(true)
+    fetchStats()
+  }
 
   if (loading) return <DashboardSkeleton />
 
   return (
     <div>
       <ErrorToast message={error} onClose={() => setError(null)} />
+
+      {/* 新数据通知横幅 */}
+      {hasNewData && (
+        <div className="mb-4 flex items-center justify-between rounded-lg bg-amber-500/10 border border-amber-500/30 px-4 py-2.5">
+          <span className="text-sm text-amber-400">{t('dashboard.newDataAvailable')}</span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleRefresh}
+              className="text-xs text-amber-500 hover:text-amber-400 transition-colors inline-flex items-center gap-1"
+            >
+              <RefreshCw className="w-3 h-3" />
+              {t('common.refresh')}
+            </button>
+            <button
+              onClick={() => setHasNewData(false)}
+              className="text-stone-500 hover:text-stone-400 transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {stats && (
         <>
@@ -92,6 +145,18 @@ export default function DashboardPage() {
               accent="green"
             />
           </div>
+
+          {/* Activity Interests Stat */}
+          {stats.totalActivityInterests > 0 && (
+            <div className="mb-8">
+              <StatCard
+                title={t('dashboard.activityInterests')}
+                value={stats.totalActivityInterests}
+                icon={Compass}
+                accent="amber"
+              />
+            </div>
+          )}
 
           {/* Recent Bookings */}
           <div className="bg-stone-900 border border-stone-800 rounded-xl">
