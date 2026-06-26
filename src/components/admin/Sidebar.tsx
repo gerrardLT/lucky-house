@@ -11,11 +11,8 @@ import {
   Compass,
   LogOut,
   Mountain,
-  Globe,
 } from 'lucide-react'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
-import type { Locale } from '@/lib/i18n/config'
-import { LOCALES } from '@/lib/i18n/config'
 
 const NAV_ITEMS = [
   { href: '/admin/dashboard', key: 'sidebar.dashboard', icon: LayoutDashboard },
@@ -25,15 +22,9 @@ const NAV_ITEMS = [
   { href: '/admin/activities', key: 'sidebar.activities', icon: Compass },
 ] as const
 
-const LOCALE_LABELS: Record<Locale, string> = {
-  zh: '中文',
-  ja: '日本語',
-  en: 'English',
-}
-
 export function Sidebar() {
   const pathname = usePathname()
-  const { locale, setLocale, t } = useAdminLocale()
+  const { t } = useAdminLocale()
 
   return (
     <aside className="w-60 min-h-screen bg-stone-900 border-r border-stone-800 flex flex-col">
@@ -71,26 +62,6 @@ export function Sidebar() {
           )
         })}
       </nav>
-
-      {/* Language Switcher */}
-      <div className="px-3 py-3 border-t border-stone-800">
-        <div className="flex items-center gap-1.5">
-          <Globe className="w-3.5 h-3.5 text-stone-500 ml-1.5 shrink-0" strokeWidth={1.5} />
-          {LOCALES.map((l) => (
-            <button
-              key={l}
-              onClick={() => setLocale(l)}
-              className={`flex-1 px-1.5 py-1 text-[11px] rounded transition-colors ${
-                locale === l
-                  ? 'bg-amber-600/10 text-amber-500 font-medium'
-                  : 'text-stone-500 hover:text-stone-300 hover:bg-stone-800'
-              }`}
-            >
-              {LOCALE_LABELS[l]}
-            </button>
-          ))}
-        </div>
-      </div>
 
       {/* Sign Out */}
       <div className="px-3 py-4 border-t border-stone-800">
