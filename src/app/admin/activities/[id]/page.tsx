@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Compass, User, MessageSquare, Globe } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { InfoRow } from '@/components/admin/InfoSection'
+import { ErrorToast } from '@/components/admin/ErrorToast'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord } from '@/types'
 
@@ -16,14 +18,18 @@ export default function ActivityDetailPage() {
   const { t } = useAdminLocale()
   const [record, setRecord] = useState<ActivityInterestRecord | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/activities/${id}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP_ERROR')
+        return r.json()
+      })
       .then((data) => setRecord(data))
-      .catch(console.error)
+      .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return (
@@ -49,6 +55,8 @@ export default function ActivityDetailPage() {
 
   return (
     <div>
+      <ErrorToast message={error} onClose={() => setError(null)} />
+
       <button
         onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
@@ -71,23 +79,23 @@ export default function ActivityDetailPage() {
           <Compass className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
           <span className="text-sm font-medium text-stone-200">{t('activities.detail.activity')}</span>
         </div>
-        <InfoRow label={t('activities.detail.activitySlug')} value={record.activitySlug} />
+        <InfoRow label={t('activities.detail.activitySlug')} value={record.activitySlug} indent />
 
         {/* Contact info */}
         <div className="flex items-center gap-2 pt-2 mb-1">
           <User className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
           <span className="text-sm font-medium text-stone-200">{t('activities.detail.contact')}</span>
         </div>
-        <InfoRow label={t('activities.detail.name')} value={record.name} />
-        <InfoRow label={t('activities.detail.email')} value={record.email} />
-        {record.phone && <InfoRow label={t('activities.detail.phone')} value={record.phone} />}
+        <InfoRow label={t('activities.detail.name')} value={record.name} indent />
+        <InfoRow label={t('activities.detail.email')} value={record.email} indent />
+        {record.phone && <InfoRow label={t('activities.detail.phone')} value={record.phone} indent />}
 
         {/* Locale */}
         <div className="flex items-center gap-2 pt-2 mb-1">
           <Globe className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
           <span className="text-sm font-medium text-stone-200">{t('activities.detail.locale')}</span>
         </div>
-        <InfoRow label={t('activities.detail.locale')} value={record.locale} />
+        <InfoRow label={t('activities.detail.locale')} value={record.locale} indent />
 
         {/* Message */}
         {record.message && (
@@ -100,15 +108,6 @@ export default function ActivityDetailPage() {
           </div>
         )}
       </div>
-    </div>
-  )
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex justify-between items-baseline pl-6">
-      <span className="text-xs text-stone-500">{label}</span>
-      <span className="text-xs text-stone-200 font-medium">{value}</span>
     </div>
   )
 }

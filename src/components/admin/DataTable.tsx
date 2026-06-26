@@ -40,7 +40,9 @@ export function DataTable<T>({
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`text-${col.align || 'left'} px-4 py-3 text-[11px] font-medium text-stone-500 uppercase tracking-wider ${col.className || ''}`}
+                className={`px-4 py-3 text-[11px] font-medium text-stone-500 uppercase tracking-wider ${
+                  col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
+                } ${col.className || ''}`}
               >
                 {col.header}
               </th>
@@ -57,7 +59,9 @@ export function DataTable<T>({
               } transition-colors`}
             >
               {columns.map((col) => (
-                <td key={col.key} className={`px-4 py-3 text-stone-300 text-${col.align || 'left'} ${col.className || ''}`}>
+                <td key={col.key} className={`px-4 py-3 text-stone-300 ${
+                  col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
+                } ${col.className || ''}`}>
                   {col.render ? col.render(row) : String((row as Record<string, unknown>)[col.key] ?? '')}
                 </td>
               ))}

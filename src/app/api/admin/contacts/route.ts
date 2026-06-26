@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth/config'
 import { db } from '@/lib/db'
 import { contacts } from '@/lib/db/schema'
-import { sql, eq, desc, and } from 'drizzle-orm'
+import { sql, eq, desc, and, or, ilike } from 'drizzle-orm'
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -16,9 +16,14 @@ export async function GET(request: Request) {
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'))
     const pageSize = Math.min(50, Math.max(1, parseInt(searchParams.get('pageSize') || '20')))
     const status = searchParams.get('status')
+    const search = searchParams.get('search')
 
-    const conditions = status ? eq(contacts.status, status as 'pending' | 'resolved') : undefined
-    const where = conditions ? and(conditions) : undefined
+    const statusCond = status ? eq(contacts.status, status as 'pending' | 'resolved') : undefined
+    const searchCond = search
+      ? or(ilike(contacts.name, `%${search}%`), ilike(contacts.email, `%${search}%`), ilike(contacts.subject, `%${search}%`))
+      : undefined
+    const conditions = [statusCond, searchCond].filter(Boolean)
+    const where = conditions.length > 0 ? and(...conditions) : undefined
 
     const [totalResult] = await db
       .select({ count: sql<number>`count(*)::int` })

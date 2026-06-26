@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Calendar, Users, MapPin, PawPrint, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { InfoSection, InfoRow } from '@/components/admin/InfoSection'
+import { ErrorToast } from '@/components/admin/ErrorToast'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { BookingRecord, BookingStatus } from '@/types'
 
@@ -17,17 +19,22 @@ export default function BookingDetailPage() {
   const [booking, setBooking] = useState<BookingRecord | null>(null)
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/bookings/${id}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP_ERROR')
+        return r.json()
+      })
       .then((data) => setBooking(data))
-      .catch(console.error)
+      .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function updateStatus(newStatus: BookingStatus) {
     setUpdating(true)
+    setError(null)
     try {
       const res = await fetch(`/api/admin/bookings/${id}/status`, {
         method: 'PATCH',
@@ -37,7 +44,11 @@ export default function BookingDetailPage() {
       if (res.ok) {
         const updated = await res.json()
         setBooking(updated)
+      } else {
+        setError(t('common.errorAction'))
       }
+    } catch {
+      setError(t('common.errorNetwork'))
     } finally {
       setUpdating(false)
     }
@@ -71,11 +82,13 @@ export default function BookingDetailPage() {
     )
   }
 
-  const contact = booking.contact as unknown as Record<string, string>
-  const petInfo = booking.petInfo as Record<string, unknown> | null
+  const contact = booking.contact
+  const petInfo = booking.petInfo
 
   return (
     <div>
+      <ErrorToast message={error} onClose={() => setError(null)} />
+
       {/* Back nav */}
       <button
         onClick={() => router.back()}
@@ -153,35 +166,6 @@ export default function BookingDetailPage() {
           </div>
         </InfoSection>
       </div>
-    </div>
-  )
-}
-
-function InfoSection({
-  title,
-  icon: Icon,
-  children,
-}: {
-  title: string
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
-  children: React.ReactNode
-}) {
-  return (
-    <div className="bg-stone-900 border border-stone-800 rounded-xl p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <Icon className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
-        <h2 className="text-sm font-medium text-stone-200">{title}</h2>
-      </div>
-      <div className="space-y-2.5">{children}</div>
-    </div>
-  )
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex justify-between items-baseline">
-      <span className="text-xs text-stone-500">{label}</span>
-      <span className="text-xs text-stone-200 font-medium">{value}</span>
     </div>
   )
 }

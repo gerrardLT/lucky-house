@@ -137,6 +137,12 @@
     "next": "次へ",
     "back": "戻る",
     "noData": "データがありません",
-    "search": "検索..."
+    "search": "検索...",
+    "errorLoad": "データの読み込みに失敗しました",
+    "errorAction": "操作に失敗しました。再度お試しください",
+    "errorNetwork": "ネットワークエラー。接続を確認してください",
+    "success": "成功",
+    "confirm": "確認",
+    "cancel": "キャンセル"
   }
 }

@@ -5,8 +5,10 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, MessageSquare, CheckCircle2, User, Globe } from 'lucide-react'
+import { ArrowLeft, MessageSquare, CheckCircle2, User, Globe, Loader2 } from 'lucide-react'
 import { StatusBadge } from '@/components/admin/StatusBadge'
+import { InfoRow } from '@/components/admin/InfoSection'
+import { ErrorToast } from '@/components/admin/ErrorToast'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ContactRecord } from '@/types'
 
@@ -16,18 +18,35 @@ export default function ContactDetailPage() {
   const { t } = useAdminLocale()
   const [contact, setContact] = useState<ContactRecord | null>(null)
   const [loading, setLoading] = useState(true)
+  const [resolving, setResolving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(`/api/admin/contacts/${id}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP_ERROR')
+        return r.json()
+      })
       .then((data) => setContact(data))
-      .catch(console.error)
+      .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
-  }, [id])
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   async function markResolved() {
-    const res = await fetch(`/api/admin/contacts/${id}/resolve`, { method: 'PATCH' })
-    if (res.ok) setContact(await res.json())
+    setResolving(true)
+    setError(null)
+    try {
+      const res = await fetch(`/api/admin/contacts/${id}/resolve`, { method: 'PATCH' })
+      if (res.ok) {
+        setContact(await res.json())
+      } else {
+        setError(t('common.errorAction'))
+      }
+    } catch {
+      setError(t('common.errorNetwork'))
+    } finally {
+      setResolving(false)
+    }
   }
 
   if (loading) {
@@ -54,6 +73,8 @@ export default function ContactDetailPage() {
 
   return (
     <div>
+      <ErrorToast message={error} onClose={() => setError(null)} />
+
       <button
         onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-xs text-stone-500 hover:text-stone-300 mb-5 transition-colors"
@@ -77,17 +98,17 @@ export default function ContactDetailPage() {
           <span className="text-sm font-medium text-stone-200">{t('contacts.detail.details')}</span>
         </div>
 
-        <InfoRow label={t('contacts.detail.subject')} value={contact.subject} />
-        <InfoRow label={t('contacts.detail.name')} value={contact.name} />
-        <InfoRow label={t('contacts.detail.email')} value={contact.email} />
-        {contact.phone && <InfoRow label={t('contacts.detail.phone')} value={contact.phone} />}
+        <InfoRow label={t('contacts.detail.subject')} value={contact.subject} indent />
+        <InfoRow label={t('contacts.detail.name')} value={contact.name} indent />
+        <InfoRow label={t('contacts.detail.email')} value={contact.email} indent />
+        {contact.phone && <InfoRow label={t('contacts.detail.phone')} value={contact.phone} indent />}
 
         <div className="flex items-center gap-2 pt-2">
           <Globe className="w-4 h-4 text-stone-500" strokeWidth={1.5} />
           <span className="text-sm font-medium text-stone-200">{t('contacts.detail.routing')}</span>
         </div>
-        <InfoRow label={t('contacts.detail.locale')} value={contact.locale} />
-        <InfoRow label={t('contacts.detail.routedTo')} value={contact.routedTo} />
+        <InfoRow label={t('contacts.detail.locale')} value={contact.locale} indent />
+        <InfoRow label={t('contacts.detail.routedTo')} value={contact.routedTo} indent />
 
         {/* Message */}
         <div className="border-t border-stone-800 pt-4">
@@ -103,23 +124,15 @@ export default function ContactDetailPage() {
           <div className="border-t border-stone-800 pt-4">
             <button
               onClick={markResolved}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium rounded-lg transition-colors"
+              disabled={resolving}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800 text-white text-xs font-medium rounded-lg transition-colors"
             >
-              <CheckCircle2 className="w-4 h-4" />
+              {resolving ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
               {t('contacts.detail.markResolved')}
             </button>
           </div>
         )}
       </div>
-    </div>
-  )
-}
-
-function InfoRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex justify-between items-baseline pl-6">
-      <span className="text-xs text-stone-500">{label}</span>
-      <span className="text-xs text-stone-200 font-medium">{value}</span>
     </div>
   )
 }

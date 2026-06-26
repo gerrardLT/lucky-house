@@ -1,5 +1,5 @@
 // src/app/admin/activities/page.tsx
-// 活动兴趣列表
+// 活动兴趣列表 — 搜索 + 类型筛选 + 分页
 
 'use client'
 
@@ -9,6 +9,8 @@ import { Compass } from 'lucide-react'
 import { DataTable, DataTableSkeleton, type Column } from '@/components/admin/DataTable'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { Pagination } from '@/components/admin/Pagination'
+import { SearchInput } from '@/components/admin/SearchInput'
+import { ErrorToast } from '@/components/admin/ErrorToast'
 import { useAdminLocale } from '@/lib/i18n/useAdminLocale'
 import type { ActivityInterestRecord, PaginatedResult } from '@/types'
 
@@ -18,19 +20,25 @@ export default function ActivitiesPage() {
   const [result, setResult] = useState<PaginatedResult<ActivityInterestRecord> | null>(null)
   const [page, setPage] = useState(1)
   const [typeFilter, setTypeFilter] = useState('')
+  const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchActivities = useCallback(() => {
     setLoading(true)
     const params = new URLSearchParams({ page: String(page), pageSize: '20' })
     if (typeFilter) params.set('type', typeFilter)
+    if (search) params.set('search', search)
 
     fetch(`/api/admin/activities?${params}`)
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('HTTP_ERROR')
+        return r.json()
+      })
       .then((data) => setResult(data))
-      .catch(console.error)
+      .catch(() => setError(t('common.errorLoad')))
       .finally(() => setLoading(false))
-  }, [page, typeFilter])
+  }, [page, typeFilter, search]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { fetchActivities() }, [fetchActivities]) // eslint-disable-line react-hooks/set-state-in-effect
 
@@ -45,17 +53,26 @@ export default function ActivitiesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <ErrorToast message={error} onClose={() => setError(null)} />
+
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
         <h1 className="text-xl font-semibold text-stone-100">{t('activities.title')}</h1>
-        <select
-          value={typeFilter}
-          onChange={(e) => { setTypeFilter(e.target.value); setPage(1) }}
-          className="px-3 py-2 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-300 focus:outline-none focus:ring-1 focus:ring-amber-500/30 transition-colors"
-        >
-          <option value="">{t('activities.allTypes')}</option>
-          <option value="interest">{t('activities.interest')}</option>
-          <option value="register">{t('activities.register')}</option>
-        </select>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <SearchInput
+            value={search}
+            onChange={(v) => { setSearch(v); setPage(1) }}
+            placeholder={t('common.search')}
+          />
+          <select
+            value={typeFilter}
+            onChange={(e) => { setTypeFilter(e.target.value); setPage(1) }}
+            className="px-3 py-2 text-xs bg-stone-900 border border-stone-800 rounded-lg text-stone-300 focus:outline-none focus:ring-1 focus:ring-amber-500/30 transition-colors"
+          >
+            <option value="">{t('activities.allTypes')}</option>
+            <option value="interest">{t('activities.interest')}</option>
+            <option value="register">{t('activities.register')}</option>
+          </select>
+        </div>
       </div>
 
       {loading ? (

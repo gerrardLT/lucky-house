@@ -137,6 +137,12 @@
     "next": "Next",
     "back": "Back",
     "noData": "No data available",
-    "search": "Search..."
+    "search": "Search...",
+    "errorLoad": "Failed to load data",
+    "errorAction": "Action failed, please try again",
+    "errorNetwork": "Network error, please check connection",
+    "success": "Success",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }
